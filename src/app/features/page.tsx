@@ -18,9 +18,15 @@ const features = [
     bullets: ['Tenant marks away dates from their portal or text Skipper','Slip automatically opens for transient bookings','Revenue split configured per marina (e.g. 60/40 or 70/30)','Tenant notified of earnings when they return','Marina gets additional transient income from already-occupied slips','Skipper handles the logistics — no staff involvement needed'],
   },
   {
-    icon: '💬', tag: 'SKIPPER AI', name: 'Just Talk to Skipper',
+    icon: '🗂️', tag: 'ASSET LOGIC™', name: 'Asset Logic™', flagship: true,
+    tagline: 'Every location. One source of truth.',
+    desc: 'Asset Logic™ is the core of AyeAyeSkipper. Every slip, mooring, yard space, rack, and parking spot is an asset — connected to a tenant, a boat, a lease, and a billing record. One map. One database. Zero orphaned data. When something changes anywhere, everything updates everywhere.',
+    bullets: ['Slip, mooring, yard, rack, parking — all managed identically','Every asset connected: tenant → boat → lease → invoice','Map is the source of truth — visual and operational in one','Assign, vacate, transfer — Skipper handles it in plain English'],
+  },
+  {
+    icon: '💬', tag: 'SKIPPER ENGINE™', name: 'Just Talk to Skipper',
     tagline: 'No menus. No training. Just say what you need.',
-    desc: 'Skipper isn\'t a search bar or a chatbot. It\'s a marine expert that knows your marina specifically — your slips, your tenants, your rates, your history. Staff at the fuel dock can text Skipper from a tablet. The dockmaster can ask who\'s overdue. The manager can tell Skipper to book a slip for an arriving guest. It all works the same way you\'d tell a competent employee.',
+    desc: 'Skipper isn\'t a search bar or a chatbot. It\'s the Skipper Engine™ — it knows your marina specifically: your slips, your tenants, your rates, your history. Staff at the fuel dock can text Skipper from a tablet. The dockmaster can ask who\'s overdue. The manager can tell Skipper to book a slip for an arriving guest. It all works the same way you\'d tell a competent employee.',
     bullets: ['"Who\'s overdue on Dock B?" — instant answer','Book a transient slip in seconds by voice or text','Skipper drafts and sends renewal notices automatically','Ask for anything — Skipper either knows or will find out','Works over web, SMS (with Twilio), or the tenant app','No training. Your dock hands will be fluent in an hour.'],
   },
   {
@@ -69,7 +75,7 @@ const features = [
     icon: '🔌', tag: 'SKIPPER GANGWAY™', name: 'Skipper Gangway™',
     tagline: 'Whatever you\'re running today — we migrate it. Same day.',
     desc: 'Skipper Gangway™ is our custom adaptation engine. Whether you\'re on Dockmaster, Marina Controller, Harbour Assist, Dockwa, or a 15-tab Excel spreadsheet, Skipper Gangway migrates your data automatically. We map your existing data structure to ours, run validation, and import. You don\'t start from zero — you start from exactly where you are.',
-    bullets: ['Dockmaster migration — automated','Marina Controller migration — automated','Dockwa export import — slip assignments, tenant records, booking history','CSV / Excel — AI-powered column mapping','QuickBooks sync — tenant accounts and billing history','Zero data loss guarantee — we validate before you go live'],
+    bullets: ['Dockmaster migration — automated','Marina Controller migration — automated','Dockwa export import — slip assignments, tenant records, booking history','CSV / Excel — Skipper Engine™ column mapping','QuickBooks sync — tenant accounts and billing history','Zero data loss guarantee — we validate before you go live'],
   },
   {
     icon: '📅', tag: 'WAIT LIST', name: 'Wait List Intelligence',

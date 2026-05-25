@@ -71,6 +71,54 @@ export default function HotSlip() {
           </div>
         </div>
 
+        {/* ═══════════════════ PAYOUT MODELS ═══════════════════ */}
+        <div style={{ marginBottom:60 }}>
+          <h2 style={{ fontSize:28, fontWeight:900, letterSpacing:'-1px', margin:'0 0 8px' }}>Marina chooses how tenants get paid.</h2>
+          <p style={{ fontSize:14, color:'rgba(255,255,255,0.5)', marginBottom:28, lineHeight:1.65 }}>
+            Three models. Marina picks the one that fits. Transaction fees are always charged to the transient boater — never to the marina or the annual tenant.
+          </p>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:20 }}>
+            {[
+              {
+                letter:'A',
+                title:'Revenue Share',
+                desc:'Marina sets the split. Tenant receives their percentage as cash each month. Marina keeps the rest.',
+                example:'Example: 70% tenant / 30% marina',
+                best:'Marinas that want to attract and retain quality annual tenants.',
+                color:'rgba(77,214,200,0.05)',
+              },
+              {
+                letter:'B',
+                title:'Lease Discount',
+                desc:'Instead of cash, tenant earns $ or % off their next invoice. Marina keeps full transient revenue. Tenant gets a lower bill.',
+                example:'Example: $200 off next renewal per booking week',
+                best:'Marinas that want to keep all revenue while rewarding enrollment.',
+                color:'rgba(255,140,0,0.05)',
+              },
+              {
+                letter:'C',
+                title:'Marina Keeps All',
+                desc:'Marina retains 100% of transient revenue. Optional: offer a flat participation incentive to encourage tenant enrollment.',
+                example:'Example: $50/year flat incentive for enrolling in Hot Slip™',
+                best:'Marinas building transient inventory without direct payout complexity.',
+                color:'rgba(255,255,255,0.03)',
+              },
+            ].map(model => (
+              <div key={model.letter} style={{ background:model.color, border:`1.5px solid rgba(77,214,200,0.25)`, borderRadius:14, padding:'28px 24px', display:'flex', flexDirection:'column' }}>
+                <div style={{ width:36, height:36, borderRadius:'50%', background:'rgba(77,214,200,0.15)', border:'2px solid rgba(77,214,200,0.4)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:16, fontWeight:900, color:TEAL, marginBottom:14, flexShrink:0 }}>{model.letter}</div>
+                <div style={{ fontWeight:800, fontSize:17, marginBottom:10, letterSpacing:'-0.3px' }}>{model.title}</div>
+                <p style={{ fontSize:13, color:'rgba(255,255,255,0.65)', lineHeight:1.7, marginBottom:12, flex:1 }}>{model.desc}</p>
+                <div style={{ fontSize:12, color:TEAL, fontStyle:'italic', marginBottom:14 }}>{model.example}</div>
+                <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)', paddingTop:12 }}>
+                  <div style={{ fontSize:11, color:'rgba(255,255,255,0.4)', fontWeight:700, textTransform:'uppercase', letterSpacing:'0.5px', marginBottom:4 }}>Best for</div>
+                  <div style={{ fontSize:12, color:'rgba(255,255,255,0.6)', lineHeight:1.6 }}>{model.best}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p style={{ marginTop:16, fontSize:13, color:'rgba(255,255,255,0.35)', textAlign:'center' }}>Transaction fees are always paid by the transient boater — never by the marina or the tenant.</p>
+        </div>
+
         {/* Objection handling */}
         <div style={{ marginBottom:60 }}>
           <h2 style={{ fontSize:28, fontWeight:900, letterSpacing:'-1px', margin:'0 0 28px' }}>Questions we get about Hot Slip™</h2>
@@ -91,8 +139,8 @@ export default function HotSlip() {
         {/* CTA */}
         <div style={{ textAlign:'center', background:'rgba(255,140,0,0.06)', border:'1px solid rgba(255,140,0,0.15)', borderRadius:16, padding:'60px 40px' }}>
           <div style={{ fontSize:40, marginBottom:16 }}>🔥</div>
-          <h2 style={{ fontSize:32, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 14px' }}>Hot Slip™ is included in the Captain plan.</h2>
-          <p style={{ fontSize:15, color:'rgba(255,255,255,0.5)', marginBottom:32, maxWidth:460, margin:'0 auto 32px' }}>Available on Captain ($249/mo) and Commodore plans. See it live in your marina during the demo.</p>
+          <h2 style={{ fontSize:32, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 14px' }}>Hot Slip™ is included on every plan.</h2>
+          <p style={{ fontSize:15, color:'rgba(255,255,255,0.5)', marginBottom:32, maxWidth:460, margin:'0 auto 32px' }}>Included in both plans — $299/mo (50 slips &amp; under) or $499/mo (50+ slips). First month free. See it live in your marina during the demo.</p>
           <Link href="/join" style={{ display:'inline-block', padding:'18px 44px', background:TEAL, color:NAVY, borderRadius:8, fontSize:16, fontWeight:800, textDecoration:'none', fontFamily:FONT }}>See Hot Slip™ in Action</Link>
         </div>
       </div>
