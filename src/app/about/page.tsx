@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-export const metadata: Metadata = { title: "About", description: "Why we built AyeAyeSkipper — the marina OS built around AI. The story of Slip Logic™, Hot Slip™, and why marina operators deserve better software." }
+export const metadata: Metadata = { title: "About", description: "Why we built AyeAyeSkipper — the marina OS built around Skipper. The story of Slip Logic™, Hot Slip™, and why marina operators deserve better software." }
 
 const TEAL = '#4dd6c8', NAVY = '#0d2b4b', FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
 
@@ -31,9 +31,9 @@ export default function About() {
               </p>
             </div>
             <div>
-              <h2 style={{ fontSize:32, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 20px' }}>AI that actually knows your marina.</h2>
+              <h2 style={{ fontSize:32, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 20px' }}>The Skipper Engine™ knows your marina.</h2>
               <p style={{ fontSize:15, color:'rgba(255,255,255,0.6)', lineHeight:1.8, margin:0 }}>
-                We never call Skipper "AI." Not because we're embarrassed by it — because the word undersells it. Skipper isn't a chatbot. It's an expert that knows your specific marina. Your slips. Your tenants. Your rates. Your history. Ask Skipper anything about your operation and it answers like someone who's been working your docks for ten years.
+                The Skipper Engine™ knows your specific marina inside and out. Skipper isn't a chatbot. It's an expert that knows your specific marina. Your slips. Your tenants. Your rates. Your history. Ask Skipper anything about your operation and it answers like someone who's been working your docks for ten years.
               </p>
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function About() {
           </p>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }}>
             {[
-              ['⚓','AyeAyeSkipper','Marina OS + Skipper AI'],
+              ['⚓','AyeAyeSkipper','Marina OS + Skipper Engine™'],
               ['🚤','MarinerAndSailor.com','Charter booking platform'],
               ['🛥️','RIBITBoats.com','Custom aluminum RIBs'],
             ].map(([icon, name, desc]) => (

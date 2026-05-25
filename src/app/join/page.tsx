@@ -11,6 +11,7 @@ const INTERESTS = [
   'Hot Slip™ Revenue Program',
   'Transient Booking',
   'Full Marina OS',
+  'SiteLogic™ — RV Parks & Campgrounds',
   'Just looking',
 ]
 
@@ -153,6 +154,13 @@ export default function JoinPage() {
               <input required type="number" min={1} style={inputStyle} value={form.slips} onChange={e => setField('slips', e.target.value)} placeholder="e.g. 120" />
             </div>
 
+            {/* Plan hint */}
+            {form.slips && (
+              <div style={{ background: 'rgba(77,214,200,0.07)', border: '1px solid rgba(77,214,200,0.2)', borderRadius: 8, padding: '12px 16px', fontSize: 13, color: TEAL }}>
+                ⚓ Based on your slip count: <strong>{Number(form.slips) <= 50 ? '$299/mo (50 slips & under)' : '$499/mo (50+ slips)'}</strong> — first month free.
+              </div>
+            )}
+
             {/* Currently using */}
             <div>
               <label style={labelStyle}>Currently using</label>
@@ -223,7 +231,7 @@ export default function JoinPage() {
             </button>
 
             <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', textAlign: 'center', margin: 0 }}>
-              No contracts. No setup fees. We'll reach out within 24 hours.
+              No contracts. No setup fees. First month free. We’ll reach out within 24 hours.
             </p>
           </form>
         )}

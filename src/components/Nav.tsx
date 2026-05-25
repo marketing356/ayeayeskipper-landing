@@ -15,7 +15,7 @@ export default function Nav() {
         <span style={{ fontSize:10, color:TEAL, fontWeight:700, letterSpacing:'1px', background:'rgba(77,214,200,0.12)', padding:'2px 8px', borderRadius:20 }}>SLIP LOGIC™</span>
       </Link>
       <div style={{ display:'flex', gap:24, alignItems:'center' }}>
-        {[['Features','/features'],['How It Works','/#how-it-works'],['Pricing','/pricing'],['vs. Dockwa','/vs-dockwa'],['Join','/join'],['For Boaters','/transient'],['About','/about']].map(([l,h]) => (
+        {[['Features','/features'],['How It Works','/#how-it-works'],['Pricing','/pricing'],['vs. Dockwa','/vs-dockwa'],['Tenant Portal','/tenant-portal'],['Join','/join'],['For Boaters','/transient'],['About','/about']].map(([l,h]) => (
           <Link key={l} href={h} style={{ color:'rgba(255,255,255,0.6)', textDecoration:'none', fontSize:13, fontWeight:500 }}>{l}</Link>
         ))}
         <Link href="/demo" style={{ padding:'8px 22px', background:TEAL, color:NAVY, border:'none', borderRadius:6, fontSize:13, fontWeight:800, cursor:'pointer', fontFamily:FONT, textDecoration:'none' }}>Book a Demo</Link>

@@ -13,7 +13,7 @@ export default function Footer() {
               <span style={{ fontWeight:900, fontSize:17, color:'#fff' }}>AyeAyeSkipper</span>
             </div>
             <p style={{ fontSize:13, color:'rgba(255,255,255,0.4)', lineHeight:1.75, maxWidth:260 }}>
-              The marina OS built around AI. Powered by Slip Logic™. Built by Mariner and Sailor LLC.
+              The marina OS powered by the Skipper Engine™. Powered by Slip Logic™. Built by Mariner and Sailor LLC.
             </p>
             <p style={{ fontSize:12, color:'rgba(255,255,255,0.25)', marginTop:12 }}>© 2026 Next-Gen Marine · Mariner and Sailor LLC</p>
           </div>

@@ -80,9 +80,9 @@ export default function VsDockwa() {
               <div style={{ fontSize:13, color:TEAL, fontWeight:700, textTransform:'uppercase', letterSpacing:'1px', marginBottom:12 }}>AyeAyeSkipper</div>
               <div style={{ fontSize:13, color:'rgba(255,255,255,0.6)', lineHeight:2 }}>
                 Transaction fees: <strong style={{ color:TEAL }}>$0</strong><br/>
-                Captain plan: <strong style={{ color:TEAL }}>$2,988/yr</strong><br/>
+                AyeAyeSkipper plan: <strong style={{ color:TEAL }}>$3,588/yr</strong><br/>
                 Customer data: <strong style={{ color:TEAL }}>yours forever</strong><br/>
-                <span style={{ display:'block', marginTop:12, fontSize:15, color:TEAL, fontWeight:700 }}>Total cost: $2,988/yr</span>
+                <span style={{ display:'block', marginTop:12, fontSize:15, color:TEAL, fontWeight:700 }}>Total cost: $3,588/yr</span>
                 <span style={{ fontSize:11, color:'rgba(255,255,255,0.3)' }}>Plus boaters who know and trust YOUR marina brand</span>
               </div>
             </div>

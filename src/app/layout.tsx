@@ -4,11 +4,11 @@ import Footer from "@/components/Footer"
 
 export const metadata: Metadata = {
   title: { default: "AyeAyeSkipper — We Run on Skipper", template: "%s | AyeAyeSkipper" },
-  description: "The marina management OS built around AI. Powered by Slip Logic™. Zero transaction fees, zero platform rake. Your marina. Your customers. Your money.",
+  description: "The marina OS powered by the Skipper Engine™. Powered by Slip Logic™. Zero transaction fees, zero platform rake. Your marina. Your customers. Your money.",
   openGraph: {
     siteName: "AyeAyeSkipper",
     title: "AyeAyeSkipper — We Run on Skipper",
-    description: "The marina OS built around AI. Slip Logic™, Hot Slip™, Skipper Gangway™. No Dockwa fees. No platform rake. You keep 100%.",
+    description: "The marina OS powered by the Skipper Engine™. Slip Logic™, Hot Slip™, Skipper Gangway™. No Dockwa fees. No platform rake. You keep 100%.",
     type: "website",
   }
 }

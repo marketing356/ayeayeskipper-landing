@@ -30,8 +30,8 @@ export default function SkipperGangway() {
               ['🔧','Dockwa','Full export import'],
               ['🔧','Harbour Assist','Automated migration'],
               ['🔧','Swell','Automated migration'],
-              ['📊','Excel / CSV','AI-powered column mapping'],
-              ['📄','Google Sheets','AI-powered column mapping'],
+              ['📊','Excel / CSV','Skipper Engine™ column mapping'],
+              ['📄','Google Sheets','Skipper Engine™ column mapping'],
               ['📁','Any format','Custom Gangway build'],
             ].map(([icon, name, note]) => (
               <div key={name as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:10, padding:'18px 16px', textAlign:'center' }}>

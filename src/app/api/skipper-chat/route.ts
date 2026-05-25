@@ -74,8 +74,8 @@ export async function POST(request: NextRequest) {
     // Fallback replies for when API is unavailable
     const msg = (await request.text().catch(() => '')).toLowerCase()
     const fallbacks: Record<string, string> = {
-      cost: "Plans start at $99/mo — flat rate, zero transaction fees. You keep 100% of what your marina earns.",
-      price: "Plans start at $99/mo — flat rate, zero transaction fees. You keep 100% of what your marina earns.",
+      cost: "Plans start at $299/mo (50 slips & under) or $499/mo (50+ slips). Flat rate, zero transaction fees. You keep 100% of what your marina earns.",
+      price: "Plans start at $299/mo (50 slips & under) or $499/mo (50+ slips). Flat rate, zero transaction fees. You keep 100% of what your marina earns.",
       migrate: "Skipper Gangway™ migrates from Dockmaster, Dockwa, or spreadsheets — usually same day. You don't start from zero.",
       'hot slip': "Hot Slip™ lets annual tenants earn revenue when they're away. First feature of its kind in marina software.",
     }

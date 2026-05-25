@@ -21,7 +21,7 @@ const COMPETITORS: Competitor[] = [
     label: 'Molo',
     tier: 'primary',
     rows: [
-      { feature: 'Monthly fee (flat)', skipper: '$99–$349/mo', competitor: 'varies' },
+      { feature: 'Monthly fee (flat)', skipper: '$299–$499/mo', competitor: 'varies' },
       { feature: 'Transaction fees', skipper: 'Zero. Ever.', competitor: '% per booking' },
       { feature: 'Marina owns customer data', skipper: 'Always', competitor: 'Platform owns' },
       { feature: 'Asset Logic™ map', skipper: 'Live color map', competitor: 'limited' },
@@ -37,7 +37,7 @@ const COMPETITORS: Competitor[] = [
     label: 'Dockside',
     tier: 'primary',
     rows: [
-      { feature: 'Monthly fee (flat)', skipper: '$99–$349/mo', competitor: 'varies' },
+      { feature: 'Monthly fee (flat)', skipper: '$299–$499/mo', competitor: 'varies' },
       { feature: 'Transaction fees', skipper: 'Zero. Ever.', competitor: '% per booking' },
       { feature: 'Marina owns customer data', skipper: 'Always', competitor: 'yours (limited export)' },
       { feature: 'Asset Logic™ map', skipper: 'Live color map', competitor: '—' },
@@ -54,7 +54,7 @@ const COMPETITORS: Competitor[] = [
     tier: 'secondary',
     note: 'In the transient booking space only.',
     rows: [
-      { feature: 'Monthly fee (flat)', skipper: '$99–$349/mo', competitor: '% of bookings' },
+      { feature: 'Monthly fee (flat)', skipper: '$299–$499/mo', competitor: '% of bookings' },
       { feature: 'Transaction fees', skipper: 'Zero. Ever.', competitor: '% per booking' },
       { feature: 'Marina owns customer data', skipper: 'Always', competitor: 'Platform owns' },
       { feature: 'Hot Slip™ tenant revenue', skipper: 'Built in', competitor: '—' },
@@ -71,7 +71,7 @@ const COMPETITORS: Competitor[] = [
     label: 'Dockmaster',
     tier: 'legacy',
     rows: [
-      { feature: 'Monthly fee (flat)', skipper: '$99–$349/mo', competitor: '$200–$500+' },
+      { feature: 'Monthly fee (flat)', skipper: '$299–$499/mo', competitor: '$200–$500+' },
       { feature: 'Transaction fees', skipper: 'Zero. Ever.', competitor: 'per transaction' },
       { feature: 'Marina owns customer data', skipper: 'Always', competitor: 'yours' },
       { feature: 'Asset Logic™ map', skipper: 'Live color map', competitor: 'limited' },
@@ -87,7 +87,7 @@ const COMPETITORS: Competitor[] = [
     label: 'Harbour Assist',
     tier: 'legacy',
     rows: [
-      { feature: 'Monthly fee (flat)', skipper: '$99–$349/mo', competitor: 'varies' },
+      { feature: 'Monthly fee (flat)', skipper: '$299–$499/mo', competitor: 'varies' },
       { feature: 'Transaction fees', skipper: 'Zero. Ever.', competitor: 'per booking' },
       { feature: 'Marina owns customer data', skipper: 'Always', competitor: 'yours' },
       { feature: 'Asset Logic™ map', skipper: 'Live color map', competitor: '—' },
