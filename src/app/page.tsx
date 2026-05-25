@@ -349,7 +349,7 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* PRICING */
+      {/* PRICING */}
       <div id="pricing" style={{ maxWidth:1000, margin:'0 auto', padding:'100px 40px' }}>
         <div style={{ textAlign:'center', marginBottom:56 }}>
           <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:12 }}>Simple, honest pricing</div>
@@ -377,7 +377,7 @@ export default function Landing() {
                   </div>
                 ))}
               </div>
-              <button onClick={() => tier.price === 'Custom' ? window.location.href='mailto:sales@ayeayeskipper.com' : router.push('/join')} style={{ width:'100%', padding:'12px', background: tier.popular ? TEAL : 'rgba(255,255,255,0.08)', color: tier.popular ? NAVY : '#fff', border:'none', borderRadius:7, fontSize:14, fontWeight:700, cursor:'pointer', fontFamily:FONT }}>
+              <button onClick={() => { if (tier.price === 'Custom') { window.location.href = 'mailto:sales@ayeayeskipper.com' } else { router.push('/join') } }} style={{ width:'100%', padding:'12px', background: tier.popular ? TEAL : 'rgba(255,255,255,0.08)', color: tier.popular ? NAVY : '#fff', border:'none', borderRadius:7, fontSize:14, fontWeight:700, cursor:'pointer', fontFamily:FONT }}>
                 {tier.price === 'Custom' ? 'Contact Us' : 'Get Started'}
               </button>
             </div>
