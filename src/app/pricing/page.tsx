@@ -1,10 +1,6 @@
-import type { Metadata } from 'next'
+'use client'
 import Link from 'next/link'
-
-export const metadata: Metadata = {
-  title: "Pricing — AyeAyeSkipper",
-  description: "Flat-rate marina management. Mate $299/mo · Captain $499/mo · Admiral $799/mo. No booking fees. No transaction cuts. Everything included.",
-}
+import { useState } from 'react'
 
 const TEAL = '#4dd6c8'
 const NAVY = '#0d2b4b'
@@ -85,6 +81,52 @@ const COMPARE = [
   { feature: 'Annual savings vs. Dockwa', skipper: '$9,600–$14,400', dockwa: '—' },
 ]
 
+function CheckoutButton({ tier, highlight }: { tier: string; highlight: boolean }) {
+  const [loading, setLoading] = useState(false)
+
+  async function handleCheckout() {
+    setLoading(true)
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier: tier.toLowerCase() }),
+      })
+      const data = await res.json()
+      if (data.url) window.location.href = data.url
+      else alert('Something went wrong. Please try again.')
+    } catch {
+      alert('Something went wrong. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <button
+      onClick={handleCheckout}
+      disabled={loading}
+      style={{
+        display: 'block',
+        width: '100%',
+        textAlign: 'center',
+        padding: '14px 24px',
+        background: highlight ? TEAL : 'rgba(77,214,200,0.12)',
+        color: highlight ? NAVY : TEAL,
+        borderRadius: 10,
+        fontWeight: 700,
+        fontSize: 15,
+        border: highlight ? 'none' : `1px solid ${TEAL}`,
+        cursor: loading ? 'not-allowed' : 'pointer',
+        opacity: loading ? 0.7 : 1,
+        fontFamily: FONT,
+      }}
+    >
+      {loading ? 'Redirecting...' : 'Start Free Trial'}
+    </button>
+  )
+}
+
 export default function Pricing() {
   return (
     <div style={{ minHeight: '100vh', background: DARK, fontFamily: FONT, color: '#fff' }}>
@@ -143,20 +185,7 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Link href={`/join?tier=${tier.name.toLowerCase()}`} style={{
-              display: 'block',
-              textAlign: 'center',
-              padding: '14px 24px',
-              background: tier.highlight ? TEAL : 'rgba(77,214,200,0.12)',
-              color: tier.highlight ? NAVY : TEAL,
-              borderRadius: 10,
-              fontWeight: 700,
-              textDecoration: 'none',
-              fontSize: 15,
-              border: tier.highlight ? 'none' : `1px solid ${TEAL}`,
-            }}>
-              Start Free Trial
-            </Link>
+            <CheckoutButton tier={tier.name} highlight={tier.highlight} />
           </div>
         ))}
       </div>
