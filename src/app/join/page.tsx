@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Nav from '@/components/Nav'
 
 const NAVY = '#0d2b4b'
@@ -15,7 +16,8 @@ const INTERESTS = [
   'Just looking',
 ]
 
-export default function JoinPage() {
+function JoinForm() {
+  const searchParams = useSearchParams()
   const [form, setForm] = useState({
     marinaName: '',
     yourName: '',
@@ -27,7 +29,13 @@ export default function JoinPage() {
     currentSoftware: '',
     interests: [] as string[],
     message: '',
+    tier: '',
   })
+
+  useEffect(() => {
+    const t = searchParams.get('tier')
+    if (t) setForm(f => ({ ...f, tier: t }))
+  }, [searchParams])
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -155,11 +163,15 @@ export default function JoinPage() {
             </div>
 
             {/* Plan hint */}
-            {form.slips && (
-              <div style={{ background: 'rgba(77,214,200,0.07)', border: '1px solid rgba(77,214,200,0.2)', borderRadius: 8, padding: '12px 16px', fontSize: 13, color: TEAL }}>
-                ⚓ Based on your slip count: <strong>{Number(form.slips) <= 50 ? '$299/mo (50 slips & under)' : '$499/mo (50+ slips)'}</strong> — first month free.
-              </div>
-            )}
+            {form.slips && (() => {
+              const n = Number(form.slips)
+              const tierName = n <= 30 ? 'Mate — $299/mo' : n <= 99 ? 'Captain — $499/mo' : 'Admiral — $799/mo'
+              return (
+                <div style={{ background: 'rgba(77,214,200,0.07)', border: '1px solid rgba(77,214,200,0.2)', borderRadius: 8, padding: '12px 16px', fontSize: 13, color: TEAL }}>
+                  ⚓ Suggested plan: <strong>{tierName}</strong> — first 30 days free.
+                </div>
+              )
+            })()}
 
             {/* Currently using */}
             <div>
@@ -237,5 +249,13 @@ export default function JoinPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function JoinPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: '100vh', background: '#070f1a' }} />}>
+      <JoinForm />
+    </Suspense>
   )
 }

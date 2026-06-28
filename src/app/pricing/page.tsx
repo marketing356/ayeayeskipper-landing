@@ -1,161 +1,206 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+
 export const metadata: Metadata = {
   title: "Pricing — AyeAyeSkipper",
-  description: "Simple flat-rate pricing. 50 slips and under: $299/mo. 50+ slips: $499/mo. First month free. Zero transaction fees. Zero booking commissions. Everything included."
+  description: "Flat-rate marina management. Mate $299/mo · Captain $499/mo · Admiral $799/mo. No booking fees. No transaction cuts. Everything included.",
 }
 
-const TEAL = '#4dd6c8', NAVY = '#0d2b4b', FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
+const TEAL = '#4dd6c8'
+const NAVY = '#0d2b4b'
+const DARK = '#070f1a'
+const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
 
 const TIERS = [
   {
-    label: '50 SLIPS & UNDER',
+    name: 'MATE',
+    label: 'UP TO 30 SLIPS',
+    subtitle: 'No transient program',
     price: '$299',
     per: '/mo',
     badge: null as string | null,
-    color: 'rgba(255,255,255,0.03)' as string,
-    border: 'rgba(255,255,255,0.12)' as string,
+    highlight: false,
     features: [
-      ['Every Skipper feature — nothing held back', true],
-      ['Slip Logic™ live color-coded marina map', true],
-      ['Asset Logic™ — slips, moorings, storage, parking', true],
-      ['Hot Slip™ tenant revenue program', true],
-      ['Transient bookings — zero commission', true],
-      ['Skipper Gangway™ migration (same day)', true],
-      ['Contracts + e-sign', true],
-      ['Tenant portal (mobile, no app required)', true],
-      ['The Briefing Room daily operations brief', true],
-      ['Unlimited staff accounts', true],
-      ['Unlimited tenant profiles', true],
-      ['Wait list intelligence', true],
-      ['Full support included', true],
-    ] as [string, boolean][],
+      'Full Helm marina management dashboard',
+      'Slip Logic™ live color-coded marina map',
+      'Asset Logic™ — slips, moorings, storage, parking',
+      'Skipper app for all staff and slip holders',
+      'Tenant messaging + announcements',
+      'Lease management + e-sign',
+      'Billing + late payment automation',
+      'Work orders + maintenance tracking',
+      'Unlimited staff accounts',
+      'Unlimited tenant profiles',
+      'Full support included',
+    ],
   },
   {
-    label: '50+ SLIPS',
+    name: 'CAPTAIN',
+    label: '31–99 SLIPS',
+    subtitle: 'Or any transient program',
     price: '$499',
     per: '/mo',
-    badge: 'BEST FOR LARGER MARINAS',
-    color: NAVY,
-    border: TEAL,
+    badge: 'MOST POPULAR',
+    highlight: true,
     features: [
-      ['Everything in the 50-slip plan', true],
-      ['Unlimited slips — no cap', true],
-      ['Multi-dock management', true],
-      ['Fuel dock module', true],
-      ['Rack + trailer + PWC storage tracking', true],
-      ['SMS via Skipper (Twilio)', true],
-      ['QuickBooks sync', true],
-      ['Custom Skipper training on your data', true],
-      ['Multi-marina dashboard', true],
-      ['Priority onboarding specialist', true],
-      ['White-label tenant portal', true],
-      ['SLA + priority support', true],
-    ] as [string, boolean][],
+      'Everything in Mate',
+      'Transient booking & Hot Slip™ revenue program',
+      'Waitlist intelligence',
+      'Fuel dock module',
+      'Rack + trailer + PWC storage tracking',
+      'SMS via Skipper (Twilio)',
+      'QuickBooks sync',
+      'Multi-dock management',
+      'Skipper Gangway™ migration (same day)',
+    ],
   },
+  {
+    name: 'ADMIRAL',
+    label: '100+ SLIPS',
+    subtitle: 'Large & multi-marina operations',
+    price: '$799',
+    per: '/mo',
+    badge: 'ENTERPRISE',
+    highlight: false,
+    features: [
+      'Everything in Captain',
+      'Unlimited slips — no cap',
+      'Multi-marina dashboard',
+      'Custom Skipper training on your data',
+      'Priority onboarding specialist',
+      'White-label tenant portal',
+      'SLA + priority support',
+      'Dedicated account manager',
+    ],
+  },
+]
+
+const COMPARE = [
+  { feature: 'Monthly software fee', skipper: '$299–$799', dockwa: '$1,300–$1,500' },
+  { feature: 'Booking commission', skipper: 'ZERO', dockwa: '15% per booking' },
+  { feature: 'Pay to rank higher', skipper: 'Never', dockwa: 'Yes — paid tiers' },
+  { feature: 'Marina map included', skipper: '✓', dockwa: '✗' },
+  { feature: 'Tenant/slip holder app', skipper: '✓', dockwa: '✗' },
+  { feature: 'Lease + e-sign', skipper: '✓', dockwa: '✗' },
+  { feature: 'Annual savings vs. Dockwa', skipper: '$9,600–$14,400', dockwa: '—' },
 ]
 
 export default function Pricing() {
   return (
-    <div style={{ minHeight:'100vh', background:'#070f1a', fontFamily:FONT, color:'#fff' }}>
-      {/* Hero */}
-      <div style={{ maxWidth:800, margin:'0 auto', padding:'80px 40px 48px', textAlign:'center' }}>
-        <h1 style={{ fontSize:'clamp(36px,5vw,58px)', fontWeight:900, letterSpacing:'-2px', margin:'0 0 16px' }}>Dead simple pricing.</h1>
-        <p style={{ fontSize:17, color:'rgba(255,255,255,0.55)', lineHeight:1.65, margin:'0 0 12px' }}>
-          Two plans. Flat rate. Everything included.<br/>
-          Zero transaction fees. Zero booking commissions. Zero surprises.
-        </p>
-        <p style={{ fontSize:15, color:TEAL, fontWeight:700, margin:0 }}>
-          Marinas switching from Molo and Dockside save thousands every year.
-        </p>
-      </div>
+    <div style={{ minHeight: '100vh', background: DARK, fontFamily: FONT, color: '#fff' }}>
 
-      {/* No-fee banner */}
-      <div style={{ maxWidth:900, margin:'0 auto 40px', padding:'0 40px' }}>
-        <div style={{ background:`${TEAL}10`, border:`1px solid ${TEAL}25`, borderRadius:10, padding:'16px 24px', display:'flex', gap:16, alignItems:'center' }}>
-          <span style={{ fontSize:20 }}>⚓</span>
-          <div style={{ fontSize:14, color:'rgba(255,255,255,0.7)', lineHeight:1.6 }}>
-            <strong style={{ color:TEAL }}>No transaction fees. Ever.</strong> Unlike Dockwa and other platforms, AyeAyeSkipper never takes a percentage of your bookings. Your transient revenue is 100% yours. <strong style={{ color:'#fff' }}>First month free on both plans.</strong>
-          </div>
-        </div>
+      {/* Nav */}
+      <nav style={{ padding: '20px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <Link href="/" style={{ color: TEAL, fontWeight: 700, fontSize: 18, textDecoration: 'none', letterSpacing: 1 }}>
+          AYEAYESKIPPER
+        </Link>
+        <Link href="/join" style={{ background: TEAL, color: NAVY, padding: '10px 24px', borderRadius: 8, fontWeight: 700, textDecoration: 'none', fontSize: 14 }}>
+          Start Free Trial
+        </Link>
+      </nav>
+
+      {/* Hero */}
+      <div style={{ textAlign: 'center', padding: '80px 20px 60px' }}>
+        <div style={{ color: TEAL, fontSize: 13, fontWeight: 700, letterSpacing: 3, marginBottom: 16 }}>PRICING</div>
+        <h1 style={{ fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: 800, margin: '0 0 20px', lineHeight: 1.1 }}>
+          Flat rate. No surprises.<br />No booking cuts.
+        </h1>
+        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 18, maxWidth: 540, margin: '0 auto 12px' }}>
+          One price covers everything. Marinas keep 100% of every booking — we charge boaters a small service fee at checkout.
+        </p>
+        <p style={{ color: TEAL, fontWeight: 600, fontSize: 15 }}>First 30 days free. No credit card required.</p>
       </div>
 
       {/* Tiers */}
-      <div style={{ maxWidth:860, margin:'0 auto', padding:'0 40px 80px' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:20, marginBottom:48 }}>
-          {TIERS.map(tier => (
-            <div key={tier.label} style={{ background:tier.color, border:`2px solid ${tier.border}`, borderRadius:16, padding:'32px', position:'relative', display:'flex', flexDirection:'column' }}>
-              {tier.badge && (
-                <div style={{ position:'absolute', top:-14, left:'50%', transform:'translateX(-50%)', background:TEAL, color:NAVY, padding:'5px 18px', borderRadius:20, fontSize:11, fontWeight:800, whiteSpace:'nowrap', letterSpacing:'0.5px' }}>{tier.badge}</div>
-              )}
-              <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'1.5px', marginBottom:10 }}>{tier.label}</div>
-              <div style={{ display:'flex', alignItems:'baseline', gap:4, marginBottom:4 }}>
-                <span style={{ fontSize:56, fontWeight:900, letterSpacing:'-3px' }}>{tier.price}</span>
-                <span style={{ color:'rgba(255,255,255,0.4)', fontSize:15 }}>{tier.per}</span>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 20px 80px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+        {TIERS.map((tier) => (
+          <div key={tier.name} style={{
+            background: tier.highlight ? NAVY : 'rgba(255,255,255,0.03)',
+            border: `2px solid ${tier.highlight ? TEAL : 'rgba(255,255,255,0.1)'}`,
+            borderRadius: 16,
+            padding: 36,
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+          }}>
+            {tier.badge && (
+              <div style={{ position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)', background: TEAL, color: NAVY, fontSize: 11, fontWeight: 800, letterSpacing: 2, padding: '5px 16px', borderRadius: 20 }}>
+                {tier.badge}
               </div>
-              <div style={{ fontSize:14, color:TEAL, fontWeight:700, marginBottom:4 }}>First month free</div>
-              <div style={{ fontSize:13, color:'rgba(255,255,255,0.35)', marginBottom:24 }}>No contracts · Cancel anytime</div>
-              <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)', paddingTop:20, flex:1, marginBottom:24 }}>
-                {tier.features.map(([f]) => (
-                  <div key={f} style={{ display:'flex', gap:10, alignItems:'flex-start', marginBottom:12, fontSize:13.5, color:'rgba(255,255,255,0.8)' }}>
-                    <span style={{ color:TEAL, flexShrink:0, marginTop:1 }}>✓</span>{f}
-                  </div>
-                ))}
-              </div>
-              <Link href="/join" style={{ display:'block', textAlign:'center', padding:'14px', background: tier.border === TEAL ? TEAL : 'rgba(255,255,255,0.07)', color: tier.border === TEAL ? NAVY : '#fff', border:'none', borderRadius:8, fontSize:15, fontWeight:700, cursor:'pointer', fontFamily:FONT, textDecoration:'none' }}>
-                Get Started — First Month Free
-              </Link>
+            )}
+            <div style={{ color: TEAL, fontSize: 12, fontWeight: 800, letterSpacing: 3, marginBottom: 8 }}>{tier.name}</div>
+            <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 4 }}>{tier.label}</div>
+            <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, marginBottom: 28 }}>{tier.subtitle}</div>
+            <div style={{ marginBottom: 32 }}>
+              <span style={{ fontSize: 52, fontWeight: 800, color: tier.highlight ? TEAL : '#fff' }}>{tier.price}</span>
+              <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 16 }}>{tier.per}</span>
             </div>
-          ))}
-        </div>
-
-        {/* What every plan includes */}
-        <div style={{ marginBottom:64 }}>
-          <h2 style={{ fontSize:32, fontWeight:900, letterSpacing:'-1.5px', textAlign:'center', margin:'0 0 36px' }}>What every plan includes</h2>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(240px,1fr))', gap:14 }}>
-            {[
-              ['🗺️','Your custom marina map','Built from your layout. Every slip, dock, mooring — exactly as it is.'],
-              ['🔄','Free migration','Skipper Gangway™ moves your data from any system. Same day.'],
-              ['🚀','Same-day onboarding','Live the same afternoon. No weeks of setup.'],
-              ['👥','Unlimited staff','Everyone on your team — no per-seat charges.'],
-              ['🌐','Unlimited tenants','100 or 1,000 tenant profiles — no extra cost.'],
-              ['📱','Tenant portal','Every tenant gets mobile access. Included in all plans.'],
-              ['🔒','Your data, always','Export your data anytime. You own it completely.'],
-              ['🛟','Support included','We don\'t charge extra for help. It\'s part of the deal.'],
-            ].map(([icon, title, desc]) => (
-              <div key={title as string} style={{ background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)', borderRadius:10, padding:'18px' }}>
-                <div style={{ fontSize:22, marginBottom:8 }}>{icon}</div>
-                <div style={{ fontWeight:700, fontSize:14, marginBottom:4 }}>{title as string}</div>
-                <div style={{ fontSize:12, color:'rgba(255,255,255,0.45)', lineHeight:1.6 }}>{desc as string}</div>
-              </div>
-            ))}
+            <ul style={{ listStyle: 'none', margin: '0 0 36px', padding: 0, flex: 1 }}>
+              {tier.features.map((f) => (
+                <li key={f} style={{ display: 'flex', gap: 10, marginBottom: 12, fontSize: 14, color: 'rgba(255,255,255,0.8)', alignItems: 'flex-start' }}>
+                  <span style={{ color: TEAL, fontWeight: 700, flexShrink: 0 }}>✓</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <Link href={`/join?tier=${tier.name.toLowerCase()}`} style={{
+              display: 'block',
+              textAlign: 'center',
+              padding: '14px 24px',
+              background: tier.highlight ? TEAL : 'rgba(77,214,200,0.12)',
+              color: tier.highlight ? NAVY : TEAL,
+              borderRadius: 10,
+              fontWeight: 700,
+              textDecoration: 'none',
+              fontSize: 15,
+              border: tier.highlight ? 'none' : `1px solid ${TEAL}`,
+            }}>
+              Start Free Trial
+            </Link>
           </div>
-        </div>
+        ))}
+      </div>
 
-        {/* FAQ */}
-        <div style={{ maxWidth:700, margin:'0 auto' }}>
-          <h2 style={{ fontSize:28, fontWeight:900, letterSpacing:'-1px', textAlign:'center', margin:'0 0 32px' }}>Pricing questions</h2>
-          {[
-            ['Are there any transaction fees?','Never. AyeAyeSkipper charges a flat monthly subscription only. We never take a percentage of your transient bookings, slip renewals, fuel sales, or any other revenue. Your income is 100% yours.'],
-            ['What if my marina is right at 50 slips?','Go with whichever plan fits. If you\'re 48 slips but growing fast, we\'d suggest starting with 50+. If you\'re at exactly 50 and not expanding, the lower plan is right.'],
-            ['Is there a setup fee?','No. We build your marina map, migrate your data, and onboard your team at no extra cost. It\'s part of the subscription.'],
-            ['Can I cancel anytime?','Yes. Month-to-month on all plans. No cancellation fee. Your data is always exportable.'],
-            ['What\'s included in Skipper Gangway™ migration?','We migrate tenant records, slip assignments, lease history, payment records, and boat specs from Dockmaster, Marina Controller, Dockwa, Molo, Dockside, and CSV/Excel. Usually done same day.'],
-            ['Do you offer non-profit or municipal marina pricing?','Yes — contact us. We work with municipal harbors and non-profit sailing clubs at a reduced rate.'],
-          ].map(([q, a]) => (
-            <div key={q as string} style={{ borderBottom:'1px solid rgba(255,255,255,0.07)', padding:'20px 0' }}>
-              <div style={{ fontWeight:700, fontSize:15, marginBottom:10, color:'#fff' }}>{q}</div>
-              <div style={{ fontSize:14, color:'rgba(255,255,255,0.55)', lineHeight:1.75 }}>{a}</div>
+      {/* Interaction Fee note */}
+      <div style={{ maxWidth: 700, margin: '0 auto 80px', padding: '0 20px', textAlign: 'center' }}>
+        <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '28px 32px' }}>
+          <div style={{ fontWeight: 700, marginBottom: 10 }}>Interaction Fee — Cost Recovery Only</div>
+          <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 14, margin: 0, lineHeight: 1.7 }}>
+            Every AI interaction is logged by tokens used. We pass our exact cost through — zero markup, never a profit center.
+            Most marinas pay $5–$15/mo. Heavy users: up to $25/mo. We call it an Interaction Fee, not an AI fee.
+          </p>
+        </div>
+      </div>
+
+      {/* vs Dockwa */}
+      <div style={{ maxWidth: 800, margin: '0 auto 80px', padding: '0 20px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <div style={{ color: TEAL, fontSize: 12, fontWeight: 800, letterSpacing: 3, marginBottom: 12 }}>THE COMPARISON</div>
+          <h2 style={{ fontSize: 32, fontWeight: 800, margin: 0 }}>Dockwa charges you to be found.<br />We just make sure boaters find you.</h2>
+        </div>
+        <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 14, overflow: 'hidden' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', background: 'rgba(255,255,255,0.06)', padding: '16px 24px', fontWeight: 700, fontSize: 13 }}>
+            <span></span>
+            <span style={{ color: TEAL, textAlign: 'center' }}>AyeAyeSkipper</span>
+            <span style={{ color: 'rgba(255,255,255,0.4)', textAlign: 'center' }}>Dockwa</span>
+          </div>
+          {COMPARE.map((row, i) => (
+            <div key={row.feature} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', padding: '14px 24px', borderTop: '1px solid rgba(255,255,255,0.06)', background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
+              <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 14 }}>{row.feature}</span>
+              <span style={{ color: TEAL, fontWeight: 700, fontSize: 14, textAlign: 'center' }}>{row.skipper}</span>
+              <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 14, textAlign: 'center' }}>{row.dockwa}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* CTA */}
-      <div style={{ textAlign:'center', padding:'80px 40px', borderTop:'1px solid rgba(255,255,255,0.07)' }}>
-        <h2 style={{ fontSize:40, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 16px' }}>First month free.<br/>No commitment.</h2>
-        <p style={{ color:'rgba(255,255,255,0.45)', fontSize:15, marginBottom:36 }}>We build your marina map before the demo. You see Skipper running your actual operation — then decide.</p>
-        <Link href="/join" style={{ display:'inline-block', padding:'18px 48px', background:TEAL, color:NAVY, borderRadius:8, fontSize:16, fontWeight:800, textDecoration:'none', fontFamily:FONT }}>Get Started Free →</Link>
+      <div style={{ textAlign: 'center', padding: '0 20px 100px' }}>
+        <h2 style={{ fontSize: 36, fontWeight: 800, margin: '0 0 16px' }}>Ready to run on Skipper?</h2>
+        <p style={{ color: 'rgba(255,255,255,0.55)', marginBottom: 32 }}>30 days free. No credit card. Your data is yours from day one.</p>
+        <Link href="/join" style={{ display: 'inline-block', background: TEAL, color: NAVY, padding: '18px 48px', borderRadius: 12, fontWeight: 800, fontSize: 18, textDecoration: 'none' }}>
+          Start Free Trial →
+        </Link>
       </div>
     </div>
   )
