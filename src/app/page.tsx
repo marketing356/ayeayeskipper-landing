@@ -15,6 +15,8 @@ export default function Landing() {
   const [chatLoading, setChatLoading] = useState(false)
   const chatRef = useRef<HTMLDivElement>(null)
 
+  const scrollToMarina = () => { document.getElementById('marina-section')?.scrollIntoView({ behavior: 'smooth' }) }
+
   async function sendChat(overrideMsg?: string) {
     const message = (overrideMsg ?? chatMsg).trim()
     if (!message || chatLoading) return
@@ -46,6 +48,35 @@ export default function Landing() {
 
   return (
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
+
+      {/* ══════════════════════════ AUDIENCE FORK ══════════════════════════ */}
+      <div style={{ minHeight:'100vh', background:DARK, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'60px 40px', textAlign:'center' }}>
+        <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:24, padding:'6px 16px', marginBottom:24 }}>
+          <span style={{ width:7, height:7, borderRadius:'50%', background:TEAL, display:'inline-block' }}></span>
+          <span style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'1px' }}>AYEAYESKIPPER</span>
+        </div>
+        <h1 style={{ fontSize:'clamp(32px,5vw,52px)', fontWeight:900, letterSpacing:'-2px', margin:'0 0 12px', lineHeight:1.05, color:'#fff' }}>
+          Welcome aboard.
+        </h1>
+        <p style={{ fontSize:17, color:'rgba(255,255,255,0.5)', margin:'0 0 52px', maxWidth:420, lineHeight:1.65 }}>
+          Skipper runs marinas. Skipper helps boaters. Where do you belong?
+        </p>
+        <div style={{ display:'flex', gap:20, flexWrap:'wrap', justifyContent:'center' }}>
+          <button onClick={scrollToMarina} style={{ width:260, padding:'32px 24px', background:NAVY, border:`2px solid ${TEAL}`, borderRadius:16, color:'#fff', cursor:'pointer', fontFamily:FONT, textAlign:'center' }}>
+            <div style={{ fontSize:40, marginBottom:12 }}>⚓</div>
+            <div style={{ fontWeight:900, fontSize:20, marginBottom:8 }}>I&apos;m a Marina</div>
+            <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)', lineHeight:1.6, marginBottom:16 }}>Marina software with no transaction fees, no commissions, and an AI that actually runs your operation.</div>
+            <div style={{ color:TEAL, fontWeight:700, fontSize:14 }}>See the platform →</div>
+          </button>
+          <button onClick={() => router.push('/boaters')} style={{ width:260, padding:'32px 24px', background:'rgba(77,214,200,0.06)', border:'2px solid rgba(77,214,200,0.3)', borderRadius:16, color:'#fff', cursor:'pointer', fontFamily:FONT, textAlign:'center' }}>
+            <div style={{ fontSize:40, marginBottom:12 }}>🛥️</div>
+            <div style={{ fontWeight:900, fontSize:20, marginBottom:8 }}>I&apos;m a Boater</div>
+            <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)', lineHeight:1.6, marginBottom:16 }}>Find marinas, book a slip, ask Skipper anything. Free for boaters, always.</div>
+            <div style={{ color:TEAL, fontWeight:700, fontSize:14 }}>Find a marina →</div>
+          </button>
+        </div>
+        <div style={{ marginTop:56, color:'rgba(255,255,255,0.15)', fontSize:12 }}>↓ Marina owners — scroll down for the full platform</div>
+      </div>
       <style>{`
         @keyframes pulse-glow {
           0%, 100% { box-shadow: 0 0 0 0 rgba(77,214,200,0.4), 0 0 40px rgba(77,214,200,0.2); }
@@ -79,7 +110,7 @@ export default function Landing() {
       `}</style>
 
       {/* ═══════════════════════════════════════ HERO ═══════════════════════════════════════ */}
-      <div style={{ background:NAVY, padding:'80px 40px 60px', textAlign:'center' }}>
+      <div id="marina-section" style={{ background:NAVY, padding:'80px 40px 60px', textAlign:'center' }}>
         {/* Badge */}
         <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:24, padding:'6px 16px', marginBottom:28 }}>
           <span style={{ width:7, height:7, borderRadius:'50%', background:TEAL, display:'inline-block' }}></span>
@@ -91,7 +122,7 @@ export default function Landing() {
           We run on <span style={{ color:TEAL }}>Skipper.</span>
         </h1>
         <p style={{ fontSize:20, color:TEAL, margin:'0 0 40px', fontWeight:600, letterSpacing:'-0.3px' }}>
-          The system that runs your marina. Ask him anything.
+          The AI marina OS. Slips, tenants, bookings, fuel — ask him anything.
         </p>
 
         {/* Skipper avatar — glowing pulse circle */}

@@ -103,6 +103,29 @@ export default function VsDockwa() {
           </div>
         </div>
 
+        {/* Real user complaints */}
+        <div style={{ marginBottom:60 }}>
+          <h2 style={{ fontSize:28, fontWeight:900, letterSpacing:'-1px', margin:'0 0 8px' }}>What boaters are saying about Dockwa</h2>
+          <p style={{ fontSize:14, color:'rgba(255,255,255,0.4)', marginBottom:24, lineHeight:1.6 }}>3.8 stars on Google Play. 3.9 stars overall. Here are the actual reviews:</p>
+          <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+            {[
+              ['⭐','"Horrendous app. Absolutely a nightmare to setup a simple reservation. Can\'t get PDF or JPG to upload from my phone, One Drive, Google, Amazon or anywhere I try to load my docs from. Insane waste of time."','— David G., 1 star, Aug 2024 (6 people found helpful)'],
+              ['⭐','"Updates to a Profile must be done on a computer, not a mobile device (i.e. upload photos and insurance/registration docs) BUT the mobile device doesn\'t tell you why it is not working. I found it buried in Help."','— Daniel C., Mar 2024'],
+              ['⚠️','Pay-to-play ranking: Dockwa\'s own docs confirm marinas that run "Deals" get better placement in search results. The best slip isn\'t always what you see first — it\'s who paid more.','— Dockwa Network page, confirmed'],
+            ].map(([icon, quote, attr], i) => (
+              <div key={i} style={{ background:'rgba(255,80,80,0.04)', border:'1px solid rgba(255,80,80,0.12)', borderRadius:12, padding:'20px 24px' }}>
+                <div style={{ display:'flex', gap:12, alignItems:'flex-start' }}>
+                  <span style={{ fontSize:20, flexShrink:0 }}>{icon}</span>
+                  <div>
+                    <div style={{ fontSize:14, color:'rgba(255,255,255,0.7)', lineHeight:1.7, fontStyle:'italic', marginBottom:6 }}>{quote}</div>
+                    <div style={{ fontSize:12, color:'rgba(255,255,255,0.3)' }}>{attr}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* What Dockwa doesn't do */}
         <div style={{ marginBottom:60 }}>
           <h2 style={{ fontSize:28, fontWeight:900, letterSpacing:'-1px', margin:'0 0 24px' }}>Dockwa is a booking tool. AyeAyeSkipper is your entire marina.</h2>
