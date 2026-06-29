@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Suspense } from 'react'
 
 const NAVY = '#0d2b4b', TEAL = '#4dd6c8', DARK = '#070f1a'
@@ -14,15 +15,13 @@ async function hashPin(pin: string): Promise<string> {
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
 }
 
-function redirectToApp(accessToken: string, refreshToken: string) {
-  // Pass Supabase session tokens in URL hash — the mobile app's Supabase client
-  // auto-detects and stores them when the page loads.
-  window.location.href =
-    `https://app.ayeayeskipper.com#access_token=${accessToken}` +
-    `&refresh_token=${refreshToken}&token_type=bearer&type=magiclink`
+function saveWebSession(email: string, account: { id?: string; first_name?: string; last_name?: string }) {
+  localStorage.setItem('boater_email', email)
+  localStorage.setItem('boater_account', JSON.stringify({ email, ...account }))
 }
 
 function AuthFlow() {
+  const router = useRouter()
   const [step, setStep] = useState<Step>('email')
   const [email, setEmail] = useState('')
   const [pin, setPin] = useState('')
@@ -30,9 +29,7 @@ function AuthFlow() {
   const [newPin, setNewPin] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  // Session state passed from verify-otp → set-pin
   const [userId, setUserId] = useState('')
-  const [sessionTokens, setSessionTokens] = useState({ access: '', refresh: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -74,7 +71,8 @@ function AuthFlow() {
       })
       const data = await res.json()
       if (data.error) { setError('Incorrect PIN'); setPin(''); return }
-      redirectToApp(data.access_token, data.refresh_token)
+      saveWebSession(email, data.account ?? {})
+      router.push('/boaters/dashboard')
     } catch { setError('Something went wrong') }
     finally { setLoading(false) }
   }
@@ -91,7 +89,6 @@ function AuthFlow() {
       const data = await res.json()
       if (data.error) { setError('Invalid or expired code'); setOtp(''); return }
       setUserId(data.userId)
-      setSessionTokens({ access: data.access_token, refresh: data.refresh_token })
       setStep('set-pin')
     } catch { setError('Something went wrong') }
     finally { setLoading(false) }
@@ -115,7 +112,8 @@ function AuthFlow() {
       })
       const data = await res.json()
       if (data.error) { setError(data.error); return }
-      redirectToApp(sessionTokens.access, sessionTokens.refresh)
+      saveWebSession(email, data.account ?? { first_name: firstName, last_name: lastName })
+      router.push('/boaters/dashboard')
     } catch { setError('Something went wrong') }
     finally { setLoading(false) }
   }
@@ -135,7 +133,6 @@ function AuthFlow() {
   return (
     <div style={{ minHeight: '100vh', background: DARK, fontFamily: FONT, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px' }}>
       <div style={{ width: '100%', maxWidth: 400 }}>
-        {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
           <img src="/skipper-avatar.jpg" alt="Skipper" style={{ width: 56, height: 56, borderRadius: '50%', border: `2px solid ${TEAL}`, marginBottom: 12 }} />
           <div style={{ fontSize: 20, fontWeight: 900, letterSpacing: '-0.5px' }}>AyeAyeSkipper</div>
@@ -144,18 +141,15 @@ function AuthFlow() {
 
         <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '32px 28px' }}>
 
-          {/* STEP: EMAIL */}
           {step === 'email' && (
             <>
               <h2 style={{ fontSize: 22, fontWeight: 900, letterSpacing: '-0.5px', margin: '0 0 8px' }}>Welcome aboard</h2>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', margin: '0 0 28px', lineHeight: 1.6 }}>Enter your email to sign in or create a free account.</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <input
-                  type="email" placeholder="your@email.com" value={email}
+                <input type="email" placeholder="your@email.com" value={email}
                   onChange={e => setEmail(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleEmail()}
-                  style={inputStyle} autoFocus
-                />
+                  style={inputStyle} autoFocus />
                 {error && <div style={{ color: '#ff6b6b', fontSize: 13 }}>{error}</div>}
                 <button onClick={handleEmail} disabled={loading} style={btnStyle}>
                   {loading ? 'Checking…' : 'Continue →'}
@@ -167,31 +161,28 @@ function AuthFlow() {
             </>
           )}
 
-          {/* STEP: PIN (returning user) */}
           {step === 'pin' && (
             <>
               <h2 style={{ fontSize: 22, fontWeight: 900, letterSpacing: '-0.5px', margin: '0 0 8px' }}>Welcome back</h2>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', margin: '0 0 6px' }}>{email}</p>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', margin: '0 0 28px', lineHeight: 1.6 }}>Enter your PIN to sign in.</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <input
-                  type="password" inputMode="numeric" placeholder="••••" maxLength={6}
+                <input type="password" inputMode="numeric" placeholder="••••" maxLength={6}
                   value={pin} onChange={e => setPin(e.target.value.replace(/\D/g, ''))}
                   onKeyDown={e => e.key === 'Enter' && handlePin()}
-                  style={{ ...inputStyle, letterSpacing: '8px', fontSize: 24, textAlign: 'center' }} autoFocus
-                />
+                  style={{ ...inputStyle, letterSpacing: '8px', fontSize: 24, textAlign: 'center' }} autoFocus />
                 {error && <div style={{ color: '#ff6b6b', fontSize: 13 }}>{error}</div>}
                 <button onClick={handlePin} disabled={loading} style={btnStyle}>
                   {loading ? 'Signing in…' : 'Sign In →'}
                 </button>
-                <button onClick={() => { setStep('email'); setPin(''); setError('') }} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.3)', fontSize: 12, cursor: 'pointer', fontFamily: FONT, marginTop: 4 }}>
+                <button onClick={() => { setStep('email'); setPin(''); setError('') }}
+                  style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.3)', fontSize: 12, cursor: 'pointer', fontFamily: FONT, marginTop: 4 }}>
                   ← Use a different email
                 </button>
               </div>
             </>
           )}
 
-          {/* STEP: OTP */}
           {step === 'otp' && (
             <>
               <h2 style={{ fontSize: 22, fontWeight: 900, letterSpacing: '-0.5px', margin: '0 0 8px' }}>Check your email</h2>
@@ -199,24 +190,22 @@ function AuthFlow() {
                 We sent a 6-digit code to <strong style={{ color: '#fff' }}>{email}</strong>. Enter it below.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <input
-                  type="text" inputMode="numeric" placeholder="123456" maxLength={6}
+                <input type="text" inputMode="numeric" placeholder="123456" maxLength={6}
                   value={otp} onChange={e => setOtp(e.target.value.replace(/\D/g, ''))}
                   onKeyDown={e => e.key === 'Enter' && handleOtp()}
-                  style={{ ...inputStyle, letterSpacing: '8px', fontSize: 24, textAlign: 'center' }} autoFocus
-                />
+                  style={{ ...inputStyle, letterSpacing: '8px', fontSize: 24, textAlign: 'center' }} autoFocus />
                 {error && <div style={{ color: '#ff6b6b', fontSize: 13 }}>{error}</div>}
                 <button onClick={handleOtp} disabled={loading} style={btnStyle}>
                   {loading ? 'Verifying…' : 'Verify Code →'}
                 </button>
-                <button onClick={() => { setStep('email'); setOtp(''); setError('') }} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.3)', fontSize: 12, cursor: 'pointer', fontFamily: FONT, marginTop: 4 }}>
+                <button onClick={() => { setStep('email'); setOtp(''); setError('') }}
+                  style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.3)', fontSize: 12, cursor: 'pointer', fontFamily: FONT, marginTop: 4 }}>
                   ← Back
                 </button>
               </div>
             </>
           )}
 
-          {/* STEP: SET PIN */}
           {step === 'set-pin' && (
             <>
               <h2 style={{ fontSize: 22, fontWeight: 900, letterSpacing: '-0.5px', margin: '0 0 8px' }}>Set your PIN</h2>
@@ -224,22 +213,14 @@ function AuthFlow() {
                 Create a 4-digit PIN. You&apos;ll use it every time you sign in — no more email codes.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <input
-                  type="text" placeholder="First name" value={firstName}
-                  onChange={e => setFirstName(e.target.value)}
-                  style={inputStyle}
-                />
-                <input
-                  type="text" placeholder="Last name" value={lastName}
-                  onChange={e => setLastName(e.target.value)}
-                  style={inputStyle}
-                />
-                <input
-                  type="password" inputMode="numeric" placeholder="Choose a 4-digit PIN" maxLength={6}
+                <input type="text" placeholder="First name" value={firstName}
+                  onChange={e => setFirstName(e.target.value)} style={inputStyle} />
+                <input type="text" placeholder="Last name" value={lastName}
+                  onChange={e => setLastName(e.target.value)} style={inputStyle} />
+                <input type="password" inputMode="numeric" placeholder="Choose a 4-digit PIN" maxLength={6}
                   value={newPin} onChange={e => setNewPin(e.target.value.replace(/\D/g, ''))}
                   onKeyDown={e => e.key === 'Enter' && handleSetPin()}
-                  style={{ ...inputStyle, letterSpacing: '8px', fontSize: 24, textAlign: 'center' }} autoFocus
-                />
+                  style={{ ...inputStyle, letterSpacing: '8px', fontSize: 24, textAlign: 'center' }} autoFocus />
                 {error && <div style={{ color: '#ff6b6b', fontSize: 13 }}>{error}</div>}
                 <button onClick={handleSetPin} disabled={loading} style={btnStyle}>
                   {loading ? 'Creating account…' : 'Create My Account →'}
