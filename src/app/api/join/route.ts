@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!
 const RESEND_KEY = process.env.RESEND_API_KEY!
-const NOTIFY_EMAIL = 'mike@expressdocks.com'
+const NOTIFY_EMAIL = 'admin@ayeayeskipper.com'
 const FROM_EMAIL = 'noreply@ayeayeskipper.com'
 
 function tierFromSlips(slips: string): string {

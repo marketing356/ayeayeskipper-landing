@@ -5,7 +5,7 @@ import { createClient } from '@supabase/supabase-js'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-06-24.dahlia' as never })
 const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET!
 const RESEND_KEY = process.env.RESEND_API_KEY!
-const NOTIFY_EMAIL = 'mike@expressdocks.com'
+const NOTIFY_EMAIL = 'admin@ayeayeskipper.com'
 const FROM_EMAIL = 'noreply@ayeayeskipper.com'
 
 async function notify(subject: string, html: string) {
