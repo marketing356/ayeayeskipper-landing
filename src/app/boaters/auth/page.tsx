@@ -1,6 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 import { Suspense } from 'react'
 
 const NAVY = '#0d2b4b', TEAL = '#4dd6c8', DARK = '#070f1a'
@@ -8,9 +7,22 @@ const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
 
 type Step = 'email' | 'pin' | 'otp' | 'set-pin'
 
+// SHA-256 hex hash — same format as mobile app (contacts.pin_hash)
+async function hashPin(pin: string): Promise<string> {
+  const enc = new TextEncoder()
+  const buf = await crypto.subtle.digest('SHA-256', enc.encode(pin))
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
+function redirectToApp(accessToken: string, refreshToken: string) {
+  // Pass Supabase session tokens in URL hash — the mobile app's Supabase client
+  // auto-detects and stores them when the page loads.
+  window.location.href =
+    `https://app.ayeayeskipper.com#access_token=${accessToken}` +
+    `&refresh_token=${refreshToken}&token_type=bearer&type=magiclink`
+}
+
 function AuthFlow() {
-  const router = useRouter()
-  const params = useSearchParams()
   const [step, setStep] = useState<Step>('email')
   const [email, setEmail] = useState('')
   const [pin, setPin] = useState('')
@@ -18,6 +30,9 @@ function AuthFlow() {
   const [newPin, setNewPin] = useState('')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  // Session state passed from verify-otp → set-pin
+  const [userId, setUserId] = useState('')
+  const [sessionTokens, setSessionTokens] = useState({ access: '', refresh: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -34,7 +49,6 @@ function AuthFlow() {
       if (data.hasPIN) {
         setStep('pin')
       } else {
-        // Send OTP
         const r2 = await fetch('/api/boaters/auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -52,17 +66,15 @@ function AuthFlow() {
     if (pin.length < 4) { setError('Enter your PIN'); return }
     setLoading(true); setError('')
     try {
+      const pinHash = await hashPin(pin)
       const res = await fetch('/api/boaters/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'verify-pin', email, pin }),
+        body: JSON.stringify({ action: 'verify-pin', email, pinHash }),
       })
       const data = await res.json()
       if (data.error) { setError('Incorrect PIN'); setPin(''); return }
-      localStorage.setItem('boater_session', data.session)
-      localStorage.setItem('boater_email', email)
-      localStorage.setItem('boater_account', JSON.stringify(data.account))
-      window.location.href = 'https://app.ayeayeskipper.com'
+      redirectToApp(data.access_token, data.refresh_token)
     } catch { setError('Something went wrong') }
     finally { setLoading(false) }
   }
@@ -78,6 +90,8 @@ function AuthFlow() {
       })
       const data = await res.json()
       if (data.error) { setError('Invalid or expired code'); setOtp(''); return }
+      setUserId(data.userId)
+      setSessionTokens({ access: data.access_token, refresh: data.refresh_token })
       setStep('set-pin')
     } catch { setError('Something went wrong') }
     finally { setLoading(false) }
@@ -87,17 +101,21 @@ function AuthFlow() {
     if (newPin.length < 4) { setError('Choose a 4-digit PIN'); return }
     setLoading(true); setError('')
     try {
+      const pinHash = await hashPin(newPin)
       const res = await fetch('/api/boaters/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'set-pin', email, otp, pin: newPin, first_name: firstName, last_name: lastName }),
+        body: JSON.stringify({
+          action: 'set-pin',
+          userId,
+          pinHash,
+          first_name: firstName,
+          last_name: lastName,
+        }),
       })
       const data = await res.json()
       if (data.error) { setError(data.error); return }
-      localStorage.setItem('boater_session', data.session)
-      localStorage.setItem('boater_email', email)
-      localStorage.setItem('boater_account', JSON.stringify(data.account))
-      window.location.href = 'https://app.ayeayeskipper.com'
+      redirectToApp(sessionTokens.access, sessionTokens.refresh)
     } catch { setError('Something went wrong') }
     finally { setLoading(false) }
   }
@@ -125,7 +143,7 @@ function AuthFlow() {
         </div>
 
         <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '32px 28px' }}>
-          
+
           {/* STEP: EMAIL */}
           {step === 'email' && (
             <>
@@ -158,7 +176,7 @@ function AuthFlow() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <input
                   type="password" inputMode="numeric" placeholder="••••" maxLength={6}
-                  value={pin} onChange={e => setPin(e.target.value.replace(/\D/g,''))}
+                  value={pin} onChange={e => setPin(e.target.value.replace(/\D/g, ''))}
                   onKeyDown={e => e.key === 'Enter' && handlePin()}
                   style={{ ...inputStyle, letterSpacing: '8px', fontSize: 24, textAlign: 'center' }} autoFocus
                 />
@@ -183,7 +201,7 @@ function AuthFlow() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <input
                   type="text" inputMode="numeric" placeholder="123456" maxLength={6}
-                  value={otp} onChange={e => setOtp(e.target.value.replace(/\D/g,''))}
+                  value={otp} onChange={e => setOtp(e.target.value.replace(/\D/g, ''))}
                   onKeyDown={e => e.key === 'Enter' && handleOtp()}
                   style={{ ...inputStyle, letterSpacing: '8px', fontSize: 24, textAlign: 'center' }} autoFocus
                 />
@@ -218,7 +236,7 @@ function AuthFlow() {
                 />
                 <input
                   type="password" inputMode="numeric" placeholder="Choose a 4-digit PIN" maxLength={6}
-                  value={newPin} onChange={e => setNewPin(e.target.value.replace(/\D/g,''))}
+                  value={newPin} onChange={e => setNewPin(e.target.value.replace(/\D/g, ''))}
                   onKeyDown={e => e.key === 'Enter' && handleSetPin()}
                   style={{ ...inputStyle, letterSpacing: '8px', fontSize: 24, textAlign: 'center' }} autoFocus
                 />

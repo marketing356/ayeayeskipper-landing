@@ -1,206 +1,266 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import crypto from 'crypto'
 
-function hashPin(pin: string): string {
-  const salt = crypto.randomBytes(16).toString('hex')
-  const hash = crypto.scryptSync(pin, salt, 64).toString('hex')
-  return `${salt}:${hash}`
-}
-
-function verifyPin(pin: string, stored: string): boolean {
-  try {
-    const [salt, hash] = stored.split(':')
-    const attempt = crypto.scryptSync(pin, salt, 64).toString('hex')
-    return crypto.timingSafeEqual(Buffer.from(attempt, 'hex'), Buffer.from(hash, 'hex'))
-  } catch { return false }
-}
-
-const supabase = createClient(
+// ─── Supabase clients ────────────────────────────────────────────────────────
+const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  { auth: { autoRefreshToken: false, persistSession: false } }
 )
-const RESEND_KEY = process.env.RESEND_API_KEY!
 
-function randOtp() {
-  return String(Math.floor(100000 + Math.random() * 900000))
+function anonClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } }
+  )
 }
 
-function randSession() {
-  return crypto.randomUUID() + '-' + Date.now()
-}
-
-// POST /api/boaters/auth
-// action: "check"     → { email } → returns { hasPIN: bool }
-// action: "verify-pin" → { email, pin } → returns { session, account } or error
-// action: "send-otp"  → { email } → sends OTP, returns { ok }
-// action: "verify-otp" → { email, otp } → returns { needsPin: true }
-// action: "set-pin"   → { email, otp, pin } → sets PIN, returns { session, account }
-// action: "profile"   → { session } → returns { account }
+// ─── POST /api/boaters/auth ──────────────────────────────────────────────────
+// All actions read/write the contacts table (marina_id IS NULL for boaters).
+// This is the same table used by the mobile app — one source of truth.
+//
+// action: "check"       → { email }                  → { hasPIN: bool }
+// action: "send-otp"    → { email }                  → { ok: true }
+// action: "verify-otp"  → { email, otp }              → { needsPin, userId, access_token, refresh_token }
+// action: "set-pin"     → { userId, pinHash, first_name?, last_name? } → { ok, account }
+// action: "verify-pin"  → { email, pinHash }          → { access_token, refresh_token, account }
+// action: "profile"     → { email }                  → { account }
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
     const { action } = body
 
-    // ─── CHECK ───────────────────────────────────────────────────────────
+    // ─── CHECK ───────────────────────────────────────────────────────────────
     if (action === 'check') {
-      const { email } = body
+      const email = (body.email ?? '').toLowerCase().trim()
       if (!email) return NextResponse.json({ error: 'Email required' }, { status: 400 })
 
-      const { data } = await supabase
-        .from('boater_accounts')
-        .select('pin_hash')
-        .eq('email', email.toLowerCase().trim())
-        .single()
+      const { data } = await supabaseAdmin
+        .from('contacts')
+        .select('auth_user_id, pin_hash')
+        .eq('email', email)
+        .not('pin_hash', 'is', null)
+        .is('marina_id', null)
+        .order('created_at', { ascending: true })
+        .limit(1)
+        .maybeSingle()
 
-      return NextResponse.json({ hasPIN: !!(data?.pin_hash) })
+      return NextResponse.json({ hasPIN: !!(data?.pin_hash && data?.auth_user_id) })
     }
 
-    // ─── VERIFY PIN ──────────────────────────────────────────────────────
-    if (action === 'verify-pin') {
-      const { email, pin } = body
-      if (!email || !pin) return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
-
-      const { data: acct } = await supabase
-        .from('boater_accounts')
-        .select('*')
-        .eq('email', email.toLowerCase().trim())
-        .single()
-
-      if (!acct?.pin_hash) return NextResponse.json({ error: 'Account not found' }, { status: 404 })
-
-      const match = verifyPin(pin, acct.pin_hash)
-      if (!match) return NextResponse.json({ error: 'Invalid PIN' }, { status: 401 })
-
-      const session = randSession()
-      await supabase.from('boater_accounts').update({ updated_at: new Date().toISOString() }).eq('email', email.toLowerCase().trim())
-
-      return NextResponse.json({
-        session,
-        account: { id: acct.id, email: acct.email, first_name: acct.first_name, last_name: acct.last_name },
-      })
-    }
-
-    // ─── SEND OTP ────────────────────────────────────────────────────────
+    // ─── SEND OTP ─────────────────────────────────────────────────────────────
+    // Supabase sends the verification email — no Resend needed here.
     if (action === 'send-otp') {
-      const { email } = body
+      const email = (body.email ?? '').toLowerCase().trim()
       if (!email) return NextResponse.json({ error: 'Email required' }, { status: 400 })
 
-      const normalEmail = email.toLowerCase().trim()
-      const otp = randOtp()
-      const expires = new Date(Date.now() + 10 * 60 * 1000).toISOString() // 10 min
+      // If the user already has a PIN in contacts, tell them to sign in with it
+      const { data: existing } = await supabaseAdmin
+        .from('contacts')
+        .select('pin_hash, auth_user_id')
+        .eq('email', email)
+        .not('pin_hash', 'is', null)
+        .is('marina_id', null)
+        .maybeSingle()
 
-      // Upsert account
-      const { data: existing } = await supabase.from('boater_accounts').select('id, otp_used').eq('email', normalEmail).single()
-
-      if (existing?.otp_used) {
-        return NextResponse.json({ error: 'OTP already used — please enter your PIN' }, { status: 400 })
+      if (existing?.pin_hash && existing?.auth_user_id) {
+        return NextResponse.json(
+          { error: 'Account already exists — please enter your PIN' },
+          { status: 400 }
+        )
       }
 
-      await supabase.from('boater_accounts').upsert({
-        email: normalEmail,
-        otp_code: otp,
-        otp_expires_at: expires,
-        otp_used: false,
-        updated_at: new Date().toISOString(),
-      }, { onConflict: 'email' })
-
-      // Send via Resend
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          from: 'noreply@ayeayeskipper.com',
-          to: [normalEmail],
-          subject: 'Your AyeAyeSkipper verification code',
-          html: `
-<div style="font-family:system-ui,sans-serif;max-width:480px;margin:0 auto;padding:40px 20px">
-  <img src="https://ayeayeskipper.com/skipper-avatar.jpg" alt="Skipper" style="width:48px;height:48px;border-radius:50%;margin-bottom:20px"/>
-  <h2 style="color:#0d2b4b;margin:0 0 8px">Your verification code</h2>
-  <p style="color:#555;margin:0 0 28px">Enter this code to create your boater account. It expires in 10 minutes.</p>
-  <div style="font-size:40px;font-weight:900;letter-spacing:8px;color:#0d2b4b;background:#f0f9ff;padding:20px 32px;border-radius:12px;display:inline-block">${otp}</div>
-  <p style="color:#999;font-size:12px;margin-top:28px">If you didn't request this, ignore this email.</p>
-</div>
-          `,
-        }),
+      // Trigger Supabase Auth OTP email
+      const { error } = await anonClient().auth.signInWithOtp({
+        email,
+        options: { shouldCreateUser: true },
       })
+
+      if (error) {
+        console.error('send-otp error:', error)
+        return NextResponse.json({ error: 'Failed to send code' }, { status: 500 })
+      }
 
       return NextResponse.json({ ok: true })
     }
 
-    // ─── VERIFY OTP ──────────────────────────────────────────────────────
+    // ─── VERIFY OTP ──────────────────────────────────────────────────────────
     if (action === 'verify-otp') {
-      const { email, otp } = body
+      const email = (body.email ?? '').toLowerCase().trim()
+      const otp = (body.otp ?? '').trim()
       if (!email || !otp) return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
 
-      const { data: acct } = await supabase
-        .from('boater_accounts')
-        .select('otp_code, otp_expires_at, otp_used')
-        .eq('email', email.toLowerCase().trim())
-        .single()
+      const client = anonClient()
+      const { data, error } = await client.auth.verifyOtp({
+        email,
+        token: otp,
+        type: 'email',
+      })
 
-      if (!acct) return NextResponse.json({ error: 'Account not found' }, { status: 404 })
-      if (acct.otp_used) return NextResponse.json({ error: 'Code already used' }, { status: 400 })
-      if (acct.otp_code !== otp) return NextResponse.json({ error: 'Invalid code' }, { status: 401 })
-      if (new Date(acct.otp_expires_at) < new Date()) return NextResponse.json({ error: 'Code expired' }, { status: 401 })
+      if (error || !data?.user || !data?.session) {
+        console.error('verify-otp error:', error)
+        return NextResponse.json({ error: 'Invalid or expired code' }, { status: 401 })
+      }
 
-      return NextResponse.json({ needsPin: true })
-    }
+      const userId = data.user.id
 
-    // ─── SET PIN ─────────────────────────────────────────────────────────
-    if (action === 'set-pin') {
-      const { email, otp, pin, first_name, last_name } = body
-      if (!email || !otp || !pin) return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
-      if (pin.length < 4 || pin.length > 6) return NextResponse.json({ error: 'PIN must be 4–6 digits' }, { status: 400 })
+      // Link or create national-pool contacts row
+      const { data: existingRows } = await supabaseAdmin
+        .from('contacts')
+        .select('id, auth_user_id')
+        .eq('email', email)
+        .is('marina_id', null)
+        .order('created_at', { ascending: true })
+        .limit(1)
 
-      const normalEmail = email.toLowerCase().trim()
+      const existing = existingRows?.[0] ?? null
 
-      const { data: acct } = await supabase
-        .from('boater_accounts')
-        .select('otp_code, otp_expires_at, otp_used')
-        .eq('email', normalEmail)
-        .single()
+      if (existing) {
+        // Update auth_user_id to real Supabase UUID
+        await supabaseAdmin
+          .from('contacts')
+          .update({ auth_user_id: userId })
+          .eq('id', existing.id)
+      } else {
+        // Brand-new boater — create national-pool row
+        await supabaseAdmin
+          .from('contacts')
+          .insert({ auth_user_id: userId, email })
+      }
 
-      if (!acct) return NextResponse.json({ error: 'Account not found' }, { status: 404 })
-      if (acct.otp_used) return NextResponse.json({ error: 'Code already used' }, { status: 400 })
-      if (acct.otp_code !== otp) return NextResponse.json({ error: 'Invalid code' }, { status: 401 })
-      if (new Date(acct.otp_expires_at) < new Date()) return NextResponse.json({ error: 'Code expired' }, { status: 401 })
+      // Auto-couple any marina-scoped rows with this email that have no auth_user_id
+      const { data: pendingLinks } = await supabaseAdmin
+        .from('contacts')
+        .select('id')
+        .eq('email', email)
+        .not('marina_id', 'is', null)
+        .is('auth_user_id', null)
 
-      const pin_hash = hashPin(pin)
-      const session = randSession()
-
-      await supabase.from('boater_accounts').update({
-        pin_hash,
-        otp_used: true,
-        otp_code: null,
-        ...(first_name ? { first_name } : {}),
-        ...(last_name ? { last_name } : {}),
-        updated_at: new Date().toISOString(),
-      }).eq('email', normalEmail)
-
-      const { data: updated } = await supabase.from('boater_accounts').select('id, email, first_name, last_name').eq('email', normalEmail).single()
+      if (pendingLinks && pendingLinks.length > 0) {
+        await supabaseAdmin
+          .from('contacts')
+          .update({ auth_user_id: userId })
+          .in('id', pendingLinks.map((c: { id: string }) => c.id))
+      }
 
       return NextResponse.json({
-        session,
-        account: updated,
+        needsPin: true,
+        userId,
+        access_token: data.session.access_token,
+        refresh_token: data.session.refresh_token,
       })
     }
 
-    // ─── PROFILE ─────────────────────────────────────────────────────────
+    // ─── SET PIN ─────────────────────────────────────────────────────────────
+    // pinHash = SHA-256 hex of the PIN (same format as mobile app)
+    if (action === 'set-pin') {
+      const { userId, pinHash, first_name, last_name } = body
+      if (!userId || !pinHash) return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
+
+      const updatePayload: Record<string, unknown> = {
+        pin_hash: pinHash,
+        setup_complete: true,
+        updated_at: new Date().toISOString(),
+      }
+      if (first_name) updatePayload.first_name = first_name
+      if (last_name) updatePayload.last_name = last_name
+
+      const { error } = await supabaseAdmin
+        .from('contacts')
+        .update(updatePayload)
+        .eq('auth_user_id', userId)
+        .is('marina_id', null)
+
+      if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+      const { data: contact } = await supabaseAdmin
+        .from('contacts')
+        .select('id, email, first_name, last_name')
+        .eq('auth_user_id', userId)
+        .is('marina_id', null)
+        .maybeSingle()
+
+      return NextResponse.json({ ok: true, account: contact })
+    }
+
+    // ─── VERIFY PIN ──────────────────────────────────────────────────────────
+    // pinHash = SHA-256 hex of the PIN (client-side hashed, same as mobile app)
+    if (action === 'verify-pin') {
+      const email = (body.email ?? '').toLowerCase().trim()
+      const pinHash = (body.pinHash ?? '').trim()
+      if (!email || !pinHash) return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
+
+      const { data: contact } = await supabaseAdmin
+        .from('contacts')
+        .select('id, email, first_name, last_name, auth_user_id, pin_hash')
+        .eq('email', email)
+        .not('pin_hash', 'is', null)
+        .is('marina_id', null)
+        .order('created_at', { ascending: true })
+        .limit(1)
+        .maybeSingle()
+
+      if (!contact?.pin_hash || !contact?.auth_user_id) {
+        return NextResponse.json({ error: 'Account not found' }, { status: 404 })
+      }
+
+      if (contact.pin_hash !== pinHash) {
+        return NextResponse.json({ error: 'Incorrect PIN' }, { status: 401 })
+      }
+
+      // Generate a real Supabase session via admin magic link (no email sent — server-to-server)
+      const { data: linkData, error: linkErr } = await supabaseAdmin.auth.admin.generateLink({
+        type: 'magiclink',
+        email,
+      })
+
+      if (linkErr || !linkData?.properties?.email_otp) {
+        console.error('generateLink error:', linkErr)
+        return NextResponse.json({ error: 'Failed to generate session' }, { status: 500 })
+      }
+
+      const client = anonClient()
+      const { data: sessionData, error: sessionErr } = await client.auth.verifyOtp({
+        email,
+        token: linkData.properties.email_otp,
+        type: 'email',
+      })
+
+      if (sessionErr || !sessionData?.session) {
+        console.error('verifyOtp error:', sessionErr)
+        return NextResponse.json({ error: 'Session creation failed' }, { status: 500 })
+      }
+
+      return NextResponse.json({
+        access_token: sessionData.session.access_token,
+        refresh_token: sessionData.session.refresh_token,
+        account: {
+          id: contact.id,
+          email: contact.email,
+          first_name: contact.first_name,
+          last_name: contact.last_name,
+        },
+      })
+    }
+
+    // ─── PROFILE ─────────────────────────────────────────────────────────────
     if (action === 'profile') {
-      // For now, session is stored client-side with email — just return account
-      const { email, session } = body
-      if (!email || !session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      const email = (body.email ?? '').toLowerCase().trim()
+      if (!email) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-      const { data: acct } = await supabase
-        .from('boater_accounts')
-        .select('id, email, first_name, last_name, phone, boat_name, boat_type, created_at')
-        .eq('email', email.toLowerCase().trim())
-        .single()
+      const { data: contact } = await supabaseAdmin
+        .from('contacts')
+        .select('id, email, first_name, last_name, phone, created_at')
+        .eq('email', email)
+        .is('marina_id', null)
+        .order('created_at', { ascending: true })
+        .limit(1)
+        .maybeSingle()
 
-      if (!acct) return NextResponse.json({ error: 'Not found' }, { status: 404 })
-      return NextResponse.json({ account: acct })
+      if (!contact) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+      return NextResponse.json({ account: contact })
     }
 
     return NextResponse.json({ error: 'Unknown action' }, { status: 400 })
