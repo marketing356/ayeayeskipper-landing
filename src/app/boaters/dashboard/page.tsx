@@ -68,17 +68,34 @@ export default function BoaterDashboard() {
     const body = input.trim()
     setInput('')
     setSending(true)
-    // Optimistic insert
-    const temp: Msg = { id: 'temp-' + Date.now(), direction: 'inbound', sender_name: 'You', body, created_at: new Date().toISOString(), channel: 'web' }
-    setMessages(prev => [...prev, temp])
+    // Optimistic: show boater message immediately
+    const tempId = 'temp-' + Date.now()
+    const tempMsg: Msg = { id: tempId, direction: 'inbound', sender_name: 'You', body, created_at: new Date().toISOString(), channel: 'web' }
+    setMessages(prev => [...prev, tempMsg])
     setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 60)
     try {
-      await fetch('/api/boaters/messages', {
+      // Build conversation history for engine context
+      const history = messages.slice(-12).map(m => ({
+        role:    m.direction === 'inbound' ? 'user' : 'assistant',
+        content: m.body,
+      }))
+      const res = await fetch('/api/boaters/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: account.email, marina_id: active.marina_id, body }),
+        body: JSON.stringify({ email: account.email, marina_id: active.marina_id, body, history }),
       })
+      const data = await res.json()
+      // Refresh thread from DB — engine wrote both messages (inbound + reply)
       await loadMessages(active)
+      // If engine returned a reply but DB refresh didn't catch it yet, show inline
+      if (data.reply && data.reply !== '') {
+        setMessages(prev => {
+          const hasReply = prev.some(m => m.direction === 'outbound' && m.body === data.reply)
+          if (hasReply) return prev
+          return [...prev, { id: 'reply-' + Date.now(), direction: 'outbound', sender_name: 'Skipper', body: data.reply, created_at: new Date().toISOString(), channel: 'web' }]
+        })
+        setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 60)
+      }
     } catch { /* silent */ }
     setSending(false)
   }

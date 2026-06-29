@@ -9,14 +9,16 @@ const supabase = createClient(
   { auth: { autoRefreshToken: false, persistSession: false } }
 )
 
-// GET /api/boaters/messages?email=...&marina_id=...
-// Returns the message thread between this boater and the marina.
+const ENGINE_URL = process.env.SKIPPER_ENGINE_URL
+
+// ── GET /api/boaters/messages?email=...&marina_id=... ─────────────────────────
+// Fetches the message thread between this boater and the marina.
+// Messages are written by the Skipper engine (log_conversation) — we only read here.
 export async function GET(req: NextRequest) {
   const email    = req.nextUrl.searchParams.get('email')?.toLowerCase().trim()
   const marinaId = req.nextUrl.searchParams.get('marina_id')
   if (!email || !marinaId) return NextResponse.json({ error: 'email and marina_id required' }, { status: 400 })
 
-  // Get this boater's contacts row for this marina (to get auth_user_id = tenant_id)
   const { data: contact } = await supabase
     .from('contacts')
     .select('auth_user_id')
@@ -24,9 +26,7 @@ export async function GET(req: NextRequest) {
     .eq('marina_id', marinaId)
     .maybeSingle()
 
-  if (!contact?.auth_user_id) {
-    return NextResponse.json({ messages: [] })
-  }
+  if (!contact?.auth_user_id) return NextResponse.json({ messages: [] })
 
   const { data: messages } = await supabase
     .from('messages')
@@ -39,19 +39,21 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ messages: messages ?? [] })
 }
 
-// POST /api/boaters/messages
-// Body: { email, marina_id, body }
-// Inserts an inbound message from the boater → shows in Helm inbox.
-// Also forwards to the Skipper engine for an AI response if engine URL is set.
+// ── POST /api/boaters/messages ────────────────────────────────────────────────
+// Sends a boater message to the Skipper engine.
+// Engine handles: AI response + writing BOTH messages (inbound + reply) to messages table.
+// Helm inbox reads from messages table — so this shows up on Helm automatically.
+//
+// Body: { email, marina_id, body, history? }
 export async function POST(req: NextRequest) {
-  const { email, marina_id, body } = await req.json()
+  const { email, marina_id, body, history = [] } = await req.json()
   if (!email || !marina_id || !body) {
     return NextResponse.json({ error: 'email, marina_id, and body required' }, { status: 400 })
   }
 
   const normalEmail = email.toLowerCase().trim()
 
-  // Get boater's contact row for this marina
+  // Look up the boater's contacts row for this marina
   const { data: contact } = await supabase
     .from('contacts')
     .select('id, auth_user_id, first_name, last_name')
@@ -63,12 +65,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No marina connection found for this email' }, { status: 404 })
   }
 
-  const senderName = [contact.first_name, contact.last_name].filter(Boolean).join(' ') || normalEmail.split('@')[0]
-
-  // Insert inbound message (boater → marina)
-  const { data: msg, error } = await supabase
-    .from('messages')
-    .insert({
+  if (!ENGINE_URL) {
+    // No engine configured — write directly and return a placeholder reply
+    const senderName = [contact.first_name, contact.last_name].filter(Boolean).join(' ') || normalEmail.split('@')[0]
+    await supabase.from('messages').insert({
       marina_id,
       tenant_id:   contact.auth_user_id,
       direction:   'inbound',
@@ -77,38 +77,48 @@ export async function POST(req: NextRequest) {
       sender_name: senderName,
       body,
     })
-    .select('id, created_at')
-    .single()
-
-  if (error) {
-    console.error('[boaters/messages POST] insert error:', error)
-    return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
+    return NextResponse.json({ reply: "Message received. The marina team will respond shortly." })
   }
 
-  // Forward to Skipper engine for AI reply (non-blocking)
-  const engineUrl = process.env.SKIPPER_ENGINE_URL
-  if (engineUrl) {
-    // Get marina name for context
-    const { data: marina } = await supabase
-      .from('marinas')
-      .select('name')
-      .eq('id', marina_id)
-      .maybeSingle()
+  // Call the Skipper engine with full boater session context
+  // Engine will: process the message, generate a reply, and write both messages to DB
+  const engineBody = {
+    message: body,
+    conversation_history: history,
+    session: {
+      marina_id,
+      tenant_id:   contact.auth_user_id,   // used by engine for Helm inbox logging
+      boater_id:   contact.auth_user_id,   // used by engine for tool access (vessels, logs, etc.)
+      access_type: 'tenant',
+    },
+    identity: {
+      auth_user_id: contact.auth_user_id,
+      contact_id:   contact.id,
+      first_name:   contact.first_name ?? null,
+      last_name:    contact.last_name  ?? null,
+      email:        normalEmail,
+    },
+  }
 
-    fetch(`${engineUrl}/chat`, {
-      method: 'POST',
+  try {
+    const engineRes = await fetch(`${ENGINE_URL}/chat`, {
+      method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        marina_id,
-        tenant_id: contact.auth_user_id,
-        message: body,
-        channel: 'web',
-        sender_name: senderName,
-        marina_name: marina?.name ?? 'Marina',
-        mode: 'boater',
-      }),
-    }).catch(() => {})
-  }
+      body:    JSON.stringify(engineBody),
+      signal:  AbortSignal.timeout(20000),
+    })
 
-  return NextResponse.json({ ok: true, message_id: msg.id })
+    if (!engineRes.ok) {
+      const err = await engineRes.text()
+      console.error('[boaters/messages] engine error:', err)
+      return NextResponse.json({ error: 'Engine error' }, { status: 502 })
+    }
+
+    const { reply } = await engineRes.json()
+    return NextResponse.json({ reply: reply ?? '' })
+
+  } catch (err) {
+    console.error('[boaters/messages] engine fetch error:', err)
+    return NextResponse.json({ error: 'Engine unavailable' }, { status: 503 })
+  }
 }
