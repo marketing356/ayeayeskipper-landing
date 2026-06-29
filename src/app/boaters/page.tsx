@@ -30,7 +30,7 @@ export default function BoatersPage() {
       const data = await res.json()
       setLastExchange({ user: message, reply: data.reply ?? '' })
     } catch {
-      setLastExchange({ user: message, reply: "Aye aye — I'm having a little trouble right now. Head to /marinas to browse slips. ⚓" })
+      setLastExchange({ user: message, reply: "Aye aye — having a little trouble right now. Head to /marinas to browse slips. ⚓" })
     } finally {
       setChatLoading(false)
       setTimeout(() => chatRef.current?.scrollTo({ top: 9999, behavior: 'smooth' }), 60)
@@ -38,143 +38,179 @@ export default function BoatersPage() {
   }
 
   const PROMPT_CHIPS = [
-    'Find a slip near me',
-    'What is Hot Slip™?',
-    'Is it free for boaters?',
-    'How do I book a slip?',
+    'Talk to your marina right now',
+    'Find a slip near me this weekend',
+    'Log my trip — miles, crew, fuel',
+    'Track my boat\'s full history',
+    'What\'s the Boat Fax feature?',
+    'Ask Skipper anything',
   ]
 
   return (
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
 
-      {/* HERO */}
+      <style>{`
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(77,214,200,0.4), 0 0 40px rgba(77,214,200,0.2); }
+          50% { box-shadow: 0 0 0 18px rgba(77,214,200,0), 0 0 80px rgba(77,214,200,0.35); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        @keyframes bubble-in {
+          0% { opacity: 0; transform: scale(0.85) translateY(8px); }
+          100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes sonar {
+          0% { transform: translate(-50%,-50%) scale(1); opacity: 0.5; }
+          100% { transform: translate(-50%,-50%) scale(2.8); opacity: 0; }
+        }
+        @keyframes typing-dot {
+          0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+          30% { transform: translateY(-5px); opacity: 1; }
+        }
+        @keyframes chip-in {
+          0% { opacity: 0; transform: translateY(6px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+          0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)}
+        }
+      `}</style>
+
+      {/* ═══════════════════════ HERO — SKIPPER FRONT AND CENTER ═══════════════════════ */}
       <div style={{ background:NAVY, padding:'80px 40px 60px', textAlign:'center' }}>
+
+        {/* Badge */}
         <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:24, padding:'6px 16px', marginBottom:28 }}>
           <span style={{ width:7, height:7, borderRadius:'50%', background:TEAL, display:'inline-block' }}></span>
           <span style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'1px' }}>FREE FOR BOATERS — ALWAYS</span>
         </div>
-        <h1 style={{ fontSize:'clamp(36px,5.5vw,56px)', fontWeight:900, letterSpacing:'-2.5px', lineHeight:1.05, margin:'0 0 16px', color:'#fff' }}>
-          Find a marina.<br/><span style={{ color:TEAL }}>Book a slip.</span><br/>No phone tag.
+
+        {/* Headline */}
+        <h1 style={{ fontSize:'clamp(36px,5vw,52px)', fontWeight:900, letterSpacing:'-2px', lineHeight:1.05, margin:'0 0 12px', color:'#fff' }}>
+          Your boat. Your marina.<br/><span style={{ color:TEAL }}>All in Skipper.</span>
         </h1>
-        <p style={{ fontSize:18, color:'rgba(255,255,255,0.6)', maxWidth:520, margin:'0 auto 40px', lineHeight:1.65 }}>
-          Skipper-powered marinas let you check availability, book a transient slip, and get real answers instantly — no hold music, no emails into the void.
+        <p style={{ fontSize:17, color:'rgba(255,255,255,0.5)', margin:'0 0 36px', maxWidth:480, lineHeight:1.65, marginLeft:'auto', marginRight:'auto' }}>
+          Talk to your marina, log trips, track your boat's full history, and book slips — no phone calls, no paperwork, no app learning curve.
         </p>
-        <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap' }}>
-          <button onClick={() => router.push('/marinas')} style={{ padding:'16px 36px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:800, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>
-            Browse Marinas →
-          </button>
-        </div>
-        <p style={{ marginTop:16, fontSize:12, color:'rgba(255,255,255,0.3)' }}>Free to browse. No account required.</p>
-      </div>
 
-      {/* SKIPPER CHAT — BOATER */}
-      <div style={{ background:'#0a1e32', padding:'80px 40px' }}>
-        <div style={{ maxWidth:680, margin:'0 auto' }}>
-          <div style={{ textAlign:'center', marginBottom:40 }}>
-            <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:12 }}>Ask Skipper Anything</div>
-            <h2 style={{ fontSize:'clamp(28px,4vw,42px)', fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 12px', lineHeight:1.1 }}>
-              Your boating assistant.<br/>No hold music. No voicemail.
-            </h2>
-            <p style={{ fontSize:15, color:'rgba(255,255,255,0.45)', lineHeight:1.65, maxWidth:480, margin:'0 auto' }}>
-              Ask about Hot Slip™ availability, how booking works, or just find your next marina.
-            </p>
+        {/* Skipper avatar */}
+        <div style={{ display:'flex', justifyContent:'center', marginBottom:28 }}>
+          <div style={{ position:'relative', display:'flex', justifyContent:'center', alignItems:'center', width:130, height:130 }}>
+            {[0, 0.9, 1.8].map((delay, i) => (
+              <div key={i} style={{
+                position:'absolute', top:'50%', left:'50%',
+                width:110, height:110, borderRadius:'50%',
+                border:`2px solid rgba(77,214,200,${0.4 - i*0.1})`,
+                animation:`sonar 2.7s ease-out ${delay}s infinite`,
+                pointerEvents:'none',
+              }} />
+            ))}
+            <div style={{
+              width:100, height:100, borderRadius:'50%',
+              overflow:'hidden',
+              border:'3px solid rgba(77,214,200,0.7)',
+              animation:'pulse-glow 2.4s ease-in-out infinite, float 3.5s ease-in-out infinite',
+              zIndex:5,
+              background:'#122d4a',
+            }}>
+              <img src="/skipper-avatar.jpg" alt="Skipper" style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 10%' }} />
+            </div>
           </div>
+        </div>
 
-          {/* Chat card */}
-          <div style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(77,214,200,0.2)', borderRadius:20, overflow:'hidden' }}>
-
-            {/* Header */}
-            <div style={{ display:'flex', alignItems:'center', gap:14, padding:'18px 24px', borderBottom:'1px solid rgba(255,255,255,0.07)' }}>
-              <div style={{ width:44, height:44, borderRadius:'50%', background:'linear-gradient(135deg,#4dd6c8,#1a4a8e)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:22, flexShrink:0 }}>⚓</div>
-              <div>
-                <div style={{ fontWeight:800, fontSize:15, letterSpacing:'-0.3px' }}>Skipper</div>
-                <div style={{ fontSize:12, color:TEAL, display:'flex', alignItems:'center', gap:5 }}>
-                  <span style={{ width:6, height:6, borderRadius:'50%', background:TEAL, display:'inline-block' }}></span>
-                  Online — ask me anything
-                </div>
-              </div>
-            </div>
-
-            {/* Messages */}
-            <div ref={chatRef} style={{ padding:'24px', minHeight:160, maxHeight:300, overflowY:'auto' }}>
-              {!lastExchange && (
-                <div style={{ display:'flex', gap:12, alignItems:'flex-start' }}>
-                  <div style={{ width:32, height:32, borderRadius:'50%', background:'linear-gradient(135deg,#4dd6c8,#1a4a8e)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:16, flexShrink:0 }}>⚓</div>
-                  <div style={{ background:'rgba(255,255,255,0.06)', borderRadius:'0 14px 14px 14px', padding:'12px 16px', maxWidth:'85%' }}>
-                    <p style={{ margin:0, fontSize:14, color:'rgba(255,255,255,0.85)', lineHeight:1.6 }}>
-                      Hey! I&apos;m Skipper — I help boaters find slips, understand marinas, and skip the phone tag. What are you looking for?
-                    </p>
-                  </div>
-                </div>
-              )}
-              {lastExchange && (
-                <>
-                  <div style={{ display:'flex', justifyContent:'flex-end', marginBottom:14 }}>
-                    <div style={{ background:'rgba(77,214,200,0.15)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:'14px 14px 0 14px', padding:'10px 14px', maxWidth:'80%', fontSize:14, color:'#fff', lineHeight:1.55 }}>
-                      {lastExchange.user}
-                    </div>
-                  </div>
-                  <div style={{ display:'flex', gap:12, alignItems:'flex-start' }}>
-                    <div style={{ width:32, height:32, borderRadius:'50%', background:'linear-gradient(135deg,#4dd6c8,#1a4a8e)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:16, flexShrink:0 }}>⚓</div>
-                    <div style={{ background:'rgba(255,255,255,0.06)', borderRadius:'0 14px 14px 14px', padding:'12px 16px', maxWidth:'85%' }}>
-                      {chatLoading && !lastExchange.reply
-                        ? <div style={{ display:'flex', gap:5, alignItems:'center' }}>{[0,1,2].map(i=><span key={i} style={{ width:7, height:7, borderRadius:'50%', background:'rgba(77,214,200,0.5)', display:'inline-block', animation:`bounce 1s ${i*0.2}s infinite` }}/>)}</div>
-                        : <p style={{ margin:0, fontSize:14, color:'rgba(255,255,255,0.85)', lineHeight:1.6 }}>{lastExchange.reply}</p>
-                      }
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Prompt chips */}
-            {!lastExchange && (
-              <div style={{ display:'flex', flexWrap:'wrap', gap:8, padding:'0 24px 16px' }}>
-                {PROMPT_CHIPS.map(chip => (
-                  <button key={chip} onClick={() => sendChat(chip)}
-                    style={{ padding:'7px 14px', background:'rgba(77,214,200,0.08)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:20, fontSize:12, color:TEAL, cursor:'pointer', fontFamily:FONT, fontWeight:600, whiteSpace:'nowrap' }}>
-                    {chip}
-                  </button>
-                ))}
+        {/* Chat exchange display */}
+        {(lastExchange || chatLoading) && (
+          <div ref={chatRef} style={{ maxWidth:560, margin:'0 auto 20px', display:'flex', flexDirection:'column', gap:10, animation:'bubble-in 0.35s ease' }}>
+            {lastExchange?.user && (
+              <div style={{ alignSelf:'flex-end', background:TEAL, color:NAVY, borderRadius:'14px 14px 2px 14px', padding:'10px 16px', fontSize:14, fontWeight:600, maxWidth:'80%' }}>
+                {lastExchange.user}
               </div>
             )}
-
-            {/* Input */}
-            <div style={{ padding:'0 16px 16px', display:'flex', gap:10 }}>
-              <input
-                value={chatMsg}
-                onChange={e => setChatMsg(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && sendChat()}
-                placeholder="Ask about slips, Hot Slip™, booking, anything..."
-                style={{ flex:1, background:'rgba(255,255,255,0.06)', border:'1px solid rgba(255,255,255,0.12)', borderRadius:10, padding:'12px 16px', color:'#fff', fontSize:14, fontFamily:FONT, outline:'none' }}
-              />
-              <button onClick={() => sendChat()} disabled={chatLoading || !chatMsg.trim()}
-                style={{ padding:'12px 20px', background: chatLoading || !chatMsg.trim() ? 'rgba(77,214,200,0.3)' : TEAL, color: NAVY, border:'none', borderRadius:10, fontSize:14, fontWeight:800, cursor: chatLoading || !chatMsg.trim() ? 'not-allowed' : 'pointer', fontFamily:FONT, transition:'background 0.15s' }}>
-                {chatLoading ? '…' : '→'}
-              </button>
-            </div>
+            {chatLoading ? (
+              <div style={{ alignSelf:'flex-start', display:'flex', alignItems:'center', gap:6, background:'rgba(255,255,255,0.07)', borderRadius:'14px 14px 14px 2px', padding:'10px 18px' }}>
+                <img src="/skipper-avatar.jpg" alt="" style={{ width:22, height:22, borderRadius:'50%', objectFit:'cover', flexShrink:0 }} />
+                {[0,0.2,0.4].map(d => (
+                  <span key={d} style={{ width:7, height:7, borderRadius:'50%', background:'rgba(77,214,200,0.7)', display:'inline-block', animation:`typing-dot 1.2s ${d}s ease-in-out infinite` }} />
+                ))}
+              </div>
+            ) : lastExchange?.reply ? (
+              <div style={{ alignSelf:'flex-start', display:'flex', gap:10, alignItems:'flex-start', maxWidth:'80%' }}>
+                <img src="/skipper-avatar.jpg" alt="Skipper" style={{ width:28, height:28, borderRadius:'50%', objectFit:'cover', flexShrink:0, marginTop:2, border:'1px solid rgba(77,214,200,0.4)' }} />
+                <div style={{ background:'rgba(255,255,255,0.07)', borderRadius:'14px 14px 14px 2px', padding:'10px 14px', fontSize:14, color:'rgba(255,255,255,0.9)', lineHeight:1.55 }}>
+                  {lastExchange.reply}
+                </div>
+              </div>
+            ) : null}
           </div>
+        )}
 
-          <p style={{ textAlign:'center', marginTop:14, fontSize:12, color:'rgba(255,255,255,0.25)' }}>
-            Free forever. No account needed to chat.
-          </p>
+        {/* Chat input */}
+        <div style={{ maxWidth:560, margin:'0 auto 14px' }}>
+          <div style={{ display:'flex', background:'rgba(255,255,255,0.06)', border:'1px solid rgba(77,214,200,0.3)', borderRadius:12, overflow:'hidden' }}>
+            <input
+              value={chatMsg}
+              onChange={e => setChatMsg(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && sendChat()}
+              placeholder="Ask Skipper about your boat, marina, slips..."
+              style={{ flex:1, background:'transparent', border:'none', outline:'none', color:'#fff', fontSize:15, fontFamily:FONT, padding:'14px 18px' }}
+            />
+            <button
+              onClick={() => sendChat()}
+              disabled={chatLoading}
+              style={{ background:TEAL, color:NAVY, border:'none', padding:'14px 22px', fontSize:18, fontWeight:900, cursor:'pointer', flexShrink:0, opacity: chatLoading ? 0.6 : 1 }}
+            >↑</button>
+          </div>
         </div>
+
+        {/* Prompt chips */}
+        <div style={{ display:'flex', justifyContent:'center', gap:10, flexWrap:'wrap', maxWidth:640, margin:'0 auto 32px' }}>
+          {PROMPT_CHIPS.map((chip, i) => (
+            <button
+              key={chip}
+              onClick={() => sendChat(chip)}
+              style={{
+                background:'rgba(255,255,255,0.06)', border:'1px solid rgba(77,214,200,0.25)',
+                color:'rgba(255,255,255,0.8)', borderRadius:20, padding:'7px 16px',
+                fontSize:13, fontWeight:500, cursor:'pointer', fontFamily:FONT,
+                animation:`chip-in 0.4s ease ${i * 0.07}s both`,
+                transition:'background 0.15s, border-color 0.15s',
+              }}
+            >{chip}</button>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap' }}>
+          <button onClick={() => router.push('/boaters/auth')} style={{ padding:'16px 36px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:800, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>
+            Get Started Free →
+          </button>
+          <button onClick={() => router.push('/marinas')} style={{ padding:'16px 36px', background:'rgba(255,255,255,0.06)', color:'#fff', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, fontSize:15, fontWeight:600, cursor:'pointer', fontFamily:FONT }}>
+            Browse Marinas
+          </button>
+        </div>
+        <p style={{ marginTop:14, fontSize:12, color:'rgba(255,255,255,0.3)' }}>Free forever. No credit card. No catch.</p>
       </div>
 
-      {/* VALUE PROPS */}
+      {/* FEATURES */}
       <div style={{ maxWidth:1000, margin:'0 auto', padding:'80px 40px' }}>
         <div style={{ textAlign:'center', marginBottom:56 }}>
-          <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:12 }}>Built for boaters</div>
-          <h2 style={{ fontSize:38, fontWeight:900, letterSpacing:'-2px', margin:0 }}>Everything you need on the water.</h2>
+          <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:12 }}>Everything for boaters</div>
+          <h2 style={{ fontSize:38, fontWeight:900, letterSpacing:'-2px', margin:0 }}>Your boat's command center.</h2>
         </div>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:20 }}>
           {[
-            ['🗺️','Real-time availability','See which slips are open right now. No more calling ahead hoping for a yes.'],
-            ['💬','Ask Skipper anything','"Is there a pump-out at Bayview Marina?" Just ask. Skipper knows every marina\'s layout, amenities, and policies.'],
-            ['⚡','Instant booking','Request a slip and get confirmed fast. No phone tag, no waiting on a callback at end of day.'],
-            ['💰','Always free for boaters','Zero booking fees. Zero markup. Marinas set their own rates — you pay exactly what they charge.'],
-            ['🔥','Hot Slip™','Annual tenants list their slip when they\'re cruising. You get a real slip at a real marina, not a random open lot.'],
-            ['📱','No app required','Text, web, or native app — however you reach Skipper, it works. Most boaters just text.'],
+            ['💬','Talk to your marina instantly','No calls. No hold music. No office hours. Message your dock master, request a pump-out, flag a slip issue, ask about your bill — all through Skipper. Skipper handles it.'],
+            ['🗺️','Find a slip, book it fast','See which transient slips are open right now at Skipper-powered marinas. Request and get confirmed fast — no callbacks.'],
+            ['📓','Ship\'s Log','Every trip logged: departure, destination, distance, crew aboard, weather and sea state, fuel used, engine hours start and end, notes. Your permanent nautical record.'],
+            ['🚗','Boat Fax™','Every haul-out, every service, every maintenance record, every engine hour — time-stamped and permanent. Like Carfax for your boat. Sell your boat someday? Hand over the full history.'],
+            ['🛥️','Vessel management','Full specs, HIN, registration, unlimited photos by category. Tenders and dinghies linked to the parent vessel. Your boat\'s passport lives in Skipper.'],
+            ['⚙️','Engine tracking','Hours logged per engine. Service intervals. Full history. Never miss a service again.'],
+            ['🔥','Hot Slip™','Annual slip at a Skipper marina? List it when you\'re cruising and earn back. Need a slip somewhere new? Book a listed one at a "full" marina. First program of its kind.'],
+            ['🔌','Transient booking','Find marinas with available slips, check rates and amenities, book instantly across the Skipper network.'],
+            ['⚓','Ask Skipper anything','Weather, tides, boating regs, troubleshooting, docking tips — Skipper knows boating. Ask anything, get a real answer fast.'],
           ].map(([icon, title, desc]) => (
             <div key={title as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:12, padding:28 }}>
               <div style={{ fontSize:32, marginBottom:14 }}>{icon}</div>
@@ -182,6 +218,22 @@ export default function BoatersPage() {
               <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)', lineHeight:1.7 }}>{desc}</div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* BOAT FAX CALLOUT */}
+      <div style={{ background:'linear-gradient(135deg, #061528 0%, #0a1f1a 100%)', borderTop:'1px solid rgba(77,214,200,0.15)', borderBottom:'1px solid rgba(77,214,200,0.15)', padding:'80px 40px', textAlign:'center' }}>
+        <div style={{ maxWidth:640, margin:'0 auto' }}>
+          <div style={{ fontSize:48, marginBottom:16 }}>🚗</div>
+          <h2 style={{ fontSize:'clamp(28px,4vw,40px)', fontWeight:900, letterSpacing:'-2px', margin:'0 0 16px', color:'#fff' }}>
+            Carfax for your boat.
+          </h2>
+          <p style={{ fontSize:16, color:'rgba(255,255,255,0.6)', lineHeight:1.75, marginBottom:32, maxWidth:520, margin:'0 auto 32px' }}>
+            Skipper stores every haul-out, every service record, every maintenance job, every engine hour — permanently attached to your vessel. When you sell, you hand over a complete history that protects you and tells the full story of your boat's life.
+          </p>
+          <button onClick={() => router.push('/boaters/auth')} style={{ padding:'16px 36px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:800, cursor:'pointer', fontFamily:FONT }}>
+            Start your boat's history →
+          </button>
         </div>
       </div>
 
@@ -212,14 +264,19 @@ export default function BoatersPage() {
       <div style={{ padding:'80px 40px', textAlign:'center' }}>
         <div style={{ maxWidth:560, margin:'0 auto' }}>
           <h2 style={{ fontSize:42, fontWeight:900, letterSpacing:'-2px', margin:'0 0 16px', lineHeight:1.05 }}>
-            Ready to find your slip?
+            Ready to put Skipper<br/><span style={{ color:TEAL }}>on your boat?</span>
           </h2>
           <p style={{ fontSize:16, color:'rgba(255,255,255,0.5)', marginBottom:36, lineHeight:1.65 }}>
-            Browse Skipper-powered marinas. Free, fast, no account needed.
+            Free forever. Everything for boaters — marina comms, trip logs, vessel history, slip booking — in one place.
           </p>
-          <button onClick={() => router.push('/marinas')} style={{ padding:'18px 44px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:17, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>
-            Browse Marinas →
-          </button>
+          <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap' }}>
+            <button onClick={() => router.push('/boaters/auth')} style={{ padding:'18px 44px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:17, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>
+              Get Started Free →
+            </button>
+            <button onClick={() => router.push('/marinas')} style={{ padding:'18px 44px', background:'rgba(255,255,255,0.06)', color:'#fff', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, fontSize:17, fontWeight:600, cursor:'pointer', fontFamily:FONT }}>
+              Browse Marinas
+            </button>
+          </div>
         </div>
       </div>
 
@@ -229,12 +286,6 @@ export default function BoatersPage() {
           ← Back to AyeAyeSkipper.com
         </button>
       </div>
-
-      <style>{`
-        @keyframes bounce {
-          0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)}
-        }
-      `}</style>
     </div>
   )
 }
