@@ -35,10 +35,13 @@ export default function Nav() {
   }, [pathname])
 
   const isHome = pathname === '/'
-  const links = isHome ? HOME_LINKS : isBoater ? BOATER_LINKS : MARINA_LINKS
-  const cta = (isHome || isBoater)
-    ? { label: 'Log In', href: '/login' }
-    : { label: 'Book a Demo', href: '/demo' }
+  const isAuthPage = ['/login', '/signup', '/account', '/marina-login', '/boaters/auth', '/boaters/dashboard'].some(p => pathname.startsWith(p))
+  const links = (isHome || isAuthPage) ? [] : isBoater ? BOATER_LINKS : MARINA_LINKS
+  const cta = isAuthPage
+    ? { label: 'Home', href: '/' }
+    : (isHome || isBoater)
+      ? { label: 'Log In', href: '/login' }
+      : { label: 'Book a Demo', href: '/demo' }
 
   return (
     <nav style={{

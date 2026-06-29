@@ -75,8 +75,8 @@ export default function LoginPage() {
 
           <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,0.07)', textAlign: 'center' }}>
             <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', marginBottom: 12 }}>Marina owner?</div>
-            <a href="https://abc-marina.ayeayeskipper.com" style={{ fontSize: 13, color: TEAL, textDecoration: 'none', fontWeight: 600 }}>
-              Go to your marina dashboard →
+            <a href="/marina-login" style={{ fontSize: 13, color: TEAL, textDecoration: 'none', fontWeight: 600 }}>
+              Sign in to your marina account →
             </a>
           </div>
         </div>

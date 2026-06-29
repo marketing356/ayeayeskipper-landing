@@ -62,7 +62,7 @@ function AuthFlow() {
       localStorage.setItem('boater_session', data.session)
       localStorage.setItem('boater_email', email)
       localStorage.setItem('boater_account', JSON.stringify(data.account))
-      router.push('/boaters/dashboard')
+      window.location.href = 'https://app.ayeayeskipper.com'
     } catch { setError('Something went wrong') }
     finally { setLoading(false) }
   }
@@ -97,7 +97,7 @@ function AuthFlow() {
       localStorage.setItem('boater_session', data.session)
       localStorage.setItem('boater_email', email)
       localStorage.setItem('boater_account', JSON.stringify(data.account))
-      router.push('/boaters/dashboard')
+      window.location.href = 'https://app.ayeayeskipper.com'
     } catch { setError('Something went wrong') }
     finally { setLoading(false) }
   }
