@@ -17,11 +17,8 @@ const BOATER_LINKS: [string, string][] = [
   ['How It Works', '/boaters#how-it-works'],
 ]
 
-// Homepage decision-tree nav — no marina sales links
-const HOME_LINKS: [string, string][] = [
-  ['Find a Marina', '/marinas'],
-  ['How It Works', '/#how-it-works'],
-]
+// Homepage — clean, no clutter
+const HOME_LINKS: [string, string][] = []
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
@@ -40,7 +37,7 @@ export default function Nav() {
   const isHome = pathname === '/'
   const links = isHome ? HOME_LINKS : isBoater ? BOATER_LINKS : MARINA_LINKS
   const cta = (isHome || isBoater)
-    ? { label: 'Sign In', href: '/boaters/auth' }
+    ? { label: 'Log In', href: '/login' }
     : { label: 'Book a Demo', href: '/demo' }
 
   return (
@@ -62,11 +59,7 @@ export default function Nav() {
             {label}
           </Link>
         ))}
-        {(isHome || isBoater) && (
-          <Link href="/boaters/auth?mode=signup" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: 13, fontWeight: 500 }}>
-            Create Account
-          </Link>
-        )}
+
         <Link href={cta.href} style={{
           padding: '8px 22px',
           background: (isHome || isBoater) ? 'rgba(77,214,200,0.15)' : TEAL,
