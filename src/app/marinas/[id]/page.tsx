@@ -1,6 +1,5 @@
 'use client'
 import { useState, useEffect, use } from 'react'
-import Nav from '@/components/Nav'
 import Link from 'next/link'
 
 const DARK  = '#070f1a'
@@ -100,14 +99,12 @@ export default function MarinaDetailPage({ params }: { params: Promise<{ id: str
 
   if (loading) return (
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
-      <Nav />
       <div style={{ textAlign:'center', padding:'120px 24px', color:MUTED }}>Loading marina…</div>
     </div>
   )
 
   if (!marina) return (
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
-      <Nav />
       <div style={{ textAlign:'center', padding:'120px 24px' }}>
         <div style={{ fontSize:40, marginBottom:16 }}>⚓</div>
         <div style={{ fontSize:18, color:MUTED, marginBottom:24 }}>Marina not found.</div>
@@ -118,7 +115,6 @@ export default function MarinaDetailPage({ params }: { params: Promise<{ id: str
 
   return (
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
-      <Nav />
 
       {/* Marina header */}
       <div style={{ maxWidth:900, margin:'0 auto', padding:'60px 24px 0' }}>

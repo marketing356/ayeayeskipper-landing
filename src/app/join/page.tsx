@@ -1,8 +1,6 @@
 'use client'
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
-import Nav from '@/components/Nav'
-
 const NAVY = '#0d2b4b'
 const TEAL = '#4dd6c8'
 const DARK = '#070f1a'
@@ -92,8 +90,6 @@ function JoinForm() {
 
   return (
     <div style={{ minHeight: '100vh', background: DARK, fontFamily: FONT, color: '#fff' }}>
-      <Nav />
-
       <div style={{ maxWidth: 720, margin: '0 auto', padding: '80px 24px 100px' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 48 }}>

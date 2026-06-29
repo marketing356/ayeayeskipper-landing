@@ -1,6 +1,5 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
-import Nav from '@/components/Nav'
 import Link from 'next/link'
 
 const DARK  = '#070f1a'
@@ -45,8 +44,6 @@ export default function MarinasPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: DARK, fontFamily: FONT, color: '#fff' }}>
-      <Nav />
-
       {/* Hero */}
       <div style={{ maxWidth: 800, margin: '0 auto', padding: '80px 24px 48px', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(77,214,200,0.1)', border: '1px solid rgba(77,214,200,0.25)', borderRadius: 24, padding: '6px 16px', marginBottom: 20 }}>

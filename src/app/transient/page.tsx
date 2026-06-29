@@ -1,7 +1,5 @@
 'use client'
 import { useState } from 'react'
-import Nav from '@/components/Nav'
-
 const NAVY = '#0d2b4b'
 const TEAL = '#4dd6c8'
 const DARK = '#070f1a'
@@ -90,8 +88,6 @@ export default function TransientPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: DARK, fontFamily: FONT, color: '#fff' }}>
-      <Nav />
-
       {/* Hero */}
       <div style={{ maxWidth: 800, margin: '0 auto', padding: '80px 24px 60px', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(77,214,200,0.1)', border: '1px solid rgba(77,214,200,0.25)', borderRadius: 24, padding: '6px 16px', marginBottom: 20 }}>

@@ -1,4 +1,3 @@
-import Nav from '@/components/Nav'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -14,8 +13,6 @@ const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
 export default function TermsPage() {
   return (
     <div style={{ minHeight: '100vh', background: DARK, fontFamily: FONT, color: '#fff' }}>
-      <Nav />
-
       <div style={{ maxWidth: 800, margin: '0 auto', padding: '80px 24px 100px' }}>
         {/* Header */}
         <div style={{ marginBottom: 56 }}>

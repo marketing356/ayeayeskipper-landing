@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -19,8 +19,17 @@ const BOATER_LINKS: [string, string][] = [
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
+  const [isBoater, setIsBoater] = useState(false)
   const pathname = usePathname()
-  const isBoater = pathname.startsWith('/boaters')
+
+  useEffect(() => {
+    // Read audience flag set by the homepage decision tree.
+    // Only 'boater' flips the nav; everything else stays marina.
+    const audience = typeof window !== 'undefined'
+      ? sessionStorage.getItem('audience')
+      : null
+    setIsBoater(audience === 'boater')
+  }, [pathname])
 
   const links = isBoater ? BOATER_LINKS : MARINA_LINKS
   const cta = isBoater
