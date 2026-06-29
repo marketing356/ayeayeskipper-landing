@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Anthropic from '@anthropic-ai/sdk'
 import fs from 'fs/promises'
 import path from 'path'
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+const SKIPPER_ENGINE_URL = process.env.SKIPPER_ENGINE_URL || 'https://skipper-engine-production.up.railway.app'
 
 const SYSTEM_PROMPT = `You are Skipper — the system that runs marinas on AyeAyeSkipper. You are the hero of the AyeAyeSkipper homepage. You help marina operators understand the platform and sign up. Be conversational, confident, and nautical. You are not a chatbot — you are the system that runs their marina. Never describe yourself as "AI" or "artificial intelligence" — you are the Skipper Engine™, the system that runs marinas.
 
@@ -46,21 +45,32 @@ async function saveSignup(message: string) {
 }
 
 export async function POST(request: NextRequest) {
+  let message = ''
   try {
-    const { message } = await request.json()
+    const body = await request.json()
+    message = body.message ?? ''
     
-    if (!message?.trim()) {
+    if (!message.trim()) {
       return NextResponse.json({ reply: 'Aye aye — what do you want to know about running your marina?' })
     }
 
-    const response = await client.messages.create({
-      model: 'claude-sonnet-4-5',
-      max_tokens: 300,
-      system: SYSTEM_PROMPT,
-      messages: [{ role: 'user', content: message }],
+    const engineRes = await fetch(`${SKIPPER_ENGINE_URL}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        session: { access_type: 'guest' },
+        conversation_history: [],
+        system_prompt: SYSTEM_PROMPT,
+      }),
     })
 
-    const reply = response.content[0].type === 'text' ? response.content[0].text : 'Aye aye — ask me anything about your marina.'
+    if (!engineRes.ok) {
+      throw new Error(`Skipper Engine returned ${engineRes.status}`)
+    }
+
+    const engineData = await engineRes.json()
+    const reply = engineData.reply || 'Aye aye — ask me anything about your marina.'
 
     // Save to signups if they provided contact info
     const lower = message.toLowerCase()
@@ -71,8 +81,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ reply })
   } catch (err) {
     console.error('Skipper chat error:', err)
-    // Fallback replies for when API is unavailable
-    const msg = (await request.text().catch(() => '')).toLowerCase()
+    // Fallback replies for when Engine is unavailable
+    const msg = message?.toLowerCase() || ''
     const fallbacks: Record<string, string> = {
       cost: "Plans start at $299/mo (50 slips & under) or $499/mo (50+ slips). Flat rate, zero transaction fees. You keep 100% of what your marina earns.",
       price: "Plans start at $299/mo (50 slips & under) or $499/mo (50+ slips). Flat rate, zero transaction fees. You keep 100% of what your marina earns.",
