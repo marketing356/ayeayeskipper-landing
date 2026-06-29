@@ -1,6 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import bcrypt from 'bcryptjs'
+import crypto from 'crypto'
+
+function hashPin(pin: string): string {
+  const salt = crypto.randomBytes(16).toString('hex')
+  const hash = crypto.scryptSync(pin, salt, 64).toString('hex')
+  return `${salt}:${hash}`
+}
+
+function verifyPin(pin: string, stored: string): boolean {
+  try {
+    const [salt, hash] = stored.split(':')
+    const attempt = crypto.scryptSync(pin, salt, 64).toString('hex')
+    return crypto.timingSafeEqual(Buffer.from(attempt, 'hex'), Buffer.from(hash, 'hex'))
+  } catch { return false }
+}
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -56,7 +70,7 @@ export async function POST(req: NextRequest) {
 
       if (!acct?.pin_hash) return NextResponse.json({ error: 'Account not found' }, { status: 404 })
 
-      const match = await bcrypt.compare(pin, acct.pin_hash)
+      const match = verifyPin(pin, acct.pin_hash)
       if (!match) return NextResponse.json({ error: 'Invalid PIN' }, { status: 401 })
 
       const session = randSession()
@@ -153,7 +167,7 @@ export async function POST(req: NextRequest) {
       if (acct.otp_code !== otp) return NextResponse.json({ error: 'Invalid code' }, { status: 401 })
       if (new Date(acct.otp_expires_at) < new Date()) return NextResponse.json({ error: 'Code expired' }, { status: 401 })
 
-      const pin_hash = await bcrypt.hash(pin, 10)
+      const pin_hash = hashPin(pin)
       const session = randSession()
 
       await supabase.from('boater_accounts').update({
