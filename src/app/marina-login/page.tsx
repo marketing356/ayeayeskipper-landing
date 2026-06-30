@@ -27,7 +27,7 @@ function LoginFlow() {
     if (!e.includes('@')) return
     setLoading(true)
     try {
-      const res = await fetch('/api/marina/signup', {
+      const res = await fetch('/api/marina/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'check', email: e }),
@@ -42,7 +42,7 @@ function LoginFlow() {
     if (!email.includes('@')) { setError('Enter a valid email'); return }
     setLoading(true); setError('')
     try {
-      const res = await fetch('/api/marina/signup', {
+      const res = await fetch('/api/marina/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'check', email }),
@@ -52,7 +52,7 @@ function LoginFlow() {
         router.push(`/signup?email=${encodeURIComponent(email)}`)
         return
       }
-      if (data.hasPIN) { setStep('pin') } else { setError('Account found but PIN not set. Contact support.') }
+      if (data.hasPIN) { setStep('pin') } else { setError('PIN not set. Log into your Helm to set your PIN first.') }
     } catch { setError('Something went wrong') }
     finally { setLoading(false) }
   }
@@ -61,13 +61,13 @@ function LoginFlow() {
     if (pin.length < 4) { setError('Enter your PIN'); return }
     setLoading(true); setError('')
     try {
-      const res = await fetch('/api/marina/signup', {
+      const res = await fetch('/api/marina/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'verify-pin', email, pin }),
       })
       const data = await res.json()
-      if (data.error) { setError('Incorrect PIN'); setPin(''); return }
+      if (data.error) { setError(data.error === 'Incorrect PIN' ? 'Incorrect PIN' : data.error); setPin(''); return }
       localStorage.setItem('marina_session', data.session)
       localStorage.setItem('marina_account', JSON.stringify(data.account))
       router.push('/account')

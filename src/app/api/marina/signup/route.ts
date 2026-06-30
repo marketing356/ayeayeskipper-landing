@@ -159,20 +159,26 @@ export async function POST(req: NextRequest) {
       Object.assign(marina!, marina2)
     }
 
-    // Create contacts row linking owner to marina
+    // SHA-256 pin hash for contacts table (Helm auth doctrine §23)
+    const { createHash } = await import('crypto')
+    const contacts_pin_hash = createHash('sha256').update(pin).digest('hex')
+
+    // Create contacts row linking owner to marina (with PIN set — this is the live auth system)
     await supabase.from('contacts').insert({
       marina_id: marina!.id,
       email: normalEmail,
       first_name: firstName,
       last_name: lastName || null,
       contact_type: 'owner',
+      helm_role: 'admin',
       role: 'admin',
       status: 'active',
+      pin_hash: contacts_pin_hash,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     })
 
-    // Finalize marina_accounts row
+    // Finalize marina_accounts row (legacy — kept for fallback only)
     const pin_hash = hashPin(pin)
     const session = crypto.randomUUID() + '-' + Date.now()
     await supabase.from('marina_owner_accounts').update({
