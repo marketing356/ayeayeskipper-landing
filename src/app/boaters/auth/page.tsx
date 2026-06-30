@@ -1,7 +1,6 @@
 'use client'
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Suspense } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const NAVY = '#0d2b4b', TEAL = '#4dd6c8', DARK = '#070f1a'
 const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
@@ -22,8 +21,9 @@ function saveWebSession(email: string, account: { id?: string; first_name?: stri
 
 function AuthFlow() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [step, setStep] = useState<Step>('email')
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(searchParams.get('email') || '')
   const [pin, setPin] = useState('')
   const [otp, setOtp] = useState('')
   const [newPin, setNewPin] = useState('')
@@ -33,15 +33,36 @@ function AuthFlow() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  // Auto-advance to PIN step if email was pre-filled from URL and account has a PIN
+  useEffect(() => {
+    const preEmail = searchParams.get('email')
+    if (!preEmail || !preEmail.includes('@')) return
+    setLoading(true)
+    fetch('/api/boaters/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'check', email: preEmail }),
+    })
+      .then(r => r.json())
+      .then(d => { if (d.hasPIN) setStep('pin') })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   async function handleEmail() {
     if (!email.includes('@')) { setError('Enter a valid email'); return }
     setLoading(true); setError('')
+    // Retry once on failure — handles Supabase cold-start
+    const tryCheck = () => fetch('/api/boaters/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'check', email }),
+    })
     try {
-      const res = await fetch('/api/boaters/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'check', email }),
-      })
+      let res: Response
+      try { res = await tryCheck() }
+      catch { await new Promise(r => setTimeout(r, 700)); res = await tryCheck() }
       const data = await res.json()
       if (data.hasPIN) {
         setStep('pin')
