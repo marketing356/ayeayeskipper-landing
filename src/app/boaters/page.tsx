@@ -184,7 +184,7 @@ export default function BoatersPage() {
 
         {/* CTA */}
         <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap' }}>
-          <button onClick={() => router.push('/boaters/auth')} style={{ padding:'16px 36px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:800, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>
+          <button onClick={() => window.location.href='https://app.ayeayeskipper.com'} style={{ padding:'16px 36px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:800, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>
             Get Started Free →
           </button>
           <button onClick={() => router.push('/marinas')} style={{ padding:'16px 36px', background:'rgba(255,255,255,0.06)', color:'#fff', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, fontSize:15, fontWeight:600, cursor:'pointer', fontFamily:FONT }}>
@@ -231,7 +231,7 @@ export default function BoatersPage() {
           <p style={{ fontSize:16, color:'rgba(255,255,255,0.6)', lineHeight:1.75, marginBottom:32, maxWidth:520, margin:'0 auto 32px' }}>
             Skipper stores every haul-out, every service record, every maintenance job, every engine hour — permanently attached to your vessel. When you sell, you hand over a complete history that protects you and tells the full story of your boat's life.
           </p>
-          <button onClick={() => router.push('/boaters/auth')} style={{ padding:'16px 36px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:800, cursor:'pointer', fontFamily:FONT }}>
+          <button onClick={() => window.location.href='https://app.ayeayeskipper.com'} style={{ padding:'16px 36px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:800, cursor:'pointer', fontFamily:FONT }}>
             Start your boat's history →
           </button>
         </div>
@@ -270,7 +270,7 @@ export default function BoatersPage() {
             Free forever. Everything for boaters — marina comms, trip logs, vessel history, slip booking — in one place.
           </p>
           <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap' }}>
-            <button onClick={() => router.push('/boaters/auth')} style={{ padding:'18px 44px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:17, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>
+            <button onClick={() => window.location.href='https://app.ayeayeskipper.com'} style={{ padding:'18px 44px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:17, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>
               Get Started Free →
             </button>
             <button onClick={() => router.push('/marinas')} style={{ padding:'18px 44px', background:'rgba(255,255,255,0.06)', color:'#fff', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, fontSize:17, fontWeight:600, cursor:'pointer', fontFamily:FONT }}>
