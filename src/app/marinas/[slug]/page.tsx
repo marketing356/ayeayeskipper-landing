@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
@@ -16,8 +16,8 @@ type Marina = {
   transient_available?: boolean; description?: string; address?: string
 }
 
-export default function MarinaDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params)
+export default function MarinaDetailPage({ params }: { params: { slug: string } }) {
+  const { slug } = params
   const [marina,    setMarina]    = useState<Marina|null>(null)
   const [loading,   setLoading]   = useState(true)
   const [submitted, setSubmitted] = useState(false)
