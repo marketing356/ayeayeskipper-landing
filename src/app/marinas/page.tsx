@@ -10,6 +10,7 @@ const MUTED = 'rgba(255,255,255,0.55)'
 
 type Marina = {
   id: string
+  slug?: string
   name: string
   city: string
   state: string
@@ -100,7 +101,7 @@ export default function MarinasPage() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 16 }}>
           {marinas.map(m => (
-            <Link key={m.id} href={`/marinas/${m.id}`} style={{ textDecoration: 'none' }}>
+            <Link key={m.id} href={`/marinas/${m.slug || m.id}`} style={{ textDecoration: 'none' }}>
               <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 16, padding: 20, cursor: 'pointer', transition: 'border-color 0.15s', height: '100%' }}
                 onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(77,214,200,0.4)')}
                 onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)')}>

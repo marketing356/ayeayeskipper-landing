@@ -1,5 +1,7 @@
 'use client'
 import { useState, useEffect, use } from 'react'
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 import Link from 'next/link'
 
 const DARK  = '#070f1a'
@@ -9,13 +11,13 @@ const FONT  = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
 const MUTED = 'rgba(255,255,255,0.55)'
 
 type Marina = {
-  id: string; name: string; city: string; state: string; zip?: string
+  id: string; slug?: string; name: string; city: string; state: string; zip?: string
   phone?: string; website?: string; total_slips: number
   transient_available?: boolean; description?: string; address?: string
 }
 
-export default function MarinaDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export default function MarinaDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params)
   const [marina,    setMarina]    = useState<Marina|null>(null)
   const [loading,   setLoading]   = useState(true)
   const [submitted, setSubmitted] = useState(false)
@@ -40,11 +42,13 @@ export default function MarinaDetailPage({ params }: { params: Promise<{ id: str
   const [notes,      setNotes]      = useState('')
 
   useEffect(() => {
-    fetch(`/api/marinas?id=${id}`)
+    // Support both slug and legacy UUID in the URL param
+    const param = UUID_RE.test(slug) ? `id=${slug}` : `slug=${slug}`
+    fetch(`/api/marinas?${param}`)
       .then(r => r.json())
       .then(j => { setMarina(j.marina); setLoading(false) })
       .catch(() => setLoading(false))
-  }, [id])
+  }, [slug])
 
   function calcNights() {
     try {
