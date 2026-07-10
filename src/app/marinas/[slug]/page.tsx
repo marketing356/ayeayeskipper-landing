@@ -1,8 +1,8 @@
 'use client'
 import { useState, useEffect, use } from 'react'
+import Link from 'next/link'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-import Link from 'next/link'
 
 const DARK  = '#070f1a'
 const TEAL  = '#4dd6c8'
