@@ -116,7 +116,7 @@ export default function BoaterAuth() {
   const STEP_SUB: Record<Step, string> = {
     email:    'Your boater account — slip info, invoices, messages, and more.',
     otp:      `We sent a 6-digit code to ${email}`,
-    'set-pin': 'You'll use this PIN every time you sign in.',
+    'set-pin': "You'll use this PIN every time you sign in.",
     pin:      `Signing in as ${email}`,
   }
 
