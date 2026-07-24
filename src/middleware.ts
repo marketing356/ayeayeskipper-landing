@@ -5,6 +5,8 @@ const PUBLIC_PREFIXES = [
   '/marinas',
   '/api/transient-request',
   '/api/marinas',
+  '/boaters',
+  '/api/boaters',
 ]
 
 export function middleware(req: NextRequest) {
