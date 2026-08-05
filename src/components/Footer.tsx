@@ -15,7 +15,7 @@ export default function Footer() {
             <p style={{ fontSize:13, color:'rgba(255,255,255,0.4)', lineHeight:1.75, maxWidth:260 }}>
               The marina OS powered by the Skipper Engine™. Powered by Slip Logic™. Built by Mariner and Sailor LLC.
             </p>
-            <p style={{ fontSize:12, color:'rgba(255,255,255,0.25)', marginTop:12 }}>© 2026 Next-Gen Marine · Mariner and Sailor LLC</p>
+            <p style={{ fontSize:12, color:'rgba(255,255,255,0.25)', marginTop:12 }}>© 2026 AyeAyeSkipper · A product of MARINER AND SAILOR COMPANY · EIN 88-3901860</p>
           </div>
           <div>
             <div style={{ fontWeight:700, fontSize:12, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'1px', marginBottom:16 }}>Product</div>
@@ -31,13 +31,13 @@ export default function Footer() {
           </div>
           <div>
             <div style={{ fontWeight:700, fontSize:12, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'1px', marginBottom:16 }}>Company</div>
-            {[['About','/about'],['Contact','/demo'],['Privacy','#'],['Terms','#']].map(([l,h]) => (
+            {[['About','/about'],['Contact','/demo'],['Privacy','/privacy'],['Terms','/terms'],['SMS Consent','/sms-consent']].map(([l,h]) => (
               <Link key={l} href={h} style={{ display:'block', color:'rgba(255,255,255,0.55)', textDecoration:'none', fontSize:13, marginBottom:10 }}>{l}</Link>
             ))}
           </div>
         </div>
         <div style={{ borderTop:'1px solid rgba(255,255,255,0.07)', paddingTop:24, display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:12 }}>
-          <div style={{ fontSize:12, color:'rgba(255,255,255,0.25)' }}>Powered by Slip Logic™ · Hot Slip™ · Skipper Gangway™ — Proprietary technology of Next-Gen Marine</div>
+          <div style={{ fontSize:12, color:'rgba(255,255,255,0.25)' }}>AyeAyeSkipper is a product of MARINER AND SAILOR COMPANY · 651 N. Broad St, Middletown, DE 19709</div>
           <div style={{ fontSize:12, color:TEAL, fontWeight:700 }}>We run on Skipper.</div>
         </div>
       </div>
