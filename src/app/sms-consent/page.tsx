@@ -1,61 +1,170 @@
+'use client'
+import { useState } from 'react'
+
 export default function SmsConsent() {
+  const [phone, setPhone]         = useState('')
+  const [agreed, setAgreed]       = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError]         = useState('')
+
+  function formatPhone(val: string) {
+    const digits = val.replace(/\D/g, '').slice(0, 10)
+    if (digits.length <= 3) return digits
+    if (digits.length <= 6) return `(${digits.slice(0,3)}) ${digits.slice(3)}`
+    return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    const digits = phone.replace(/\D/g, '')
+    if (digits.length < 10) { setError('Please enter a valid 10-digit US phone number.'); return }
+    if (!agreed) { setError('You must check the consent box to opt in.'); return }
+    setError('')
+    setSubmitted(true)
+  }
+
+  const S = {
+    page: {
+      minHeight: '100vh',
+      background: '#050f1c',
+      color: '#fff',
+      fontFamily: "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif",
+      padding: '60px 20px',
+    } as React.CSSProperties,
+    wrap: { maxWidth: 560, margin: '0 auto' } as React.CSSProperties,
+    logo: { fontSize: 22, fontWeight: 900, color: '#4dd6c8', marginBottom: 32, display: 'block' } as React.CSSProperties,
+    h1: { fontSize: 28, fontWeight: 900, marginBottom: 8 } as React.CSSProperties,
+    sub: { color: 'rgba(255,255,255,0.5)', fontSize: 13, marginBottom: 36 } as React.CSSProperties,
+    label: { display: 'block', fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase' as const, letterSpacing: 0.5, marginBottom: 6 },
+    input: {
+      width: '100%', padding: '13px 15px', background: 'rgba(255,255,255,0.07)',
+      border: '1px solid rgba(255,255,255,0.15)', borderRadius: 10, color: '#fff',
+      fontSize: 16, outline: 'none', boxSizing: 'border-box' as const, marginBottom: 20,
+    } as React.CSSProperties,
+    consentBox: {
+      background: 'rgba(77,214,200,0.06)', border: '1px solid rgba(77,214,200,0.2)',
+      borderRadius: 12, padding: '18px', marginBottom: 16,
+    } as React.CSSProperties,
+    checkRow: { display: 'flex', alignItems: 'flex-start', gap: 12, cursor: 'pointer' } as React.CSSProperties,
+    checkbox: { width: 20, height: 20, marginTop: 2, flexShrink: 0, accentColor: '#4dd6c8', cursor: 'pointer' } as React.CSSProperties,
+    consentText: { fontSize: 13, lineHeight: 1.7, color: 'rgba(255,255,255,0.8)' } as React.CSSProperties,
+    disclosures: {
+      fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.8, marginBottom: 20,
+    } as React.CSSProperties,
+    btn: {
+      width: '100%', padding: '15px', background: '#4dd6c8', color: '#050f1c',
+      border: 'none', borderRadius: 10, fontSize: 15, fontWeight: 900,
+      cursor: 'pointer', marginBottom: 8,
+    } as React.CSSProperties,
+    error: { color: '#f87171', fontSize: 13, marginBottom: 12 } as React.CSSProperties,
+    divider: { borderTop: '1px solid rgba(255,255,255,0.08)', margin: '36px 0 24px' } as React.CSSProperties,
+    policyRow: { display: 'flex', gap: 20, fontSize: 12, color: 'rgba(255,255,255,0.35)' } as React.CSSProperties,
+    link: { color: '#4dd6c8', textDecoration: 'none' } as React.CSSProperties,
+  }
+
+  if (submitted) return (
+    <div style={S.page}>
+      <div style={S.wrap}>
+        <span style={S.logo}>AyeAyeSkipper</span>
+        <div style={{ textAlign: 'center', padding: '60px 20px' }}>
+          <div style={{ fontSize: 52, marginBottom: 16 }}>✅</div>
+          <h2 style={{ fontSize: 24, fontWeight: 800, marginBottom: 12 }}>You&apos;re opted in!</h2>
+          <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>
+            You&apos;ll receive SMS notifications from your marina via AyeAyeSkipper at the number you provided.<br /><br />
+            Reply <strong>STOP</strong> at any time to unsubscribe. Reply <strong>HELP</strong> for assistance.<br />
+            Msg &amp; Data rates may apply.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
-    <main style={{ maxWidth: 760, margin: '0 auto', padding: '80px 40px', fontFamily: "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif", color: '#fff' }}>
-      <h1 style={{ fontSize: 32, fontWeight: 900, marginBottom: 8 }}>SMS Messaging Consent</h1>
-      <p style={{ color: 'rgba(255,255,255,0.5)', marginBottom: 40 }}>Last updated: August 2026 · MARINER AND SAILOR COMPANY</p>
-
-      <section style={{ marginBottom: 40 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#4dd6c8', marginBottom: 12 }}>Who Sends Messages</h2>
-        <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
-          SMS messages are sent on behalf of marina operators using AyeAyeSkipper, a marina management platform
-          operated by MARINER AND SAILOR COMPANY, 651 N. Broad St, Middletown, DE 19709.
+    <div style={S.page}>
+      <div style={S.wrap}>
+        <span style={S.logo}>AyeAyeSkipper</span>
+        <h1 style={S.h1}>Sign up for Marina SMS Alerts</h1>
+        <p style={S.sub}>
+          MARINER AND SAILOR COMPANY · (866) 434-8771 · Middletown, DE
         </p>
-      </section>
 
-      <section style={{ marginBottom: 40 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#4dd6c8', marginBottom: 12 }}>How You Opt In</h2>
-        <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
-          Marina tenants and guests provide their mobile phone number when signing a slip lease, storage agreement,
-          or transient reservation through their marina's AyeAyeSkipper system. During this process, tenants check
-          a clearly labeled consent checkbox confirming they agree to receive SMS notifications from their marina
-          via AyeAyeSkipper. No messages are sent without this explicit consent.
-        </p>
-      </section>
+        <form onSubmit={handleSubmit}>
+          {/* Phone number field */}
+          <label style={S.label}>Your Mobile Phone Number *</label>
+          <input
+            type="tel"
+            inputMode="numeric"
+            placeholder="(555) 000-0000"
+            value={phone}
+            onChange={e => setPhone(formatPhone(e.target.value))}
+            style={S.input}
+            required
+          />
 
-      <section style={{ marginBottom: 40 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#4dd6c8', marginBottom: 12 }}>Types of Messages</h2>
-        <ul style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 2, paddingLeft: 20 }}>
-          <li>Slip assignment and dock assignment notifications</li>
-          <li>Invoice and payment reminders</li>
-          <li>Lease renewal notices</li>
-          <li>Marina announcements and operational updates</li>
-          <li>Haul-out and launch scheduling confirmations</li>
-        </ul>
-      </section>
+          {/* Standalone SMS consent checkbox */}
+          <div style={S.consentBox}>
+            <label style={S.checkRow}>
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={e => setAgreed(e.target.checked)}
+                style={S.checkbox}
+                required
+              />
+              <span style={S.consentText}>
+                <strong>I agree to receive SMS text messages from AyeAyeSkipper</strong> (MARINER AND SAILOR COMPANY)
+                at the phone number above. Messages may include marina operational communications such as:
+                invoice notifications, payment reminders, lease renewals, dock assignments, haul-out scheduling,
+                and general marina announcements. Message frequency varies (typically 2–6 messages per month).
+                This consent is not a condition of any purchase or lease agreement.
+              </span>
+            </label>
+          </div>
 
-      <section style={{ marginBottom: 40 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#4dd6c8', marginBottom: 12 }}>How to Opt Out</h2>
-        <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
-          Reply <strong>STOP</strong> to any message to unsubscribe immediately. You will receive one final
-          confirmation message and no further messages will be sent. Reply <strong>HELP</strong> for assistance.
-          Message and data rates may apply.
-        </p>
-      </section>
+          {/* Required disclosures */}
+          <p style={S.disclosures}>
+            By opting in, you acknowledge: Msg &amp; Data rates may apply. Reply <strong style={{ color: 'rgba(255,255,255,0.6)' }}>STOP</strong> to
+            unsubscribe at any time. Reply <strong style={{ color: 'rgba(255,255,255,0.6)' }}>HELP</strong> for help.
+            AyeAyeSkipper will not share your phone number with third parties for marketing purposes.
+          </p>
 
-      <section style={{ marginBottom: 40 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#4dd6c8', marginBottom: 12 }}>Message Frequency</h2>
-        <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
-          Message frequency varies based on marina activity. Most tenants receive 2–6 messages per month.
-        </p>
-      </section>
+          {error && <p style={S.error}>{error}</p>}
 
-      <section>
-        <h2 style={{ fontSize: 20, fontWeight: 700, color: '#4dd6c8', marginBottom: 12 }}>Contact</h2>
-        <p style={{ color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
-          Questions? Email <a href="mailto:admin@ayeayeskipper.com" style={{ color: '#4dd6c8' }}>admin@ayeayeskipper.com</a> or
-          visit <a href="https://ayeayeskipper.com" style={{ color: '#4dd6c8' }}>ayeayeskipper.com</a>.
-        </p>
-      </section>
-    </main>
+          <button type="submit" style={S.btn}>
+            Opt In to SMS Notifications →
+          </button>
+
+          <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textAlign: 'center', lineHeight: 1.6 }}>
+            Your consent is separate from our Privacy Policy and Terms of Service.
+          </p>
+        </form>
+
+        <div style={S.divider} />
+
+        {/* Program details */}
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
+            SMS Program Details
+          </div>
+          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.8 }}>
+            <strong style={{ color: 'rgba(255,255,255,0.55)' }}>Program name:</strong> AyeAyeSkipper Marina Notifications<br />
+            <strong style={{ color: 'rgba(255,255,255,0.55)' }}>Sender:</strong> MARINER AND SAILOR COMPANY, 651 N. Broad St, Middletown, DE 19709<br />
+            <strong style={{ color: 'rgba(255,255,255,0.55)' }}>Number:</strong> (866) 434-8771<br />
+            <strong style={{ color: 'rgba(255,255,255,0.55)' }}>Message types:</strong> Invoice notifications, payment reminders, lease renewals, dock assignments, operational announcements<br />
+            <strong style={{ color: 'rgba(255,255,255,0.55)' }}>Frequency:</strong> Varies — typically 2–6 messages per month per marina<br />
+            <strong style={{ color: 'rgba(255,255,255,0.55)' }}>Cost:</strong> Msg &amp; Data rates may apply<br />
+            <strong style={{ color: 'rgba(255,255,255,0.55)' }}>Opt-out:</strong> Reply STOP to any message<br />
+            <strong style={{ color: 'rgba(255,255,255,0.55)' }}>Help:</strong> Reply HELP or email admin@ayeayeskipper.com
+          </p>
+        </div>
+
+        {/* Policy links — on same page per Twilio requirement */}
+        <div style={S.policyRow}>
+          <a href="/privacy" style={S.link}>Privacy Policy</a>
+          <a href="/terms" style={S.link}>Terms of Service</a>
+          <a href="mailto:admin@ayeayeskipper.com" style={S.link}>Contact Us</a>
+        </div>
+      </div>
+    </div>
   )
 }
