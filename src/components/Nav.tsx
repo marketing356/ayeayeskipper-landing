@@ -40,7 +40,7 @@ export default function Nav() {
   const cta = isAuthPage
     ? { label: 'Home', href: '/' }
     : (isHome || isBoater)
-      ? { label: 'Log In', href: '/login' }
+      ? { label: 'Log In', href: 'https://app.ayeayeskipper.com' }
       : { label: 'Book a Demo', href: '/demo' }
 
   return (
