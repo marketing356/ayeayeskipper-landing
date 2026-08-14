@@ -16,6 +16,7 @@ type Marina = {
   state: string
   total_slips: number
   transient_available?: boolean
+  photo_url?: string | null
 }
 
 export default function MarinasPage() {
@@ -45,30 +46,33 @@ export default function MarinasPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: DARK, fontFamily: FONT, color: '#fff' }}>
-      {/* Hero */}
-      <div style={{ maxWidth: 800, margin: '0 auto', padding: '80px 24px 48px', textAlign: 'center' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(77,214,200,0.1)', border: '1px solid rgba(77,214,200,0.25)', borderRadius: 24, padding: '6px 16px', marginBottom: 20 }}>
-          <span style={{ width: 7, height: 7, borderRadius: '50%', background: TEAL, display: 'inline-block' }} />
-          <span style={{ fontSize: 12, color: TEAL, fontWeight: 700, letterSpacing: '1px' }}>MARINA DIRECTORY</span>
+      {/* Hero — full-bleed gradient with subtle glow, matches detail page treatment */}
+      <div style={{ position:'relative', overflow:'hidden', background:'linear-gradient(135deg,#0d2b4b 0%,#071e38 55%,#04121f 100%)' }}>
+        <div style={{ position:'absolute', inset:0, opacity:0.15, backgroundImage:'radial-gradient(circle at 15% 20%, #4dd6c8 0%, transparent 38%), radial-gradient(circle at 85% 80%, #4dd6c8 0%, transparent 32%)' }} />
+        <div style={{ position:'relative', maxWidth: 800, margin: '0 auto', padding: '90px 24px 56px', textAlign: 'center' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(77,214,200,0.12)', border: '1px solid rgba(77,214,200,0.3)', borderRadius: 24, padding: '6px 16px', marginBottom: 22 }}>
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: TEAL, display: 'inline-block', boxShadow:'0 0 8px rgba(77,214,200,0.8)' }} />
+            <span style={{ fontSize: 12, color: TEAL, fontWeight: 700, letterSpacing: '1px' }}>MARINA DIRECTORY</span>
+          </div>
+          <h1 style={{ fontSize: 'clamp(34px,5.5vw,58px)', fontWeight: 900, letterSpacing: '-2px', margin: '0 0 16px', lineHeight: 1.05 }}>
+            Find a <span style={{ color: TEAL, textShadow:'0 0 30px rgba(77,214,200,0.4)' }}>Skipper Marina</span>
+          </h1>
+          <p style={{ fontSize: 17, color: MUTED, margin: '0 0 40px', lineHeight: 1.6 }}>
+            Browse AyeAyeSkipper-powered marinas. Request a transient slip instantly — no calls, no paperwork.
+          </p>
+          <form onSubmit={handleSearch} style={{ display: 'flex', gap: 10, maxWidth: 540, margin: '0 auto' }}>
+            <input
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Search by name, city, or state…"
+              style={{ flex: 1, padding: '13px 18px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 12, color: '#fff', fontSize: 14, fontFamily: FONT, outline: 'none' }}
+            />
+            <button type="submit"
+              style={{ padding: '13px 24px', background: TEAL, color: NAVY, border: 'none', borderRadius: 12, fontSize: 14, fontWeight: 800, cursor: 'pointer', fontFamily: FONT, boxShadow:'0 4px 20px rgba(77,214,200,0.25)' }}>
+              Search
+            </button>
+          </form>
         </div>
-        <h1 style={{ fontSize: 'clamp(32px,5vw,56px)', fontWeight: 900, letterSpacing: '-2px', margin: '0 0 16px', lineHeight: 1.05 }}>
-          Find a <span style={{ color: TEAL }}>Skipper Marina</span>
-        </h1>
-        <p style={{ fontSize: 17, color: MUTED, margin: '0 0 40px', lineHeight: 1.6 }}>
-          Browse AyeAyeSkipper-powered marinas. Request a transient slip instantly — no calls, no paperwork.
-        </p>
-        <form onSubmit={handleSearch} style={{ display: 'flex', gap: 10, maxWidth: 540, margin: '0 auto' }}>
-          <input
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Search by name, city, or state…"
-            style={{ flex: 1, padding: '12px 16px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 10, color: '#fff', fontSize: 14, fontFamily: FONT, outline: 'none' }}
-          />
-          <button type="submit"
-            style={{ padding: '12px 20px', background: TEAL, color: NAVY, border: 'none', borderRadius: 10, fontSize: 14, fontWeight: 800, cursor: 'pointer', fontFamily: FONT }}>
-            Search
-          </button>
-        </form>
       </div>
 
       {/* Results */}
@@ -99,23 +103,37 @@ export default function MarinasPage() {
           </div>
         )}
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))', gap: 20 }}>
           {marinas.map(m => (
             <Link key={m.id} href={`/marinas/${m.slug || m.id}`} style={{ textDecoration: 'none' }}>
-              <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 16, padding: 20, cursor: 'pointer', transition: 'border-color 0.15s', height: '100%' }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(77,214,200,0.4)')}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)')}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(77,214,200,0.15)', border: '1px solid rgba(77,214,200,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>⚓</div>
-                  {m.transient_available && (
-                    <span style={{ fontSize: 10, fontWeight: 700, color: TEAL, background: 'rgba(77,214,200,0.1)', border: '1px solid rgba(77,214,200,0.25)', borderRadius: 6, padding: '3px 8px', letterSpacing: 0.5 }}>TRANSIENT</span>
+              <div style={{ background: 'linear-gradient(160deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 18, overflow:'hidden', cursor: 'pointer', transition: 'border-color 0.2s, transform 0.2s', height: '100%' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(77,214,200,0.5)'; e.currentTarget.style.transform = 'translateY(-3px)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.transform = 'translateY(0)' }}>
+                {/* Card image / gradient banner */}
+                <div style={{ position:'relative', height:110, background: m.photo_url
+                  ? `url(${m.photo_url}) center/cover`
+                  : 'linear-gradient(135deg,#0d2b4b 0%,#0a3652 60%,#071e38 100%)' }}>
+                  {!m.photo_url && (
+                    <div style={{ position:'absolute', inset:0, opacity:0.18, backgroundImage:'radial-gradient(circle at 25% 30%, #4dd6c8 0%, transparent 45%)' }} />
                   )}
+                  <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(7,15,26,0.85) 100%)' }} />
+                  <div style={{ position:'absolute', top:10, right:10 }}>
+                    {m.transient_available ? (
+                      <span style={{ fontSize:10, fontWeight:800, color:'#0d2b4b', background:TEAL, borderRadius:999, padding:'4px 10px', letterSpacing:0.4 }}>⛵ TRANSIENT</span>
+                    ) : (
+                      <span style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,0.85)', background:'rgba(0,0,0,0.4)', backdropFilter:'blur(4px)', border:'1px solid rgba(255,255,255,0.2)', borderRadius:999, padding:'4px 10px' }}>SEASONAL</span>
+                    )}
+                  </div>
+                  <div style={{ position:'absolute', bottom:10, left:14, right:14 }}>
+                    <div style={{ fontSize:17, fontWeight:900, color:'#fff', letterSpacing:'-0.3px', textShadow:'0 2px 8px rgba(0,0,0,0.6)' }}>{m.name}</div>
+                  </div>
                 </div>
-                <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{m.name}</div>
-                <div style={{ fontSize: 13, color: MUTED, marginBottom: 14 }}>{m.city}, {m.state}</div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: 12, color: MUTED }}>{m.total_slips} slips</span>
-                  <span style={{ fontSize: 12, color: TEAL, fontWeight: 700 }}>Request a slip →</span>
+                <div style={{ padding:'14px 16px 16px' }}>
+                  <div style={{ fontSize: 13, color: MUTED, marginBottom: 14, display:'flex', alignItems:'center', gap:5 }}>📍 {m.city}, {m.state}</div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: 12, color: MUTED, display:'flex', alignItems:'center', gap:5 }}>⚓ {m.total_slips} slips</span>
+                    <span style={{ fontSize: 12, color: TEAL, fontWeight: 800 }}>View marina →</span>
+                  </div>
                 </div>
               </div>
             </Link>
