@@ -12,8 +12,36 @@ const MUTED = 'rgba(255,255,255,0.55)'
 
 type Marina = {
   id: string; slug?: string; name: string; city: string; state: string; zip?: string
-  phone?: string; website?: string; total_slips: number
+  phone?: string; website?: string; email?: string; total_slips: number
   transient_available?: boolean; description?: string; address?: string
+  max_vessel_loa_ft?: number|null; max_draft_ft?: number|null; vhf_channel?: string|null
+  approach_notes?: string|null; min_approach_depth_ft?: number|null; min_channel_depth_ft?: number|null
+  mean_low_water_dock_depth_ft?: number|null
+  amenities?: Record<string, boolean|string|null>
+  photos?: { id:string; url:string; caption:string|null; is_hero:boolean }[]
+}
+
+const AMENITY_LABELS: [string,string][] = [
+  ['fuel_dock','Fuel Dock'], ['dockage','Dockage'], ['water_hookup','Water Hookup'],
+  ['water_taxi','Water Taxi'], ['dinghy_dock','Dinghy Dock'], ['wifi','Wi-Fi'],
+  ['restrooms','Restrooms'], ['showers','Showers'], ['laundry','Laundry'], ['trash','Trash'],
+  ['ice','Ice'], ['atm','ATM'], ['swimming_pool','Swimming Pool'], ['groceries','Groceries'],
+  ['alcohol','Alcohol'], ['medical','Medical Facility'], ['hotels','Hotels'],
+  ['restaurants','Restaurants Nearby'], ['restaurant_on_property','Restaurant On-Site'],
+  ['ship_store','Ship Store'], ['dog_park','Dog Park'], ['pet_friendly','Pet Friendly'],
+  ['dry_stack','Dry Stack'], ['land_storage','Land Storage'], ['travel_lift','Travel Lift'],
+  ['repair_crane','Repair Crane'], ['engine_service','Engine Service'],
+  ['propeller_service','Propeller Service'], ['service_maintenance','Service & Maintenance'],
+  ['security','Security'], ['pump_out','Pump-Out'], ['pharmacy','Pharmacy'], ['beach','Beach'], ['golf','Golf'],
+]
+
+function InfoStat({ label, value }: { label:string; value:string }) {
+  return (
+    <div style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:10, padding:'10px 14px' }}>
+      <div style={{ fontSize:10, color:MUTED, textTransform:'uppercase', letterSpacing:0.5, fontWeight:700, marginBottom:3 }}>{label}</div>
+      <div style={{ fontSize:15, color:'#fff', fontWeight:800 }}>{value}</div>
+    </div>
+  )
 }
 
 export default function MarinaDetailPage({ params }: { params: { slug: string } }) {
@@ -134,16 +162,71 @@ export default function MarinaDetailPage({ params }: { params: { slug: string } 
                 <span style={{ fontSize:10, fontWeight:700, color:TEAL, background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:6, padding:'3px 8px' }}>TRANSIENT AVAILABLE</span>
               )}
             </div>
-            <div style={{ fontSize:14, color:MUTED }}>{marina.city}, {marina.state}{marina.zip ? ` ${marina.zip}` : ''}</div>
+            <div style={{ fontSize:14, color:MUTED }}>{marina.address ? `${marina.address}, ` : ''}{marina.city}, {marina.state}{marina.zip ? ` ${marina.zip}` : ''}</div>
             <div style={{ display:'flex', gap:20, marginTop:10, flexWrap:'wrap' }}>
               <span style={{ fontSize:13, color:MUTED }}>{marina.total_slips} slips</span>
               {marina.phone && <span style={{ fontSize:13, color:MUTED }}>{marina.phone}</span>}
+              {marina.vhf_channel && <span style={{ fontSize:13, color:MUTED }}>VHF {marina.vhf_channel}</span>}
+              {marina.website && <a href={marina.website.startsWith('http') ? marina.website : `https://${marina.website}`} target="_blank" rel="noreferrer" style={{ fontSize:13, color:TEAL }}>{marina.website}</a>}
             </div>
             {marina.description && (
               <p style={{ fontSize:14, color:MUTED, marginTop:12, lineHeight:1.6, maxWidth:600 }}>{marina.description}</p>
             )}
           </div>
         </div>
+
+        {/* Photo strip */}
+        {marina.photos && marina.photos.length > 0 && (
+          <div style={{ display:'flex', gap:10, overflowX:'auto', marginBottom:40, paddingBottom:4 }}>
+            {marina.photos.map(p => (
+              <img key={p.id} src={p.url} alt={p.caption || marina!.name} style={{ height:160, width:'auto', borderRadius:12, objectFit:'cover', flexShrink:0 }} />
+            ))}
+          </div>
+        )}
+
+        {/* Berth Capacity */}
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))', gap:16, marginBottom:32 }}>
+          <InfoStat label="Slips" value={String(marina.total_slips ?? '—')} />
+          {marina.max_vessel_loa_ft != null && <InfoStat label="Max Vessel LOA" value={`${marina.max_vessel_loa_ft} ft`} />}
+          {marina.max_draft_ft != null && <InfoStat label="Max Draft" value={`${marina.max_draft_ft} ft`} />}
+        </div>
+
+        {/* Approach */}
+        {(marina.approach_notes || marina.min_approach_depth_ft != null || marina.min_channel_depth_ft != null || marina.mean_low_water_dock_depth_ft != null) && (
+          <div style={{ marginBottom:32 }}>
+            <div style={{ fontSize:13, fontWeight:800, color:TEAL, textTransform:'uppercase', letterSpacing:1, marginBottom:10 }}>Approach</div>
+            {marina.approach_notes && <p style={{ fontSize:14, color:MUTED, lineHeight:1.6, marginBottom:12, maxWidth:600 }}>{marina.approach_notes}</p>}
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))', gap:16 }}>
+              {marina.min_approach_depth_ft != null && <InfoStat label="Min. Approach Depth" value={`${marina.min_approach_depth_ft} ft`} />}
+              {marina.min_channel_depth_ft != null && <InfoStat label="Min. Channel Depth" value={`${marina.min_channel_depth_ft} ft`} />}
+              {marina.mean_low_water_dock_depth_ft != null && <InfoStat label="Mean Low Water Dock Depth" value={`${marina.mean_low_water_dock_depth_ft} ft`} />}
+            </div>
+          </div>
+        )}
+
+        {/* Services & Amenities */}
+        {marina.amenities && (
+          <div style={{ marginBottom:40 }}>
+            <div style={{ fontSize:13, fontWeight:800, color:TEAL, textTransform:'uppercase', letterSpacing:1, marginBottom:14 }}>Services &amp; Amenities</div>
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:'10px 20px' }}>
+              {AMENITY_LABELS.filter(([key]) => {
+                const v = marina!.amenities![key]
+                return v === true || (typeof v === 'string' && v.trim())
+              }).map(([key,label]) => {
+                const v = marina!.amenities![key]
+                return (
+                  <div key={key} style={{ display:'flex', justifyContent:'space-between', fontSize:13, borderBottom:'1px solid rgba(255,255,255,0.06)', padding:'6px 0' }}>
+                    <span style={{ color:MUTED }}>{label}</span>
+                    <span style={{ color:TEAL, fontWeight:700 }}>{v === true ? 'Yes' : v}</span>
+                  </div>
+                )
+              })}
+            </div>
+            {AMENITY_LABELS.every(([key]) => { const v = marina!.amenities![key]; return v !== true && !(typeof v === 'string' && v.trim()) }) && (
+              <p style={{ fontSize:13, color:MUTED }}>Amenity details coming soon for this marina.</p>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Booking form */}
