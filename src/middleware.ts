@@ -58,12 +58,12 @@ export async function middleware(req: NextRequest) {
       return res
     }
     return new NextResponse(loginPage('Wrong username or password — try again.'), {
-      status: 401, headers: { 'Content-Type': 'text/html' },
+      status: 401, headers: { 'Content-Type': 'text/html; charset=utf-8' },
     })
   }
 
   return new NextResponse(loginPage(), {
-    status: 401, headers: { 'Content-Type': 'text/html' },
+    status: 401, headers: { 'Content-Type': 'text/html; charset=utf-8' },
   })
 }
 
