@@ -51,7 +51,7 @@ export async function middleware(req: NextRequest) {
     const user = form.get('user')
     const pass = form.get('pass')
     if (user === GATE_USER && pass === GATE_PASS) {
-      const res = NextResponse.redirect(req.url)
+      const res = NextResponse.redirect(req.url, 303)
       res.cookies.set(COOKIE_NAME, COOKIE_VALUE, {
         httpOnly: true, secure: true, sameSite: 'lax', maxAge: 60 * 60 * 24 * 30, path: '/',
       })
