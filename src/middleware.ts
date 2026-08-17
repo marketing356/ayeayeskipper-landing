@@ -43,11 +43,20 @@ function loginPage(error?: string) {
 }
 
 export async function middleware(req: NextRequest) {
+  // 🔴 Machine/API doors must NEVER sit behind the human page gate. External callers
+  // (Stripe/Twilio webhooks) can't present a login cookie, and calling req.formData()
+  // on their application/json body throws → HTTP 500 → dropped webhook. These routes were
+  // publicly reachable before the Aug-14 test gate and carry their own handling.
+  // Page-only gate. (Same class of bug that broke boater payment confirmation on the Helm.)
+  if (req.nextUrl.pathname.startsWith('/api/')) return NextResponse.next()
+
   const cookie = req.cookies.get(COOKIE_NAME)
   if (cookie?.value === COOKIE_VALUE) return NextResponse.next()
 
   if (req.method === 'POST') {
-    const form = await req.formData()
+    // Guard against non-form bodies so a stray JSON POST can never 500 the gate.
+    let form: FormData
+    try { form = await req.formData() } catch { return new NextResponse(loginPage(), { status: 401, headers: { 'Content-Type': 'text/html; charset=utf-8' } }) }
     const user = form.get('user')
     const pass = form.get('pass')
     if (user === GATE_USER && pass === GATE_PASS) {
