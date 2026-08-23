@@ -50,6 +50,9 @@ export async function middleware(req: NextRequest) {
   // Page-only gate. (Same class of bug that broke boater payment confirmation on the Helm.)
   if (req.nextUrl.pathname.startsWith('/api/')) return NextResponse.next()
 
+  // Public pages — accessible without the site gate (for app store reviewers, etc.)
+  if (req.nextUrl.pathname === '/privacy' || req.nextUrl.pathname.startsWith('/privacy/')) return NextResponse.next()
+
   const cookie = req.cookies.get(COOKIE_NAME)
   if (cookie?.value === COOKIE_VALUE) return NextResponse.next()
 
