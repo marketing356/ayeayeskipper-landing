@@ -34,13 +34,12 @@ export default function Demo() {
           </p>
           <div style={{ display:'flex', flexDirection:'column', gap:16, marginBottom:40 }}>
             {[
-              ['🗺️','We build your marina map','Send us your layout. We build it before the demo — on us.'],
-              ['📦','We pre-load your data','Share a tenant list or we scrape your public info. Skipper knows your marina on day one.'],
-              ['💬','Skipper opens the call','No slideshow. Skipper is live, talking about your marina before you say a word.'],
-              ['⏱️','30 minutes','That\'s all it takes. Most people are sold in 15.'],
-            ].map(([icon, title, desc]) => (
+              ['We build your marina map','Send us your layout. We build it before the demo — on us.'],
+              ['We pre-load your data','Share a tenant list or we scrape your public info. Skipper knows your marina on day one.'],
+              ['Skipper opens the call','No slideshow. Skipper is live, talking about your marina before you say a word.'],
+              ['30 minutes','That\'s all it takes. Most people are sold in 15.'],
+            ].map(([title, desc]) => (
               <div key={title as string} style={{ display:'flex', gap:16, alignItems:'flex-start' }}>
-                <span style={{ fontSize:24, flexShrink:0 }}>{icon}</span>
                 <div>
                   <div style={{ fontWeight:700, fontSize:15, marginBottom:2 }}>{title as string}</div>
                   <div style={{ fontSize:13, color:'rgba(255,255,255,0.5)' }}>{desc as string}</div>
@@ -63,12 +62,11 @@ export default function Demo() {
         <div>
           {submitted ? (
             <div style={{ background:`${TEAL}10`, border:`1px solid ${TEAL}30`, borderRadius:16, padding:'48px 36px', textAlign:'center' }}>
-              <div style={{ fontSize:48, marginBottom:16 }}>⚓</div>
               <h2 style={{ fontSize:28, fontWeight:900, letterSpacing:'-1px', margin:'0 0 12px' }}>We're on it.</h2>
               <p style={{ fontSize:15, color:'rgba(255,255,255,0.6)', lineHeight:1.7, margin:0 }}>
                 We'll review your marina and reach out within a few hours to schedule. We'll have your map built before we talk.
               </p>
-              <p style={{ fontSize:14, color:TEAL, marginTop:20, fontWeight:600 }}>We run on Skipper. ⚓</p>
+              <p style={{ fontSize:14, color:TEAL, marginTop:20, fontWeight:600 }}>We run on Skipper.</p>
             </div>
           ) : (
             <div style={{ background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:16, padding:'36px' }}>

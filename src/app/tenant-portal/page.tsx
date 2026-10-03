@@ -10,7 +10,6 @@ const TEAL = '#4dd6c8', NAVY = '#0d2b4b', FONT = "system-ui,-apple-system,'Segoe
 
 const FEATURES = [
   {
-    icon: '🏠',
     label: 'MY SLIP',
     name: 'My Slip',
     desc: 'See your slip number, dock, lease details, and renewal date at a glance. Know exactly where you are, what you\'re paying, and when your lease renews — without having to call the office.',
@@ -22,7 +21,6 @@ const FEATURES = [
     ],
   },
   {
-    icon: '💳',
     label: 'BILLING',
     name: 'Billing',
     desc: 'View invoices, payment history, and upcoming dues. See exactly what you owe and when it\'s due. Direct payment from the portal is coming soon.',
@@ -34,7 +32,6 @@ const FEATURES = [
     ],
   },
   {
-    icon: '🔥',
     label: 'HOT SLIP™',
     name: 'Hot Slip™',
     desc: 'List your slip when you\'re away and earn revenue or lease credits automatically. Activate with one tap — Skipper handles the rest. Your slip is always waiting when you return.',
@@ -46,7 +43,6 @@ const FEATURES = [
     ],
   },
   {
-    icon: '👤',
     label: 'MY PROFILE',
     name: 'Profile',
     desc: 'Your boat info, registration, insurance status, and marina contact details all in one place. Always accurate, always up to date.',
@@ -58,7 +54,6 @@ const FEATURES = [
     ],
   },
   {
-    icon: '⚓',
     label: 'SKIPPER',
     name: 'Skipper',
     desc: 'Ask Skipper anything about your marina, your slip, your billing, or local conditions. The Skipper Engine™ is available 24/7 — no hold music, no voicemail.',
@@ -106,7 +101,7 @@ export default function TenantPortal() {
           >
             <div style={{ order: i % 2 === 0 ? 0 : 1 }}>
               <div style={{ display:'inline-block', fontSize:10, color:TEAL, fontWeight:700, letterSpacing:'2px', background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.2)', padding:'3px 10px', borderRadius:20, marginBottom:16 }}>{f.label}</div>
-              <h2 style={{ fontSize:36, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 12px' }}>{f.icon} {f.name}</h2>
+              <h2 style={{ fontSize:36, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 12px' }}>{f.name}</h2>
               <p style={{ fontSize:15, color:'rgba(255,255,255,0.6)', lineHeight:1.75, margin:'0 0 0' }}>{f.desc}</p>
             </div>
             <div style={{ order: i % 2 === 0 ? 1 : 0 }}>
@@ -126,20 +121,18 @@ export default function TenantPortal() {
       {/* Invite-only section */}
       <div style={{ background:'rgba(255,255,255,0.02)', borderTop:'1px solid rgba(255,255,255,0.07)', borderBottom:'1px solid rgba(255,255,255,0.07)', padding:'80px 40px' }}>
         <div style={{ maxWidth:720, margin:'0 auto', textAlign:'center' }}>
-          <div style={{ fontSize:36, marginBottom:16 }}>⚓</div>
           <h2 style={{ fontSize:32, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 16px' }}>Invite only — your marina sends the invite.</h2>
           <p style={{ fontSize:15, color:'rgba(255,255,255,0.6)', lineHeight:1.75, marginBottom:24, maxWidth:540, margin:'0 auto 24px' }}>
             Tenants get a personal invite link from their marina manager when their marina goes live on AyeAyeSkipper. No app store download required — the Tenant Portal works in any mobile browser on iOS or Android.
           </p>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))', gap:16, maxWidth:680, margin:'0 auto' }}>
             {[
-              ['📧','Marina sends your invite','One email with your personal link. Click to activate.'],
-              ['📱','Works in any browser','No App Store. No Play Store. No downloads.'],
-              ['🔐','Secured to your account','Only you can access your slip and billing data.'],
-              ['🔄','Always up to date','Any change Skipper makes is live in your portal instantly.'],
-            ].map(([icon, title, desc]) => (
-              <div key={title as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:10, padding:'18px', textAlign:'left' }}>
-                <div style={{ fontSize:22, marginBottom:8 }}>{icon}</div>
+              ['Marina sends your invite','One email with your personal link. Click to activate.'],
+              ['Works in any browser','No App Store. No Play Store. No downloads.'],
+              ['Secured to your account','Only you can access your slip and billing data.'],
+              ['Always up to date','Any change Skipper makes is live in your portal instantly.'],
+            ].map(([title, desc]) => (
+              <div key={title as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:10, padding:'18px', textAlign:'left', borderTop:`2px solid ${TEAL}` }}>
                 <div style={{ fontWeight:700, fontSize:14, marginBottom:4 }}>{title as string}</div>
                 <div style={{ fontSize:12, color:'rgba(255,255,255,0.45)', lineHeight:1.6 }}>{desc as string}</div>
               </div>
@@ -154,8 +147,8 @@ export default function TenantPortal() {
         <p style={{ color:'rgba(255,255,255,0.45)', fontSize:15, marginBottom:32, maxWidth:460, margin:'0 auto 32px' }}>
           The Tenant Portal is included in every AyeAyeSkipper plan. No add-on. No extra charge. Book a demo and we'll show you exactly what your tenants will see.
         </p>
-        <Link href="/join" style={{ display:'inline-block', padding:'18px 44px', background:TEAL, color:NAVY, borderRadius:8, fontSize:16, fontWeight:800, textDecoration:'none', fontFamily:FONT }}>Book a Demo ⚓</Link>
-        <p style={{ marginTop:16, fontSize:12, color:'rgba(255,255,255,0.25)' }}>$299/mo (50 slips &amp; under) · $499/mo (50+ slips) · First month free</p>
+        <Link href="/join" style={{ display:'inline-block', padding:'18px 44px', background:TEAL, color:NAVY, borderRadius:8, fontSize:16, fontWeight:800, textDecoration:'none', fontFamily:FONT }}>Book a Demo</Link>
+        <p style={{ marginTop:16, fontSize:12, color:'rgba(255,255,255,0.25)' }}>$199–$799/mo by slip count · First month free</p>
       </div>
     </div>
   )

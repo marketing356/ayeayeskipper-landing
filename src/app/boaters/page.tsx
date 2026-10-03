@@ -30,7 +30,7 @@ export default function BoatersPage() {
       const data = await res.json()
       setLastExchange({ user: message, reply: data.reply ?? '' })
     } catch {
-      setLastExchange({ user: message, reply: "Aye aye — having a little trouble right now. Head to /marinas to browse slips. ⚓" })
+      setLastExchange({ user: message, reply: "Aye aye — having a little trouble right now. Head to /marinas to browse slips." })
     } finally {
       setChatLoading(false)
       setTimeout(() => chatRef.current?.scrollTo({ top: 9999, behavior: 'smooth' }), 60)
@@ -202,18 +202,17 @@ export default function BoatersPage() {
         </div>
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:20 }}>
           {[
-            ['💬','Talk to your marina instantly','No calls. No hold music. No office hours. Message your dock master, request a pump-out, flag a slip issue, ask about your bill — all through Skipper. Skipper handles it.'],
-            ['🗺️','Find a slip, book it fast','See which transient slips are open right now at Skipper-powered marinas. Request and get confirmed fast — no callbacks.'],
-            ['📓','Ship\'s Log','Every trip logged: departure, destination, distance, crew aboard, weather and sea state, fuel used, engine hours start and end, notes. Your permanent nautical record.'],
-            ['🚗','Boat Fax™','Every haul-out, every service, every maintenance record, every engine hour — time-stamped and permanent. Like Carfax for your boat. Sell your boat someday? Hand over the full history.'],
-            ['🛥️','Vessel management','Full specs, HIN, registration, unlimited photos by category. Tenders and dinghies linked to the parent vessel. Your boat\'s passport lives in Skipper.'],
-            ['⚙️','Engine tracking','Hours logged per engine. Service intervals. Full history. Never miss a service again.'],
-            ['🔥','Hot Slip™','Annual slip at a Skipper marina? List it when you\'re cruising and earn back. Need a slip somewhere new? Book a listed one at a "full" marina. First program of its kind.'],
-            ['🔌','Transient booking','Find marinas with available slips, check rates and amenities, book instantly across the Skipper network.'],
-            ['⚓','Ask Skipper anything','Weather, tides, boating regs, troubleshooting, docking tips — Skipper knows boating. Ask anything, get a real answer fast.'],
-          ].map(([icon, title, desc]) => (
-            <div key={title as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:12, padding:28 }}>
-              <div style={{ fontSize:32, marginBottom:14 }}>{icon}</div>
+            ['Talk to your marina instantly','No calls. No hold music. No office hours. Message your dock master, request a pump-out, flag a slip issue, ask about your bill — all through Skipper. Skipper handles it.'],
+            ['Find a slip, book it fast','See which transient slips are open right now at Skipper-powered marinas. Request and get confirmed fast — no callbacks.'],
+            ['Ship\'s Log','Every trip logged: departure, destination, distance, crew aboard, weather and sea state, fuel used, engine hours start and end, notes. Your permanent nautical record.'],
+            ['Boat Fax™','Every haul-out, every service, every maintenance record, every engine hour — time-stamped and permanent. Like Carfax for your boat. Sell your boat someday? Hand over the full history.'],
+            ['Vessel management','Full specs, HIN, registration, unlimited photos by category. Tenders and dinghies linked to the parent vessel. Your boat\'s passport lives in Skipper.'],
+            ['Engine tracking','Hours logged per engine. Service intervals. Full history. Never miss a service again.'],
+            ['Hot Slip™','Annual slip at a Skipper marina? List it when you\'re cruising and earn back. Need a slip somewhere new? Book a listed one at a "full" marina. First program of its kind.'],
+            ['Transient booking','Find marinas with available slips, check rates and amenities, book instantly across the Skipper network.'],
+            ['Ask Skipper anything','Weather, tides, boating regs, troubleshooting, docking tips — Skipper knows boating. Ask anything, get a real answer fast.'],
+          ].map(([title, desc]) => (
+            <div key={title as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:12, padding:28, borderTop:`2px solid ${TEAL}` }}>
               <div style={{ fontWeight:800, fontSize:16, marginBottom:8, letterSpacing:'-0.3px' }}>{title}</div>
               <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)', lineHeight:1.7 }}>{desc}</div>
             </div>
@@ -224,7 +223,6 @@ export default function BoatersPage() {
       {/* BOAT FAX CALLOUT */}
       <div style={{ background:'linear-gradient(135deg, #061528 0%, #0a1f1a 100%)', borderTop:'1px solid rgba(77,214,200,0.15)', borderBottom:'1px solid rgba(77,214,200,0.15)', padding:'80px 40px', textAlign:'center' }}>
         <div style={{ maxWidth:640, margin:'0 auto' }}>
-          <div style={{ fontSize:48, marginBottom:16 }}>🚗</div>
           <h2 style={{ fontSize:'clamp(28px,4vw,40px)', fontWeight:900, letterSpacing:'-2px', margin:'0 0 16px', color:'#fff' }}>
             Carfax for your boat.
           </h2>

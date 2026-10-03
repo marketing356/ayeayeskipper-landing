@@ -42,7 +42,7 @@ export default function VsDockwa() {
         <div style={{ borderRadius:16, overflow:'hidden', border:'1px solid rgba(255,255,255,0.08)', marginBottom:60 }}>
           <div style={{ display:'grid', gridTemplateColumns:'1.2fr 1fr 1fr' }}>
             <div style={{ background:'rgba(255,255,255,0.03)', padding:'16px 20px', fontSize:12, color:'rgba(255,255,255,0.3)', fontWeight:700, textTransform:'uppercase', letterSpacing:'1px' }}>The Question</div>
-            <div style={{ background:`${TEAL}12`, padding:'16px 20px', fontSize:12, color:TEAL, fontWeight:700, textTransform:'uppercase', letterSpacing:'1px', textAlign:'center' }}>⚓ AyeAyeSkipper</div>
+            <div style={{ background:`${TEAL}12`, padding:'16px 20px', fontSize:12, color:TEAL, fontWeight:700, textTransform:'uppercase', letterSpacing:'1px', textAlign:'center' }}>AyeAyeSkipper</div>
             <div style={{ background:'rgba(255,80,80,0.08)', padding:'16px 20px', fontSize:12, color:'rgba(255,140,140,0.9)', fontWeight:700, textTransform:'uppercase', letterSpacing:'1px', textAlign:'center' }}>Dockwa</div>
           </div>
           {[
@@ -109,13 +109,13 @@ export default function VsDockwa() {
           <p style={{ fontSize:14, color:'rgba(255,255,255,0.4)', marginBottom:24, lineHeight:1.6 }}>3.8 stars on Google Play. 3.9 stars overall. Here are the actual reviews:</p>
           <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
             {[
-              ['⭐','"Horrendous app. Absolutely a nightmare to setup a simple reservation. Can\'t get PDF or JPG to upload from my phone, One Drive, Google, Amazon or anywhere I try to load my docs from. Insane waste of time."','— David G., 1 star, Aug 2024 (6 people found helpful)'],
-              ['⭐','"Updates to a Profile must be done on a computer, not a mobile device (i.e. upload photos and insurance/registration docs) BUT the mobile device doesn\'t tell you why it is not working. I found it buried in Help."','— Daniel C., Mar 2024'],
-              ['⚠️','Pay-to-play ranking: Dockwa\'s own docs confirm marinas that run "Deals" get better placement in search results. The best slip isn\'t always what you see first — it\'s who paid more.','— Dockwa Network page, confirmed'],
-            ].map(([icon, quote, attr], i) => (
+              ['1-STAR','"Horrendous app. Absolutely a nightmare to setup a simple reservation. Can\'t get PDF or JPG to upload from my phone, One Drive, Google, Amazon or anywhere I try to load my docs from. Insane waste of time."','— David G., 1 star, Aug 2024 (6 people found helpful)'],
+              ['REVIEW','"Updates to a Profile must be done on a computer, not a mobile device (i.e. upload photos and insurance/registration docs) BUT the mobile device doesn\'t tell you why it is not working. I found it buried in Help."','— Daniel C., Mar 2024'],
+              ['NOTE','Pay-to-play ranking: Dockwa\'s own docs confirm marinas that run "Deals" get better placement in search results. The best slip isn\'t always what you see first — it\'s who paid more.','— Dockwa Network page, confirmed'],
+            ].map(([tag, quote, attr], i) => (
               <div key={i} style={{ background:'rgba(255,80,80,0.04)', border:'1px solid rgba(255,80,80,0.12)', borderRadius:12, padding:'20px 24px' }}>
                 <div style={{ display:'flex', gap:12, alignItems:'flex-start' }}>
-                  <span style={{ fontSize:20, flexShrink:0 }}>{icon}</span>
+                  <span style={{ fontSize:10, color:'rgba(255,140,140,0.8)', fontWeight:800, letterSpacing:'1px', flexShrink:0, marginTop:3, background:'rgba(255,80,80,0.12)', padding:'3px 8px', borderRadius:4 }}>{tag}</span>
                   <div>
                     <div style={{ fontSize:14, color:'rgba(255,255,255,0.7)', lineHeight:1.7, fontStyle:'italic', marginBottom:6 }}>{quote}</div>
                     <div style={{ fontSize:12, color:'rgba(255,255,255,0.3)' }}>{attr}</div>
@@ -131,20 +131,20 @@ export default function VsDockwa() {
           <h2 style={{ fontSize:28, fontWeight:900, letterSpacing:'-1px', margin:'0 0 24px' }}>Dockwa is a booking tool. AyeAyeSkipper is your entire marina.</h2>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(260px,1fr))', gap:14 }}>
             {[
-              '🚫 Dockwa doesn\'t manage your slip tenants',
-              '🚫 Dockwa doesn\'t track fuel inventory',
-              '🚫 Dockwa doesn\'t run your waitlist',
-              '🚫 Dockwa doesn\'t manage storage',
-              '🚫 Dockwa doesn\'t send lease contracts',
-              '🚫 Dockwa doesn\'t know your pedestal map',
-              '🚫 Dockwa doesn\'t track work orders',
-              '🚫 Dockwa doesn\'t brief you every morning',
-              '🚫 Dockwa doesn\'t learn your marina',
-              '🚫 Dockwa doesn\'t have Hot Slip™ for annual tenants',
-              '🚫 Dockwa doesn\'t give your tenants a marina expert',
-              '🚫 Dockwa doesn\'t migrate you to something better',
+              'Dockwa doesn\'t manage your slip tenants',
+              'Dockwa doesn\'t track fuel inventory',
+              'Dockwa doesn\'t run your waitlist',
+              'Dockwa doesn\'t manage storage',
+              'Dockwa doesn\'t send lease contracts',
+              'Dockwa doesn\'t know your pedestal map',
+              'Dockwa doesn\'t track work orders',
+              'Dockwa doesn\'t brief you every morning',
+              'Dockwa doesn\'t learn your marina',
+              'Dockwa doesn\'t have Hot Slip™ for annual tenants',
+              'Dockwa doesn\'t give your tenants a marina expert',
+              'Dockwa doesn\'t migrate you to something better',
             ].map((item, i) => (
-              <div key={i} style={{ background:'rgba(255,80,80,0.04)', border:'1px solid rgba(255,80,80,0.1)', borderRadius:8, padding:'12px 16px', fontSize:13, color:'rgba(255,255,255,0.6)' }}>{item}</div>
+              <div key={i} style={{ background:'rgba(255,80,80,0.04)', border:'1px solid rgba(255,80,80,0.1)', borderRadius:8, padding:'12px 16px', fontSize:13, color:'rgba(255,255,255,0.6)', borderLeft:'2px solid rgba(255,80,80,0.4)' }}>{item}</div>
             ))}
           </div>
         </div>

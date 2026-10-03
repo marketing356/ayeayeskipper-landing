@@ -107,10 +107,9 @@ function JoinForm() {
 
         {submitted ? (
           <div style={{ background: 'rgba(77,214,200,0.08)', border: `2px solid ${TEAL}`, borderRadius: 16, padding: '64px 40px', textAlign: 'center' }}>
-            <div style={{ fontSize: 56, marginBottom: 20 }}>⚓</div>
             <h2 style={{ fontSize: 28, fontWeight: 900, letterSpacing: '-1px', margin: '0 0 12px', color: TEAL }}>We got it!</h2>
             <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.7)', margin: 0 }}>
-              Expect a call within 24 hours. ⚓
+              Expect a call within 24 hours.
             </p>
           </div>
         ) : (
@@ -161,10 +160,10 @@ function JoinForm() {
             {/* Plan hint */}
             {form.slips && (() => {
               const n = Number(form.slips)
-              const tierName = n <= 30 ? 'Mate — $299/mo' : n <= 99 ? 'Captain — $499/mo' : 'Admiral — $799/mo'
+              const tierName = n <= 29 ? 'Deckhand — $199/mo' : n <= 50 ? 'Mate — $299/mo' : n <= 150 ? 'Captain — $499/mo' : 'Admiral — $799/mo'
               return (
                 <div style={{ background: 'rgba(77,214,200,0.07)', border: '1px solid rgba(77,214,200,0.2)', borderRadius: 8, padding: '12px 16px', fontSize: 13, color: TEAL }}>
-                  ⚓ Suggested plan: <strong>{tierName}</strong> — first 30 days free.
+                  Suggested plan: <strong>{tierName}</strong> — first 30 days free.
                 </div>
               )
             })()}
@@ -235,7 +234,7 @@ function JoinForm() {
                 letterSpacing: '-0.3px',
               }}
             >
-              {loading ? 'Sending...' : 'Get Started with Skipper ⚓'}
+              {loading ? 'Sending...' : 'Get Started with Skipper'}
             </button>
 
             <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', textAlign: 'center', margin: 0 }}>

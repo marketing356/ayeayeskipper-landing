@@ -21,21 +21,21 @@ type Marina = {
   photos?: { id:string; url:string; caption:string|null; is_hero:boolean }[]
 }
 
-// [key, label, icon] — grouped into categories below for a scannable, icon-led amenity grid
-const AMENITY_META: Record<string, [string,string]> = {
-  fuel_dock: ['⛽','Fuel Dock'], dockage: ['⚓','Dockage'], water_hookup: ['💧','Water Hookup'],
-  water_taxi: ['🚤','Water Taxi'], dinghy_dock: ['🛶','Dinghy Dock'], wifi: ['📶','Wi-Fi'],
-  restrooms: ['🚹','Restrooms'], showers: ['🚿','Showers'], laundry: ['🧺','Laundry'],
-  trash: ['🗑️','Trash'], ice: ['🧊','Ice'], atm: ['🏦','ATM'],
-  swimming_pool: ['🏊','Swimming Pool'], groceries: ['🛒','Groceries'],
-  alcohol: ['🍺','Alcohol'], medical: ['⚕️','Medical Facility'], hotels: ['🏨','Hotels'],
-  restaurants: ['🍽️','Restaurants Nearby'], restaurant_on_property: ['🍽️','Restaurant On-Site'],
-  ship_store: ['🏪','Ship Store'], dog_park: ['🐕','Dog Park'], pet_friendly: ['🐾','Pet Friendly'],
-  dry_stack: ['🏗️','Dry Stack'], land_storage: ['🏗️','Land Storage'],
-  travel_lift: ['🏗️','Travel Lift'], repair_crane: ['🚧','Repair Crane'],
-  engine_service: ['🔧','Engine Service'], propeller_service: ['⚙️','Propeller Service'],
-  service_maintenance: ['🛠️','Service & Maintenance'], security: ['🔒','Security'],
-  pump_out: ['🚩','Pump-Out'], pharmacy: ['💊','Pharmacy'], beach: ['🏖️','Beach'], golf: ['⛳','Golf'],
+// Grouped into categories below for a scannable amenity grid (text-label only, no icons)
+const AMENITY_META: Record<string, string> = {
+  fuel_dock: 'Fuel Dock', dockage: 'Dockage', water_hookup: 'Water Hookup',
+  water_taxi: 'Water Taxi', dinghy_dock: 'Dinghy Dock', wifi: 'Wi-Fi',
+  restrooms: 'Restrooms', showers: 'Showers', laundry: 'Laundry',
+  trash: 'Trash', ice: 'Ice', atm: 'ATM',
+  swimming_pool: 'Swimming Pool', groceries: 'Groceries',
+  alcohol: 'Alcohol', medical: 'Medical Facility', hotels: 'Hotels',
+  restaurants: 'Restaurants Nearby', restaurant_on_property: 'Restaurant On-Site',
+  ship_store: 'Ship Store', dog_park: 'Dog Park', pet_friendly: 'Pet Friendly',
+  dry_stack: 'Dry Stack', land_storage: 'Land Storage',
+  travel_lift: 'Travel Lift', repair_crane: 'Repair Crane',
+  engine_service: 'Engine Service', propeller_service: 'Propeller Service',
+  service_maintenance: 'Service & Maintenance', security: 'Security',
+  pump_out: 'Pump-Out', pharmacy: 'Pharmacy', beach: 'Beach', golf: 'Golf',
 }
 
 const AMENITY_GROUPS: [string,string[]][] = [
@@ -47,10 +47,9 @@ const AMENITY_GROUPS: [string,string[]][] = [
   ['Nearby', ['groceries','alcohol','medical','hotels','restaurants','pharmacy','beach','golf']],
 ]
 
-function InfoStat({ label, value, icon }: { label:string; value:string; icon?:string }) {
+function InfoStat({ label, value }: { label:string; value:string }) {
   return (
-    <div style={{ background:'linear-gradient(160deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))', border:'1px solid rgba(255,255,255,0.1)', borderRadius:14, padding:'14px 16px', position:'relative', overflow:'hidden' }}>
-      {icon && <div style={{ position:'absolute', top:10, right:12, fontSize:22, opacity:0.25 }}>{icon}</div>}
+    <div style={{ background:'linear-gradient(160deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))', border:'1px solid rgba(255,255,255,0.1)', borderRadius:14, padding:'14px 16px', position:'relative', overflow:'hidden', borderTop:'2px solid #4dd6c8' }}>
       <div style={{ fontSize:10, color:MUTED, textTransform:'uppercase', letterSpacing:0.8, fontWeight:800, marginBottom:5 }}>{label}</div>
       <div style={{ fontSize:20, color:'#fff', fontWeight:900, letterSpacing:'-0.3px' }}>{value}</div>
     </div>
@@ -151,7 +150,6 @@ export default function MarinaDetailPage({ params }: { params: { slug: string } 
   if (!marina) return (
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
       <div style={{ textAlign:'center', padding:'120px 24px' }}>
-        <div style={{ fontSize:40, marginBottom:16 }}>⚓</div>
         <div style={{ fontSize:18, color:MUTED, marginBottom:24 }}>Marina not found.</div>
         <Link href="/marinas" style={{ color:TEAL, fontWeight:700 }}>← Back to directory</Link>
       </div>
@@ -179,18 +177,18 @@ export default function MarinaDetailPage({ params }: { params: { slug: string } 
         </div>
         <div style={{ position:'absolute', bottom:0, left:0, right:0, maxWidth:900, margin:'0 auto', padding:'0 24px 28px' }}>
           <div style={{ display:'flex', alignItems:'center', gap:10, flexWrap:'wrap', marginBottom:8 }}>
-            <span style={{ fontSize:11, fontWeight:800, color:'#0d2b4b', background:TEAL, borderRadius:999, padding:'4px 12px', letterSpacing:0.5 }}>⚓ SKIPPER MARINA</span>
+            <span style={{ fontSize:11, fontWeight:800, color:'#0d2b4b', background:TEAL, borderRadius:999, padding:'4px 12px', letterSpacing:0.5 }}>SKIPPER MARINA</span>
             {marina.transient_available ? (
-              <span style={{ fontSize:11, fontWeight:800, color:'#fff', background:'rgba(74,222,128,0.25)', border:'1px solid rgba(74,222,128,0.5)', borderRadius:999, padding:'4px 12px' }}>⛵ TRANSIENT WELCOME</span>
+              <span style={{ fontSize:11, fontWeight:800, color:'#fff', background:'rgba(74,222,128,0.25)', border:'1px solid rgba(74,222,128,0.5)', borderRadius:999, padding:'4px 12px' }}>TRANSIENT WELCOME</span>
             ) : (
               <span style={{ fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.7)', background:'rgba(255,255,255,0.08)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:999, padding:'4px 12px' }}>SEASONAL &amp; STORAGE</span>
             )}
           </div>
           <h1 style={{ fontSize:'clamp(28px,5vw,48px)', fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 8px', textShadow:'0 2px 20px rgba(0,0,0,0.5)' }}>{marina.name}</h1>
           <div style={{ display:'flex', gap:18, flexWrap:'wrap', fontSize:14, color:'rgba(255,255,255,0.85)' }}>
-            <span>📍 {marina.address ? `${marina.address}, ` : ''}{marina.city}, {marina.state}{marina.zip ? ` ${marina.zip}` : ''}</span>
-            {marina.phone && <span>📞 {marina.phone}</span>}
-            {marina.vhf_channel && <span>📻 VHF {marina.vhf_channel}</span>}
+            <span>{marina.address ? `${marina.address}, ` : ''}{marina.city}, {marina.state}{marina.zip ? ` ${marina.zip}` : ''}</span>
+            {marina.phone && <span>{marina.phone}</span>}
+            {marina.vhf_channel && <span>VHF {marina.vhf_channel}</span>}
           </div>
         </div>
       </div>
@@ -199,7 +197,7 @@ export default function MarinaDetailPage({ params }: { params: { slug: string } 
         {marina.website && (
           <a href={marina.website.startsWith('http') ? marina.website : `https://${marina.website}`} target="_blank" rel="noreferrer"
             style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:13, color:TEAL, fontWeight:700, textDecoration:'none', marginBottom:20 }}>
-            🌐 {marina.website} →
+            {marina.website} →
           </a>
         )}
 
@@ -223,16 +221,16 @@ export default function MarinaDetailPage({ params }: { params: { slug: string } 
         <div style={{ marginBottom:36 }}>
           <div style={{ fontSize:13, fontWeight:800, color:TEAL, textTransform:'uppercase', letterSpacing:1, marginBottom:14 }}>Berth Capacity</div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))', gap:12 }}>
-            <InfoStat icon="⚓" label="Slips" value={String(marina.total_slips ?? '—')} />
-            {marina.max_vessel_loa_ft != null && <InfoStat icon="🚤" label="Max Vessel LOA" value={`${marina.max_vessel_loa_ft} ft`} />}
-            {marina.max_draft_ft != null && <InfoStat icon="🌊" label="Max Draft" value={`${marina.max_draft_ft} ft`} />}
+            <InfoStat label="Slips" value={String(marina.total_slips ?? '—')} />
+            {marina.max_vessel_loa_ft != null && <InfoStat label="Max Vessel LOA" value={`${marina.max_vessel_loa_ft} ft`} />}
+            {marina.max_draft_ft != null && <InfoStat label="Max Draft" value={`${marina.max_draft_ft} ft`} />}
           </div>
         </div>
 
         {/* Approach */}
         {(marina.approach_notes || marina.min_approach_depth_ft != null || marina.min_channel_depth_ft != null || marina.mean_low_water_dock_depth_ft != null) && (
           <div style={{ marginBottom:36 }}>
-            <div style={{ fontSize:13, fontWeight:800, color:TEAL, textTransform:'uppercase', letterSpacing:1, marginBottom:14 }}>🧭 Approach</div>
+            <div style={{ fontSize:13, fontWeight:800, color:TEAL, textTransform:'uppercase', letterSpacing:1, marginBottom:14 }}>Approach</div>
             {marina.approach_notes && <p style={{ fontSize:14, color:MUTED, lineHeight:1.6, marginBottom:14, maxWidth:600 }}>{marina.approach_notes}</p>}
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))', gap:12 }}>
               {marina.min_approach_depth_ft != null && <InfoStat label="Min. Approach Depth" value={`${marina.min_approach_depth_ft} ft`} />}
@@ -259,12 +257,11 @@ export default function MarinaDetailPage({ params }: { params: { slug: string } 
                     <div style={{ fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:0.8, marginBottom:10 }}>{groupName}</div>
                     <div style={{ display:'flex', flexWrap:'wrap', gap:10 }}>
                       {active.map(key => {
-                        const [icon, label] = AMENITY_META[key]
+                        const label = AMENITY_META[key]
                         const v = amenities[key]
                         const extra = typeof v === 'string' ? v : null
                         return (
                           <div key={key} style={{ display:'flex', alignItems:'center', gap:8, background:'rgba(77,214,200,0.08)', border:'1px solid rgba(77,214,200,0.2)', borderRadius:999, padding:'8px 14px' }}>
-                            <span style={{ fontSize:16 }}>{icon}</span>
                             <span style={{ fontSize:13, color:'#fff', fontWeight:600 }}>{label}</span>
                             {extra && <span style={{ fontSize:11, color:TEAL, fontWeight:700 }}>({extra})</span>}
                           </div>
@@ -287,7 +284,6 @@ export default function MarinaDetailPage({ params }: { params: { slug: string } 
 
           {submitted ? (
             <div style={{ background:'rgba(77,214,200,0.08)', border:`2px solid ${TEAL}`, borderRadius:16, padding:'48px 32px', textAlign:'center' }}>
-              <div style={{ fontSize:48, marginBottom:16 }}>⚓</div>
               <h3 style={{ fontSize:22, fontWeight:900, color:TEAL, margin:'0 0 10px' }}>Request sent!</h3>
               <p style={{ fontSize:15, color:MUTED, margin:'0 0 24px', lineHeight:1.6 }}>
                 {marina.name} will review your request and respond shortly. Check your email for confirmation.
@@ -396,7 +392,7 @@ export default function MarinaDetailPage({ params }: { params: { slug: string } 
 
               <button type="submit" disabled={submitting}
                 style={{ padding:'14px', fontSize:16, fontWeight:800, color:NAVY, background: submitting ? 'rgba(77,214,200,0.5)' : TEAL, border:'none', borderRadius:12, cursor: submitting ? 'default':'pointer', fontFamily:FONT }}>
-                {submitting ? 'Sending…' : 'Send Request to Marina ⚓'}
+                {submitting ? 'Sending…' : 'Send Request to Marina'}
               </button>
               <p style={{ fontSize:12, color:MUTED, textAlign:'center', margin:0 }}>Free to submit. Marina will respond directly.</p>
             </form>
@@ -408,14 +404,14 @@ export default function MarinaDetailPage({ params }: { params: { slug: string } 
           <div style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:14, padding:20 }}>
             <div style={{ fontSize:12, fontWeight:700, color:TEAL, textTransform:'uppercase', letterSpacing:1, marginBottom:14 }}>How it works</div>
             {[
-              { icon:'📋', text:'Submit your request with dates and vessel specs' },
-              { icon:'⚡', text:'Marina gets notified instantly via Skipper' },
-              { icon:'✅', text:'They confirm availability and assign your slip' },
-              { icon:'⚓', text:'Arrive and enjoy — no paperwork on arrival' },
-            ].map((item, i) => (
+              'Submit your request with dates and vessel specs',
+              'Marina gets notified instantly via Skipper',
+              'They confirm availability and assign your slip',
+              'Arrive and enjoy — no paperwork on arrival',
+            ].map((text, i) => (
               <div key={i} style={{ display:'flex', gap:12, marginBottom:14, alignItems:'flex-start' }}>
-                <span style={{ fontSize:18, flexShrink:0 }}>{item.icon}</span>
-                <span style={{ fontSize:13, color:MUTED, lineHeight:1.5 }}>{item.text}</span>
+                <span style={{ fontSize:11, fontWeight:900, color:TEAL, flexShrink:0, width:16 }}>{i+1}.</span>
+                <span style={{ fontSize:13, color:MUTED, lineHeight:1.5 }}>{text}</span>
               </div>
             ))}
           </div>

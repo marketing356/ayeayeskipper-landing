@@ -40,7 +40,7 @@ export default function Landing() {
       const data = await res.json()
       setLastExchange({ user: message, reply: data.reply ?? '' })
     } catch {
-      setLastExchange({ user: message, reply: "Aye aye — I'm having a little trouble right now. Head to /join and we'll sort it out. ⚓" })
+      setLastExchange({ user: message, reply: "Aye aye — I'm having a little trouble right now. Head to /join and we'll sort it out." })
     } finally {
       setChatLoading(false)
       setTimeout(() => chatRef.current?.scrollTo({ top: 9999, behavior: 'smooth' }), 60)
@@ -71,13 +71,13 @@ export default function Landing() {
         </p>
         <div style={{ display:'flex', gap:20, flexWrap:'wrap', justifyContent:'center' }}>
           <button onClick={scrollToMarina} style={{ width:260, padding:'32px 24px', background:NAVY, border:`2px solid ${TEAL}`, borderRadius:16, color:'#fff', cursor:'pointer', fontFamily:FONT, textAlign:'center' }}>
-            <div style={{ fontSize:40, marginBottom:12 }}>⚓</div>
+            <div style={{ fontSize:11, color:TEAL, fontWeight:800, letterSpacing:'2px', marginBottom:14 }}>FOR MARINAS</div>
             <div style={{ fontWeight:900, fontSize:20, marginBottom:8 }}>I&apos;m a Marina</div>
             <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)', lineHeight:1.6, marginBottom:16 }}>Marina software with no transaction fees, no commissions, and an AI that actually runs your operation.</div>
             <div style={{ color:TEAL, fontWeight:700, fontSize:14 }}>See the platform →</div>
           </button>
           <button onClick={() => { if (typeof window !== 'undefined') sessionStorage.setItem('audience', 'boater'); router.push('/boaters') }} style={{ width:260, padding:'32px 24px', background:'rgba(77,214,200,0.06)', border:'2px solid rgba(77,214,200,0.3)', borderRadius:16, color:'#fff', cursor:'pointer', fontFamily:FONT, textAlign:'center' }}>
-            <div style={{ fontSize:40, marginBottom:12 }}>🛥️</div>
+            <div style={{ fontSize:11, color:TEAL, fontWeight:800, letterSpacing:'2px', marginBottom:14 }}>FOR BOATERS</div>
             <div style={{ fontWeight:900, fontSize:20, marginBottom:8 }}>I&apos;m a Boater</div>
             <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)', lineHeight:1.6, marginBottom:16 }}>Find marinas, book a slip, ask Skipper anything. Free for boaters, always.</div>
             <div style={{ color:TEAL, fontWeight:700, fontSize:14 }}>Find a marina →</div>
@@ -279,22 +279,21 @@ export default function Landing() {
           </div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(300px,1fr))', gap:20 }}>
             {[
-              ['⚓','Slip Management + Slip Logic™','Color-coded live map of every slip. Green = paid. Red = overdue. Yellow = expiring. Skipper flags problems before you spot them.'],
-              ['🗂️','Asset Logic™','Every slip, mooring, yard space, rack, and parking spot — one map, one database. Assign, vacate, transfer. Skipper handles it all.'],
-              ['🔥','Hot Slip™','Annual tenants mark their slip available when they\'re away. Transients book it. Tenant earns. Marina profits. Everyone wins.'],
-              ['💬','Just Talk to Skipper','No forms, no menus. Text or voice. "Who\'s overdue?" "Book Slip B12 for a 32-footer tonight." Skipper handles it.'],
-              ['🗺️','Live Marina Map','Your exact marina in 2D. Every slip, mooring ball, pedestal, safety station — labeled, color-coded, and always current.'],
-              ['⛽','Fuel Dock','Track tank levels, log every sale, set pump prices. Skipper alerts when it\'s time to reorder.'],
-              ['🏗️','Storage & Assets','Rack storage, trailers, PWCs — every asset tracked with location history. Launch calendar built in.'],
-              ['🛥️','Transient Bookings','Guest arrives, Skipper assigns a slip, calculates the charge, sends a receipt. Zero staff involvement.'],
-              ['📋','Contracts + E-Sign','Skipper sends the lease, tenant signs on their phone. Captured, timestamped, logged. No printer required.'],
-              ['📅','Wait List Intelligence','8 people waiting? When a slip opens, Skipper matches the best fit and notifies them automatically.'],
-              ['🔌','Skipper Gangway™','Already on Dockmaster, Dockwa, Marina Controller, or spreadsheets? Skipper Gangway™ migrates everything. Live same day.'],
-              ['📊','The Briefing Room','Every morning: who\'s arriving, who\'s departing, what\'s overdue, what the weather\'s doing. Skipper briefs you so you\'re never caught off guard.'],
-              ['👤','Tenant Portal','Your tenants get their own Skipper-powered app. View their lease, pay invoices, request maintenance, check their slip.'],
-            ].map(([icon, title, desc]) => (
-              <div key={title} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:12, padding:28 }}>
-                <div style={{ fontSize:32, marginBottom:14 }}>{icon}</div>
+              ['Slip Management + Slip Logic™','Color-coded live map of every slip. Green = paid. Red = overdue. Yellow = expiring. Skipper flags problems before you spot them.'],
+              ['Asset Logic™','Every slip, mooring, yard space, rack, and parking spot — one map, one database. Assign, vacate, transfer. Skipper handles it all.'],
+              ['Hot Slip™','Annual tenants mark their slip available when they\'re away. Transients book it. Tenant earns. Marina profits. Everyone wins.'],
+              ['Just Talk to Skipper','No forms, no menus. Text or voice. "Who\'s overdue?" "Book Slip B12 for a 32-footer tonight." Skipper handles it.'],
+              ['Live Marina Map','Your exact marina in 2D. Every slip, mooring ball, pedestal, safety station — labeled, color-coded, and always current.'],
+              ['Fuel Dock','Track tank levels, log every sale, set pump prices. Skipper alerts when it\'s time to reorder.'],
+              ['Storage & Assets','Rack storage, trailers, PWCs — every asset tracked with location history. Launch calendar built in.'],
+              ['Transient Bookings','Guest arrives, Skipper assigns a slip, calculates the charge, sends a receipt. Zero staff involvement.'],
+              ['Contracts + E-Sign','Skipper sends the lease, tenant signs on their phone. Captured, timestamped, logged. No printer required.'],
+              ['Wait List Intelligence','8 people waiting? When a slip opens, Skipper matches the best fit and notifies them automatically.'],
+              ['Skipper Gangway™','Already on Dockmaster, Dockwa, Marina Controller, or spreadsheets? Skipper Gangway™ migrates everything. Live same day.'],
+              ['The Briefing Room','Every morning: who\'s arriving, who\'s departing, what\'s overdue, what the weather\'s doing. Skipper briefs you so you\'re never caught off guard.'],
+              ['Tenant Portal','Your tenants get their own Skipper-powered app. View their lease, pay invoices, request maintenance, check their slip.'],
+            ].map(([title, desc]) => (
+              <div key={title} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:12, padding:28, borderTop:`2px solid ${TEAL}` }}>
                 <div style={{ fontWeight:800, fontSize:16, marginBottom:10, letterSpacing:'-0.3px' }}>{title}</div>
                 <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)', lineHeight:1.7 }}>{desc}</div>
               </div>
@@ -342,13 +341,12 @@ export default function Landing() {
           </div>
           <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
             {[
-              ['💳','You collect payments your way','Terminal, check, ACH, wire — Skipper logs whatever you record.'],
-              ['🏦','Money goes to your bank','We never hold, process, or touch marina funds. Period.'],
-              ['📊','Full payment tracking','Skipper knows who\'s paid, who\'s overdue, and who\'s about to expire.'],
-              ['🔌','Optional Stripe setup','No processor yet? We help you set up your own Stripe. Straight to your account.'],
-            ].map(([icon, title, desc]) => (
-              <div key={title} style={{ display:'flex', gap:14, padding:'16px', background:'rgba(255,255,255,0.04)', borderRadius:10, border:'1px solid rgba(255,255,255,0.07)' }}>
-                <span style={{ fontSize:22, flexShrink:0 }}>{icon}</span>
+              ['You collect payments your way','Terminal, check, ACH, wire — Skipper logs whatever you record.'],
+              ['Money goes to your bank','We never hold, process, or touch marina funds. Period.'],
+              ['Full payment tracking','Skipper knows who\'s paid, who\'s overdue, and who\'s about to expire.'],
+              ['Optional Stripe setup','No processor yet? We help you set up your own Stripe. Straight to your account.'],
+            ].map(([title, desc]) => (
+              <div key={title} style={{ display:'flex', gap:14, padding:'16px', background:'rgba(255,255,255,0.04)', borderRadius:10, border:'1px solid rgba(255,255,255,0.07)', borderLeft:`2px solid ${TEAL}` }}>
                 <div>
                   <div style={{ fontWeight:700, fontSize:14, marginBottom:3 }}>{title}</div>
                   <div style={{ fontSize:12, color:'rgba(255,255,255,0.5)' }}>{desc}</div>
@@ -368,7 +366,6 @@ export default function Landing() {
         </div>
         <div style={{ display:'flex', justifyContent:'center' }}>
           <a href="/join" style={{ background:'rgba(77,214,200,0.04)', border:`2px dashed rgba(77,214,200,0.25)`, borderRadius:14, padding:28, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textDecoration:'none', color:'#fff', textAlign:'center', minHeight:160, width:'100%', maxWidth:360 }}>
-            <div style={{ fontSize:32, marginBottom:12 }}>⚓</div>
             <div style={{ fontWeight:700, fontSize:16, color:TEAL, letterSpacing:'-0.3px' }}>Your marina could be first →</div>
             <div style={{ fontSize:13, color:'rgba(255,255,255,0.4)', marginTop:6 }}>Join as a founding partner</div>
           </a>
@@ -387,8 +384,7 @@ export default function Landing() {
         </div>
 
         {/* No-fee banner */}
-        <div style={{ background:`${TEAL}10`, border:`1px solid ${TEAL}25`, borderRadius:10, padding:'14px 22px', display:'flex', gap:14, alignItems:'center', marginBottom:32 }}>
-          <span style={{ fontSize:18 }}>⚓</span>
+        <div style={{ background:`${TEAL}10`, border:`1px solid ${TEAL}25`, borderRadius:10, padding:'14px 22px', display:'flex', gap:14, alignItems:'center', marginBottom:32, borderLeft:`3px solid ${TEAL}` }}>
           <div style={{ fontSize:14, color:'rgba(255,255,255,0.7)', lineHeight:1.5 }}>
             <strong style={{ color:TEAL }}>Zero transaction fees. Ever.</strong> Unlike Dockwa and others, we never take a cut of your bookings. Your transient revenue is 100% yours. First month free on every plan.
           </div>

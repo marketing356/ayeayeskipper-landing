@@ -25,17 +25,16 @@ export default function SkipperGangway() {
           <div style={{ fontSize:12, color:'rgba(255,255,255,0.4)', fontWeight:700, textTransform:'uppercase', letterSpacing:'1.5px', textAlign:'center', marginBottom:36 }}>Platforms we migrate from</div>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(160px,1fr))', gap:14 }}>
             {[
-              ['🔧','Dockmaster','Automated migration'],
-              ['🔧','Marina Controller','Automated migration'],
-              ['🔧','Dockwa','Full export import'],
-              ['🔧','Harbour Assist','Automated migration'],
-              ['🔧','Swell','Automated migration'],
-              ['📊','Excel / CSV','Skipper Engine™ column mapping'],
-              ['📄','Google Sheets','Skipper Engine™ column mapping'],
-              ['📁','Any format','Custom Gangway build'],
-            ].map(([icon, name, note]) => (
-              <div key={name as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:10, padding:'18px 16px', textAlign:'center' }}>
-                <div style={{ fontSize:24, marginBottom:8 }}>{icon}</div>
+              ['Dockmaster','Automated migration'],
+              ['Marina Controller','Automated migration'],
+              ['Dockwa','Full export import'],
+              ['Harbour Assist','Automated migration'],
+              ['Swell','Automated migration'],
+              ['Excel / CSV','Skipper Engine™ column mapping'],
+              ['Google Sheets','Skipper Engine™ column mapping'],
+              ['Any format','Custom Gangway build'],
+            ].map(([name, note]) => (
+              <div key={name as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:10, padding:'18px 16px', textAlign:'center', borderTop:`2px solid ${TEAL}` }}>
                 <div style={{ fontWeight:700, fontSize:14, marginBottom:4 }}>{name as string}</div>
                 <div style={{ fontSize:11, color:TEAL, fontWeight:600 }}>{note as string}</div>
               </div>
@@ -49,17 +48,16 @@ export default function SkipperGangway() {
         <h2 style={{ fontSize:32, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 36px' }}>What Skipper Gangway™ migrates</h2>
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:20, marginBottom:60 }}>
           {[
-            ['👤','Tenant records','Name, contact info, emergency contact, boat details, insurance, documents on file — all migrated exactly'],
-            ['⚓','Slip assignments','Who\'s in which slip, since when, at what rate — mapped to your actual marina layout'],
-            ['📋','Lease history','Historical and current leases, start/end dates, rate changes over time'],
-            ['💳','Payment history','What\'s been paid, what\'s outstanding, payment method preferences'],
-            ['🛥️','Boat specifications','Vessel names, LOA, beam, draft, type — matched to tenants automatically'],
-            ['📅','Reservation history','Transient booking records, recurring visitors, booking patterns'],
-            ['📊','Rate structures','Your rate tables — nightly, weekly, seasonal, slip-type-specific'],
-            ['📁','Documents','Signed contracts, insurance certs, photo IDs — attached to tenant records'],
-          ].map(([icon, title, desc]) => (
-            <div key={title as string} style={{ display:'flex', gap:14, padding:'18px', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)', borderRadius:10 }}>
-              <span style={{ fontSize:24, flexShrink:0 }}>{icon}</span>
+            ['Tenant records','Name, contact info, emergency contact, boat details, insurance, documents on file — all migrated exactly'],
+            ['Slip assignments','Who\'s in which slip, since when, at what rate — mapped to your actual marina layout'],
+            ['Lease history','Historical and current leases, start/end dates, rate changes over time'],
+            ['Payment history','What\'s been paid, what\'s outstanding, payment method preferences'],
+            ['Boat specifications','Vessel names, LOA, beam, draft, type — matched to tenants automatically'],
+            ['Reservation history','Transient booking records, recurring visitors, booking patterns'],
+            ['Rate structures','Your rate tables — nightly, weekly, seasonal, slip-type-specific'],
+            ['Documents','Signed contracts, insurance certs, photo IDs — attached to tenant records'],
+          ].map(([title, desc]) => (
+            <div key={title as string} style={{ display:'flex', gap:14, padding:'18px', background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.07)', borderRadius:10, borderLeft:`2px solid ${TEAL}` }}>
               <div>
                 <div style={{ fontWeight:700, fontSize:14, marginBottom:4 }}>{title as string}</div>
                 <div style={{ fontSize:12, color:'rgba(255,255,255,0.5)', lineHeight:1.65 }}>{desc as string}</div>

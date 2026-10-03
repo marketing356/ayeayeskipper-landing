@@ -13,7 +13,7 @@ export default function HotSlip() {
           <span style={{ fontSize:12, color:'rgba(255,180,60,1)', fontWeight:700, letterSpacing:'1px' }}>EXCLUSIVE — AYEAYESKIPPER ONLY</span>
         </div>
         <h1 style={{ fontSize:'clamp(40px,6vw,76px)', fontWeight:900, letterSpacing:'-3px', lineHeight:1.02, margin:'0 0 24px' }}>
-          🔥 Hot Slip™
+          Hot Slip™
         </h1>
         <p style={{ fontSize:22, color:'rgba(255,255,255,0.7)', margin:'0 0 16px', fontWeight:600 }}>Your annual tenants earn money when they're away.</p>
         <p style={{ fontSize:17, color:'rgba(255,255,255,0.5)', maxWidth:580, margin:'0 auto', lineHeight:1.65 }}>
@@ -138,9 +138,8 @@ export default function HotSlip() {
 
         {/* CTA */}
         <div style={{ textAlign:'center', background:'rgba(255,140,0,0.06)', border:'1px solid rgba(255,140,0,0.15)', borderRadius:16, padding:'60px 40px' }}>
-          <div style={{ fontSize:40, marginBottom:16 }}>🔥</div>
           <h2 style={{ fontSize:32, fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 14px' }}>Hot Slip™ is included on every plan.</h2>
-          <p style={{ fontSize:15, color:'rgba(255,255,255,0.5)', marginBottom:32, maxWidth:460, margin:'0 auto 32px' }}>Included in both plans — $299/mo (50 slips &amp; under) or $499/mo (50+ slips). First month free. See it live in your marina during the demo.</p>
+          <p style={{ fontSize:15, color:'rgba(255,255,255,0.5)', marginBottom:32, maxWidth:460, margin:'0 auto 32px' }}>Included on every plan — Deckhand, Mate, Captain, and Admiral. First month free. See it live in your marina during the demo.</p>
           <Link href="/join" style={{ display:'inline-block', padding:'18px 44px', background:TEAL, color:NAVY, borderRadius:8, fontSize:16, fontWeight:800, textDecoration:'none', fontFamily:FONT }}>See Hot Slip™ in Action</Link>
         </div>
       </div>

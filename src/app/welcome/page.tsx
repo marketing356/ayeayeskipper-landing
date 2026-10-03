@@ -15,7 +15,6 @@ export default function Welcome() {
   return (
     <div style={{ minHeight: '100vh', background: DARK, fontFamily: FONT, color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 20px' }}>
       <div style={{ textAlign: 'center', maxWidth: 600 }}>
-        <div style={{ fontSize: 72, marginBottom: 24 }}>⚓</div>
         <h1 style={{ fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 900, margin: '0 0 20px', color: TEAL }}>
           You&apos;re on Skipper.
         </h1>

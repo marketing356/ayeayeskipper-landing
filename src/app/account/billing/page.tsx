@@ -11,9 +11,9 @@ const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
-const TIER_LABELS: Record<string, string> = { mate: 'Mate', captain: 'Captain', admiral: 'Admiral' }
-const TIER_PRICES: Record<string, number>  = { mate: 299, captain: 499, admiral: 799 }
-const TIER_SLIPS:  Record<string, string>  = { mate: '≤30 slips', captain: '31–99 slips', admiral: '100+ slips' }
+const TIER_LABELS: Record<string, string> = { deckhand: 'Deckhand', mate: 'Mate', captain: 'Captain', admiral: 'Admiral' }
+const TIER_PRICES: Record<string, number>  = { deckhand: 199, mate: 299, captain: 499, admiral: 799 }
+const TIER_SLIPS:  Record<string, string>  = { deckhand: '≤29 slips', mate: '30–50 slips', captain: '51–150 slips', admiral: '151+ slips' }
 
 type BillingData = {
   marina: {
@@ -271,7 +271,7 @@ export default function BillingPage() {
 
             {/* All tiers */}
             <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column' as const, gap: 8 }}>
-              {(['mate', 'captain', 'admiral'] as const).map(t => (
+              {(['deckhand', 'mate', 'captain', 'admiral'] as const).map(t => (
                 <div key={t} style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   padding: '10px 14px', borderRadius: 8,
@@ -360,7 +360,7 @@ export default function BillingPage() {
                 background: 'rgba(77,214,200,0.06)', border: '1px solid rgba(77,214,200,0.2)',
                 borderRadius: 8, padding: '10px 14px', fontSize: 12, color: TEAL, fontWeight: 600,
               }}>
-                ✓ Card on file. You won't be charged until your trial ends.
+                Card on file. You won't be charged until your trial ends.
               </div>
             </div>
           ) : (
@@ -374,7 +374,7 @@ export default function BillingPage() {
                   marginBottom: 18, lineHeight: 1.6,
                 }}>
                   {trialUrgent
-                    ? `⚠️ Trial ends in ${daysLeft} day${daysLeft === 1 ? '' : 's'}. Add a card to keep access.`
+                    ? `Trial ends in ${daysLeft} day${daysLeft === 1 ? '' : 's'}. Add a card to keep access.`
                     : `Free trial — ${daysLeft} day${daysLeft === 1 ? '' : 's'} remaining. Add a card anytime.`
                   }
                 </div>

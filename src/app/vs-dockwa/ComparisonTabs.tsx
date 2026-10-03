@@ -164,7 +164,7 @@ export default function ComparisonTabs() {
           color: 'rgba(255,210,100,0.9)',
           fontStyle: 'italic',
         }}>
-          ℹ️ {competitor.note}
+          {competitor.note}
         </div>
       )}
 
@@ -173,7 +173,7 @@ export default function ComparisonTabs() {
         {/* Header */}
         <div style={{ display:'grid', gridTemplateColumns:'1.3fr 1fr 1fr' }}>
           <div style={{ background:'rgba(255,255,255,0.03)', padding:'14px 20px', fontSize:12, color:'rgba(255,255,255,0.3)', fontWeight:700, textTransform:'uppercase', letterSpacing:'1px' }}>Feature</div>
-          <div style={{ background:`${TEAL}18`, padding:'14px 20px', fontSize:12, color:TEAL, fontWeight:800, textTransform:'uppercase', letterSpacing:'1px', textAlign:'center', borderLeft:`1px solid ${TEAL}30` }}>⚓ AyeAyeSkipper</div>
+          <div style={{ background:`${TEAL}18`, padding:'14px 20px', fontSize:12, color:TEAL, fontWeight:800, textTransform:'uppercase', letterSpacing:'1px', textAlign:'center', borderLeft:`1px solid ${TEAL}30` }}>AyeAyeSkipper</div>
           <div style={{ background:'rgba(255,255,255,0.04)', padding:'14px 20px', fontSize:12, color:'rgba(255,255,255,0.4)', fontWeight:700, textTransform:'uppercase', letterSpacing:'1px', textAlign:'center', borderLeft:'1px solid rgba(255,255,255,0.06)' }}>{competitor.label}</div>
         </div>
 

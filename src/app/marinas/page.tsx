@@ -92,7 +92,6 @@ export default function MarinasPage() {
 
         {!loading && marinas.length === 0 && (
           <div style={{ textAlign: 'center', padding: '60px 0' }}>
-            <div style={{ fontSize: 40, marginBottom: 16 }}>⚓</div>
             <div style={{ fontSize: 16, color: MUTED }}>No marinas found{query ? ` for "${query}"` : ''}.</div>
             {query && (
               <button onClick={() => { setSearch(''); setQuery(''); fetchMarinas('') }}
@@ -119,7 +118,7 @@ export default function MarinasPage() {
                   <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(7,15,26,0.85) 100%)' }} />
                   <div style={{ position:'absolute', top:10, right:10 }}>
                     {m.transient_available ? (
-                      <span style={{ fontSize:10, fontWeight:800, color:'#0d2b4b', background:TEAL, borderRadius:999, padding:'4px 10px', letterSpacing:0.4 }}>⛵ TRANSIENT</span>
+                      <span style={{ fontSize:10, fontWeight:800, color:'#0d2b4b', background:TEAL, borderRadius:999, padding:'4px 10px', letterSpacing:0.4 }}>TRANSIENT</span>
                     ) : (
                       <span style={{ fontSize:10, fontWeight:700, color:'rgba(255,255,255,0.85)', background:'rgba(0,0,0,0.4)', backdropFilter:'blur(4px)', border:'1px solid rgba(255,255,255,0.2)', borderRadius:999, padding:'4px 10px' }}>SEASONAL</span>
                     )}
@@ -129,9 +128,9 @@ export default function MarinasPage() {
                   </div>
                 </div>
                 <div style={{ padding:'14px 16px 16px' }}>
-                  <div style={{ fontSize: 13, color: MUTED, marginBottom: 14, display:'flex', alignItems:'center', gap:5 }}>📍 {m.city}, {m.state}</div>
+                  <div style={{ fontSize: 13, color: MUTED, marginBottom: 14, display:'flex', alignItems:'center', gap:5 }}>{m.city}, {m.state}</div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: 12, color: MUTED, display:'flex', alignItems:'center', gap:5 }}>⚓ {m.total_slips} slips</span>
+                    <span style={{ fontSize: 12, color: MUTED, display:'flex', alignItems:'center', gap:5 }}>{m.total_slips} slips</span>
                     <span style={{ fontSize: 12, color: TEAL, fontWeight: 800 }}>View marina →</span>
                   </div>
                 </div>

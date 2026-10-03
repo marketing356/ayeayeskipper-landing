@@ -85,12 +85,11 @@ export default function About() {
           </p>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }}>
             {[
-              ['⚓','AyeAyeSkipper','Marina OS + Skipper Engine™'],
-              ['🚤','MarinerAndSailor.com','Charter booking platform'],
-              ['🛥️','RIBITBoats.com','Custom aluminum RIBs'],
-            ].map(([icon, name, desc]) => (
-              <div key={name as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:10, padding:'18px' }}>
-                <div style={{ fontSize:24, marginBottom:8 }}>{icon}</div>
+              ['AyeAyeSkipper','Marina OS + Skipper Engine™'],
+              ['MarinerAndSailor.com','Charter booking platform'],
+              ['RIBITBoats.com','Custom aluminum RIBs'],
+            ].map(([name, desc]) => (
+              <div key={name as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:10, padding:'18px', borderTop:`2px solid ${TEAL}` }}>
                 <div style={{ fontWeight:700, fontSize:14, marginBottom:4 }}>{name as string}</div>
                 <div style={{ fontSize:12, color:'rgba(255,255,255,0.45)' }}>{desc as string}</div>
               </div>

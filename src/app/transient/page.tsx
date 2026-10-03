@@ -15,9 +15,9 @@ const REGIONS = [
 ]
 
 const HOW_IT_WORKS = [
-  { icon: '🔍', step: 'Search partner marinas', desc: 'Browse AyeAyeSkipper-powered marinas in your destination. See live slip availability before you leave the dock.' },
-  { icon: '📱', step: 'Book through Skipper', desc: 'Reserve your slip in seconds. Skipper confirms instantly, sends dock instructions, and handles payment.' },
-  { icon: '⚓', step: 'Arrive and enjoy', desc: "Your slip is ready when you arrive. No paperwork, no waiting. Just tie up and explore." },
+  { step: 'Search partner marinas', desc: 'Browse AyeAyeSkipper-powered marinas in your destination. See live slip availability before you leave the dock.' },
+  { step: 'Book through Skipper', desc: 'Reserve your slip in seconds. Skipper confirms instantly, sends dock instructions, and handles payment.' },
+  { step: 'Arrive and enjoy', desc: "Your slip is ready when you arrive. No paperwork, no waiting. Just tie up and explore." },
 ]
 
 export default function TransientPage() {
@@ -112,7 +112,6 @@ export default function TransientPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 24 }}>
             {HOW_IT_WORKS.map((item, i) => (
               <div key={i} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: 28, textAlign: 'center' }}>
-                <div style={{ fontSize: 40, marginBottom: 16 }}>{item.icon}</div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 12 }}>
                   <span style={{ width: 24, height: 24, borderRadius: '50%', background: `rgba(77,214,200,0.15)`, border: `1px solid ${TEAL}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 900, color: TEAL, flexShrink: 0 }}>{i + 1}</span>
                   <div style={{ fontWeight: 800, fontSize: 16, letterSpacing: '-0.3px' }}>{item.step}</div>
@@ -133,10 +132,9 @@ export default function TransientPage() {
 
         {submitted ? (
           <div style={{ background: 'rgba(77,214,200,0.08)', border: `2px solid ${TEAL}`, borderRadius: 16, padding: '64px 40px', textAlign: 'center' }}>
-            <div style={{ fontSize: 56, marginBottom: 20 }}>⚓</div>
             <h2 style={{ fontSize: 28, fontWeight: 900, letterSpacing: '-1px', margin: '0 0 12px', color: TEAL }}>You're on the list!</h2>
             <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.7)', margin: 0 }}>
-              We'll notify you when slips open in your area. ⚓
+              We'll notify you when slips open in your area.
             </p>
           </div>
         ) : (
@@ -246,7 +244,7 @@ export default function TransientPage() {
                 letterSpacing: '-0.3px',
               }}
             >
-              {loading ? 'Joining...' : 'Join the Transient Network ⚓'}
+              {loading ? 'Joining...' : 'Join the Transient Network'}
             </button>
 
             <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', textAlign: 'center', margin: 0 }}>

@@ -8,11 +8,13 @@ const DARK = '#070f1a'
 const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
 
 const TIER_LABELS: Record<string, string> = {
+  deckhand: 'Deckhand',
   mate:    'Mate',
   captain: 'Captain',
   admiral: 'Admiral',
 }
 const TIER_PRICES: Record<string, number> = {
+  deckhand: 199,
   mate:    299,
   captain: 499,
   admiral: 799,
@@ -116,7 +118,7 @@ export default function MarinaAccountPage() {
           flexWrap: 'wrap' as const,
         }}>
           <span style={{ fontSize: 13, color: trialUrgent ? '#ff8080' : trialWarning ? '#ffcc44' : TEAL, fontWeight: 700 }}>
-            ⏱ {daysLeft === 0 ? 'Trial ends today' : `${daysLeft} day${daysLeft === 1 ? '' : 's'} left in your free trial`}
+            {daysLeft === 0 ? 'Trial ends today' : `${daysLeft} day${daysLeft === 1 ? '' : 's'} left in your free trial`}
           </span>
           {!account.hasPaymentMethod && (
             <a href="/account/billing" style={{
@@ -177,8 +179,7 @@ export default function MarinaAccountPage() {
             border: helmUrl ? '1px solid rgba(77,214,200,0.25)' : '1px solid rgba(255,255,255,0.07)',
             borderRadius: 14, padding: 24,
           }}>
-            <div style={{ fontSize: 28, marginBottom: 12 }}>⚓</div>
-            <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 6 }}>Your Helm</div>
+            <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 6, borderTop: `2px solid ${TEAL}`, paddingTop: 10, marginTop: -10 }}>Your Helm</div>
             {helmUrl ? (
               <>
                 <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', margin: '0 0 14px', lineHeight: 1.6 }}>
@@ -202,7 +203,6 @@ export default function MarinaAccountPage() {
             border: '1px solid rgba(255,255,255,0.07)',
             borderRadius: 14, padding: 24,
           }}>
-            <div style={{ fontSize: 28, marginBottom: 12 }}>💳</div>
             <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 6 }}>Subscription</div>
             <div style={{ marginBottom: 12 }}>
               {isTrialing ? (
@@ -248,7 +248,6 @@ export default function MarinaAccountPage() {
             border: '1px solid rgba(255,255,255,0.07)',
             borderRadius: 14, padding: 24,
           }}>
-            <div style={{ fontSize: 28, marginBottom: 12 }}>🗺️</div>
             <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 14 }}>Marina Info</div>
             {[
               ['Marina',  account.marinaName],
@@ -268,7 +267,7 @@ export default function MarinaAccountPage() {
         <div style={{ marginBottom: 40 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
             <h2 style={{ fontSize: 18, fontWeight: 800, margin: 0, letterSpacing: '-0.4px' }}>
-              ⚓ Skipper Marina Network
+              Skipper Marina Network
             </h2>
             <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
               {network.length} marina{network.length !== 1 ? 's' : ''}
