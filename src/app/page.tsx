@@ -246,7 +246,7 @@ export default function Landing() {
           <p style={{ fontSize:15, color:'rgba(255,255,255,0.45)', marginTop:16, marginBottom:0 }}>Full comparison vs Molo, Dockside, Dockwa &amp; more → <a href="/vs-dockwa" style={{ color:TEAL, textDecoration:'none', fontWeight:600 }}>See the full chart</a></p>
         </div>
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:3, borderRadius:16, overflow:'hidden' }}>
-          <div style={{ background:`${TEAL}15`, padding:'16px 24px', fontWeight:700, fontSize:13, color:TEAL, textTransform:'uppercase', letterSpacing:'1px', borderBottom:`1px solid ${TEAL}30` }}>⚓ AyeAyeSkipper</div>
+          <div style={{ background:`${TEAL}15`, padding:'16px 24px', fontWeight:700, fontSize:13, color:TEAL, textTransform:'uppercase', letterSpacing:'1px', borderBottom:`1px solid ${TEAL}30` }}>AyeAyeSkipper</div>
           <div style={{ background:'rgba(255,255,255,0.04)', padding:'16px 24px', fontWeight:700, fontSize:13, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'1px' }}>Molo, Dockside &amp; Others</div>
           {[
             ['Zero transaction fees. You keep 100%.','Platform takes a cut of every booking'],
