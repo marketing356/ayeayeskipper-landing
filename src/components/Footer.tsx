@@ -9,7 +9,6 @@ export default function Footer() {
         <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr 1fr', gap:48, marginBottom:48 }}>
           <div>
             <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:12 }}>
-              <span style={{ fontSize:20 }}>⚓</span>
               <span style={{ fontWeight:900, fontSize:17, color:'#fff' }}>AyeAyeSkipper</span>
             </div>
             <p style={{ fontSize:13, color:'rgba(255,255,255,0.4)', lineHeight:1.75, maxWidth:260 }}>
