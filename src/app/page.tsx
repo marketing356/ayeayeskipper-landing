@@ -362,27 +362,14 @@ export default function Landing() {
       {/* PARTNER MARINAS */}
       <div style={{ maxWidth:1100, margin:'0 auto', padding:'100px 40px' }}>
         <div style={{ textAlign:'center', marginBottom:56 }}>
-          <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:12 }}>MARINAS ON BOARD</div>
+          <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:12 }}>FOUNDING PARTNER PROGRAM</div>
           <h2 style={{ fontSize:42, fontWeight:900, letterSpacing:'-2px', margin:'0 0 14px' }}>Built with real marinas.<br/>Run by Skipper.</h2>
-          <p style={{ color:'rgba(255,255,255,0.45)', fontSize:15, maxWidth:500, margin:'0 auto' }}>Our founding partners helped shape every feature.</p>
+          <p style={{ color:'rgba(255,255,255,0.45)', fontSize:15, maxWidth:500, margin:'0 auto' }}>We're onboarding our first founding partners now — they help shape every feature before anyone else sees it.</p>
         </div>
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:20 }}>
-          <div style={{ background:'rgba(255,255,255,0.04)', border:`2px solid rgba(77,214,200,0.35)`, borderRadius:14, padding:28, position:'relative', overflow:'hidden' }}>
-            <div style={{ position:'absolute', top:0, left:0, right:0, height:3, background:`linear-gradient(90deg, ${TEAL}, rgba(77,214,200,0.3))` }} />
-            <div style={{ display:'inline-flex', alignItems:'center', gap:6, background:'rgba(77,214,200,0.12)', border:`1px solid rgba(77,214,200,0.3)`, borderRadius:20, padding:'3px 12px', marginBottom:16 }}>
-              <span style={{ width:6, height:6, borderRadius:'50%', background:TEAL, display:'inline-block' }}></span>
-              <span style={{ fontSize:11, color:TEAL, fontWeight:700, letterSpacing:'0.5px' }}>FOUNDING PARTNER</span>
-            </div>
-            <div style={{ fontWeight:900, fontSize:20, letterSpacing:'-0.5px', marginBottom:6 }}>Bayside Marina</div>
-            <div style={{ fontSize:13, color:'rgba(255,255,255,0.45)', marginBottom:16 }}>📍 Demo Bay, FL</div>
-            <div style={{ fontSize:13, color:'rgba(255,255,255,0.6)', display:'flex', gap:16 }}>
-              <span>43 slips</span>
-              <span style={{ color:TEAL }}>🔥 Hot Slip™ Active</span>
-            </div>
-          </div>
-          <a href="/join" style={{ background:'rgba(77,214,200,0.04)', border:`2px dashed rgba(77,214,200,0.25)`, borderRadius:14, padding:28, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textDecoration:'none', color:'#fff', textAlign:'center', minHeight:160 }}>
+        <div style={{ display:'flex', justifyContent:'center' }}>
+          <a href="/join" style={{ background:'rgba(77,214,200,0.04)', border:`2px dashed rgba(77,214,200,0.25)`, borderRadius:14, padding:28, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textDecoration:'none', color:'#fff', textAlign:'center', minHeight:160, width:'100%', maxWidth:360 }}>
             <div style={{ fontSize:32, marginBottom:12 }}>⚓</div>
-            <div style={{ fontWeight:700, fontSize:16, color:TEAL, letterSpacing:'-0.3px' }}>Your marina could be next →</div>
+            <div style={{ fontWeight:700, fontSize:16, color:TEAL, letterSpacing:'-0.3px' }}>Your marina could be first →</div>
             <div style={{ fontSize:13, color:'rgba(255,255,255,0.4)', marginTop:6 }}>Join as a founding partner</div>
           </a>
         </div>
@@ -392,10 +379,10 @@ export default function Landing() {
       <div id="pricing" style={{ maxWidth:860, margin:'0 auto', padding:'100px 40px' }}>
         <div style={{ textAlign:'center', marginBottom:56 }}>
           <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:12 }}>Simple, honest pricing</div>
-          <h2 style={{ fontSize:42, fontWeight:900, letterSpacing:'-2px', margin:'0 0 12px' }}>Dead simple. Two plans.</h2>
+          <h2 style={{ fontSize:42, fontWeight:900, letterSpacing:'-2px', margin:'0 0 12px' }}>Dead simple. Four plans.</h2>
           <p style={{ color:'rgba(255,255,255,0.45)', fontSize:15, maxWidth:480, margin:'0 auto' }}>
-            Flat rate. Everything included. Zero transaction fees. Zero booking commissions. Zero surprises.<br/>
-            Marinas switching from Molo and Dockside save thousands every year.
+            Flat rate by slip count. Everything included. Zero transaction fees. Zero booking commissions. Zero surprises.<br/>
+            Marinas switching from Molo, Dockside, and DockMaster save thousands every year.
           </p>
         </div>
 
@@ -403,69 +390,99 @@ export default function Landing() {
         <div style={{ background:`${TEAL}10`, border:`1px solid ${TEAL}25`, borderRadius:10, padding:'14px 22px', display:'flex', gap:14, alignItems:'center', marginBottom:32 }}>
           <span style={{ fontSize:18 }}>⚓</span>
           <div style={{ fontSize:14, color:'rgba(255,255,255,0.7)', lineHeight:1.5 }}>
-            <strong style={{ color:TEAL }}>Zero transaction fees. Ever.</strong> Unlike Dockwa and others, we never take a cut of your bookings. Your transient revenue is 100% yours. First month free on both plans.
+            <strong style={{ color:TEAL }}>Zero transaction fees. Ever.</strong> Unlike Dockwa and others, we never take a cut of your bookings. Your transient revenue is 100% yours. First month free on every plan.
           </div>
         </div>
 
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:20, marginBottom:28 }}>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))', gap:16, marginBottom:28 }}>
           {[
             {
-              label:'50 SLIPS & UNDER',
+              label:'DECKHAND',
+              sub:'UP TO 29 SLIPS',
+              price:'$199',
+              per:'/mo',
+              badge: null,
+              color:'rgba(255,255,255,0.04)',
+              border:'rgba(255,255,255,0.12)',
+              features:[
+                'Full Helm marina management dashboard',
+                'Slip Logic™ live marina map',
+                'Asset Logic™ — slips, moorings, storage, parking',
+                'Skipper app for every staff + slip holder',
+                'Contracts + e-sign',
+                'Billing + late-payment automation',
+                'Unlimited staff + tenant profiles',
+                'Full support included',
+              ]
+            },
+            {
+              label:'MATE',
+              sub:'30–50 SLIPS',
               price:'$299',
               per:'/mo',
               badge: null,
               color:'rgba(255,255,255,0.04)',
               border:'rgba(255,255,255,0.12)',
               features:[
-                'Every Skipper feature — nothing held back',
-                'Slip Logic™ live marina map',
+                'Everything in Deckhand',
                 'Hot Slip™ tenant revenue program',
-                'Asset Logic™ — slips, moorings, storage, parking',
-                'Skipper Gangway™ migration (same day)',
                 'Transient bookings — zero commission',
-                'Contracts + e-sign',
-                'Tenant portal (mobile, no app required)',
-                'The Briefing Room daily brief',
-                'Unlimited staff accounts',
-                'Unlimited tenant profiles',
-                'Full support included',
+                'Waitlist intelligence',
+                'Fuel dock module',
+                'Rack + trailer + PWC storage tracking',
               ]
             },
             {
-              label:'50+ SLIPS',
+              label:'CAPTAIN',
+              sub:'51–150 SLIPS',
               price:'$499',
               per:'/mo',
-              badge:'BEST FOR LARGER MARINAS',
+              badge:'MOST POPULAR',
               color:NAVY,
               border:TEAL,
               features:[
-                'Everything in the 50-slip plan',
-                'Unlimited slips — no cap',
-                'Multi-dock management',
-                'Fuel dock module',
-                'Rack + trailer + PWC storage tracking',
+                'Everything in Mate',
                 'SMS via Skipper (Twilio)',
                 'QuickBooks sync',
+                'Multi-dock management',
+                'Skipper Gangway™ migration (same day)',
+                'Configurable haul/launch billing',
+                'Free website, built + hosted, yours to keep',
+              ]
+            },
+            {
+              label:'ADMIRAL',
+              sub:'151+ SLIPS',
+              price:'$799',
+              per:'/mo',
+              badge:'ENTERPRISE',
+              color:'rgba(255,255,255,0.04)',
+              border:'rgba(255,255,255,0.12)',
+              features:[
+                'Everything in Captain',
+                'Unlimited slips — no cap',
+                'Skipper Portfolio — one login across every marina you own',
                 'Custom Skipper training on your data',
-                'Multi-marina dashboard (enterprise)',
                 'Priority onboarding specialist',
                 'White-label tenant portal',
                 'SLA + priority support',
+                'Dedicated account manager',
               ]
             }
           ].map(tier => (
-            <div key={tier.label} style={{ background:tier.color, border:`2px solid ${tier.border}`, borderRadius:14, padding:28, position:'relative', display:'flex', flexDirection:'column' }}>
+            <div key={tier.label} style={{ background:tier.color, border:`2px solid ${tier.border}`, borderRadius:14, padding:24, position:'relative', display:'flex', flexDirection:'column' }}>
               {tier.badge && (
-                <div style={{ position:'absolute', top:-14, left:'50%', transform:'translateX(-50%)', background:TEAL, color:NAVY, padding:'5px 18px', borderRadius:20, fontSize:11, fontWeight:800, whiteSpace:'nowrap', letterSpacing:'0.5px' }}>{tier.badge}</div>
+                <div style={{ position:'absolute', top:-14, left:'50%', transform:'translateX(-50%)', background:TEAL, color:NAVY, padding:'5px 16px', borderRadius:20, fontSize:10, fontWeight:800, whiteSpace:'nowrap', letterSpacing:'0.5px' }}>{tier.badge}</div>
               )}
-              <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'1.5px', marginBottom:10 }}>{tier.label}</div>
+              <div style={{ fontSize:15, color:TEAL, fontWeight:900, letterSpacing:'1px', marginBottom:2 }}>{tier.label}</div>
+              <div style={{ fontSize:11, color:'rgba(255,255,255,0.4)', fontWeight:700, letterSpacing:'1px', marginBottom:14 }}>{tier.sub}</div>
               <div style={{ display:'flex', alignItems:'baseline', gap:4, marginBottom:4 }}>
-                <span style={{ fontSize:52, fontWeight:900, letterSpacing:'-3px' }}>{tier.price}</span>
-                <span style={{ color:'rgba(255,255,255,0.4)', fontSize:15 }}>{tier.per}</span>
+                <span style={{ fontSize:40, fontWeight:900, letterSpacing:'-2px' }}>{tier.price}</span>
+                <span style={{ color:'rgba(255,255,255,0.4)', fontSize:14 }}>{tier.per}</span>
               </div>
-              <div style={{ fontSize:13, color:TEAL, fontWeight:600, marginBottom:4 }}>First month free</div>
-              <div style={{ fontSize:12, color:'rgba(255,255,255,0.35)', marginBottom:20 }}>No contracts · Cancel anytime</div>
-              <div style={{ borderTop:'1px solid rgba(255,255,255,0.1)', paddingTop:18, flex:1, marginBottom:24 }}>
+              <div style={{ fontSize:12, color:TEAL, fontWeight:600, marginBottom:4 }}>First month free</div>
+              <div style={{ fontSize:11, color:'rgba(255,255,255,0.35)', marginBottom:18 }}>No contracts · Cancel anytime</div>
+              <div style={{ borderTop:'1px solid rgba(255,255,255,0.1)', paddingTop:16, flex:1, marginBottom:20 }}>
                 {tier.features.map(f => (
                   <div key={f} style={{ display:'flex', gap:10, alignItems:'flex-start', marginBottom:10, fontSize:13, color:'rgba(255,255,255,0.8)' }}>
                     <span style={{ color:TEAL, flexShrink:0, marginTop:1 }}>✓</span>{f}
@@ -522,8 +539,25 @@ export default function Landing() {
         </div>
       </div>
 
+      {/* URGENCY CTA */}
+      <div style={{ maxWidth:1000, margin:'60px auto 0', padding:'0 40px' }}>
+        <div style={{ position:'relative', overflow:'hidden', borderRadius:20, padding:'64px 48px', textAlign:'center', background:'linear-gradient(135deg, #1a0d2e 0%, #0d2b4b 55%, #070f1a 100%)', border:'1px solid rgba(77,214,200,0.2)' }}>
+          <h2 style={{ fontSize:'clamp(28px,4vw,44px)', fontWeight:900, letterSpacing:'-2px', margin:'0 0 18px', lineHeight:1.1, color:'#fff' }}>
+            Every season you run it by hand is <span style={{ color:'#ffb347' }}>revenue you don't get back.</span>
+          </h2>
+          <p style={{ fontSize:16, color:'rgba(255,255,255,0.55)', maxWidth:560, margin:'0 auto 36px', lineHeight:1.7 }}>
+            Empty slips while a tenant's away. Invoices chased by hand. A dock crew calling the office for answers Skipper could give instantly. AyeAyeSkipper gives you back the one thing you can't buy more of — <strong style={{ color:'#fff' }}>your time</strong>.
+          </p>
+          <div style={{ display:'flex', gap:16, justifyContent:'center', flexWrap:'wrap' }}>
+            <button onClick={() => router.push('/join')} style={{ padding:'18px 40px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:16, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.2px' }}>Start Your Free Trial →</button>
+            <button onClick={() => router.push('/demo')} style={{ padding:'18px 40px', background:'transparent', color:'#fff', border:'1px solid rgba(255,255,255,0.25)', borderRadius:8, fontSize:16, fontWeight:600, cursor:'pointer', fontFamily:FONT }}>Book a Free Consultation</button>
+          </div>
+          <p style={{ marginTop:20, fontSize:12, color:'rgba(255,255,255,0.35)' }}>No credit card required. No contracts. See Skipper running your actual marina in days, not weeks.</p>
+        </div>
+      </div>
+
       {/* CTA */}
-      <div style={{ padding:'100px 40px', textAlign:'center' }}>
+      <div style={{ padding:'80px 40px 100px', textAlign:'center' }}>
         <div style={{ maxWidth:640, margin:'0 auto' }}>
           <h2 style={{ fontSize:48, fontWeight:900, letterSpacing:'-2.5px', margin:'0 0 20px', lineHeight:1.05 }}>Your marina.<br/><span style={{ color:TEAL }}>Your Skipper.</span></h2>
           <p style={{ fontSize:16, color:'rgba(255,255,255,0.55)', marginBottom:40, lineHeight:1.7 }}>We'll build your marina in 3D and have Skipper ready to run your operation by end of week. First month free. No commitment required.</p>
