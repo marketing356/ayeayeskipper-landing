@@ -17,6 +17,24 @@ function wmoLookup(code: number) {
   return WMO[code] ?? WMO[Math.floor(code/10)*10] ?? { desc: 'Mixed', icon: '🌡️' }
 }
 
+const STATE_ABBR: Record<string, string> = {
+  'alabama':'AL','alaska':'AK','arizona':'AZ','arkansas':'AR','california':'CA','colorado':'CO','connecticut':'CT',
+  'delaware':'DE','florida':'FL','georgia':'GA','hawaii':'HI','idaho':'ID','illinois':'IL','indiana':'IN','iowa':'IA',
+  'kansas':'KS','kentucky':'KY','louisiana':'LA','maine':'ME','maryland':'MD','massachusetts':'MA','michigan':'MI',
+  'minnesota':'MN','mississippi':'MS','missouri':'MO','montana':'MT','nebraska':'NE','nevada':'NV',
+  'new hampshire':'NH','new jersey':'NJ','new mexico':'NM','new york':'NY','north carolina':'NC','north dakota':'ND',
+  'ohio':'OH','oklahoma':'OK','oregon':'OR','pennsylvania':'PA','rhode island':'RI','south carolina':'SC',
+  'south dakota':'SD','tennessee':'TN','texas':'TX','utah':'UT','vermont':'VT','virginia':'VA','washington':'WA',
+  'west virginia':'WV','wisconsin':'WI','wyoming':'WY','district of columbia':'DC',
+}
+function stateToAbbr(raw: string): string {
+  if (!raw) return ''
+  const trimmed = raw.trim()
+  // Already a 2-letter code (e.g. geocoder gave us a code directly)
+  if (/^[A-Za-z]{2}$/.test(trimmed)) return trimmed.toUpperCase()
+  return STATE_ABBR[trimmed.toLowerCase()] || trimmed
+}
+
 async function fetchWeather(lat: number, lon: number): Promise<Wx | null> {
   try {
     const [wRes, gRes] = await Promise.all([
@@ -28,7 +46,7 @@ async function fetchWeather(lat: number, lon: number): Promise<Wx | null> {
     const cond = wmoLookup(cur.weathercode)
     const windDir = DIRS[Math.round((cur.winddirection_10m ?? 0) / 22.5) % 16]
     const city = gJson.address?.city || gJson.address?.town || gJson.address?.village || ''
-    const state = (gJson.address?.state_code || gJson.address?.state || '').slice(0,2).toUpperCase()
+    const state = stateToAbbr(gJson.address?.state_code || gJson.address?.state || '')
     const location = city && state ? `${city}, ${state}` : city || 'Your Location'
     return { icon: cond.icon, temp: Math.round(cur.temperature_2m), desc: cond.desc, wind: Math.round(cur.windspeed_10m), windDir, location, lat, lng: lon }
   } catch { return null }
