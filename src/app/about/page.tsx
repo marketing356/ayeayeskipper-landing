@@ -81,13 +81,12 @@ export default function About() {
             AyeAyeSkipper is a product of <strong style={{ color:'#fff' }}>Next-Gen Marine</strong>, a company built around the belief that the marine industry deserves modern technology. We're not a Silicon Valley startup parachuting into marina management. We come from the boating world — we know what a pile slip is, we know what "stand by on 16" means, and we know why the channel depth matters more than the font on the app.
           </p>
           <p style={{ fontSize:16, color:'rgba(255,255,255,0.6)', lineHeight:1.8, marginBottom:36 }}>
-            We operate under <strong style={{ color:'#fff' }}>Mariner and Sailor LLC</strong>, a marine-focused entity that also includes charter booking (MarinerAndSailor.com), dock manufacturing (ExpressDocks.com), and custom aluminum boat building (RIBITBoats.com). The marine industry is our industry. AyeAyeSkipper is our operating system for it.
+            We operate under <strong style={{ color:'#fff' }}>Mariner and Sailor LLC</strong>, a marine-focused entity that also includes charter booking (MarinerAndSailor.com) and dock manufacturing (ExpressDocks.com). The marine industry is our industry. AyeAyeSkipper is our operating system for it.
           </p>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:16 }}>
             {[
               ['AyeAyeSkipper','Marina OS + Skipper Engine™'],
               ['MarinerAndSailor.com','Charter booking platform'],
-              ['RIBITBoats.com','Custom aluminum RIBs'],
             ].map(([name, desc]) => (
               <div key={name as string} style={{ background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:10, padding:'18px', borderTop:`2px solid ${TEAL}` }}>
                 <div style={{ fontWeight:700, fontSize:14, marginBottom:4 }}>{name as string}</div>
