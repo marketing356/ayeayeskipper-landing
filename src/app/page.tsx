@@ -57,52 +57,86 @@ export default function Landing() {
   return (
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
 
-      {/* ══════════════════════════ HERO — MARINA-FIRST ══════════════════════════ */}
-      <div style={{ minHeight:'92vh', background:DARK, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'70px 40px 40px', textAlign:'center' }}>
+      {/* ══════════════════════════ HERO — MARINA-FIRST, ONE BIG IMAGE ══════════════════════════ */}
+      <div style={{ background:DARK, padding:'70px 40px 0', textAlign:'center' }}>
         <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:24, padding:'6px 16px', marginBottom:24 }}>
           <span style={{ width:7, height:7, borderRadius:'50%', background:TEAL, display:'inline-block' }}></span>
           <span style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'1px' }}>THE MARINA OS BUILT AROUND SKIPPER</span>
         </div>
-        <h1 style={{ fontSize:'clamp(34px,5.5vw,56px)', fontWeight:900, letterSpacing:'-2.5px', margin:'0 0 14px', lineHeight:1.05, color:'#fff', maxWidth:820 }}>
+        <h1 style={{ fontSize:'clamp(34px,5.5vw,56px)', fontWeight:900, letterSpacing:'-2.5px', margin:'0 0 14px', lineHeight:1.05, color:'#fff', maxWidth:820, marginLeft:'auto', marginRight:'auto' }}>
           We build your marina from <span style={{ color:TEAL }}>satellite to screen.</span>
         </h1>
-        <p style={{ fontSize:18, color:'rgba(255,255,255,0.55)', margin:'0 0 48px', maxWidth:560, lineHeight:1.6 }}>
-          Every slip, every dock, every boat — modeled from real satellite imagery into a live, operational marina map. See exactly how it happens below.
+        <p style={{ fontSize:18, color:'rgba(255,255,255,0.55)', margin:'0 auto 40px', maxWidth:560, lineHeight:1.6 }}>
+          Every slip, every dock, every boat — modeled from real satellite imagery into a live, operational marina map.
         </p>
 
-        {/* 4-STEP VISUAL PROOF SEQUENCE */}
-        <div style={{ width:'100%', maxWidth:1180, display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:16 }} className="proof-grid">
-          {[
-            { n:'01', label:'We find your marina', sub:'Satellite imagery, traced to the inch', img:'/collage/final-1-satellite.jpg' },
-            { n:'02', label:'We build it in 3D', sub:'Every dock, slip, and vessel modeled to scale', img:'/collage/final-2-3dmodel.jpg' },
-            { n:'03', label:'Your live Chart Room', sub:'Real-time 2D operational map — click any slip', img:'/collage/final-3-chartroom.jpg' },
-            { n:'04', label:'One database, every view', sub:'The map, the money, the tenants — always in sync', img:'/collage/final-4-dashboard.jpg' },
-          ].map(step => (
-            <div key={step.n} style={{ textAlign:'left' }}>
-              <div style={{ position:'relative', borderRadius:12, overflow:'hidden', border:'1px solid rgba(77,214,200,0.2)', aspectRatio:'4/3', background:'#0a1a2e' }}>
-                <img src={step.img} alt={step.label} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
-                <div style={{ position:'absolute', top:8, left:8, background:'rgba(13,43,75,0.85)', color:TEAL, fontSize:12, fontWeight:900, padding:'3px 9px', borderRadius:6, letterSpacing:'0.5px' }}>{step.n}</div>
-              </div>
-              <div style={{ fontWeight:800, fontSize:14, marginTop:10, color:'#fff', letterSpacing:'-0.2px' }}>{step.label}</div>
-              <div style={{ fontSize:12, color:'rgba(255,255,255,0.45)', marginTop:3, lineHeight:1.5 }}>{step.sub}</div>
-            </div>
-          ))}
+        {/* ONE BIG HERO IMAGE — the live Chart Room, full size, genuinely impressive */}
+        <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', borderRadius:16, overflow:'hidden', border:'1px solid rgba(77,214,200,0.25)', boxShadow:'0 30px 80px -20px rgba(0,0,0,0.6)' }}>
+          <img src="/collage/hero-chartroom.jpg" alt="Live AyeAyeSkipper Chart Room — real marina map" style={{ width:'100%', display:'block' }} />
+          <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(0deg, rgba(7,15,26,0.92) 0%, rgba(7,15,26,0) 100%)', padding:'50px 28px 18px', textAlign:'left' }}>
+            <div style={{ fontSize:13, color:TEAL, fontWeight:800, letterSpacing:'0.5px' }}>YOUR LIVE CHART ROOM</div>
+            <div style={{ fontSize:14, color:'rgba(255,255,255,0.65)', marginTop:4 }}>Real-time operational map. Click any slip. Every status, always current.</div>
+          </div>
         </div>
 
-        <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap', marginTop:44 }}>
+        <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap', marginTop:36 }}>
           <button onClick={() => router.push('/join')} style={{ padding:'17px 38px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>See Your Marina Built →</button>
           <button onClick={() => router.push('/demo')} style={{ padding:'17px 38px', background:'rgba(255,255,255,0.06)', color:'#fff', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, fontSize:15, fontWeight:600, cursor:'pointer', fontFamily:FONT }}>Explore a Live Demo</button>
         </div>
         <p style={{ marginTop:18, fontSize:12, color:'rgba(255,255,255,0.3)' }}>No contracts. No setup fees. We build your marina map at no cost, before you pay a cent.</p>
 
         {/* Boater link — small, demoted, not a competing path */}
-        <button onClick={() => { if (typeof window !== 'undefined') sessionStorage.setItem('audience', 'boater'); router.push('/boaters') }} style={{ marginTop:40, background:'none', border:'none', color:'rgba(255,255,255,0.3)', fontSize:12, cursor:'pointer', fontFamily:FONT, textDecoration:'underline', textUnderlineOffset:3 }}>
+        <button onClick={() => { if (typeof window !== 'undefined') sessionStorage.setItem('audience', 'boater'); router.push('/boaters') }} style={{ marginTop:28, marginBottom:0, background:'none', border:'none', color:'rgba(255,255,255,0.3)', fontSize:12, cursor:'pointer', fontFamily:FONT, textDecoration:'underline', textUnderlineOffset:3 }}>
           Looking for a slip instead? Boater info →
         </button>
       </div>
+
+      {/* ══════════════════════════ HOW WE BUILD IT — 3-STEP STRIP ══════════════════════════ */}
+      <div style={{ padding:'90px 40px', background:DARK }}>
+        <div style={{ maxWidth:1100, margin:'0 auto' }}>
+          <div style={{ textAlign:'center', marginBottom:48 }}>
+            <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:12 }}>From real satellite imagery to a live map</div>
+            <h2 style={{ fontSize:'clamp(28px,4vw,40px)', fontWeight:900, letterSpacing:'-1.5px', margin:0, color:'#fff' }}>See exactly how we build it.</h2>
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:24 }} className="proof-grid">
+            {[
+              { n:'01', label:'We find your marina', sub:'Real satellite imagery, every dock traced to the inch', img:'/collage/final-1-satellite.jpg' },
+              { n:'02', label:'We build it to scale', sub:'Every slip, dock, and vessel modeled in 3D', img:'/collage/final-2-3dmodel.jpg' },
+              { n:'03', label:'Your live Chart Room', sub:'Real-time operational map — click any slip', img:'/collage/final-3-chartroom.jpg' },
+            ].map(step => (
+              <div key={step.n} style={{ textAlign:'left' }}>
+                <div style={{ position:'relative', borderRadius:14, overflow:'hidden', border:'1px solid rgba(77,214,200,0.2)', aspectRatio:'4/3', background:'#0a1a2e' }}>
+                  <img src={step.img} alt={step.label} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+                  <div style={{ position:'absolute', top:10, left:10, background:'rgba(13,43,75,0.9)', color:TEAL, fontSize:13, fontWeight:900, padding:'4px 11px', borderRadius:7, letterSpacing:'0.5px' }}>{step.n}</div>
+                </div>
+                <div style={{ fontWeight:800, fontSize:17, marginTop:14, color:'#fff', letterSpacing:'-0.3px' }}>{step.label}</div>
+                <div style={{ fontSize:13, color:'rgba(255,255,255,0.5)', marginTop:4, lineHeight:1.55 }}>{step.sub}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ══════════════════════════ ONE DATABASE SECTION — dashboard gets its own room ══════════════════════════ */}
+      <div style={{ background:'rgba(255,255,255,0.02)', borderTop:'1px solid rgba(255,255,255,0.07)', borderBottom:'1px solid rgba(255,255,255,0.07)', padding:'90px 40px' }}>
+        <div style={{ maxWidth:1100, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1fr', gap:56, alignItems:'center' }} className="db-split">
+          <div style={{ textAlign:'left' }}>
+            <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:14 }}>One database, every view</div>
+            <h2 style={{ fontSize:'clamp(28px,4vw,38px)', fontWeight:900, letterSpacing:'-1.5px', margin:'0 0 18px', color:'#fff', lineHeight:1.1 }}>The map, the money, the tenants — always in sync.</h2>
+            <p style={{ fontSize:15, color:'rgba(255,255,255,0.6)', lineHeight:1.75 }}>
+              Every slip on your Chart Room map is wired straight to the same database that runs your billing, your occupancy, your overdue accounts. Move a boat on the map, and the Helm dashboard updates instantly. No double entry, no syncing, no spreadsheets fighting your map.
+            </p>
+          </div>
+          <div style={{ borderRadius:14, overflow:'hidden', border:'1px solid rgba(77,214,200,0.2)', boxShadow:'0 20px 50px -15px rgba(0,0,0,0.5)' }}>
+            <img src="/collage/final-4-dashboard.jpg" alt="The Helm — live occupancy and financials dashboard" style={{ width:'100%', display:'block' }} />
+          </div>
+        </div>
+      </div>
+
       <style>{`
         @media (max-width: 860px) {
-          .proof-grid { grid-template-columns: repeat(2,1fr) !important; }
+          .proof-grid { grid-template-columns: 1fr !important; }
+          .db-split { grid-template-columns: 1fr !important; }
         }
       `}</style>
       <style>{`
