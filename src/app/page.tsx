@@ -70,47 +70,47 @@ export default function Landing() {
           Every slip, every dock, every boat — modeled from real satellite imagery into a live, operational marina map.
         </p>
 
-        {/* ONE BIG HERO IMAGE — the live Chart Room, full size, genuinely impressive */}
-        <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', borderRadius:16, overflow:'hidden', border:'1px solid rgba(77,214,200,0.25)', boxShadow:'0 30px 80px -20px rgba(0,0,0,0.6)' }}>
+        {/* ONE BIG HERO IMAGE — sized to flow directly into the 3-step row below, same visual weight class */}
+        <div style={{ maxWidth:860, margin:'0 auto', position:'relative', borderRadius:16, overflow:'hidden', border:'1px solid rgba(77,214,200,0.25)', boxShadow:'0 24px 60px -18px rgba(0,0,0,0.55)' }}>
           <img src="/collage/hero-chartroom.jpg" alt="Live AyeAyeSkipper Chart Room — real marina map" style={{ width:'100%', display:'block' }} />
-          <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(0deg, rgba(7,15,26,0.92) 0%, rgba(7,15,26,0) 100%)', padding:'50px 28px 18px', textAlign:'left' }}>
-            <div style={{ fontSize:13, color:TEAL, fontWeight:800, letterSpacing:'0.5px' }}>YOUR LIVE CHART ROOM</div>
-            <div style={{ fontSize:14, color:'rgba(255,255,255,0.65)', marginTop:4 }}>Real-time operational map. Click any slip. Every status, always current.</div>
+          <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(0deg, rgba(7,15,26,0.92) 0%, rgba(7,15,26,0) 100%)', padding:'40px 24px 16px', textAlign:'left' }}>
+            <div style={{ fontSize:12, color:TEAL, fontWeight:800, letterSpacing:'0.5px' }}>YOUR LIVE CHART ROOM</div>
+            <div style={{ fontSize:13, color:'rgba(255,255,255,0.65)', marginTop:3 }}>Real-time operational map. Click any slip. Every status, always current.</div>
           </div>
         </div>
 
-        <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap', marginTop:36 }}>
+        <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap', marginTop:32 }}>
           <button onClick={() => router.push('/join')} style={{ padding:'17px 38px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>See Your Marina Built →</button>
           <button onClick={() => router.push('/demo')} style={{ padding:'17px 38px', background:'rgba(255,255,255,0.06)', color:'#fff', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, fontSize:15, fontWeight:600, cursor:'pointer', fontFamily:FONT }}>Explore a Live Demo</button>
         </div>
-        <p style={{ marginTop:18, fontSize:12, color:'rgba(255,255,255,0.3)' }}>No contracts. No setup fees. We build your marina map at no cost, before you pay a cent.</p>
+        <p style={{ marginTop:16, fontSize:12, color:'rgba(255,255,255,0.3)' }}>No contracts. No setup fees. We build your marina map at no cost, before you pay a cent.</p>
 
         {/* Boater link — small, demoted, not a competing path */}
-        <button onClick={() => { if (typeof window !== 'undefined') sessionStorage.setItem('audience', 'boater'); router.push('/boaters') }} style={{ marginTop:28, marginBottom:0, background:'none', border:'none', color:'rgba(255,255,255,0.3)', fontSize:12, cursor:'pointer', fontFamily:FONT, textDecoration:'underline', textUnderlineOffset:3 }}>
+        <button onClick={() => { if (typeof window !== 'undefined') sessionStorage.setItem('audience', 'boater'); router.push('/boaters') }} style={{ marginTop:24, marginBottom:0, background:'none', border:'none', color:'rgba(255,255,255,0.3)', fontSize:12, cursor:'pointer', fontFamily:FONT, textDecoration:'underline', textUnderlineOffset:3 }}>
           Looking for a slip instead? Boater info →
         </button>
       </div>
 
-      {/* ══════════════════════════ HOW WE BUILD IT — 3-STEP STRIP ══════════════════════════ */}
-      <div style={{ padding:'90px 40px', background:DARK }}>
-        <div style={{ maxWidth:1100, margin:'0 auto' }}>
+      {/* ══════════════════════════ HOW WE BUILD IT — 3-STEP STRIP, same scale class as hero ══════════════════════════ */}
+      <div style={{ padding:'70px 40px 100px', background:DARK }}>
+        <div style={{ maxWidth:1180, margin:'0 auto' }}>
           <div style={{ textAlign:'center', marginBottom:48 }}>
             <div style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'2px', textTransform:'uppercase', marginBottom:12 }}>From real satellite imagery to a live map</div>
             <h2 style={{ fontSize:'clamp(28px,4vw,40px)', fontWeight:900, letterSpacing:'-1.5px', margin:0, color:'#fff' }}>See exactly how we build it.</h2>
           </div>
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:24 }} className="proof-grid">
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:28 }} className="proof-grid">
             {[
               { n:'01', label:'We find your marina', sub:'Real satellite imagery, every dock traced to the inch', img:'/collage/final-1-satellite.jpg' },
               { n:'02', label:'We build it to scale', sub:'Every slip, dock, and vessel modeled in 3D', img:'/collage/final-2-3dmodel.jpg' },
               { n:'03', label:'Your live Chart Room', sub:'Real-time operational map — click any slip', img:'/collage/final-3-chartroom.jpg' },
             ].map(step => (
               <div key={step.n} style={{ textAlign:'left' }}>
-                <div style={{ position:'relative', borderRadius:14, overflow:'hidden', border:'1px solid rgba(77,214,200,0.2)', aspectRatio:'4/3', background:'#0a1a2e' }}>
+                <div style={{ position:'relative', borderRadius:14, overflow:'hidden', border:'1px solid rgba(77,214,200,0.25)', aspectRatio:'4/3', background:'#0a1a2e', boxShadow:'0 18px 40px -16px rgba(0,0,0,0.5)' }}>
                   <img src={step.img} alt={step.label} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
-                  <div style={{ position:'absolute', top:10, left:10, background:'rgba(13,43,75,0.9)', color:TEAL, fontSize:13, fontWeight:900, padding:'4px 11px', borderRadius:7, letterSpacing:'0.5px' }}>{step.n}</div>
+                  <div style={{ position:'absolute', top:12, left:12, background:'rgba(13,43,75,0.9)', color:TEAL, fontSize:13, fontWeight:900, padding:'5px 12px', borderRadius:7, letterSpacing:'0.5px' }}>{step.n}</div>
                 </div>
-                <div style={{ fontWeight:800, fontSize:17, marginTop:14, color:'#fff', letterSpacing:'-0.3px' }}>{step.label}</div>
-                <div style={{ fontSize:13, color:'rgba(255,255,255,0.5)', marginTop:4, lineHeight:1.55 }}>{step.sub}</div>
+                <div style={{ fontWeight:800, fontSize:18, marginTop:16, color:'#fff', letterSpacing:'-0.3px' }}>{step.label}</div>
+                <div style={{ fontSize:13.5, color:'rgba(255,255,255,0.5)', marginTop:5, lineHeight:1.55 }}>{step.sub}</div>
               </div>
             ))}
           </div>
