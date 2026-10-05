@@ -58,37 +58,37 @@ export default function Landing() {
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
 
       {/* ══════════════════════════ HERO — MARINA-FIRST, COMPACT, CTAS ABOVE THE FOLD ══════════════════════════ */}
-      <div style={{ background:DARK, padding:'48px 40px 0', textAlign:'center' }}>
-        <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:24, padding:'5px 14px', marginBottom:18 }}>
+      <div style={{ background:DARK, padding:'36px 40px 0', textAlign:'center' }}>
+        <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:24, padding:'5px 14px', marginBottom:14 }}>
           <span style={{ width:7, height:7, borderRadius:'50%', background:TEAL, display:'inline-block' }}></span>
           <span style={{ fontSize:11, color:TEAL, fontWeight:700, letterSpacing:'1px' }}>THE MARINA OS BUILT AROUND SKIPPER</span>
         </div>
-        <h1 style={{ fontSize:'clamp(28px,4.2vw,42px)', fontWeight:900, letterSpacing:'-2px', margin:'0 0 10px', lineHeight:1.08, color:'#fff', maxWidth:720, marginLeft:'auto', marginRight:'auto' }}>
+        <h1 style={{ fontSize:'clamp(26px,4vw,38px)', fontWeight:900, letterSpacing:'-2px', margin:'0 0 8px', lineHeight:1.08, color:'#fff', maxWidth:680, marginLeft:'auto', marginRight:'auto' }}>
           We build your marina from <span style={{ color:TEAL }}>satellite to screen.</span>
         </h1>
-        <p style={{ fontSize:15, color:'rgba(255,255,255,0.55)', margin:'0 auto 26px', maxWidth:480, lineHeight:1.55 }}>
+        <p style={{ fontSize:14, color:'rgba(255,255,255,0.55)', margin:'0 auto 20px', maxWidth:460, lineHeight:1.5 }}>
           Every slip, every dock, every boat — modeled from real satellite imagery into a live, operational marina map.
         </p>
 
         {/* CTAs FIRST — above the fold, not buried under the image */}
-        <div style={{ display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap', marginBottom:28 }}>
-          <button onClick={() => router.push('/join')} style={{ padding:'14px 32px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:14, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>See Your Marina Built →</button>
-          <button onClick={() => router.push('/demo')} style={{ padding:'14px 32px', background:'rgba(255,255,255,0.06)', color:'#fff', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, fontSize:14, fontWeight:600, cursor:'pointer', fontFamily:FONT }}>Explore a Live Demo</button>
+        <div style={{ display:'flex', gap:12, justifyContent:'center', flexWrap:'wrap', marginBottom:22 }}>
+          <button onClick={() => router.push('/join')} style={{ padding:'13px 30px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:14, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>See Your Marina Built →</button>
+          <button onClick={() => router.push('/demo')} style={{ padding:'13px 30px', background:'rgba(77,214,200,0.08)', color:TEAL, border:'1px solid rgba(77,214,200,0.35)', borderRadius:8, fontSize:14, fontWeight:700, cursor:'pointer', fontFamily:FONT }}>Explore a Live Demo</button>
         </div>
 
         {/* HERO IMAGE — compact, same visual weight class as the 3-step row below */}
-        <div style={{ maxWidth:640, margin:'0 auto', position:'relative', borderRadius:14, overflow:'hidden', border:'1px solid rgba(77,214,200,0.25)', boxShadow:'0 20px 50px -16px rgba(0,0,0,0.5)' }}>
+        <div style={{ maxWidth:520, margin:'0 auto', position:'relative', borderRadius:14, overflow:'hidden', border:'1px solid rgba(77,214,200,0.25)', boxShadow:'0 20px 50px -16px rgba(0,0,0,0.5)' }}>
           <img src="/collage/hero-chartroom.jpg" alt="Live AyeAyeSkipper Chart Room — real marina map" style={{ width:'100%', display:'block' }} />
-          <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(0deg, rgba(7,15,26,0.92) 0%, rgba(7,15,26,0) 100%)', padding:'32px 20px 14px', textAlign:'left' }}>
-            <div style={{ fontSize:11, color:TEAL, fontWeight:800, letterSpacing:'0.5px' }}>YOUR LIVE CHART ROOM</div>
-            <div style={{ fontSize:12, color:'rgba(255,255,255,0.65)', marginTop:2 }}>Real-time operational map. Click any slip. Every status, always current.</div>
+          <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(0deg, rgba(7,15,26,0.92) 0%, rgba(7,15,26,0) 100%)', padding:'26px 18px 12px', textAlign:'left' }}>
+            <div style={{ fontSize:10.5, color:TEAL, fontWeight:800, letterSpacing:'0.5px' }}>YOUR LIVE CHART ROOM</div>
+            <div style={{ fontSize:11.5, color:'rgba(255,255,255,0.65)', marginTop:2 }}>Real-time operational map. Click any slip. Every status, always current.</div>
           </div>
         </div>
 
-        <p style={{ marginTop:14, fontSize:11.5, color:'rgba(255,255,255,0.3)' }}>No contracts. No setup fees. We build your marina map at no cost, before you pay a cent.</p>
+        <p style={{ marginTop:12, fontSize:11, color:'rgba(255,255,255,0.3)' }}>No contracts. No setup fees. We build your marina map at no cost, before you pay a cent.</p>
 
         {/* Boater link — small, demoted, not a competing path */}
-        <button onClick={() => { if (typeof window !== 'undefined') sessionStorage.setItem('audience', 'boater'); router.push('/boaters') }} style={{ marginTop:18, marginBottom:0, background:'none', border:'none', color:'rgba(255,255,255,0.3)', fontSize:11.5, cursor:'pointer', fontFamily:FONT, textDecoration:'underline', textUnderlineOffset:3 }}>
+        <button onClick={() => { if (typeof window !== 'undefined') sessionStorage.setItem('audience', 'boater'); router.push('/boaters') }} style={{ marginTop:14, marginBottom:0, background:'none', border:'none', color:'rgba(255,255,255,0.3)', fontSize:11, cursor:'pointer', fontFamily:FONT, textDecoration:'underline', textUnderlineOffset:3 }}>
           Looking for a slip instead? Boater info →
         </button>
       </div>
