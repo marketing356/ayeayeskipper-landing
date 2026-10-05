@@ -57,34 +57,54 @@ export default function Landing() {
   return (
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
 
-      {/* ══════════════════════════ AUDIENCE FORK ══════════════════════════ */}
-      <div style={{ minHeight:'100vh', background:DARK, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'60px 40px', textAlign:'center' }}>
+      {/* ══════════════════════════ HERO — MARINA-FIRST ══════════════════════════ */}
+      <div style={{ minHeight:'92vh', background:DARK, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'70px 40px 40px', textAlign:'center' }}>
         <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:24, padding:'6px 16px', marginBottom:24 }}>
           <span style={{ width:7, height:7, borderRadius:'50%', background:TEAL, display:'inline-block' }}></span>
-          <span style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'1px' }}>AYEAYESKIPPER</span>
+          <span style={{ fontSize:12, color:TEAL, fontWeight:700, letterSpacing:'1px' }}>THE MARINA OS BUILT AROUND SKIPPER</span>
         </div>
-        <h1 style={{ fontSize:'clamp(32px,5vw,52px)', fontWeight:900, letterSpacing:'-2px', margin:'0 0 12px', lineHeight:1.05, color:'#fff' }}>
-          Welcome aboard.
+        <h1 style={{ fontSize:'clamp(34px,5.5vw,56px)', fontWeight:900, letterSpacing:'-2.5px', margin:'0 0 14px', lineHeight:1.05, color:'#fff', maxWidth:820 }}>
+          We build your marina from <span style={{ color:TEAL }}>satellite to screen.</span>
         </h1>
-        <p style={{ fontSize:17, color:'rgba(255,255,255,0.5)', margin:'0 0 52px', maxWidth:420, lineHeight:1.65 }}>
-          Skipper runs marinas. Skipper helps boaters. Where do you belong?
+        <p style={{ fontSize:18, color:'rgba(255,255,255,0.55)', margin:'0 0 48px', maxWidth:560, lineHeight:1.6 }}>
+          Every slip, every dock, every boat — modeled from real satellite imagery into a live, operational marina map. See exactly how it happens below.
         </p>
-        <div style={{ display:'flex', gap:20, flexWrap:'wrap', justifyContent:'center' }}>
-          <button onClick={scrollToMarina} style={{ width:260, padding:'32px 24px', background:NAVY, border:`2px solid ${TEAL}`, borderRadius:16, color:'#fff', cursor:'pointer', fontFamily:FONT, textAlign:'center' }}>
-            <div style={{ fontSize:11, color:TEAL, fontWeight:800, letterSpacing:'2px', marginBottom:14 }}>FOR MARINAS</div>
-            <div style={{ fontWeight:900, fontSize:20, marginBottom:8 }}>I&apos;m a Marina</div>
-            <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)', lineHeight:1.6, marginBottom:16 }}>Marina software with no transaction fees, no commissions, and an AI that actually runs your operation.</div>
-            <div style={{ color:TEAL, fontWeight:700, fontSize:14 }}>See the platform →</div>
-          </button>
-          <button onClick={() => { if (typeof window !== 'undefined') sessionStorage.setItem('audience', 'boater'); router.push('/boaters') }} style={{ width:260, padding:'32px 24px', background:'rgba(77,214,200,0.06)', border:'2px solid rgba(77,214,200,0.3)', borderRadius:16, color:'#fff', cursor:'pointer', fontFamily:FONT, textAlign:'center' }}>
-            <div style={{ fontSize:11, color:TEAL, fontWeight:800, letterSpacing:'2px', marginBottom:14 }}>FOR BOATERS</div>
-            <div style={{ fontWeight:900, fontSize:20, marginBottom:8 }}>I&apos;m a Boater</div>
-            <div style={{ fontSize:13, color:'rgba(255,255,255,0.55)', lineHeight:1.6, marginBottom:16 }}>Find marinas, book a slip, ask Skipper anything. Free for boaters, always.</div>
-            <div style={{ color:TEAL, fontWeight:700, fontSize:14 }}>Find a marina →</div>
-          </button>
+
+        {/* 4-STEP VISUAL PROOF SEQUENCE */}
+        <div style={{ width:'100%', maxWidth:1180, display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:16 }} className="proof-grid">
+          {[
+            { n:'01', label:'We find your marina', sub:'Satellite imagery, traced to the inch', img:'/collage/final-1-satellite.jpg' },
+            { n:'02', label:'We build it in 3D', sub:'Every dock, slip, and vessel modeled to scale', img:'/collage/final-2-3dmodel.jpg' },
+            { n:'03', label:'Your live Chart Room', sub:'Real-time 2D operational map — click any slip', img:'/collage/final-3-chartroom.jpg' },
+            { n:'04', label:'One database, every view', sub:'The map, the money, the tenants — always in sync', img:'/collage/final-4-dashboard.jpg' },
+          ].map(step => (
+            <div key={step.n} style={{ textAlign:'left' }}>
+              <div style={{ position:'relative', borderRadius:12, overflow:'hidden', border:'1px solid rgba(77,214,200,0.2)', aspectRatio:'4/3', background:'#0a1a2e' }}>
+                <img src={step.img} alt={step.label} style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+                <div style={{ position:'absolute', top:8, left:8, background:'rgba(13,43,75,0.85)', color:TEAL, fontSize:12, fontWeight:900, padding:'3px 9px', borderRadius:6, letterSpacing:'0.5px' }}>{step.n}</div>
+              </div>
+              <div style={{ fontWeight:800, fontSize:14, marginTop:10, color:'#fff', letterSpacing:'-0.2px' }}>{step.label}</div>
+              <div style={{ fontSize:12, color:'rgba(255,255,255,0.45)', marginTop:3, lineHeight:1.5 }}>{step.sub}</div>
+            </div>
+          ))}
         </div>
-        <div style={{ marginTop:56, color:'rgba(255,255,255,0.15)', fontSize:12 }}>↓ Marina owners — scroll down for the full platform</div>
+
+        <div style={{ display:'flex', gap:14, justifyContent:'center', flexWrap:'wrap', marginTop:44 }}>
+          <button onClick={() => router.push('/join')} style={{ padding:'17px 38px', background:TEAL, color:NAVY, border:'none', borderRadius:8, fontSize:15, fontWeight:900, cursor:'pointer', fontFamily:FONT, letterSpacing:'-0.3px' }}>See Your Marina Built →</button>
+          <button onClick={() => router.push('/demo')} style={{ padding:'17px 38px', background:'rgba(255,255,255,0.06)', color:'#fff', border:'1px solid rgba(255,255,255,0.15)', borderRadius:8, fontSize:15, fontWeight:600, cursor:'pointer', fontFamily:FONT }}>Explore a Live Demo</button>
+        </div>
+        <p style={{ marginTop:18, fontSize:12, color:'rgba(255,255,255,0.3)' }}>No contracts. No setup fees. We build your marina map at no cost, before you pay a cent.</p>
+
+        {/* Boater link — small, demoted, not a competing path */}
+        <button onClick={() => { if (typeof window !== 'undefined') sessionStorage.setItem('audience', 'boater'); router.push('/boaters') }} style={{ marginTop:40, background:'none', border:'none', color:'rgba(255,255,255,0.3)', fontSize:12, cursor:'pointer', fontFamily:FONT, textDecoration:'underline', textUnderlineOffset:3 }}>
+          Looking for a slip instead? Boater info →
+        </button>
       </div>
+      <style>{`
+        @media (max-width: 860px) {
+          .proof-grid { grid-template-columns: repeat(2,1fr) !important; }
+        }
+      `}</style>
       <style>{`
         @keyframes pulse-glow {
           0%, 100% { box-shadow: 0 0 0 0 rgba(77,214,200,0.4), 0 0 40px rgba(77,214,200,0.2); }
