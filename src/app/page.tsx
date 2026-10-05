@@ -58,7 +58,7 @@ export default function Landing() {
     <div style={{ minHeight:'100vh', background:DARK, fontFamily:FONT, color:'#fff' }}>
 
       {/* ══════════════════════════ HERO — MARINA-FIRST, COMPACT, CTAS ABOVE THE FOLD ══════════════════════════ */}
-      <div style={{ background:DARK, padding:'36px 40px 0', textAlign:'center' }}>
+      <div style={{ background:DARK, padding:'22px 40px 0', textAlign:'center' }}>
         <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(77,214,200,0.1)', border:'1px solid rgba(77,214,200,0.25)', borderRadius:24, padding:'5px 14px', marginBottom:14 }}>
           <span style={{ width:7, height:7, borderRadius:'50%', background:TEAL, display:'inline-block' }}></span>
           <span style={{ fontSize:11, color:TEAL, fontWeight:700, letterSpacing:'1px' }}>THE MARINA OS BUILT AROUND SKIPPER</span>
@@ -77,7 +77,7 @@ export default function Landing() {
         </div>
 
         {/* HERO IMAGE — compact, same visual weight class as the 3-step row below */}
-        <div style={{ maxWidth:520, margin:'0 auto', position:'relative', borderRadius:14, overflow:'hidden', border:'1px solid rgba(77,214,200,0.25)', boxShadow:'0 20px 50px -16px rgba(0,0,0,0.5)' }}>
+        <div style={{ maxWidth:480, margin:'0 auto', position:'relative', borderRadius:14, overflow:'hidden', border:'1px solid rgba(77,214,200,0.25)', boxShadow:'0 20px 50px -16px rgba(0,0,0,0.5)' }}>
           <img src="/collage/hero-chartroom.jpg" alt="Live AyeAyeSkipper Chart Room — real marina map" style={{ width:'100%', display:'block' }} />
           <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'linear-gradient(0deg, rgba(7,15,26,0.92) 0%, rgba(7,15,26,0) 100%)', padding:'26px 18px 12px', textAlign:'left' }}>
             <div style={{ fontSize:10.5, color:TEAL, fontWeight:800, letterSpacing:'0.5px' }}>YOUR LIVE CHART ROOM</div>

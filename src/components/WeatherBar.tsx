@@ -114,23 +114,29 @@ export default function WeatherBar() {
     }
   }, [])
 
-  // Always render the bar — show skeleton while loading, weather once ready
+  // Always render the bar — show skeleton while loading, weather once ready.
+  // Mobile: show only temp + condition (the single most useful stat). Desktop: full row.
   return (
-    <div style={{ background: 'rgba(77,214,200,0.08)', borderBottom: '1px solid rgba(77,214,200,0.15)', padding: '6px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, fontFamily: FONT, flexWrap: 'wrap', minHeight: 32 }}>
+    <div style={{ background: 'rgba(77,214,200,0.08)', borderBottom: '1px solid rgba(77,214,200,0.15)', padding: '6px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, fontFamily: FONT, flexWrap: 'wrap', minHeight: 32 }} className="weatherbar-row">
       {loading ? (
         <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}>🌤️ Loading weather…</span>
       ) : wx ? (
         <>
-          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>📍 {wx.location}</span>
+          <span className="wx-location" style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>📍 {wx.location}</span>
           <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.85)', fontWeight: 700 }}>{wx.icon} {wx.temp}°F · {wx.desc}</span>
-          <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>💨 {wx.windDir} {wx.wind} kts</span>
+          <span className="wx-wind" style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>💨 {wx.windDir} {wx.wind} kts</span>
           {tide && (
-            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>🌊 {tide.type} tide {tide.time} · {tide.height_ft.toFixed(1)}ft</span>
+            <span className="wx-tide" style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>🌊 {tide.type} tide {tide.time} · {tide.height_ft.toFixed(1)}ft</span>
           )}
         </>
       ) : (
         <span style={{ fontSize: 12, color: TEAL, fontWeight: 600 }}>🌊 AyeAyeSkipper — The Marina OS</span>
       )}
+      <style>{`
+        @media (max-width: 520px) {
+          .wx-location, .wx-wind, .wx-tide { display: none; }
+        }
+      `}</style>
     </div>
   )
 }
