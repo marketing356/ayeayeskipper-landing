@@ -57,6 +57,11 @@ export async function GET(req: Request) {
         merchant_id: merchantId,
         access_token: exchange.access_token,
         employee_id: exchange.employee_id || null,
+        // 2026-10-09 FIX: pass through the renewal token + its expirations so Railway can
+        // keep this connection alive instead of it dying the moment access_token expires.
+        refresh_token: exchange.refresh_token || null,
+        access_token_expiration: exchange.access_token_expiration || null,
+        refresh_token_expiration: exchange.refresh_token_expiration || null,
       }),
     })
     const saved = await saveRes.json().catch(() => ({}))
