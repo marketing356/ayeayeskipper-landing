@@ -22,6 +22,12 @@ export async function GET(req: Request) {
   const code = url.searchParams.get('code')
   const stateRaw = url.searchParams.get('state') || ''
   const errorParam = url.searchParams.get('error')
+  // Clover sends merchant_id as its OWN query param on this very redirect (per Clover's
+  // documented auth-code flow: "...?merchant_id={MERCHANT_ID}&client_id={APP_ID}&code={CODE}"),
+  // NOT inside the later token-exchange response. Confirmed 2026-10-09 against a real sandbox
+  // callback: the exchange response only returns access_token/refresh_token, no merchant_id —
+  // trusting the exchange response for merchant_id silently dropped every real connection.
+  const merchantIdFromRedirect = url.searchParams.get('merchant_id')
   const [marinaId, returnSlug] = decodeURIComponent(stateRaw).split('|')
 
   if (errorParam) {
@@ -38,7 +44,8 @@ export async function GET(req: Request) {
       body: JSON.stringify({ code }),
     })
     const exchange = await exchangeRes.json().catch(() => ({}))
-    if (!exchangeRes.ok || !exchange.access_token || !exchange.merchant_id) {
+    const merchantId = merchantIdFromRedirect || exchange.merchant_id
+    if (!exchangeRes.ok || !exchange.access_token || !merchantId) {
       const msg = exchange?.detail || exchange?.error || 'Clover connection failed'
       return NextResponse.redirect(helmUrl(returnSlug, `/helm?clover_error=${encodeURIComponent(msg)}&active=settings&section=integrations`))
     }
@@ -47,7 +54,7 @@ export async function GET(req: Request) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-skipper-api-key': API_KEY },
       body: JSON.stringify({
-        merchant_id: exchange.merchant_id,
+        merchant_id: merchantId,
         access_token: exchange.access_token,
         employee_id: exchange.employee_id || null,
       }),
