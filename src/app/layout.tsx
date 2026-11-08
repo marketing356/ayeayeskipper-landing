@@ -4,12 +4,12 @@ import WeatherBar from "@/components/WeatherBar"
 import Footer from "@/components/Footer"
 
 export const metadata: Metadata = {
-  title: { default: "AyeAyeSkipper — We Run on Skipper", template: "%s | AyeAyeSkipper" },
-  description: "The marina OS powered by the Skipper Engine™. Powered by Slip Logic™. Zero transaction fees, zero platform rake. Your marina. Your customers. Your money.",
+  title: { default: "Skipper — Marina and yacht club software", template: "%s | Skipper" },
+  description: "We run on Skipper. Management software for marinas and yacht clubs: slips, moorings, yard, contracts and billing, on autopilot. No setup fees.",
   openGraph: {
-    siteName: "AyeAyeSkipper",
-    title: "AyeAyeSkipper — We Run on Skipper",
-    description: "The marina OS powered by the Skipper Engine™. Slip Logic™, Hot Slip™, Skipper Gangway™. No Dockwa fees. No platform rake. You keep 100%.",
+    siteName: "Skipper",
+    title: "Skipper — We run on Skipper",
+    description: "Management software for marinas and yacht clubs. Your marina or club, on autopilot.",
     type: "website",
   }
 }

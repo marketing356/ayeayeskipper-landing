@@ -3,41 +3,26 @@ const TEAL = '#4dd6c8'
 const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
 
 export default function Footer() {
+  const a: React.CSSProperties = { color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: 13 }
   return (
-    <footer style={{ borderTop:'1px solid rgba(255,255,255,0.07)', padding:'60px 40px 40px', fontFamily:FONT }}>
-      <div style={{ maxWidth:1100, margin:'0 auto' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr 1fr', gap:48, marginBottom:48 }}>
+    <footer style={{ borderTop: '1px solid rgba(255,255,255,0.07)', padding: '44px 28px 36px', fontFamily: FONT }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24, marginBottom: 28 }}>
           <div>
-            <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:12 }}>
-              <span style={{ fontWeight:900, fontSize:17, color:'#fff' }}>AyeAyeSkipper</span>
-            </div>
-            <p style={{ fontSize:13, color:'rgba(255,255,255,0.4)', lineHeight:1.75, maxWidth:260 }}>
-              The marina OS powered by the Skipper Engine™. Powered by Slip Logic™. Built by Mariner and Sailor LLC.
-            </p>
-            <p style={{ fontSize:12, color:'rgba(255,255,255,0.25)', marginTop:12 }}>© 2026 AyeAyeSkipper · A product of MARINER AND SAILOR COMPANY · EIN 88-3901860</p>
+            <div style={{ fontWeight: 900, fontSize: 18, color: '#fff', marginBottom: 8 }}>Skipper</div>
+            <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', maxWidth: 320, lineHeight: 1.7 }}>Management software for marinas and yacht clubs.</div>
           </div>
-          <div>
-            <div style={{ fontWeight:700, fontSize:12, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'1px', marginBottom:16 }}>Product</div>
-            {[['Features','/features'],['Pricing','/pricing'],['Hot Slip™','/hot-slip'],['Skipper Gangway™','/skipper-gangway'],['Book a Demo','/demo']].map(([l,h]) => (
-              <Link key={l} href={h} style={{ display:'block', color:'rgba(255,255,255,0.55)', textDecoration:'none', fontSize:13, marginBottom:10 }}>{l}</Link>
-            ))}
-          </div>
-          <div>
-            <div style={{ fontWeight:700, fontSize:12, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'1px', marginBottom:16 }}>Compare</div>
-            {[['vs. Dockwa','/vs-dockwa'],['vs. Dockmaster','#'],['vs. Marina Controller','#'],['vs. Spreadsheets','#']].map(([l,h]) => (
-              <Link key={l} href={h} style={{ display:'block', color:'rgba(255,255,255,0.55)', textDecoration:'none', fontSize:13, marginBottom:10 }}>{l}</Link>
-            ))}
-          </div>
-          <div>
-            <div style={{ fontWeight:700, fontSize:12, color:'rgba(255,255,255,0.4)', textTransform:'uppercase', letterSpacing:'1px', marginBottom:16 }}>Company</div>
-            {[['About','/about'],['Contact','/demo'],['Privacy','/privacy'],['Terms','/terms'],['SMS Consent','/sms-consent']].map(([l,h]) => (
-              <Link key={l} href={h} style={{ display:'block', color:'rgba(255,255,255,0.55)', textDecoration:'none', fontSize:13, marginBottom:10 }}>{l}</Link>
-            ))}
+          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <Link href="/terms" style={a}>Terms</Link>
+            <Link href="/privacy" style={a}>Privacy</Link>
+            <Link href="/support" style={a}>Support</Link>
+            <Link href="/sms-consent" style={a}>SMS Consent</Link>
+            <a href="https://app.ayeayeskipper.com" style={a}>Boater log in</a>
           </div>
         </div>
-        <div style={{ borderTop:'1px solid rgba(255,255,255,0.07)', paddingTop:24, display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:12 }}>
-          <div style={{ fontSize:12, color:'rgba(255,255,255,0.25)' }}>AyeAyeSkipper is a product of MARINER AND SAILOR COMPANY · 651 N. Broad St, Middletown, DE 19709</div>
-          <div style={{ fontSize:12, color:TEAL, fontWeight:700 }}>We run on Skipper.</div>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>Skipper (AyeAyeSkipper) is a product of Mariner and Sailor Company, 651 N. Broad St, Middletown, DE 19709</div>
+          <div style={{ fontSize: 12, color: TEAL, fontWeight: 700 }}>We run on Skipper.</div>
         </div>
       </div>
     </footer>

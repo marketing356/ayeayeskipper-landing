@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 const TEAL = '#4dd6c8'
 const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
@@ -61,6 +62,7 @@ async function fetchTide(lat: number, lon: number): Promise<Tide | null> {
 }
 
 export default function WeatherBar() {
+  const pathname = usePathname()
   const [wx, setWx] = useState<Wx | null>(null)
   const [tide, setTide] = useState<Tide | null>(null)
   const [loading, setLoading] = useState(true)
@@ -116,6 +118,7 @@ export default function WeatherBar() {
 
   // Always render the bar — show skeleton while loading, weather once ready.
   // Mobile: show only temp + condition (the single most useful stat). Desktop: full row.
+  if (pathname === '/') return null
   return (
     <div style={{ background: 'rgba(77,214,200,0.08)', borderBottom: '1px solid rgba(77,214,200,0.15)', padding: '6px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, fontFamily: FONT, flexWrap: 'wrap', minHeight: 32 }} className="weatherbar-row">
       {loading ? (
