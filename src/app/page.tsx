@@ -343,7 +343,7 @@ export default function Home() {
       <section className="sk-section" style={{ paddingTop: 70, paddingBottom: 60 }}>
         <div className="sk-wrap">
           <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
-            <div className="sk-eyebrow">Skipper for marinas and yacht clubs</div>
+            <div className="sk-eyebrow">Marina and yacht club SaaS</div>
             <h1 className="sk-hero-h1" style={{ fontSize: 66, fontWeight: 900, letterSpacing: '-2px', lineHeight: 1.05, margin: '0 0 18px' }}>
               We run on <span style={{ color: TEAL }}>Skipper.</span>
             </h1>
