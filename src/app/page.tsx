@@ -525,16 +525,24 @@ export default function Home() {
       <section id="fleet" className="sk-section">
         <div className="sk-wrap">
           <div style={{ maxWidth: 800, marginBottom: 40 }}>
-            <div className="sk-eyebrow">Fleet</div>
-            <h2 className="sk-h2">Know where your money is, across every marina you own.</h2>
-            <p className="sk-sub">One screen for the whole portfolio, with live numbers straight from each marina. Built for owners, operators and funds that hold more than one.</p>
+            <div className="sk-eyebrow">Fleet and portfolio</div>
+            <h2 className="sk-h2">One screen for every marina you own. Real numbers, not a monthly report.</h2>
+            <p className="sk-sub">Two marinas or a whole portfolio, the owner opens one page and sees what came in, what is owed, what is empty and where every boat is. It reads the same live data each marina runs on, so there is nothing to export and nothing to reconcile by hand. Built for owners, operators and the funds that back them.</p>
           </div>
+          <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', marginBottom: 12, maxWidth: 1000 }}>
+            <img src="/collage/fleet-portfolio.jpg" alt="Skipper Portfolio screen: money in today, this week and this month, what tenants owe, occupancy, vessels without a lease and boats with no known location, marina by marina" style={{ width: '100%', display: 'block' }} />
+          </div>
+          <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', marginBottom: 36 }}>Sample portfolio, demo data.</p>
           <div className="sk-grid4" style={{ marginBottom: 36 }}>
             {[
-              ['Cash in', 'Last hour, today, this week, this month and year to date, per marina and in total.'],
-              ['Percent full', 'Slips and moorings occupied and vacant, marina by marina.'],
-              ['Vacancies', 'See the empty spaces that are earning nothing, right now.'],
-              ['Transient and slip revenue', 'Visitor income and seasonal income, side by side.'],
+              ['Money in', 'Today, this week and this month for the whole portfolio, and today for each marina, from real payments.'],
+              ['What is owed', 'What tenants owe you and what you owe vendors, in total and marina by marina.'],
+              ['Percent full', 'Slips and moorings occupied and vacant, per marina and for the group. See the empty spaces that earn nothing.'],
+              ['Every boat accounted for', 'Boats and trailers on site, boats with no paying lease, and boats with no known location. The gap is a number, not a guess.'],
+              ['Drill into any marina', 'One click from the portfolio opens that marina in full, with the same books, map and contracts its staff use.'],
+              ['Live, and always current', 'The screen refreshes itself every minute. No spreadsheet to build and no month-end wait.'],
+              ['Access you control', 'Each owner login sees only the marinas it is assigned to. A partner sees theirs and nothing else.'],
+              ['Your own address', 'The portfolio lives on its own web address and sign-in, separate from the marina logins.'],
             ].map(([t, d]) => (
               <div key={t} className="sk-card">
                 <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 8, color: TEAL }}>{t}</div>
