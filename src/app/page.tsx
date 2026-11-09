@@ -407,6 +407,16 @@ export default function Home() {
           </div>
 
           <div style={{ marginTop: 80 }}>
+            <div className="sk-eyebrow">The Helm</div>
+            <h2 className="sk-h2" style={{ maxWidth: 760 }}>Your whole day, on one screen.</h2>
+            <p className="sk-sub" style={{ maxWidth: 760, marginBottom: 28 }}>Who is arriving and leaving, what is overdue, what came in this month, open work orders, and the weather and tides for the dock. Every number opens the record behind it.</p>
+            <div className="sk-card" style={{ padding: 0, overflow: 'hidden' }}>
+              <img src="/collage/helm-home.jpg" alt="The Helm home screen: occupancy, arrivals, overdue accounts, money collected, quick actions, and the weather and tide conditions" style={{ width: '100%', display: 'block' }} />
+            </div>
+            <div style={{ marginTop: 10, fontSize: 12, color: 'rgba(255,255,255,0.45)' }}>Sample marina, demo data.</div>
+          </div>
+
+          <div style={{ marginTop: 80 }}>
             <div className="sk-eyebrow">How we build your marina</div>
             <h2 className="sk-h2" style={{ maxWidth: 760 }}>We turn your marina into an interactive map.</h2>
             <p className="sk-sub" style={{ maxWidth: 760, marginBottom: 32 }}>You send us your boat and owner lists, your layout and your contracts. We draw every space, load your records and hand you a live map of your marina or club.</p>
