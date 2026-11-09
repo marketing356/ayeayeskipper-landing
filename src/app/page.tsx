@@ -85,28 +85,29 @@ export default function Home() {
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       {/* HERO */}
-      <section className="sk-section" style={{ paddingTop: 70, paddingBottom: 70 }}>
-        <div className="sk-wrap sk-grid2">
-          <div>
+      <section className="sk-section" style={{ paddingTop: 70, paddingBottom: 60 }}>
+        <div className="sk-wrap">
+          <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
             <div className="sk-eyebrow">Skipper for marinas and yacht clubs</div>
-            <h1 className="sk-hero-h1" style={{ fontSize: 62, fontWeight: 900, letterSpacing: '-2px', lineHeight: 1.05, margin: '0 0 18px' }}>
+            <h1 className="sk-hero-h1" style={{ fontSize: 66, fontWeight: 900, letterSpacing: '-2px', lineHeight: 1.05, margin: '0 0 18px' }}>
               We run on <span style={{ color: TEAL }}>Skipper.</span>
             </h1>
             <p style={{ fontSize: 26, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.92)' }}>Your marina or club, on autopilot.</p>
-            <p className="sk-sub" style={{ marginBottom: 32 }}>
-              Slips, moorings, yard, contracts and billing, handled day to day. Approve every action, or set it to one tap and go. Built with AI from the ground up.
+            <p className="sk-sub" style={{ marginBottom: 30 }}>
+              Slips, moorings, yard, contracts and billing, handled day to day. Approve every action, or set it to one tap and go. Every module included, in one published price.
             </p>
-            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-              <a href="#marinas" className="sk-btn sk-btn-main">I run a marina</a>
-              <a href="#clubs" className="sk-btn sk-btn-ghost">I run a yacht club</a>
+            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center' }}>
+              <a href="#marinas" className="sk-btn ***">I run a marina</a>
+              <a href="#clubs" className="sk-btn ***">I run a yacht club</a>
             </div>
             <p style={{ marginTop: 18, fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
               Or <a href="#demo" style={{ color: TEAL, textDecoration: 'none', fontWeight: 700 }}>request a demo</a> and we will walk you through it.
             </p>
           </div>
-          <div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 30px 80px rgba(0,0,0,0.5)' }}>
-            <img src="/collage/hero-chartroom.jpg" alt="Skipper Chart Room map of a marina with slips and moorings" style={{ width: '100%', display: 'block' }} />
+          <div style={{ marginTop: 48, borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 30px 80px rgba(0,0,0,0.55)' }}>
+            <img src="/collage/chartroom-3d-full.jpg" alt="Skipper Chart Room: a 3D map of a marina with every slip, boat and module in the menu" style={{ width: '100%', display: 'block' }} />
           </div>
+          <p style={{ marginTop: 10, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Sample marina, demo data.</p>
         </div>
       </section>
 
