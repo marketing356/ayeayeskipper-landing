@@ -208,6 +208,7 @@ const SHOWS: Show[] = [
     ],
     shots: [
       { src: '/collage/acme-fuel.jpg', alt: 'Skipper fuel dock with tank levels and recent sales' },
+      { src: '/collage/fuel-tanks.jpg', alt: 'Skipper fuel tank settings: capacity, price per gallon, level bar and low-level alert for each tank' },
     ],
     note: 'Sample data.',
   },
