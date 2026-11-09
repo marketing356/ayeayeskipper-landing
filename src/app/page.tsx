@@ -46,16 +46,16 @@ const BUILD_STEPS: [string, string, string][] = [
 ]
 
 const COMPARE: string[][] = [
-  ['Prices published on their website', 'Yes, on this page', 'Yes, per module', 'Not listed', 'Not listed', 'Yes'],
-  ['Every module in one price', 'Yes', 'No. 8 separately priced products', 'Not published', 'Not published', 'No. Work orders start on the $199 plan'],
-  ['Fuel dock, ship store and point of sale', 'Included', 'Extra: POS from $249, fuel from $199', 'Listed', 'Point of sale listed', 'Not listed'],
-  ['Work orders, parts and inventory', 'Included', 'Not listed on pricing page', 'Listed', 'Listed', 'Work orders on $199 plan and up'],
-  ['AI that does the day-to-day work', 'Yes, the Autopilot', 'Not listed', 'Not listed', 'AI-assisted service scheduling', 'Not listed'],
-  ['Yacht club tools: members, house accounts, board', 'Yes', 'Not listed', 'Boat club rentals CRM', 'Not listed', 'Not listed'],
-  ['Live money and occupancy across all your marinas', 'Yes, the Fleet view', 'Portfolio pricing, contact us', 'Consolidated reporting listed', 'Not listed', 'Not listed'],
-  ['One boat record shared across sister marinas', 'Yes, clusters', 'Not listed', 'Not listed', 'Not listed', 'Not listed'],
-  ['Integrations and custom builds included in the price', 'Yes', 'Add-on from $84 a month', 'Integrations listed, price not published', 'Partner list, price not published', 'Not listed'],
-  ['Setup fee', 'None', 'Not stated', 'Not stated', 'Not stated', 'None stated'],
+  ['Prices published on their website', 'Yes, on this page', 'Yes, per module', 'Not listed', 'Not listed'],
+  ['Every module in one price', 'Yes', 'No. 8 separately priced products', 'Not published', 'Not published'],
+  ['Fuel dock, ship store and point of sale', 'Included', 'Extra: POS from $249, fuel from $199', 'Listed', 'Point of sale listed'],
+  ['Work orders, parts and inventory', 'Included', 'Not listed on pricing page', 'Listed', 'Listed'],
+  ['AI that does the day-to-day work', 'Yes, the Autopilot', 'Not listed', 'Not listed', 'AI-assisted service scheduling'],
+  ['Yacht club tools: members, house accounts, board', 'Yes', 'Not listed', 'Boat club rentals CRM', 'Not listed'],
+  ['Live money and occupancy across all your marinas', 'Yes, the Fleet view', 'Portfolio pricing, contact us', 'Consolidated reporting listed', 'Not listed'],
+  ['One boat record shared across sister marinas', 'Yes, clusters', 'Not listed', 'Not listed', 'Not listed'],
+  ['Integrations and custom builds included in the price', 'Yes', 'Add-on from $84 a month', 'Integrations listed, price not published', 'Partner list, price not published'],
+  ['Setup fee', 'None', 'Not stated', 'Not stated', 'Not stated'],
 ]
 
 const MARINA_TIERS: [string, string][] = [
@@ -82,6 +82,215 @@ const FAQ: [string, string][] = [
   ['Do boaters and members pay Skipper anything?', 'No. Boaters get an app with no extra work for you. Card processors such as Stripe and Clover still charge their normal card fees.'],
   ['Does it work for a yacht club with only moorings?', 'Yes. Skipper shows only the kinds of space you actually have. A club with moorings and no slips sees moorings and no slips.'],
 ]
+
+
+type Shot = { src: string; alt: string; phone?: boolean }
+type Show = { id: string; eyebrow: string; title: string; sub: string; points: [string, string][]; shots: Shot[]; note?: string }
+
+const SHOWS: Show[] = [
+  {
+    id: 'maps', eyebrow: 'Maps', title: 'A map that is right, and a boater can read it.',
+    sub: 'Your marina is drawn to scale from satellite, with every slip and mooring labelled. A boater with a reservation opens the app and their space lights up on the map, so nobody circles the mooring field fifty times in the dark.',
+    points: [
+      ['Customers find their own space', 'Their slip or mooring is marked on their phone, with a button that zooms straight to it.'],
+      ['Open slips on show', 'Available slips are lit up on the map for anyone choosing where to stay, and can be published for prospective slip holders.'],
+      ['Mooring fields, labelled', 'Marinas with heavy transient traffic get every mooring mapped and named.'],
+      ['Only what you have', 'A marina with slips only sees slips. A club with moorings only sees moorings.'],
+    ],
+    shots: [{ src: '/collage/app-map.jpg', alt: 'Skipper boater app showing available slips lit up on the marina map', phone: true }],
+    note: 'Sample marina, demo data.',
+  },
+  {
+    id: 'app', eyebrow: 'The boater app', title: 'Put every customer in the app.',
+    sub: 'Skipper comes with an app for your boaters. They look after their own account instead of walking into your office, so there are fewer visits, fewer calls and less typing for your staff.',
+    points: [
+      ['It knows the boat', 'The app knows the boat size and offers only the slips that fit it, ready to book.'],
+      ['Balance and payments', 'Customers see what they owe and pay invoices from their phone.'],
+      ['Messages in one place', 'Receipts, check-in notices and replies from your team, in the app.'],
+      ['Boat details and documents', 'Insurance and registration uploaded by the owner, not chased by you.'],
+      ['Wait list requests', 'Customers ask for a slip or join the wait list without a phone call.'],
+    ],
+    shots: [
+      { src: '/collage/app-home.jpg', alt: 'Skipper boater app home screen', phone: true },
+      { src: '/collage/app-book.jpg', alt: 'Skipper boater app booking only slips that fit the boat', phone: true },
+      { src: '/collage/app-messages.jpg', alt: 'Skipper boater app messages with the marina team', phone: true },
+    ],
+    note: 'Sample marina, demo data.',
+  },
+  {
+    id: 'hotslip', eyebrow: 'Transient and Hot Slip', title: 'Turn empty slips into income.',
+    sub: 'Tenants list the dates they will be away. Those nights go on your transient calendar, you earn the revenue, and you decide how much goes back to the slip holder. Moorings work the same way.',
+    points: [
+      ['Away dates on slips and moorings', 'Active and scheduled stays show on the grid, so you know what is free to sell.'],
+      ['You choose the payout', 'Revenue share with the holder, a discount on their lease, or the marina keeps it all. You set the split.'],
+      ['Points toward the monthly bill', 'Optionally credit slip holders a share of each stay against their monthly slip fee.'],
+      ['See the numbers first', 'The calculator shows 20 nights at $150: $3,000 in all, split $2,400 and $600 in the example.'],
+      ['No Skipper fee', 'There is no Skipper fee on transient bookings.'],
+    ],
+    shots: [{ src: '/collage/helm-hotslip.jpg', alt: 'Skipper Hot Slip Payout settings with payout calculator' }],
+    note: 'Example only, not a promise: a 200-slip marina whose holders are away a good part of the season can sell those nights and earn like a bigger marina. Sample data.',
+  },
+  {
+    id: 'track', eyebrow: 'Stop losing track', title: 'No more free rent.',
+    sub: 'A trailer sits in the yard for three years. The owner finally takes it away and you never knew it was there. Skipper gives every boat, trailer and vehicle a space and a record, so it is always on the books.',
+    points: [
+      ['Every boat has a space', 'Slip, mooring, yard or rack, with the owner, the contract and the balance behind it.'],
+      ['Trailers on the record', 'A trailer is linked to its boat, one trailer to a space, and every move is logged.'],
+      ['Parking with contracts', 'Lots and spaces for cars, SUVs and RVs, vehicle contracts and a monthly invoice.'],
+      ['No contract, flagged', 'In dry stack, a boat in a slot with no contract is marked so it cannot slip by.'],
+    ],
+    shots: [],
+  },
+  {
+    id: 'drystack', eyebrow: 'Dry stack', title: 'Dry stack, the whole program.',
+    sub: 'Every rack slot on one grid, with who is in it and what state the contract is in. Then the forklift schedule on top.',
+    points: [
+      ['Rack grid', 'Rows and levels, with search by slot, tenant or boat and filters for available, occupied, reserved, overdue and abandoned.'],
+      ['Paid, day-use, no contract, hold', 'A colour for each state, so a problem slot stands out at a glance.'],
+      ['Rack contracts', 'Day-use, seasonal, annual and short-term, each with its monthly rate and dates.'],
+      ['Rack Launch', 'A forklift schedule for launches and returns, today and this week, with who is out on a trip.'],
+    ],
+    shots: [],
+  },
+  {
+    id: 'workorders', eyebrow: 'Work orders and parts', title: 'Work orders that build the invoice.',
+    sub: 'Your parts and services catalog feeds the work order. When the job is done, the invoice is already built and waiting for you to review and send.',
+    points: [
+      ['Parts and services catalog', 'Part and manufacturer numbers, quantity on hand, a low-stock alert, cost and sell price, supplier and taxable or not.'],
+      ['Line items from the catalog', 'Find the boat, the owner fills in, pick the items, add a discount or apply a deposit.'],
+      ['Done means invoiced', 'Completing a work order drafts the invoice with tax and held deposits applied. You review it and send it.'],
+      ['Contracts can start the work', 'A signed contract can create the work order for you.'],
+    ],
+    shots: [],
+  },
+  {
+    id: 'fuel', eyebrow: 'Fuel dock', title: 'A fuel dock with a point of sale, in the price.',
+    sub: 'Tank levels, prices and sales in one screen. Other systems charge extra for the point of sale and extra again for fuel.',
+    points: [
+      ['Tanks at a glance', 'Capacity, current level, price per gallon and a low-level alert for each tank.'],
+      ['Record a sale', 'Diesel or gasoline, to a registered vessel, a tenant or a walk-up, with gallons, slip, staff member and payment method.'],
+      ['Today at the dock', 'Sales and transactions for the day, and a recent transactions list.'],
+    ],
+    shots: [{ src: '/collage/helm-fuel.jpg', alt: 'Skipper fuel tank settings with level bars and low-level alert' }],
+    note: 'Sample data.',
+  },
+  {
+    id: 'safety', eyebrow: 'Electric and safety', title: 'Shore power and safety, on the record.',
+    sub: 'Pedestals and safety stations are tracked like everything else, with an inspection log and a compliance report you can export when someone asks.',
+    points: [
+      ['Pedestals, NEC 555', 'Amperage, the slips each pedestal serves, status from current to overdue, an inspection log and an exportable compliance report.'],
+      ['Meter readings', 'Meter start and current, kWh used, your rate and the billing cycle.'],
+      ['Safety stations, NFPA 10 and 303', 'Fire extinguishers, AEDs, life rings, first aid and fuel suppression, with condition and an inspection log.'],
+      ['Power monitoring on request', 'Want live monitoring? We connect your monitor, and it is included.'],
+    ],
+    shots: [
+      { src: '/collage/helm-pedestals.jpg', alt: 'Skipper pedestals NEC 555 compliance screen' },
+      { src: '/collage/helm-safety.jpg', alt: 'Skipper safety stations NFPA screen' },
+    ],
+    note: 'Sample data.',
+  },
+  {
+    id: 'messaging', eyebrow: 'Messaging', title: 'One inbox. Customers, crew and the whole marina.',
+    sub: 'Reply to a customer by app message or by text from the same thread. Send a broadcast to everyone in slips, on moorings or in the yard. Keep your dock crew in their own group chats.',
+    points: [
+      ['App or text, per thread', 'A switch on every conversation: send it as an app message or as a text.'],
+      ['Broadcast', 'Reach groups such as slips, moorings, yard and transient by app and text. An emergency mode texts everyone.'],
+      ['Channels', 'Office, Dock Ops, Fuel, Store, Service, Security and Launch Service, each with its own staff.'],
+      ['Crew group chats', 'Dock hands and mechanics get group windows, so everyone sees who is handling what.'],
+    ],
+    shots: [],
+  },
+  {
+    id: 'waitlist', eyebrow: 'Wait list', title: 'A wait list that knows what fits.',
+    sub: 'When a slip or mooring opens, Skipper tells you who fits and who is next in line. You make the call.',
+    points: [
+      ['Fit comes first', 'Length, beam, draft, air draft and weight are checked against the space before anyone is offered it.'],
+      ['Then first come, first served', 'Among boats that fit, the one that joined first is next. Nobody who does not fit loses their place.'],
+      ['Unknown sizes flagged', 'A boat with missing sizes is offered after confirmed fits, marked confirm it fits.'],
+      ['See open spaces on a map', 'Every open slip and mooring on the map, right from the wait list. Only the space types you have.'],
+    ],
+    shots: [],
+  },
+  {
+    id: 'billing', eyebrow: 'Billing and contracts', title: 'Billing on autopilot. Contracts that price themselves.',
+    sub: 'Build the contract from blocks, send it as a link and they sign on their phone. The second they sign, the invoice and the work order can go out automatically.',
+    points: [
+      ['Reminders that make sense', 'One statement lists every unpaid invoice, by app message and by text.'],
+      ['Late fees, handled', 'Charged automatically after the days you choose, capped at your state limit. Each late fee is its own invoice, untaxed.'],
+      ['Card on file', 'Saved cards are charged automatically, with retries. The system runs these rules itself every few hours.'],
+      ['Rates that calculate', 'Per foot rates multiply by the boat length on file. Flat rates stay flat. Tax is set per line.'],
+      ['Your accountant', 'Invoices and payments export for your accountant.'],
+    ],
+    shots: [
+      { src: '/collage/helm-billing.jpg', alt: 'Skipper billing automation settings' },
+      { src: '/collage/helm-contract-services.jpg', alt: 'Skipper contract builder with auto-priced included services' },
+    ],
+    note: 'Sample data.',
+  },
+]
+
+function ShowSection({ s, alt }: { s: Show; alt: boolean }) {
+  const phones = s.shots.length > 0 && s.shots.every(x => x.phone)
+  const head = (
+    <div>
+      <div className="sk-eyebrow">{s.eyebrow}</div>
+      <h2 className="sk-h2">{s.title}</h2>
+      <p className="sk-sub" style={{ marginBottom: s.shots.length ? 22 : 0 }}>{s.sub}</p>
+    </div>
+  )
+  return (
+    <section id={s.id} className={'sk-section' + (alt ? ' sk-alt' : '')}>
+      <div className="sk-wrap">
+        {s.shots.length === 0 ? (
+          <>
+            <div style={{ maxWidth: 800, marginBottom: 36 }}>{head}</div>
+            <div className="sk-grid4">
+              {s.points.map(([t, d]) => (
+                <div key={t} className="sk-card">
+                  <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 8, color: TEAL }}>{t}</div>
+                  <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6 }}>{d}</div>
+                </div>
+              ))}
+            </div>
+            {s.note && <p style={{ marginTop: 14, fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
+          </>
+        ) : (
+          <div className="sk-grid2" style={{ alignItems: 'center' }}>
+            <div>
+              {head}
+              <div style={{ display: 'grid', gap: 14 }}>
+                {s.points.map(([t, d]) => (
+                  <div key={t} style={{ fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.7)' }}>
+                    <strong style={{ color: '#fff' }}>{t}.</strong> {d}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              {phones ? (
+                <div style={{ display: 'flex', gap: 14, justifyContent: 'center' }}>
+                  {s.shots.map(x => (
+                    <img key={x.src} src={x.src} alt={x.alt} style={{ width: s.shots.length === 1 ? 270 : '32%', maxWidth: 270, borderRadius: 22, border: '1px solid rgba(255,255,255,0.15)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', display: 'block' }} />
+                  ))}
+                </div>
+              ) : (
+                <div style={{ display: 'grid', gap: 16 }}>
+                  {s.shots.map(x => (
+                    <div key={x.src} style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 20px 50px rgba(0,0,0,0.45)' }}>
+                      <img src={x.src} alt={x.alt} style={{ width: '100%', display: 'block' }} />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {s.note && <p style={{ marginTop: 10, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
 
 export default function Home() {
   return (
@@ -198,6 +407,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* DEEP DIVES */}
+      {SHOWS.map((x, i) => <ShowSection key={x.id} s={x} alt={i % 2 === 1} />)}
 
       {/* AUTOPILOT */}
       <section id="autopilot" className="sk-section">
@@ -342,12 +554,12 @@ export default function Home() {
             <p className="sk-sub">Most marina software prices every feature on its own line. Skipper puts all of it in one published price. Here is how we stack up, side by side, using what each company says on its own website.</p>
           </div>
           <div style={{ overflowX: 'auto', borderRadius: 14, border: '1px solid rgba(255,255,255,0.1)' }}>
-            <table style={{ width: '100%', minWidth: 880, borderCollapse: 'collapse', fontSize: 14 }}>
+            <table style={{ width: '100%', minWidth: 760, borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: 'rgba(255,255,255,0.05)' }}>
                   <th style={{ textAlign: 'left', padding: '14px 16px', color: 'rgba(255,255,255,0.6)', fontWeight: 700 }}>What you get</th>
                   <th style={{ textAlign: 'left', padding: '14px 16px', color: NAVY, background: TEAL, fontWeight: 900 }}>Skipper</th>
-                  {['Dockwa', 'Molo', 'DockMaster', 'Dockside'].map(n => (
+                  {['Dockwa', 'Molo', 'DockMaster'].map(n => (
                     <th key={n} style={{ textAlign: 'left', padding: '14px 16px', fontWeight: 800 }}>{n}</th>
                   ))}
                 </tr>
