@@ -10,6 +10,7 @@ const css = [
   '.sk-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }',
   '.sk-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }',
   '.sk-grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }',
+  '.sk-grid5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }',
   '.sk-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 14px; padding: 24px; }',
   '.sk-btn { display: inline-block; padding: 14px 28px; border-radius: 8px; font-weight: 800; font-size: 15px; text-decoration: none; }',
   '.sk-btn-main { background: ' + TEAL + '; color: ' + NAVY + '; }',
@@ -20,7 +21,7 @@ const css = [
   '.sk-section { padding: 90px 0; }',
   '.sk-alt { background: rgba(255,255,255,0.025); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }',
   '@media (max-width: 860px) {',
-  '  .sk-grid2, .sk-grid3, .sk-grid4 { grid-template-columns: 1fr; }',
+  '  .sk-grid2, .sk-grid3, .sk-grid4, .sk-grid5 { grid-template-columns: 1fr; }',
   '  .sk-h2 { font-size: 30px; }',
   '  .sk-section { padding: 60px 0; }',
   '  .sk-hero-h1 { font-size: 44px !important; }',
@@ -58,16 +59,19 @@ const COMPARE: string[][] = [
 ]
 
 const MARINA_TIERS: [string, string][] = [
-  ['Up to 30 slips and moorings', '$199'],
-  ['31 to 99', '$299'],
-  ['100 to 249', '$499'],
-  ['250 or more, or several marinas', '$799'],
+  ['Up to 20 slips and moorings', '$99'],
+  ['21 to 50', '$199'],
+  ['51 to 100', '$299'],
+  ['101 to 250', '$499'],
+  ['Over 250, or several marinas', '$799'],
 ]
 
 const CLUB_TIERS: [string, string][] = [
-  ['Up to 150 members', '$199'],
-  ['151 to 400 members', '$349'],
-  ['401 or more members', '$499'],
+  ['Up to 100 members', '$99'],
+  ['101 to 250 members', '$199'],
+  ['251 to 500 members', '$299'],
+  ['501 to 1,000 members', '$499'],
+  ['Over 1,000 members', '$799'],
 ]
 
 const FAQ: [string, string][] = [
@@ -380,7 +384,7 @@ export default function Home() {
           </div>
 
           <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 14 }}>Marinas</div>
-          <div className="sk-grid4" style={{ marginBottom: 40 }}>
+          <div className="sk-grid5" style={{ marginBottom: 40 }}>
             {MARINA_TIERS.map(([size, price]) => (
               <div key={size} className="sk-card" style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>{size}</div>
@@ -391,7 +395,7 @@ export default function Home() {
           </div>
 
           <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 14 }}>Yacht clubs</div>
-          <div className="sk-grid3" style={{ marginBottom: 40 }}>
+          <div className="sk-grid5" style={{ marginBottom: 40 }}>
             {CLUB_TIERS.map(([size, price]) => (
               <div key={size} className="sk-card" style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>{size}</div>
