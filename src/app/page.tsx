@@ -127,7 +127,10 @@ const SHOWS: Show[] = [
       ['See the numbers first', 'The calculator shows 20 nights at $150: $3,000 in all, split $2,400 and $600 in the example.'],
       ['No Skipper fee', 'There is no Skipper fee on transient bookings.'],
     ],
-    shots: [{ src: '/collage/helm-hotslip.jpg', alt: 'Skipper Hot Slip Payout settings with payout calculator' }],
+    shots: [
+      { src: '/collage/acme-hotslip.jpg', alt: 'Skipper slips grid with Hot Slip spaces marked' },
+      { src: '/collage/helm-hotslip.jpg', alt: 'Skipper Hot Slip Payout settings with payout calculator' },
+    ],
     note: 'Example only, not a promise: a 200-slip marina whose holders are away a good part of the season can sell those nights and earn like a bigger marina. Sample data.',
   },
   {
@@ -139,7 +142,10 @@ const SHOWS: Show[] = [
       ['Parking with contracts', 'Lots and spaces for cars, SUVs and RVs, vehicle contracts and a monthly invoice.'],
       ['No contract, flagged', 'In dry stack, a boat in a slot with no contract is marked so it cannot slip by.'],
     ],
-    shots: [],
+    shots: [
+      { src: '/collage/acme-yard.jpg', alt: 'Skipper yard storage with every space, boat and owner on record' },
+      { src: '/collage/acme-parking.jpg', alt: 'Skipper parking lots with occupied and available spaces' },
+    ],
   },
   {
     id: 'drystack', eyebrow: 'Dry stack', title: 'Dry stack, the whole program.',
@@ -150,7 +156,10 @@ const SHOWS: Show[] = [
       ['Rack contracts', 'Day-use, seasonal, annual and short-term, each with its monthly rate and dates.'],
       ['Rack Launch', 'A forklift schedule for launches and returns, today and this week, with who is out on a trip.'],
     ],
-    shots: [],
+    shots: [
+      { src: '/collage/acme-rack.jpg', alt: 'Skipper dry stack rack grid by row and level' },
+      { src: '/collage/acme-racklaunch.jpg', alt: 'Skipper rack launch queue for the forklift' },
+    ],
   },
   {
     id: 'workorders', eyebrow: 'Work orders and parts', title: 'Work orders that build the invoice.',
@@ -161,7 +170,10 @@ const SHOWS: Show[] = [
       ['Done means invoiced', 'Completing a work order drafts the invoice with tax and held deposits applied. You review it and send it.'],
       ['Contracts can start the work', 'A signed contract can create the work order for you.'],
     ],
-    shots: [],
+    shots: [
+      { src: '/collage/acme-workorders.jpg', alt: 'Skipper work orders list' },
+      { src: '/collage/acme-parts.jpg', alt: 'Skipper parts and services catalog with low stock alert' },
+    ],
   },
   {
     id: 'fuel', eyebrow: 'Fuel dock', title: 'A fuel dock with a point of sale, in the price.',
@@ -171,7 +183,9 @@ const SHOWS: Show[] = [
       ['Record a sale', 'Diesel or gasoline, to a registered vessel, a tenant or a walk-up, with gallons, slip, staff member and payment method.'],
       ['Today at the dock', 'Sales and transactions for the day, and a recent transactions list.'],
     ],
-    shots: [{ src: '/collage/helm-fuel.jpg', alt: 'Skipper fuel tank settings with level bars and low-level alert' }],
+    shots: [
+      { src: '/collage/acme-fuel.jpg', alt: 'Skipper fuel dock with tank levels and recent sales' },
+    ],
     note: 'Sample data.',
   },
   {
@@ -184,8 +198,8 @@ const SHOWS: Show[] = [
       ['Power monitoring on request', 'Want live monitoring? We connect your monitor, and it is included.'],
     ],
     shots: [
-      { src: '/collage/helm-pedestals.jpg', alt: 'Skipper pedestals NEC 555 compliance screen' },
-      { src: '/collage/helm-safety.jpg', alt: 'Skipper safety stations NFPA screen' },
+      { src: '/collage/acme-pedestals.jpg', alt: 'Skipper pedestals NEC 555 compliance' },
+      { src: '/collage/acme-safety.jpg', alt: 'Skipper safety stations NFPA 10 and 303' },
     ],
     note: 'Sample data.',
   },
@@ -198,18 +212,22 @@ const SHOWS: Show[] = [
       ['Channels', 'Office, Dock Ops, Fuel, Store, Service, Security and Launch Service, each with its own staff.'],
       ['Crew group chats', 'Dock hands and mechanics get group windows, so everyone sees who is handling what.'],
     ],
-    shots: [],
+    shots: [
+      { src: '/collage/acme-messages.jpg', alt: 'Skipper messages inbox with unread conversations' },
+    ],
   },
   {
     id: 'waitlist', eyebrow: 'Wait list', title: 'A wait list that knows what fits.',
-    sub: 'When a slip or mooring opens, Skipper tells you who fits and who is next in line. You make the call.',
+    sub: 'Every empty slip and mooring is listed with the person to offer it to. Skipper checks who fits and who has waited longest. You make the call.',
     points: [
       ['Fit comes first', 'Length, beam, draft, air draft and weight are checked against the space before anyone is offered it.'],
       ['Then first come, first served', 'Among boats that fit, the one that joined first is next. Nobody who does not fit loses their place.'],
       ['Unknown sizes flagged', 'A boat with missing sizes is offered after confirmed fits, marked confirm it fits.'],
-      ['See open spaces on a map', 'Every open slip and mooring on the map, right from the wait list. Only the space types you have.'],
+      ['Open spaces, with a name next to each', 'The Available Spaces tab lists every empty slip and mooring today, with the best fit to offer it to. Tick one box to show only spaces someone fits.'],
     ],
-    shots: [],
+    shots: [
+      { src: '/collage/acme-waitlist.jpg', alt: 'Skipper wait list Available Spaces tab showing who fits each open slip' },
+    ],
   },
   {
     id: 'billing', eyebrow: 'Billing and contracts', title: 'Billing on autopilot. Contracts that price themselves.',
