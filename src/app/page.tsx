@@ -144,8 +144,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* MODULES */}
+      <section id="modules" className="sk-section sk-alt">
+        <div className="sk-wrap">
+          <div style={{ maxWidth: 800, marginBottom: 40 }}>
+            <div className="sk-eyebrow">Every module included</div>
+            <h2 className="sk-h2">Fuel dock, work orders, parts and ship store. All in the price.</h2>
+            <p className="sk-sub">Other systems charge for each module. Skipper does not. Every module is switched on for you from day one, with nothing to unlock and no add-on bill.</p>
+          </div>
+          <div className="sk-grid4">
+            {[
+              ['Fuel dock', 'Tanks and levels, sales, deliveries and a low-fuel alert, all tied to the boat and the account.'],
+              ['Work orders', 'From request to done on the same record as the boat. Contracts can create the work for you.'],
+              ['Parts and inventory', 'Your parts and services catalog with quantity on hand and a low-stock warning.'],
+              ['Ship store', 'Ring up sales at the counter and charge them to the boat owner, with no second system.'],
+            ].map(([t, d]) => (
+              <div key={t} className="sk-card">
+                <div style={{ fontWeight: 800, fontSize: 17, marginBottom: 8, color: TEAL }}>{t}</div>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6 }}>{d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* AUTOPILOT */}
-      <section id="autopilot" className="sk-section sk-alt">
+      <section id="autopilot" className="sk-section">
         <div className="sk-wrap">
           <div style={{ maxWidth: 760, marginBottom: 40 }}>
             <div className="sk-eyebrow">Autopilot</div>
@@ -218,12 +242,29 @@ export default function Home() {
       {/* FLEET + CLUSTERS */}
       <section id="fleet" className="sk-section">
         <div className="sk-wrap">
+          <div style={{ maxWidth: 800, marginBottom: 40 }}>
+            <div className="sk-eyebrow">Fleet</div>
+            <h2 className="sk-h2">Know where your money is, across every marina you own.</h2>
+            <p className="sk-sub">One screen for the whole portfolio, with live numbers straight from each marina. Built for owners, operators and funds that hold more than one.</p>
+          </div>
+          <div className="sk-grid4" style={{ marginBottom: 36 }}>
+            {[
+              ['Cash in', 'Last hour, today, this week, this month and year to date, per marina and in total.'],
+              ['Percent full', 'Slips and moorings occupied and vacant, marina by marina.'],
+              ['Vacancies', 'See the empty spaces that are earning nothing, right now.'],
+              ['Transient and slip revenue', 'Visitor income and seasonal income, side by side.'],
+            ].map(([t, d]) => (
+              <div key={t} className="sk-card">
+                <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 8, color: TEAL }}>{t}</div>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6 }}>{d}</div>
+              </div>
+            ))}
+          </div>
           <div className="sk-grid2">
             <div>
-              <div className="sk-eyebrow">Fleet and clusters</div>
-              <h2 className="sk-h2">One boat, two marinas, one record.</h2>
+              <div className="sk-eyebrow">Clusters</div>
+              <h2 className="sk-h2" style={{ fontSize: 30 }}>One boat, two marinas, one record.</h2>
               <p className="sk-sub" style={{ marginBottom: 18 }}>Skipper does not buy or take over marinas. Marinas and clubs in the same area join a cluster on one system. A boat that winters at one and summers at another is a single record, with its trailer and its contract. No re-entry, no phone calls.</p>
-              <p className="sk-sub">If you run more than one marina, the fleet view puts them all on one screen with live numbers straight from each marina.</p>
             </div>
             <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
               <img src="/cluster-diagram.svg" alt="Several marinas and clubs connected as one cluster on Skipper" style={{ width: '100%', display: 'block' }} />
@@ -233,7 +274,7 @@ export default function Home() {
       </section>
 
       {/* INTEGRATIONS */}
-      <section className="sk-section sk-alt">
+      <section className="sk-section">
         <div className="sk-wrap">
           <div style={{ maxWidth: 760, marginBottom: 36 }}>
             <div className="sk-eyebrow">Integrations</div>

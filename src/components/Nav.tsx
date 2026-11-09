@@ -8,6 +8,7 @@ const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
 
 const LINKS: [string, string][] = [
   ['Product', '/#product'],
+  ['Modules', '/#modules'],
   ['Autopilot', '/#autopilot'],
   ['Yacht Clubs', '/#clubs'],
   ['Fleet', '/#fleet'],
