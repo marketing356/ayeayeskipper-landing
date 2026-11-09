@@ -46,16 +46,18 @@ const BUILD_STEPS: [string, string, string][] = [
 ]
 
 const COMPARE: string[][] = [
-  ['Prices published on their website', 'Yes, on this page', 'Yes, per module', 'Not listed', 'Not listed'],
-  ['Every module in one price', 'Yes', 'No. 8 separately priced products', 'Not published', 'Not published'],
-  ['Fuel dock, ship store and point of sale', 'Included', 'Extra: POS from $249, fuel from $199', 'Listed', 'Point of sale listed'],
-  ['Work orders, parts and inventory', 'Included', 'Not listed on pricing page', 'Listed', 'Listed'],
+  ['Every module in one price', 'Yes. One monthly price, every module on', 'No. 8 separately priced products', 'No. Marina side priced per space; service, fuel, store and integrations are extra modules', 'Not published'],
+  ['Marina base price', '$99 to $799 a month by size', 'Per module, from $169 a month', '$42 per slip or mooring per year, about $3.50 a month (May 2026 proposal)', 'Not listed'],
+  ['Fuel dock', 'Included', 'Extra module: $199 a month', 'Extra module, about $499 a month (told on a May 2026 sales call)', 'Listed, price not published'],
+  ['Ship store and point of sale', 'Included', 'Extra module: $249 a month', 'Extra module', 'Point of sale listed'],
+  ['Work orders, parts and inventory', 'Included', 'Not listed on the pricing page', 'Extra service module, charged by work-order load: about $1,000 a month for a 15-person yard, per the rep', 'Listed'],
+  ['Integrations and custom builds', 'Included in the price', 'Extra module: $84 a month', 'Extra module', 'Partner list, price not published'],
+  ['Setup or implementation fee', 'None', 'Not stated', '$1,000 one time (list $2,950)', 'Not stated'],
+  ['Your own card processor', 'Stripe or Clover, your account', 'Not stated', 'Stripe only; own processor "typically no"', 'Not stated'],
   ['AI that does the day-to-day work', 'Yes, the Autopilot', 'Not listed', 'Not listed', 'AI-assisted service scheduling'],
   ['Yacht club tools: members, house accounts, board', 'Yes', 'Not listed', 'Boat club rentals CRM', 'Not listed'],
   ['Live money and occupancy across all your marinas', 'Yes, the Fleet view', 'Portfolio pricing, contact us', 'Consolidated reporting listed', 'Not listed'],
-  ['One boat record shared across sister marinas', 'Yes, clusters', 'Not listed', 'Not listed', 'Not listed'],
-  ['Integrations and custom builds included in the price', 'Yes', 'Add-on from $84 a month', 'Integrations listed, price not published', 'Partner list, price not published'],
-  ['Setup fee', 'None', 'Not stated', 'Not stated', 'Not stated'],
+  ['One boat record, with its work orders, invoices and seasons', 'Yes, and shared across sister marinas', 'Not listed', 'Vessels linked to customers; service history not shown', 'Not listed'],
 ]
 
 const MARINA_TIERS: [string, string][] = [
@@ -606,7 +608,7 @@ export default function Home() {
                 <tr style={{ background: 'rgba(255,255,255,0.05)' }}>
                   <th style={{ textAlign: 'left', padding: '14px 16px', color: 'rgba(255,255,255,0.6)', fontWeight: 700 }}>What you get</th>
                   <th style={{ textAlign: 'left', padding: '14px 16px', color: NAVY, background: TEAL, fontWeight: 900 }}>Skipper</th>
-                  {['Dockwa', 'Molo', 'DockMaster'].map(n => (
+                  {['Dockwa', 'Storable (Molo)', 'DockMaster'].map(n => (
                     <th key={n} style={{ textAlign: 'left', padding: '14px 16px', fontWeight: 800 }}>{n}</th>
                   ))}
                 </tr>
@@ -625,10 +627,10 @@ export default function Home() {
             </table>
           </div>
           <p style={{ marginTop: 22, fontSize: 17, color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, maxWidth: 820 }}>
-            Add up Dockwa&apos;s own price list and its eight priced products come to <strong style={{ color: TEAL }}>$1,299 a month</strong> (their &quot;starting at&quot; prices, billed annually, before tax). Skipper has one price, with every module switched on.
+            <strong style={{ color: TEAL }}>The low entry price is not the price.</strong> Add up Dockwa&apos;s own price list and its eight priced products come to <strong style={{ color: TEAL }}>$1,299 a month</strong> (their &quot;starting at&quot; prices, billed annually, before tax). Storable quoted a marina with 85 slips <strong style={{ color: TEAL }}>$3,570 a year</strong> for marina management, then put work orders, fuel and the store on separate modules. Skipper has one price, with every module switched on.
           </p>
           <p style={{ marginTop: 14, fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.7, maxWidth: 860 }}>
-            Based on each company&apos;s public website on 9 November 2026. Dockwa&apos;s main site blocked automated reading, so its column uses its published pricing page only. &quot;Not listed&quot; means we did not find it on the pages we read, not that it is impossible. Spot a mistake? Email admin@ayeayeskipper.com and we will correct it.
+            Dockwa and DockMaster: each company&apos;s public website on 9 November 2026 (Dockwa&apos;s main site blocked automated reading, so its column uses its published pricing page only). Storable: a sales proposal and call for an 85-slip, 22-mooring marina in May 2026, and the rep&apos;s spoken estimates, which are not written quotes; prices change. &quot;Not listed&quot; means we did not find it on the pages we read, not that it is impossible. Spot a mistake? Email admin@ayeayeskipper.com and we will correct it.
           </p>
         </div>
       </section>
