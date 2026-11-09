@@ -12,6 +12,7 @@ const LINKS: [string, string][] = [
   ['Autopilot', '/#autopilot'],
   ['Yacht Clubs', '/#clubs'],
   ['Fleet', '/#fleet'],
+  ['Compare', '/#compare'],
   ['Pricing', '/#pricing'],
 ]
 

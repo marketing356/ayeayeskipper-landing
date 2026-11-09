@@ -44,6 +44,32 @@ const BUILD_STEPS: [string, string, string][] = [
   ['03', 'Your live Chart Room', '/collage/final-3-chartroom.jpg'],
 ]
 
+const COMPARE: string[][] = [
+  ['Prices published on their website', 'Yes, on this page', 'Yes, per module', 'Not listed', 'Not listed', 'Yes'],
+  ['Every module in one price', 'Yes', 'No. 8 separately priced products', 'Not published', 'Not published', 'No. Work orders start on the $199 plan'],
+  ['Fuel dock, ship store and point of sale', 'Included', 'Extra: POS from $249, fuel from $199', 'Listed', 'Point of sale listed', 'Not listed'],
+  ['Work orders, parts and inventory', 'Included', 'Not listed on pricing page', 'Listed', 'Listed', 'Work orders on $199 plan and up'],
+  ['AI that does the day-to-day work', 'Yes, the Autopilot', 'Not listed', 'Not listed', 'AI-assisted service scheduling', 'Not listed'],
+  ['Yacht club tools: members, house accounts, board', 'Yes', 'Not listed', 'Boat club rentals CRM', 'Not listed', 'Not listed'],
+  ['Live money and occupancy across all your marinas', 'Yes, the Fleet view', 'Portfolio pricing, contact us', 'Consolidated reporting listed', 'Not listed', 'Not listed'],
+  ['One boat record shared across sister marinas', 'Yes, clusters', 'Not listed', 'Not listed', 'Not listed', 'Not listed'],
+  ['Integrations and custom builds included in the price', 'Yes', 'Add-on from $84 a month', 'Integrations listed, price not published', 'Partner list, price not published', 'Not listed'],
+  ['Setup fee', 'None', 'Not stated', 'Not stated', 'Not stated', 'None stated'],
+]
+
+const MARINA_TIERS: [string, string][] = [
+  ['Up to 30 slips and moorings', '$199'],
+  ['31 to 99', '$299'],
+  ['100 to 249', '$499'],
+  ['250 or more, or several marinas', '$799'],
+]
+
+const CLUB_TIERS: [string, string][] = [
+  ['Up to 150 members', '$199'],
+  ['151 to 400 members', '$349'],
+  ['401 or more members', '$499'],
+]
+
 const FAQ: [string, string][] = [
   ['What is Skipper?', 'Skipper is management software for marinas and yacht clubs. It holds your spaces, boats, contracts, billing and messages in one system, and it does the day-to-day work for you.'],
   ['Does it replace the software I use now?', 'Yes. We build your marina or club on Skipper, bring your data across, and keep working with the tools you already use, such as your accounting package and card processor.'],
@@ -302,23 +328,82 @@ export default function Home() {
         </div>
       </section>
 
+      {/* COMPARE */}
+      <section id="compare" className="sk-section sk-alt">
+        <div className="sk-wrap">
+          <div style={{ maxWidth: 800, marginBottom: 36 }}>
+            <div className="sk-eyebrow">Compare</div>
+            <h2 className="sk-h2">Don&apos;t die by a thousand modules.</h2>
+            <p className="sk-sub">Most marina software prices every feature on its own line. Skipper puts all of it in one published price. Here is how we stack up, side by side, using what each company says on its own website.</p>
+          </div>
+          <div style={{ overflowX: 'auto', borderRadius: 14, border: '1px solid rgba(255,255,255,0.1)' }}>
+            <table style={{ width: '100%', minWidth: 880, borderCollapse: 'collapse', fontSize: 14 }}>
+              <thead>
+                <tr style={{ background: 'rgba(255,255,255,0.05)' }}>
+                  <th style={{ textAlign: 'left', padding: '14px 16px', color: 'rgba(255,255,255,0.6)', fontWeight: 700 }}>What you get</th>
+                  <th style={{ textAlign: 'left', padding: '14px 16px', color: NAVY, background: TEAL, fontWeight: 900 }}>Skipper</th>
+                  {['Dockwa', 'Molo', 'DockMaster', 'Dockside'].map(n => (
+                    <th key={n} style={{ textAlign: 'left', padding: '14px 16px', fontWeight: 800 }}>{n}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARE.map(([row, sk, ...others]) => (
+                  <tr key={row} style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                    <td style={{ padding: '13px 16px', fontWeight: 700, verticalAlign: 'top' }}>{row}</td>
+                    <td style={{ padding: '13px 16px', background: 'rgba(77,214,200,0.1)', color: TEAL, fontWeight: 800, verticalAlign: 'top' }}>{sk}</td>
+                    {others.map((o, i) => (
+                      <td key={i} style={{ padding: '13px 16px', color: 'rgba(255,255,255,0.6)', verticalAlign: 'top' }}>{o}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p style={{ marginTop: 22, fontSize: 17, color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, maxWidth: 820 }}>
+            Add up Dockwa&apos;s own price list and its eight priced products come to <strong style={{ color: TEAL }}>$1,299 a month</strong> (their &quot;starting at&quot; prices, billed annually, before tax). Skipper has one price, with every module switched on.
+          </p>
+          <p style={{ marginTop: 14, fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.7, maxWidth: 860 }}>
+            Based on each company&apos;s public website on 9 November 2026. Dockwa&apos;s main site blocked automated reading, so its column uses its published pricing page only. &quot;Not listed&quot; means we did not find it on the pages we read, not that it is impossible. Spot a mistake? Email admin@ayeayeskipper.com and we will correct it.
+          </p>
+        </div>
+      </section>
+
       {/* PRICING */}
       <section id="pricing" className="sk-section">
-        <div className="sk-wrap" style={{ textAlign: 'center' }}>
-          <div className="sk-eyebrow">Pricing</div>
-          <h2 className="sk-h2" style={{ maxWidth: 780, margin: '0 auto 16px' }}>One monthly price. Everything in it.</h2>
-          <p className="sk-sub" style={{ maxWidth: 700, margin: '0 auto 36px' }}>No setup fee. No onboarding fee. No add-on modules. Your map, your data move and your integrations are included. No Skipper fee on transient bookings. Card processors still charge their normal card fees.</p>
-          <div className="sk-grid2" style={{ maxWidth: 820, margin: '0 auto 32px', textAlign: 'left', alignItems: 'stretch' }}>
-            <div className="sk-card">
-              <div style={{ fontWeight: 900, fontSize: 22, marginBottom: 8 }}>Marinas</div>
-              <p style={{ margin: 0, fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>Priced for the size of your marina. Ask for a quote and we will give you one number, in writing.</p>
-            </div>
-            <div className="sk-card">
-              <div style={{ fontWeight: 900, fontSize: 22, marginBottom: 8 }}>Yacht clubs</div>
-              <p style={{ margin: 0, fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>Priced for the size of your membership. Ask for a quote and we will give you one number, in writing.</p>
-            </div>
+        <div className="sk-wrap">
+          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            <div className="sk-eyebrow">Pricing</div>
+            <h2 className="sk-h2" style={{ maxWidth: 780, margin: '0 auto 16px' }}>One price. Everything included. Right here.</h2>
+            <p className="sk-sub" style={{ maxWidth: 720, margin: '0 auto' }}>Your price depends only on the size of your marina or club. Every module is in every plan. No setup fee, no onboarding fee, no add-ons. No Skipper fee on transient bookings. Card processors still charge their normal card fees.</p>
           </div>
-          <a href="#demo" className="sk-btn sk-btn-main">Get a quote</a>
+
+          <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 14 }}>Marinas</div>
+          <div className="sk-grid4" style={{ marginBottom: 40 }}>
+            {MARINA_TIERS.map(([size, price]) => (
+              <div key={size} className="sk-card" style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>{size}</div>
+                <div style={{ fontSize: 38, fontWeight: 900, color: TEAL }}>{price}</div>
+                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>per month</div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 14 }}>Yacht clubs</div>
+          <div className="sk-grid3" style={{ marginBottom: 40 }}>
+            {CLUB_TIERS.map(([size, price]) => (
+              <div key={size} className="sk-card" style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>{size}</div>
+                <div style={{ fontSize: 38, fontWeight: 900, color: TEAL }}>{price}</div>
+                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)' }}>per month</div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <p style={{ margin: '0 0 22px', fontSize: 15, color: 'rgba(255,255,255,0.65)' }}>Every plan includes: slips, moorings, yard, contracts and e-sign, billing, fuel dock, work orders, parts and inventory, ship store, messaging, wait list, the Autopilot, your map, your data move, and the integrations you need.</p>
+            <a href="#demo" className="sk-btn ***">Request a demo</a>
+          </div>
         </div>
       </section>
 

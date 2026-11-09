@@ -41,6 +41,15 @@ const nextConfig = {
         destination: 'https://expressdocks.com/:path*',
         permanent: true,
       },
+      // Skipper one-page site (2026-11-09): old marketing pages fold into the homepage
+      { source: '/features', destination: '/#product', permanent: true },
+      { source: '/pricing', destination: '/#pricing', permanent: true },
+      { source: '/vs-dockwa', destination: '/#compare', permanent: true },
+      { source: '/hot-slip', destination: '/', permanent: true },
+      { source: '/transient', destination: '/', permanent: true },
+      { source: '/about', destination: '/', permanent: true },
+      { source: '/demo', destination: '/#demo', permanent: true },
+      { source: '/skipper-gangway', destination: '/', permanent: true },
       // New redirects — April 2025
       { source: '/residential-docks', destination: '/residential', permanent: true },
       { source: '/modulardocks', destination: '/blog/what-to-know-before-buying-a-modular-dock-system-c', permanent: true },
