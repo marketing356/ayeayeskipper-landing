@@ -101,14 +101,16 @@ const SHOWS: Show[] = [
     note: 'Sample marina, demo data.',
   },
   {
-    id: 'app', eyebrow: 'The boater app', title: 'Put every customer in the app.',
-    sub: 'Skipper comes with an app for your boaters. They look after their own account instead of walking into your office, so there are fewer visits, fewer calls and less typing for your staff.',
+    id: 'app', eyebrow: 'The boater app', title: 'The boat is the record.',
+    sub: 'Your boaters add their boat once, with its real size. From then on the size decides where it can go, and every job and invoice lands on the boat, not in a pile of paper. Fewer calls, fewer visits, nothing retyped.',
     points: [
-      ['It knows the boat', 'The app knows the boat size and offers only the slips that fit it, ready to book.'],
-      ['Balance and payments', 'Customers see what they owe and pay invoices from their phone.'],
-      ['Messages in one place', 'Receipts, check-in notices and replies from your team, in the app.'],
-      ['Boat details and documents', 'Insurance and registration uploaded by the owner, not chased by you.'],
-      ['Wait list requests', 'Customers ask for a slip or join the wait list without a phone call.'],
+      ['Add the boat once, with its size', 'Length, beam, draft and air draft go on the boat in the app. The marina sees the same numbers.'],
+      ['Size decides the space', 'Skipper checks those numbers against the limits on every slip and mooring. A space the boat cannot fit is not offered, for transient bookings and for the wait list.'],
+      ['Every work order sticks to the boat', 'Finish a work order and it lands in the boat service history by itself, and a draft invoice is built from it for you to review.'],
+      ['Invoices carry the boat', 'Billing is tied to the boat as well as the customer, so you can see what was done and charged on that hull.'],
+      ['Season by season', 'Every past slip, mooring and storage season stays on the boat record, so winter storage never erases where it was last summer.'],
+      ['Ship log and service history in the owner pocket', 'Owners log trips with engine hours, fuel used, distance and weather, add their own service entries, and see the haul-outs and launches your yard did.'],
+      ['Balance, messages and documents', 'Owners pay invoices, read messages from your team and upload insurance and registration from their phone.'],
     ],
     shots: [
       { src: '/collage/app-home.jpg', alt: 'Skipper boater app home screen', phone: true },
