@@ -449,6 +449,47 @@ export default function Home() {
         </div>
       </section>
 
+      {/* COMPARE */}
+      <section id="compare" className="sk-section">
+        <div className="sk-wrap">
+          <div style={{ maxWidth: 800, marginBottom: 36 }}>
+            <div className="sk-eyebrow">Compare</div>
+            <h2 className="sk-h2">Don&apos;t die by a thousand modules.</h2>
+            <p className="sk-sub">Most marina software prices every feature on its own line. Skipper puts all of it in one published price. Here is how we stack up, side by side, using what each company says on its own website.</p>
+          </div>
+          <div style={{ overflowX: 'auto', borderRadius: 14, border: '1px solid rgba(255,255,255,0.1)' }}>
+            <table style={{ width: '100%', minWidth: 760, borderCollapse: 'collapse', fontSize: 14 }}>
+              <thead>
+                <tr style={{ background: 'rgba(255,255,255,0.05)' }}>
+                  <th style={{ textAlign: 'left', padding: '14px 16px', color: 'rgba(255,255,255,0.6)', fontWeight: 700 }}>What you get</th>
+                  <th style={{ textAlign: 'left', padding: '14px 16px', color: NAVY, background: TEAL, fontWeight: 900 }}>Skipper</th>
+                  {['Dockwa', 'Storable (Molo)', 'DockMaster'].map(n => (
+                    <th key={n} style={{ textAlign: 'left', padding: '14px 16px', fontWeight: 800 }}>{n}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARE.map(([row, sk, ...others]) => (
+                  <tr key={row} style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                    <td style={{ padding: '13px 16px', fontWeight: 700, verticalAlign: 'top' }}>{row}</td>
+                    <td style={{ padding: '13px 16px', background: 'rgba(77,214,200,0.1)', color: TEAL, fontWeight: 800, verticalAlign: 'top' }}>{sk}</td>
+                    {others.map((o, i) => (
+                      <td key={i} style={{ padding: '13px 16px', color: 'rgba(255,255,255,0.6)', verticalAlign: 'top' }}>{o}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p style={{ marginTop: 22, fontSize: 17, color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, maxWidth: 820 }}>
+            <strong style={{ color: TEAL }}>The low entry price is not the price.</strong> Add up Dockwa&apos;s own price list and its eight priced products come to <strong style={{ color: TEAL }}>$1,299 a month</strong> (their &quot;starting at&quot; prices, billed annually, before tax). Storable quoted a marina with 85 slips <strong style={{ color: TEAL }}>$3,570 a year</strong> for marina management, then put work orders, fuel and the store on separate modules. Skipper has one price, with every module switched on.
+          </p>
+          <p style={{ marginTop: 14, fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.7, maxWidth: 860 }}>
+            Dockwa and DockMaster: each company&apos;s public website on 9 November 2026 (Dockwa&apos;s main site blocked automated reading, so its column uses its published pricing page only). Storable: a sales proposal and call for an 85-slip, 22-mooring marina in May 2026, and the rep&apos;s spoken estimates, which are not written quotes; prices change. &quot;Not listed&quot; means we did not find it on the pages we read, not that it is impossible. Spot a mistake? Email admin@ayeayeskipper.com and we will correct it.
+          </p>
+        </div>
+      </section>
+
       {/* DEEP DIVES */}
       {SHOWS.map((x, i) => <ShowSection key={x.id} s={x} alt={i % 2 === 1} />)}
 
@@ -591,47 +632,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* COMPARE */}
-      <section id="compare" className="sk-section sk-alt">
-        <div className="sk-wrap">
-          <div style={{ maxWidth: 800, marginBottom: 36 }}>
-            <div className="sk-eyebrow">Compare</div>
-            <h2 className="sk-h2">Don&apos;t die by a thousand modules.</h2>
-            <p className="sk-sub">Most marina software prices every feature on its own line. Skipper puts all of it in one published price. Here is how we stack up, side by side, using what each company says on its own website.</p>
-          </div>
-          <div style={{ overflowX: 'auto', borderRadius: 14, border: '1px solid rgba(255,255,255,0.1)' }}>
-            <table style={{ width: '100%', minWidth: 760, borderCollapse: 'collapse', fontSize: 14 }}>
-              <thead>
-                <tr style={{ background: 'rgba(255,255,255,0.05)' }}>
-                  <th style={{ textAlign: 'left', padding: '14px 16px', color: 'rgba(255,255,255,0.6)', fontWeight: 700 }}>What you get</th>
-                  <th style={{ textAlign: 'left', padding: '14px 16px', color: NAVY, background: TEAL, fontWeight: 900 }}>Skipper</th>
-                  {['Dockwa', 'Storable (Molo)', 'DockMaster'].map(n => (
-                    <th key={n} style={{ textAlign: 'left', padding: '14px 16px', fontWeight: 800 }}>{n}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {COMPARE.map(([row, sk, ...others]) => (
-                  <tr key={row} style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                    <td style={{ padding: '13px 16px', fontWeight: 700, verticalAlign: 'top' }}>{row}</td>
-                    <td style={{ padding: '13px 16px', background: 'rgba(77,214,200,0.1)', color: TEAL, fontWeight: 800, verticalAlign: 'top' }}>{sk}</td>
-                    {others.map((o, i) => (
-                      <td key={i} style={{ padding: '13px 16px', color: 'rgba(255,255,255,0.6)', verticalAlign: 'top' }}>{o}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p style={{ marginTop: 22, fontSize: 17, color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, maxWidth: 820 }}>
-            <strong style={{ color: TEAL }}>The low entry price is not the price.</strong> Add up Dockwa&apos;s own price list and its eight priced products come to <strong style={{ color: TEAL }}>$1,299 a month</strong> (their &quot;starting at&quot; prices, billed annually, before tax). Storable quoted a marina with 85 slips <strong style={{ color: TEAL }}>$3,570 a year</strong> for marina management, then put work orders, fuel and the store on separate modules. Skipper has one price, with every module switched on.
-          </p>
-          <p style={{ marginTop: 14, fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.7, maxWidth: 860 }}>
-            Dockwa and DockMaster: each company&apos;s public website on 9 November 2026 (Dockwa&apos;s main site blocked automated reading, so its column uses its published pricing page only). Storable: a sales proposal and call for an 85-slip, 22-mooring marina in May 2026, and the rep&apos;s spoken estimates, which are not written quotes; prices change. &quot;Not listed&quot; means we did not find it on the pages we read, not that it is impossible. Spot a mistake? Email admin@ayeayeskipper.com and we will correct it.
-          </p>
         </div>
       </section>
 
