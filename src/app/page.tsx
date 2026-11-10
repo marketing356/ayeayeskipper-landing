@@ -432,13 +432,13 @@ export default function Home() {
         <div className="sk-wrap">
           <div className="sk-hero-grid">
             <div className="sk-hero-text">
-              <div className="sk-pill sk-rise">Marina and yacht club SaaS</div>
-              <h1 className="sk-hero-h1 sk-rise sk-rise2" style={{ fontSize: 76, fontWeight: 900, letterSpacing: '-3px', lineHeight: 1.02, margin: '0 0 20px' }}>
-                We run on <span className="sk-grad">Skipper.</span>
+              <div className="sk-pill sk-rise">The legacy days are over.</div>
+              <h1 className="sk-hero-h1 sk-rise sk-rise2" style={{ fontSize: 'clamp(40px, 6vw, 66px)', fontWeight: 900, letterSpacing: '-2px', lineHeight: 1.04, margin: '0 0 20px' }}>
+                Marina software without the <span className="sk-grad">thousand modules.</span>
               </h1>
-              <p className="sk-rise sk-rise3" style={{ fontSize: 26, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.95)' }}>Your marina or yacht club, on autopilot.</p>
+              <p className="sk-rise sk-rise3" style={{ fontSize: 26, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.95)' }}>The legacy players had their day. They are so big they cannot get out of their own way.</p>
               <p className="sk-sub sk-rise sk-rise3 sk-hero-sub" style={{ marginBottom: 28 }}>
-                Slips, moorings, yard, contracts and billing, handled day to day. Approve every action, or set it to one tap and go. Every module included, in one published price.
+                Most marina owners stay stuck with their legacy software because switching sounds painful. With Skipper we make it almost seamless from day one. Every module included, in one published price from $99 a month. Approve every action, or set it to one tap and go.
               </p>
               <div className="sk-rise sk-rise4 sk-hero-actions" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <a href="#marinas" className="sk-btn sk-btn-main">I run a marina</a>
@@ -984,6 +984,18 @@ export default function Home() {
                 <p style={{ margin: '12px 0 0', fontSize: 15, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>{a}</p>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TRUST STRIP */}
+      <section className="sk-section" style={{ paddingTop: 10, paddingBottom: 10 }}>
+        <div className="sk-wrap">
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <span className="sk-chip"><i />No setup fee</span>
+            <span className="sk-chip"><i />Data migration included</span>
+            <span className="sk-chip"><i />Billed monthly</span>
+            <span className="sk-chip"><i />AI off with one switch</span>
           </div>
         </div>
       </section>

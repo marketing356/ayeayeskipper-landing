@@ -21,6 +21,9 @@ export default function DemoForm() {
     setState('sending')
     try {
       const r = await fetch('/api/demo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) })
+      if (r.ok) {
+        try { const w = window as unknown as { dataLayer?: unknown[] }; (w.dataLayer = w.dataLayer || []).push({ event: 'generate_lead', lead_type: 'demo_request', lead_kind: f.kind }) } catch {}
+      }
       setState(r.ok ? 'done' : 'error')
     } catch {
       setState('error')
