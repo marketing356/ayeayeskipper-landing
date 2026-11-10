@@ -397,6 +397,7 @@ function ShowSection({ s: s0, alt }: { s: Show; alt: boolean }) {
         ))}
         {s.note && <p style={{ margin: '10px 0 0', textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
         <p className="sk-sub" style={{ maxWidth: 800, margin: '24px 0 24px' }}>{s.sub}</p>
+        {s.id === 'app' && <p style={{ margin: '0 0 24px' }}><a href="https://apps.apple.com/us/app/ayeayeskipper-boater/id6794378330" target="_blank" rel="noopener" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '10px 20px', borderRadius: 12, background: '#000', border: '1px solid rgba(255,255,255,0.4)', color: '#fff', textDecoration: 'none', fontWeight: 700 }}><span style={{ fontSize: 26, lineHeight: 1 }}>&#63743;</span><span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1, textAlign: 'left' }}><span style={{ fontSize: 11, fontWeight: 500 }}>Download on the</span><span style={{ fontSize: 19 }}>App Store</span></span></a></p>}
         <FoldBtn label="What is included" />
         <div className="sk-grid3 sk-fold">
           {s.points.map(([t, d]) => (
@@ -448,6 +449,7 @@ export default function Home() {
                 <span className="sk-chip"><i />Dry stack and yard, built in</span>
                 <span className="sk-chip"><i />One published price</span>
                 <span className="sk-chip"><i />Live at working marinas</span>
+                <a href="#app" className="sk-chip" style={{ textDecoration: 'none', color: 'inherit' }}><i />Free iPhone app for your boaters</a>
               </div>
               <p style={{ marginTop: 18, fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
                 Or <a href="#demo" style={{ color: TEAL, textDecoration: 'none', fontWeight: 700 }}>request a demo</a> and we will walk you through it.
