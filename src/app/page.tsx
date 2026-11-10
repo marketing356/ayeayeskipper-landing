@@ -682,6 +682,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* MOORING FIELDS (added 2026-11-10) */}
+      <section id="moorings" className="sk-section">
+        <div className="sk-wrap">
+          <div style={{ maxWidth: 800, marginBottom: 36 }}>
+            <div className="sk-eyebrow">Mooring fields</div>
+            <h2 className="sk-h2">Find your mooring ball in a big field. Tap it and it pulses.</h2>
+            <p className="sk-sub">A transient boater taps Available and every open mooring pulses on the map. A mooring holder taps My spot and goes straight to theirs. Slips and moorings each get their own map, with one tap to switch.</p>
+          </div>
+          <div className="sk-grid2" style={{ alignItems: 'start', marginBottom: 36 }}>
+            <div>
+              <div className="sk-card" style={{ padding: 0, overflow: 'hidden' }}>
+                <img src="/collage/mooring-2d.jpg" alt="Chart Room 2D map of a mooring field: every mooring ball with its number, green for open and red for overdue" style={{ width: '100%', display: 'block' }} />
+              </div>
+              <div style={{ marginTop: 10, fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>Chart Room, 2D. Every mooring in the field, colored by status.</div>
+            </div>
+            <div>
+              <div className="sk-card" style={{ padding: 0, overflow: 'hidden' }}>
+                <img src="/collage/mooring-3d.jpg" alt="Chart Room 3D view of a mooring field with boats on their moorings" style={{ width: '100%', display: 'block' }} />
+              </div>
+              <div style={{ marginTop: 10, fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>Chart Room, 3D. The same field, seen from the water.</div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start' }}>
+            <figure style={{ margin: 0, width: 270, maxWidth: '100%' }}>
+              <div className="sk-card" style={{ padding: 0, overflow: 'hidden', borderRadius: 22 }}>
+                <img src="/collage/mooring-phone.jpg" alt="Boater app on a phone: open moorings M5 and M6 pulse on the Mooring Field map" style={{ width: '100%', display: 'block' }} />
+              </div>
+              <figcaption style={{ marginTop: 10, fontSize: 13, color: 'rgba(255,255,255,0.6)', textAlign: 'center' }}>Boater app: open moorings pulse on the Mooring Field map.</figcaption>
+            </figure>
+            <figure style={{ margin: 0, width: 270, maxWidth: '100%' }}>
+              <div className="sk-card" style={{ padding: 0, overflow: 'hidden', borderRadius: 22 }}>
+                <img src="/collage/slips-phone.jpg" alt="Boater app on a phone: open slips C7, C8 and C9 pulse on the slips map" style={{ width: '100%', display: 'block' }} />
+              </div>
+              <figcaption style={{ marginTop: 10, fontSize: 13, color: 'rgba(255,255,255,0.6)', textAlign: 'center' }}>Same app, slips map: open slips pulse the same way.</figcaption>
+            </figure>
+          </div>
+          <div style={{ marginTop: 18, fontSize: 12, color: 'rgba(255,255,255,0.45)', textAlign: 'center' }}>Sample marina, demo data.</div>
+        </div>
+      </section>
+
       {/* MODULES */}
       <section id="modules" className="sk-section sk-alt">
         <div className="sk-wrap">
