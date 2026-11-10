@@ -317,6 +317,12 @@ const SHOWS: Show[] = [
   },
 ]
 
+const PHOTO_FIT: Record<string, { ratio: string; pos: string }> = {
+  '/collage/photo-yard.jpg': { ratio: '3 / 2', pos: '50% 100%' },
+  '/collage/photo-transient.jpg': { ratio: '16 / 9', pos: '50% 40%' },
+  '/collage/photo-fuel.jpg': { ratio: '16 / 9', pos: '50% 35%' },
+}
+
 function ShowSection({ s: s0, alt }: { s: Show; alt: boolean }) {
   const photo = s0.shots[0] && s0.shots[0].src.indexOf('/photo-') >= 0 ? s0.shots[0] : null
   const s: Show = photo ? { ...s0, shots: s0.shots.slice(1) } : s0
@@ -331,7 +337,7 @@ function ShowSection({ s: s0, alt }: { s: Show; alt: boolean }) {
   return (
     <section id={s.id} className={'sk-section' + (alt ? ' sk-alt' : '')}>
       <div className="sk-wrap">
-        {photo && <div className="sk-banner"><img src={photo.src} alt={photo.alt} /></div>}
+        {photo && <div className="sk-banner"><img src={photo.src} alt={photo.alt} style={{ aspectRatio: PHOTO_FIT[photo.src]?.ratio ?? '16 / 9', objectPosition: PHOTO_FIT[photo.src]?.pos ?? '50% 40%' }} /></div>}
         {s.shots.length === 0 ? (
           <>
             <div style={{ maxWidth: 800, marginBottom: 36 }}>{head}</div>
@@ -344,6 +350,27 @@ function ShowSection({ s: s0, alt }: { s: Show; alt: boolean }) {
               ))}
             </div>
             {s.note && <p style={{ marginTop: 14, fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
+          </>
+        ) : photo && !phones ? (
+          <>
+            <div className="sk-grid2" style={{ alignItems: 'start', marginBottom: 28 }}>
+              {head}
+              <div style={{ display: 'grid', gap: 14, paddingTop: 34 }}>
+                {s.points.map(([t, d]) => (
+                  <div key={t} style={{ fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.7)' }}>
+                    <strong style={{ color: '#fff' }}>{t}.</strong> {d}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="sk-grid2" style={{ alignItems: 'start', gap: 20 }}>
+              {s.shots.map(x => (
+                <div key={x.src} style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 20px 50px rgba(0,0,0,0.45)' }}>
+                  <img src={x.src} alt={x.alt} style={{ width: '100%', display: 'block' }} />
+                </div>
+              ))}
+            </div>
+            {s.note && <p style={{ marginTop: 10, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
           </>
         ) : (
           <div className="sk-grid2" style={{ alignItems: 'center' }}>
