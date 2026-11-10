@@ -46,9 +46,9 @@ export default function Nav() {
       <div className={'sk-navlinks' + (open ? ' sk-open' : '')} style={{ gap: 22, alignItems: 'center' }}>
         {!isAuthPage && (
           <div className="sk-feat" onMouseEnter={() => setFeat(true)} onMouseLeave={() => setFeat(false)}>
-            <button onClick={() => setFeat(f => !f)} style={{ ...linkStyle, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: FONT }}>Features &#9662;</button>
-            {feat && (
-              <div className="sk-featmenu">
+            <button onClick={() => setFeat(true)} style={{ ...linkStyle, background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: FONT }}>Features &#9662;</button>
+            {(
+              <div className={'sk-featmenu' + (feat ? ' sk-show' : '')}>
                 {FEATURE_GROUPS.map(([g, items]) => (
                   <div key={g} className="sk-featcol">
                     <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '1.5px', color: TEAL, textTransform: 'uppercase', marginBottom: 8 }}>{g}</div>
@@ -73,13 +73,14 @@ export default function Nav() {
         '.sk-navlinks { display: flex; }',
         '.sk-burger { display: none; }',
         '.sk-feat { position: relative; padding: 22px 0; }',
-        '.sk-featmenu { position: absolute; top: 56px; left: -20px; display: grid; grid-template-columns: repeat(3, 190px); gap: 24px; padding: 20px 24px; background: rgba(7,15,26,0.98); border: 1px solid rgba(77,214,200,0.3); border-radius: 12px; box-shadow: 0 30px 70px rgba(0,0,0,0.6); }',
+        '.sk-featmenu { display: none; position: absolute; top: 56px; left: -20px; display: grid; grid-template-columns: repeat(3, 190px); gap: 24px; padding: 20px 24px; background: rgba(7,15,26,0.98); border: 1px solid rgba(77,214,200,0.3); border-radius: 12px; box-shadow: 0 30px 70px rgba(0,0,0,0.6); }',
+        '.sk-featmenu.sk-show { display: grid; }',
         '@media (max-width: 960px) {',
         '  .sk-burger { display: block; }',
         '  .sk-navlinks { display: none; width: 100%; flex-direction: column; align-items: flex-start !important; padding: 12px 0 18px; }',
         '  .sk-navlinks.sk-open { display: flex; }',
         '  .sk-feat { padding: 0; }',
-        '  .sk-featmenu { position: static; grid-template-columns: 1fr; border: none; box-shadow: none; padding: 10px 0 0 4px; background: none; }',
+        '  .sk-featmenu, .sk-featmenu.sk-show { display: grid; position: static; grid-template-columns: 1fr; border: none; box-shadow: none; padding: 10px 0 0 4px; background: none; }',
         '}',
       ].join('\n') }} />
     </nav>
