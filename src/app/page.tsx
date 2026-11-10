@@ -51,11 +51,20 @@ const css = [
   '.sk-ba img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }',
   '.sk-ba figcaption { position: absolute; left: 12px; top: 12px; padding: 6px 12px; border-radius: 999px; background: rgba(7,15,26,0.78); border: 1px solid rgba(77,214,200,0.45); color: #eafffc; font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; backdrop-filter: blur(6px); }',
   '.sk-ba figure.before figcaption { border-color: rgba(255,255,255,0.4); color: #fff; }',
+  '.sk-hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; margin-bottom: 56px; }',
+  '.sk-hero-skipper { position: relative; border-radius: 22px; overflow: hidden; border: 1px solid rgba(77,214,200,0.35); box-shadow: 0 0 80px rgba(77,214,200,0.25), 0 40px 100px rgba(0,0,0,0.6); }',
+  '.sk-hero-skipper img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; }',
+  '.sk-hero-tag { position: absolute; left: 14px; right: 14px; bottom: 14px; padding: 10px 14px; border-radius: 12px; background: rgba(7,15,26,0.78); border: 1px solid rgba(77,214,200,0.45); color: #eafffc; font-size: 13px; font-weight: 800; text-align: center; }',
+  '.sk-banner { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 24px 60px rgba(0,0,0,0.5); margin-bottom: 36px; }',
+  '.sk-banner img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 30%; display: block; }',
   '@media (max-width: 860px) {',
   '  .sk-grid2, .sk-grid3, .sk-grid4, .sk-grid5 { grid-template-columns: 1fr; }',
   '  .sk-h2 { font-size: 30px; }',
   '  .sk-section { padding: 60px 0; }',
   '  .sk-hero-h1 { font-size: 46px !important; letter-spacing: -1.5px !important; }',
+  '  .sk-hero-grid { grid-template-columns: 1fr; gap: 28px; text-align: center; }',
+  '  .sk-hero-actions { justify-content: center; }',
+  '  .sk-banner img { aspect-ratio: 4 / 3; }',
   '  .sk-ring { display: none; }',
   '  .sk-ba { grid-template-columns: 1fr; gap: 14px; }',
   '  .sk-btn { width: 100%; text-align: center; }',
@@ -308,7 +317,9 @@ const SHOWS: Show[] = [
   },
 ]
 
-function ShowSection({ s, alt }: { s: Show; alt: boolean }) {
+function ShowSection({ s: s0, alt }: { s: Show; alt: boolean }) {
+  const photo = s0.shots[0] && s0.shots[0].src.indexOf('/photo-') >= 0 ? s0.shots[0] : null
+  const s: Show = photo ? { ...s0, shots: s0.shots.slice(1) } : s0
   const phones = s.shots.length > 0 && s.shots.every(x => x.phone)
   const head = (
     <div>
@@ -320,6 +331,7 @@ function ShowSection({ s, alt }: { s: Show; alt: boolean }) {
   return (
     <section id={s.id} className={'sk-section' + (alt ? ' sk-alt' : '')}>
       <div className="sk-wrap">
+        {photo && <div className="sk-banner"><img src={photo.src} alt={photo.alt} /></div>}
         {s.shots.length === 0 ? (
           <>
             <div style={{ maxWidth: 800, marginBottom: 36 }}>{head}</div>
@@ -382,27 +394,33 @@ export default function Home() {
       {/* HERO */}
       <section className="sk-section" style={{ paddingTop: 70, paddingBottom: 60 }}>
         <div className="sk-wrap">
-          <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
-            <div className="sk-pill sk-rise">Marina and yacht club SaaS</div>
-            <h1 className="sk-hero-h1 sk-rise sk-rise2" style={{ fontSize: 84, fontWeight: 900, letterSpacing: '-3px', lineHeight: 1.02, margin: '0 0 20px' }}>
-              We run on <span className="sk-grad">Skipper.</span>
-            </h1>
-            <p className="sk-rise sk-rise3" style={{ fontSize: 28, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.95)' }}>Your marina or yacht club, on autopilot.</p>
-            <p className="sk-sub sk-rise sk-rise3" style={{ marginBottom: 32 }}>
-              Slips, moorings, yard, contracts and billing, handled day to day. Approve every action, or set it to one tap and go. Every module included, in one published price.
-            </p>
-            <div className="sk-rise sk-rise4" style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div className="sk-hero-grid">
+            <div className="sk-hero-text">
+              <div className="sk-pill sk-rise">Marina and yacht club SaaS</div>
+              <h1 className="sk-hero-h1 sk-rise sk-rise2" style={{ fontSize: 76, fontWeight: 900, letterSpacing: '-3px', lineHeight: 1.02, margin: '0 0 20px' }}>
+                We run on <span className="sk-grad">Skipper.</span>
+              </h1>
+              <p className="sk-rise sk-rise3" style={{ fontSize: 26, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.95)' }}>Your marina or yacht club, on autopilot.</p>
+              <p className="sk-sub sk-rise sk-rise3" style={{ marginBottom: 28 }}>
+                Slips, moorings, yard, contracts and billing, handled day to day. Approve every action, or set it to one tap and go. Every module included, in one published price.
+              </p>
+              <div className="sk-rise sk-rise4 sk-hero-actions" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <a href="#marinas" className="sk-btn sk-btn-main">I run a marina</a>
               <a href="#clubs" className="sk-btn sk-btn-ghost">I run a yacht club</a>
+              </div>
+              <div className="sk-rise sk-rise4 sk-hero-actions" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 24 }}>
+                <span className="sk-chip"><i />Every module included</span>
+                <span className="sk-chip"><i />One published price</span>
+                <span className="sk-chip"><i />Live at working marinas</span>
+              </div>
+              <p style={{ marginTop: 18, fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
+                Or <a href="#demo" style={{ color: TEAL, textDecoration: 'none', fontWeight: 700 }}>request a demo</a> and we will walk you through it.
+              </p>
             </div>
-            <div className="sk-rise sk-rise4" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center', marginTop: 26 }}>
-              <span className="sk-chip"><i />Every module included</span>
-              <span className="sk-chip"><i />One published price</span>
-              <span className="sk-chip"><i />Live at working marinas</span>
+            <div className="sk-hero-skipper sk-rise sk-rise3">
+              <img src="/collage/skipper-hero.jpg" alt="Skipper, the AI that runs the marina, standing on a dock with a tablet" />
+              <div className="sk-hero-tag">Meet Skipper, the AI that runs your marina</div>
             </div>
-            <p style={{ marginTop: 18, fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
-              Or <a href="#demo" style={{ color: TEAL, textDecoration: 'none', fontWeight: 700 }}>request a demo</a> and we will walk you through it.
-            </p>
           </div>
           <div className="sk-hero-frame"><div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.18)', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
             <img src="/collage/chartroom-3d-full.jpg" alt="Skipper Chart Room: a 3D map of a marina with every slip, boat and module in the menu" style={{ width: '100%', display: 'block' }} />
@@ -484,7 +502,7 @@ export default function Home() {
             </div>
             <div>
               <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 20px 50px rgba(0,0,0,0.45)' }}>
-                <img src="/collage/photo-dockmaster-map.jpg" alt="A dockmaster checks the Chart Room map on his tablet at the end of the dock" style={{ width: '100%', display: 'block' }} />
+                <img src="/collage/photo-dockmaster-map.jpg" alt="A dockmaster checks the Chart Room map on his tablet at the end of the dock" style={{ width: '100%', display: 'block', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: '50% 25%' }} />
               </div>
               <p style={{ marginTop: 10, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Illustrative photo.</p>
             </div>
