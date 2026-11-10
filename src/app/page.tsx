@@ -491,6 +491,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* BEFORE / AFTER: Mike 2026-11-10; imagery use confirmed by Mike (Google gave permission), real Bronx Marina */}
+      <section className="sk-section">
+        <div className="sk-wrap">
+          <div style={{ textAlign: 'center', maxWidth: 820, margin: '0 auto 32px' }}>
+            <div className="sk-eyebrow">One real marina, four views</div>
+            <h2 className="sk-h2">From a satellite photo to a live marina.</h2>
+            <p className="sk-sub">We start with the aerial view of your marina and build it, slip by slip. Then it runs: the same marina in 3D, as a live 2D map with every overdue boat lit, and as a simple list of docks and slips.</p>
+          </div>
+          <div className="***"><div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.18)', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
+            <img src="/collage/bronx-before-after.jpg" alt="Bronx Marina four ways: the satellite photo, the 3D Chart Room, the 2D live map with the Overdue filter on, and the Docks and Slips list" style={{ width: '100%', display: 'block' }} />
+          </div></div>
+          <div className="sk-grid3" style={{ marginTop: 40, gridTemplateColumns: 'repeat(4, 1fr)' }}>
+            {[['1', 'The aerial photo', 'Where we start.'], ['2', 'The 3D Chart Room', 'Your marina, built to scale.'], ['3', 'The live 2D map', 'Filter it and every overdue boat lights up.'], ['4', 'Docks & Slips', 'The same facts as a list.']].map(([n, t, d]) => (
+              <div key={n} className="sk-card">
+                <div className="sk-grad" style={{ fontSize: 30, fontWeight: 900 }}>{n}</div>
+                <div style={{ fontWeight: 800, fontSize: 16, margin: '4px 0' }}>{t}</div>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)' }}>{d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="sk-section sk-alt">
         <div className="sk-wrap" style={{ textAlign: 'center', maxWidth: 820 }}>
           <div className="sk-eyebrow">The brain</div>
