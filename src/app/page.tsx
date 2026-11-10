@@ -13,18 +13,46 @@ const css = [
   '.sk-grid5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }',
   '.sk-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 14px; padding: 24px; }',
   '.sk-btn { display: inline-block; padding: 14px 28px; border-radius: 8px; font-weight: 800; font-size: 15px; text-decoration: none; }',
-  '.sk-btn-main { background: ' + TEAL + '; color: ' + NAVY + '; }',
-  '.sk-btn-ghost { border: 1px solid ' + TEAL + '; color: ' + TEAL + '; }',
+  '.sk-btn-main { background: linear-gradient(135deg, #7ff3e6, #4dd6c8 55%, #5fb4ff); color: #04202e; animation: skglow 3s ease-in-out infinite; }',
+  '.sk-btn-ghost { border: 1px solid rgba(77,214,200,0.6); color: #eafffc; background: rgba(255,255,255,0.06); backdrop-filter: blur(6px); }',
   '.sk-h2 { font-size: 38px; font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin: 0 0 16px; }',
   '.sk-eyebrow { font-size: 12px; color: ' + TEAL + '; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }',
   '.sk-sub { font-size: 18px; color: rgba(255,255,255,0.65); line-height: 1.65; margin: 0; }',
   '.sk-section { padding: 90px 0; }',
   '.sk-alt { background: rgba(255,255,255,0.025); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }',
+  '.sk-main { position: relative; overflow-x: hidden; background: radial-gradient(1200px 700px at 50% -10%, rgba(77,214,200,0.20), transparent 60%), radial-gradient(900px 600px at 90% 8%, rgba(124,92,255,0.18), transparent 60%), radial-gradient(900px 700px at 5% 30%, rgba(40,120,255,0.12), transparent 60%), #070f1a; }',
+  '.sk-main::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: linear-gradient(to bottom, #000 0, transparent 1400px); mask-image: linear-gradient(to bottom, #000 0, transparent 1400px); }',
+  '.sk-main > * { position: relative; }',
+  '.sk-orb { position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none; animation: skdrift 14s ease-in-out infinite alternate; }',
+  '.sk-ring { position: absolute; left: 50%; top: 120px; width: 1500px; height: 520px; margin-left: -750px; border: 1px solid rgba(77,214,200,0.18); border-radius: 50%; pointer-events: none; transform: rotate(-6deg); }',
+  '.sk-ring2 { top: 170px; width: 1250px; height: 420px; margin-left: -625px; border-color: rgba(124,92,255,0.20); transform: rotate(5deg); }',
+  '@keyframes skdrift { from { transform: translate(0,0) scale(1); } to { transform: translate(40px,30px) scale(1.12); } }',
+  '@keyframes skfloat { from { transform: translateY(0); } to { transform: translateY(-10px); } }',
+  '@keyframes skrise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }',
+  '@keyframes skglow { 0%,100% { box-shadow: 0 0 24px rgba(77,214,200,0.45), 0 8px 30px rgba(77,214,200,0.25); } 50% { box-shadow: 0 0 40px rgba(77,214,200,0.75), 0 8px 40px rgba(77,214,200,0.4); } }',
+  '.sk-rise { animation: skrise 0.9s cubic-bezier(.2,.7,.2,1) both; }',
+  '.sk-rise2 { animation-delay: 0.12s; } .sk-rise3 { animation-delay: 0.24s; } .sk-rise4 { animation-delay: 0.36s; }',
+  '.sk-pill { display: inline-block; padding: 7px 16px; border-radius: 999px; background: rgba(77,214,200,0.10); border: 1px solid rgba(77,214,200,0.35); color: ' + TEAL + '; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px; box-shadow: 0 0 22px rgba(77,214,200,0.15); }',
+  '.sk-grad { background: linear-gradient(100deg, #7ff3e6 0%, #4dd6c8 35%, #6aa8ff 70%, #a78bfa 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 28px rgba(77,214,200,0.35)); }',
+  '.sk-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8); backdrop-filter: blur(6px); }',
+  '.sk-chip i { width: 8px; height: 8px; border-radius: 50%; background: ' + TEAL + '; box-shadow: 0 0 10px ' + TEAL + '; display: inline-block; }',
+  '.sk-hero-frame { position: relative; margin-top: 56px; }',
+  '.sk-hero-frame::before { content: ""; position: absolute; inset: -2px; border-radius: 18px; background: linear-gradient(120deg, rgba(77,214,200,0.9), rgba(106,168,255,0.5), rgba(167,139,250,0.9)); filter: blur(22px); opacity: 0.45; z-index: 0; }',
+  '.sk-hero-frame > div { position: relative; z-index: 1; animation: skfloat 6s ease-in-out infinite alternate; }',
+  '.sk-card { background: linear-gradient(160deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02)); backdrop-filter: blur(8px); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }',
+  '.sk-card:hover { transform: translateY(-4px); border-color: rgba(77,214,200,0.5); box-shadow: 0 14px 40px rgba(0,0,0,0.4), 0 0 28px rgba(77,214,200,0.18); }',
+  '.sk-h2 { background: linear-gradient(180deg, #ffffff 30%, #b9ccdd 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }',
+  '.sk-eyebrow { text-shadow: 0 0 18px rgba(77,214,200,0.5); }',
+  '.sk-alt { background: linear-gradient(180deg, rgba(77,214,200,0.045), rgba(124,92,255,0.035)); }',
+  '.sk-btn { transition: transform .2s ease, box-shadow .2s ease; padding: 16px 32px; font-size: 16px; border-radius: 10px; }',
+  '.sk-btn:hover { transform: translateY(-2px); }',
   '@media (max-width: 860px) {',
   '  .sk-grid2, .sk-grid3, .sk-grid4, .sk-grid5 { grid-template-columns: 1fr; }',
   '  .sk-h2 { font-size: 30px; }',
   '  .sk-section { padding: 60px 0; }',
-  '  .sk-hero-h1 { font-size: 44px !important; }',
+  '  .sk-hero-h1 { font-size: 46px !important; letter-spacing: -1.5px !important; }',
+  '  .sk-ring { display: none; }',
+  '  .sk-btn { width: 100%; text-align: center; }',
   '}',
 ].join('\n')
 
@@ -336,33 +364,41 @@ function ShowSection({ s, alt }: { s: Show; alt: boolean }) {
 
 export default function Home() {
   return (
-    <main style={{ fontFamily: FONT, background: DARK, color: '#fff' }}>
+    <main className="sk-main" style={{ fontFamily: FONT, color: '#fff' }}>
+      <div className="sk-ring" /><div className="sk-ring sk-ring2" />
+      <div className="sk-orb" style={{ width: 420, height: 420, left: '-8%', top: 160, background: 'rgba(77,214,200,0.22)' }} />
+      <div className="sk-orb" style={{ width: 380, height: 380, right: '-6%', top: 60, background: 'rgba(124,92,255,0.25)', animationDelay: '-6s' }} />
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       {/* HERO */}
       <section className="sk-section" style={{ paddingTop: 70, paddingBottom: 60 }}>
         <div className="sk-wrap">
           <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
-            <div className="sk-eyebrow">Marina and yacht club SaaS</div>
-            <h1 className="sk-hero-h1" style={{ fontSize: 66, fontWeight: 900, letterSpacing: '-2px', lineHeight: 1.05, margin: '0 0 18px' }}>
-              We run on <span style={{ color: TEAL }}>Skipper.</span>
+            <div className="sk-pill sk-rise">Marina and yacht club SaaS</div>
+            <h1 className="sk-hero-h1 sk-rise sk-rise2" style={{ fontSize: 84, fontWeight: 900, letterSpacing: '-3px', lineHeight: 1.02, margin: '0 0 20px' }}>
+              We run on <span className="sk-grad">Skipper.</span>
             </h1>
-            <p style={{ fontSize: 26, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.92)' }}>Your marina or club, on autopilot.</p>
-            <p className="sk-sub" style={{ marginBottom: 30 }}>
+            <p className="sk-rise sk-rise3" style={{ fontSize: 28, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.95)' }}>Your marina or club, on autopilot.</p>
+            <p className="sk-sub sk-rise sk-rise3" style={{ marginBottom: 32 }}>
               Slips, moorings, yard, contracts and billing, handled day to day. Approve every action, or set it to one tap and go. Every module included, in one published price.
             </p>
-            <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center' }}>
-              <a href="#marinas" className="sk-btn ***">I run a marina</a>
-              <a href="#clubs" className="sk-btn ***">I run a yacht club</a>
+            <div className="sk-rise sk-rise4" style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+              <a href="#marinas" className="sk-btn sk-btn-main">I run a marina</a>
+              <a href="#clubs" className="sk-btn sk-btn-ghost">I run a yacht club</a>
+            </div>
+            <div className="sk-rise sk-rise4" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center', marginTop: 26 }}>
+              <span className="sk-chip"><i />Every module included</span>
+              <span className="sk-chip"><i />One published price</span>
+              <span className="sk-chip"><i />Live at working marinas</span>
             </div>
             <p style={{ marginTop: 18, fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
               Or <a href="#demo" style={{ color: TEAL, textDecoration: 'none', fontWeight: 700 }}>request a demo</a> and we will walk you through it.
             </p>
           </div>
-          <div style={{ marginTop: 48, borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 30px 80px rgba(0,0,0,0.55)' }}>
+          <div className="sk-hero-frame"><div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.18)', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
             <img src="/collage/chartroom-3d-full.jpg" alt="Skipper Chart Room: a 3D map of a marina with every slip, boat and module in the menu" style={{ width: '100%', display: 'block' }} />
-          </div>
-          <p style={{ marginTop: 10, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Sample marina, demo data.</p>
+          </div></div>
+          <p style={{ marginTop: 14, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Sample marina, demo data.</p>
         </div>
       </section>
 
@@ -679,7 +715,7 @@ export default function Home() {
 
           <div style={{ textAlign: 'center' }}>
             <p style={{ margin: '0 0 22px', fontSize: 15, color: 'rgba(255,255,255,0.65)' }}>Every plan includes: slips, moorings, yard, contracts and e-sign, billing, fuel dock, work orders, parts and inventory, ship store, messaging, wait list, the Autopilot, your map, your data move, and the integrations you need.</p>
-            <a href="#demo" className="sk-btn ***">Request a demo</a>
+            <a href="#demo" className="sk-btn sk-btn-main">Request a demo</a>
           </div>
         </div>
       </section>
