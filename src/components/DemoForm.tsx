@@ -49,7 +49,7 @@ export default function DemoForm() {
       <div><label style={label}>Your name</label><input required style={field} value={f.name} onChange={e => set('name', e.target.value)} /></div>
       <div><label style={label}>Email</label><input required type="email" style={field} value={f.email} onChange={e => set('email', e.target.value)} /></div>
       <div><label style={label}>Phone (best for a quick call)</label><input required type="tel" style={field} value={f.phone} onChange={e => set('phone', e.target.value)} /></div>
-      <div><label style={label}>{f.kind === 'club' ? 'Club name' : 'Marina name'}</label><input required style={field} value={f.place} onChange={e => set('place', e.target.value)} /></div>
+      <div><label style={label}>{f.kind === 'club' ? 'Yacht club name' : 'Marina name'}</label><input required style={field} value={f.place} onChange={e => set('place', e.target.value)} /></div>
       <div><label style={label}>{f.kind === 'club' ? 'About how many members?' : 'About how many slips and moorings?'}</label><input style={field} value={f.size} onChange={e => set('size', e.target.value)} /></div>
       <label style={{ display: 'flex', gap: 10, alignItems: 'center', fontSize: 14, color: 'rgba(255,255,255,0.8)', cursor: 'pointer' }}><input type="checkbox" checked={f.dry} onChange={e => setF({ ...f, dry: e.target.checked })} />I run dry stack or a boat yard</label>
       <div><label style={label}>Anything we should know? (optional)</label><textarea rows={3} style={field} value={f.message} onChange={e => set('message', e.target.value)} /></div>

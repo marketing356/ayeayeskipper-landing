@@ -126,15 +126,15 @@ const CLUB_TIERS: [string, string][] = [
 
 const FAQ: [string, string][] = [
   ['What is Skipper?', 'Skipper is management software for marinas and yacht clubs. It holds your spaces, boats, contracts, billing and messages in one system, with a live map of your property and an AI assistant that does the day-to-day work.'],
-  ['How much does it cost?', 'Your price depends only on the size of your marina or club, from $99 a month for up to 20 slips and moorings to $799 for over 250 or several marinas. Every module is in every plan. Yacht club prices are in the pricing section.'],
+  ['How much does it cost?', 'Your price depends only on the size of your marina or yacht club, from $99 a month for up to 20 slips and moorings to $799 for over 250 or several marinas. Every module is in every plan. Yacht club prices are in the pricing section.'],
   ['Are there setup fees or other charges?', 'No setup fee, no onboarding fee and no add-ons. Moving your data, your map and the integrations you need are inside your monthly price. There is no Skipper fee on transient bookings. Card processors such as Stripe and Clover still charge their normal card fees.'],
   ['Do I have to use the AI?', 'No. Claude is built into Skipper, and one switch turns it off for the whole marina. With the AI off, nothing is answered, sent or done by AI, and you still run the marina on the same slips, contracts, billing, map and records, by hand. Turn it back on any time.'],
   ['What is the AI, and does it do things without asking?', 'Skipper is powered by Claude, the AI from Anthropic. It reads your marina records, answers in plain English and does the work you approve. You can approve each action, or set it to one tap and go. You decide how much it does.'],
-  ['What do I have to do to switch from my current software?', 'Send us your boat and owner lists, your layout and your contracts. We draw every space, load your records and hand you a live map of your marina or club. You do not build it yourself.'],
+  ['What do I have to do to switch from my current software?', 'Send us your boat and owner lists, your layout and your contracts. We draw every space, load your records and hand you a live map of your marina or yacht club. You do not build it yourself.'],
   ['Does it work with my accounting software and card processor?', 'Stripe, Clover and text messaging are live today. QuickBooks, Xero, Square, Mailchimp, Google Calendar, Zapier and your own point of sale are built when you ask, and that is included in your price.'],
-  ['What if I need something Skipper does not do yet?', 'Tell us. We build custom features and integrations for the marinas and clubs we work with, and they are included.'],
+  ['What if I need something Skipper does not do yet?', 'Tell us. We build custom features and integrations for the marinas and yacht clubs we work with, and they are included.'],
   ['Do my boaters and members have to pay anything or learn anything?', 'No. Boaters get an app where their space lights up on the map and they can message you. It costs them nothing and takes no extra work from you.'],
-  ['Does it work for a yacht club with only moorings?', 'Yes. Skipper shows only the kinds of space you actually have. A club with moorings and no slips sees moorings and no slips.'],
+  ['Does it work for a yacht club with only moorings?', 'Yes. Skipper shows only the kinds of space you actually have. A yacht club with moorings and no slips sees moorings and no slips.'],
   ['Can I run more than one marina?', 'Yes. Several marinas run together on one account with a fleet view, and they are covered by the top plan.'],
   ['Can I see it before I decide?', 'Yes. Request a demo and we will walk you through it with a marina like yours.'],
 ]
@@ -151,7 +151,7 @@ const SHOWS: Show[] = [
       ['Customers find their own space', 'Their slip or mooring is marked on their phone, with a button that zooms straight to it.'],
       ['Open slips on show', 'Available slips are lit up on the map for anyone choosing where to stay, and can be published for prospective slip holders.'],
       ['Mooring fields, labelled', 'Marinas with heavy transient traffic get every mooring mapped and named.'],
-      ['Only what you have', 'A marina with slips only sees slips. A club with moorings only sees moorings.'],
+      ['Only what you have', 'A marina with slips only sees slips. A yacht club with moorings only sees moorings.'],
     ],
     shots: [{ src: '/collage/app-map.jpg', alt: 'Skipper boater app showing available slips lit up on the marina map', phone: true }],
     note: 'Sample marina, demo data.',
@@ -606,7 +606,7 @@ export default function Home() {
           <div style={{ maxWidth: 760, marginBottom: 40 }}>
             <div className="sk-eyebrow">What it is</div>
             <h2 className="sk-h2">Software that does the work, not just keeps the records.</h2>
-            <p className="sk-sub">Skipper is marina and club management software that handles the day-to-day for you, so your people can spend their time on the water and with your members.</p>
+            <p className="sk-sub">Skipper is marina and yacht club management software that handles the day-to-day for you, so your people can spend their time on the water and with your members.</p>
           </div>
           <div className="sk-grid4">
             {[
@@ -654,7 +654,7 @@ export default function Home() {
           <div style={{ marginTop: 80 }}>
             <div className="sk-eyebrow">How we build your marina</div>
             <h2 className="sk-h2" style={{ maxWidth: 760 }}>We turn your marina into an interactive map.</h2>
-            <p className="sk-sub" style={{ maxWidth: 760, marginBottom: 32 }}>You send us your boat and owner lists, your layout and your contracts. We draw every space, load your records and hand you a live map of your marina or club.</p>
+            <p className="sk-sub" style={{ maxWidth: 760, marginBottom: 32 }}>You send us your boat and owner lists, your layout and your contracts. We draw every space, load your records and hand you a live map of your marina or yacht club.</p>
             <div className="sk-grid3">
               {BUILD_STEPS.map(([n, label, img]) => (
                 <div key={n} className="sk-card" style={{ padding: 0, overflow: 'hidden' }}>
@@ -804,7 +804,7 @@ export default function Home() {
             ))}
           </div>
           <p style={{ marginTop: 28, fontSize: 16, color: 'rgba(255,255,255,0.7)', maxWidth: 760, lineHeight: 1.7 }}>
-            Your membership agreements go through the same contract builder and e-signature as everything else. Need something your club does that we do not have yet? Tell us. We build it with you, and it is included.
+            Your membership agreements go through the same contract builder and e-signature as everything else. Need something your yacht club does that we do not have yet? Tell us. We build it with you, and it is included.
           </p>
         </div>
       </section>
@@ -842,10 +842,10 @@ export default function Home() {
             <div>
               <div className="sk-eyebrow">Clusters</div>
               <h2 className="sk-h2" style={{ fontSize: 30 }}>One boat, two marinas, one record.</h2>
-              <p className="sk-sub" style={{ marginBottom: 18 }}>Skipper does not buy or take over marinas. Marinas and clubs in the same area join a cluster on one system. A boat that winters at one and summers at another is a single record, with its trailer and its contract. No re-entry, no phone calls.</p>
+              <p className="sk-sub" style={{ marginBottom: 18 }}>Skipper does not buy or take over marinas. Marinas and yacht clubs in the same area join a cluster on one system. A boat that winters at one and summers at another is a single record, with its trailer and its contract. No re-entry, no phone calls.</p>
             </div>
             <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
-              <img src="/cluster-diagram.svg" alt="Several marinas and clubs connected as one cluster on Skipper" style={{ width: '100%', display: 'block' }} />
+              <img src="/cluster-diagram.svg" alt="Several marinas and yacht clubs connected as one cluster on Skipper" style={{ width: '100%', display: 'block' }} />
             </div>
           </div>
         </div>
@@ -886,7 +886,7 @@ export default function Home() {
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
             <div className="sk-eyebrow">Pricing</div>
             <h2 className="sk-h2" style={{ maxWidth: 780, margin: '0 auto 16px' }}>One price. Everything included. Right here.</h2>
-            <p className="sk-sub" style={{ maxWidth: 720, margin: '0 auto' }}>Your price depends only on the size of your marina or club. Every module is in every plan. No setup fee, no onboarding fee, no add-ons. No Skipper fee on transient bookings. Card processors still charge their normal card fees.</p>
+            <p className="sk-sub" style={{ maxWidth: 720, margin: '0 auto' }}>Your price depends only on the size of your marina or yacht club. Every module is in every plan. No setup fee, no onboarding fee, no add-ons. No Skipper fee on transient bookings. Card processors still charge their normal card fees.</p>
           </div>
 
           <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 14 }}>Marinas</div>
