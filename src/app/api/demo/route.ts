@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
   }
 
   const rows: [string, unknown][] = [
-    ['Type', kind], ['Name', name], ['Email', email], ['Phone', b.phone], [kind + ' name', b.place], ['Size', b.size], ['Message', b.message],
+    ['Type', kind], ['Name', name], ['Email', email], ['Phone', b.phone], [kind + ' name', b.place], ['Size', b.size], ['Dry stack or yard', b.dry ? 'Yes' : 'No'], ['Message', b.message],
   ]
   const html = '<h2>New demo request: ' + esc(b.place || name) + ' (' + kind + ')</h2><table style="border-collapse:collapse">' +
     rows.map(([k, v]) => '<tr><td style="padding:6px 12px;background:#f5f5f5;font-weight:bold">' + esc(k) + '</td><td style="padding:6px 12px">' + esc(v || '-') + '</td></tr>').join('') + '</table>'

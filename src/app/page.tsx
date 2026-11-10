@@ -450,6 +450,7 @@ export default function Home() {
               </div>
               <div className="sk-rise sk-rise4 sk-hero-actions" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 24 }}>
                 <span className="sk-chip"><i />Every module included</span>
+                <span className="sk-chip"><i />Dry stack and yard, built in</span>
                 <span className="sk-chip"><i />One published price</span>
                 <span className="sk-chip"><i />Live at working marinas</span>
               </div>
@@ -940,6 +941,7 @@ export default function Home() {
             <div className="sk-eyebrow">Request a demo</div>
             <h2 className="sk-h2">See your marina or club on Skipper.</h2>
             <p className="sk-sub" style={{ marginBottom: 22 }}>Tell us a little about you. We will get back to you personally, show you the product running, and give you a quote.</p>
+            <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, marginBottom: 18 }}>Prefer to talk? Call <a href="tel:+18006860315" style={{ color: TEAL, fontWeight: 800, textDecoration: 'none' }}>1-800-686-0315</a>.</p>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>Skipper is short for AyeAyeSkipper: aye aye, yes captain, it is done.</p>
           </div>
           <DemoForm />
