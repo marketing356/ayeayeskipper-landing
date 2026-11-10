@@ -352,83 +352,39 @@ function ShowSection({ s: s0, alt }: { s: Show; alt: boolean }) {
   const photo = s0.shots[0] && s0.shots[0].src.indexOf('/photo-') >= 0 ? s0.shots[0] : null
   const s: Show = photo ? { ...s0, shots: s0.shots.slice(1) } : s0
   const phones = s.shots.length > 0 && s.shots.every(x => x.phone)
-  const head = (
-    <div>
-      <div className="sk-eyebrow">{s.eyebrow}</div>
-      <h2 className="sk-h2">{s.title}</h2>
-      <p className="sk-sub" style={{ marginBottom: s.shots.length ? 22 : 0 }}>{s.sub}</p>
-    </div>
-  )
+  // One layout for every section (Mike 2026-11-10): title first, then the picture, then the small print, then each feature as its own bubble.
+  const frame: React.CSSProperties = { borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 20px 50px rgba(0,0,0,0.45)' }
   return (
     <section id={s.id} className={'sk-section' + (alt ? ' sk-alt' : '')}>
       <div className="sk-wrap">
+        <div style={{ maxWidth: 800, marginBottom: 26 }}>
+          <div className="sk-eyebrow">{s.eyebrow}</div>
+          <h2 className="sk-h2" style={{ marginBottom: 0 }}>{s.title}</h2>
+        </div>
         {photo && <div className="sk-banner"><img src={photo.src} alt={photo.alt} style={{ aspectRatio: PHOTO_FIT[photo.src]?.ratio ?? '16 / 9', objectPosition: PHOTO_FIT[photo.src]?.pos ?? '50% 40%' }} /></div>}
-        {s.shots.length === 0 ? (
-          <>
-            <div style={{ maxWidth: 800, marginBottom: 36 }}>{head}</div>
-            <div className="sk-grid4">
-              {s.points.map(([t, d]) => (
-                <div key={t} className="sk-card">
-                  <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 8, color: TEAL }}>{t}</div>
-                  <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6 }}>{d}</div>
-                </div>
-              ))}
-            </div>
-            {s.note && <p style={{ marginTop: 14, fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
-          </>
-        ) : photo && !phones ? (
-          <>
-            <div className="sk-grid2" style={{ alignItems: 'start', marginBottom: 28 }}>
-              {head}
-              <div style={{ display: 'grid', gap: 14, paddingTop: 34 }}>
-                {s.points.map(([t, d]) => (
-                  <div key={t} style={{ fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.7)' }}>
-                    <strong style={{ color: '#fff' }}>{t}.</strong> {d}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="sk-grid2" style={{ alignItems: 'center', gap: 20 }}>
-              {s.shots.map(x => (
-                <div key={x.src} style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 20px 50px rgba(0,0,0,0.45)' }}>
-                  <img src={x.src} alt={x.alt} style={{ width: '100%', display: 'block' }} />
-                </div>
-              ))}
-            </div>
-            {s.note && <p style={{ marginTop: 10, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
-          </>
-        ) : (
-          <div className="sk-grid2" style={{ alignItems: 'center' }}>
-            <div>
-              {head}
-              <div style={{ display: 'grid', gap: 14 }}>
-                {s.points.map(([t, d]) => (
-                  <div key={t} style={{ fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.7)' }}>
-                    <strong style={{ color: '#fff' }}>{t}.</strong> {d}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              {phones ? (
-                <div style={{ display: 'flex', gap: 14, justifyContent: 'center' }}>
-                  {s.shots.map(x => (
-                    <img key={x.src} src={x.src} alt={x.alt} style={{ width: s.shots.length === 1 ? 270 : '32%', maxWidth: 270, borderRadius: 22, border: '1px solid rgba(255,255,255,0.15)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', display: 'block' }} />
-                  ))}
-                </div>
-              ) : (
-                <div style={{ display: 'grid', gap: 16 }}>
-                  {s.shots.map(x => (
-                    <div key={x.src} style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 20px 50px rgba(0,0,0,0.45)' }}>
-                      <img src={x.src} alt={x.alt} style={{ width: '100%', display: 'block' }} />
-                    </div>
-                  ))}
-                </div>
-              )}
-              {s.note && <p style={{ marginTop: 10, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
-            </div>
+        {s.shots.length > 0 && (phones ? (
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 8 }}>
+            {s.shots.map(x => (
+              <img key={x.src} src={x.src} alt={x.alt} style={{ width: s.shots.length === 1 ? 300 : 'calc(33% - 10px)', minWidth: 140, maxWidth: 300, borderRadius: 22, border: '1px solid rgba(255,255,255,0.15)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)', display: 'block' }} />
+            ))}
           </div>
-        )}
+        ) : (
+          <div className={s.shots.length > 1 ? 'sk-grid2' : undefined} style={{ display: 'grid', gap: 16, alignItems: 'center', marginBottom: 8 }}>
+            {s.shots.map(x => (
+              <div key={x.src} style={frame}><img src={x.src} alt={x.alt} style={{ width: '100%', display: 'block' }} /></div>
+            ))}
+          </div>
+        ))}
+        {s.note && <p style={{ margin: '10px 0 0', textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
+        <p className="sk-sub" style={{ maxWidth: 800, margin: '24px 0 24px' }}>{s.sub}</p>
+        <div className="sk-grid3">
+          {s.points.map(([t, d]) => (
+            <div key={t} className="sk-card">
+              <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 8, color: TEAL }}>{t}</div>
+              <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6 }}>{d}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
