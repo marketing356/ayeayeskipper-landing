@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: "Skipper",
     title: "Skipper — We run on Skipper",
-    description: "Management software for marinas and yacht clubs. Your marina or club, on autopilot.",
+    description: "Management software for marinas and yacht clubs. Your marina or yacht club, on autopilot.",
     type: "website",
   }
 }

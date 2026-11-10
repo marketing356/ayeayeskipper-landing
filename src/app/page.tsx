@@ -939,7 +939,7 @@ export default function Home() {
         <div className="sk-wrap sk-grid2" style={{ alignItems: 'start' }}>
           <div>
             <div className="sk-eyebrow">Request a demo</div>
-            <h2 className="sk-h2">See your marina or club on Skipper.</h2>
+            <h2 className="sk-h2">See your marina or yacht club on Skipper.</h2>
             <p className="sk-sub" style={{ marginBottom: 22 }}>Tell us a little about you. We will get back to you personally, show you the product running, and give you a quote.</p>
             <p style={{ fontSize: 17, color: 'rgba(255,255,255,0.85)', lineHeight: 1.7, marginBottom: 18 }}>Prefer to talk? Call <a href="tel:+18006860315" style={{ color: TEAL, fontWeight: 800, textDecoration: 'none' }}>1-800-686-0315</a> or email <a href="mailto:info@ayeayeskipper.com" style={{ color: TEAL, fontWeight: 800, textDecoration: 'none' }}>info@ayeayeskipper.com</a>.</p>
             <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>Skipper is short for AyeAyeSkipper: aye aye, yes captain, it is done.</p>
