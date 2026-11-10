@@ -77,43 +77,19 @@ export default function WeatherBar() {
       setLoading(false)
     }
 
-    // Try browser geolocation first
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async pos => {
-          if (done) return
-          done = true
-          await resolve(pos.coords.latitude, pos.coords.longitude)
-        },
-        async () => {
-          // Geolocation denied — fall back to IP geolocation
-          if (done) return
-          done = true
-          try {
-            const ipRes = await fetch('https://ipapi.co/json/')
-            const ipJson = await ipRes.json()
-            if (ipJson.latitude && ipJson.longitude) {
-              await resolve(ipJson.latitude, ipJson.longitude)
-              return
-            }
-          } catch { /* silent */ }
-          setLoading(false)
-        },
-        { timeout: 5000 }
-      )
-    } else {
-      // No geolocation support — use IP fallback immediately
-      fetch('https://ipapi.co/json/')
-        .then(r => r.json())
-        .then(async ipJson => {
-          if (ipJson.latitude && ipJson.longitude) {
-            await resolve(ipJson.latitude, ipJson.longitude)
-          } else {
-            setLoading(false)
-          }
-        })
-        .catch(() => setLoading(false))
-    }
+    // No browser location prompt on the public site: use approximate IP location only
+    fetch('https://ipapi.co/json/')
+      .then(r => r.json())
+      .then(async ipJson => {
+        if (done) return
+        done = true
+        if (ipJson.latitude && ipJson.longitude) {
+          await resolve(ipJson.latitude, ipJson.longitude)
+          return
+        }
+        setLoading(false)
+      })
+      .catch(() => { if (!done) { done = true; setLoading(false) } })
   }, [])
 
   // Always render the bar — show skeleton while loading, weather once ready.
