@@ -690,7 +690,7 @@ export default function Home() {
             <h2 className="sk-h2">Find your mooring ball in a big field. Tap it and it pulses.</h2>
             <p className="sk-sub">A transient boater taps Available and every open mooring pulses on the map. A mooring holder taps My spot and goes straight to theirs. Slips and moorings each get their own map, with one tap to switch.</p>
           </div>
-          <div className="sk-grid2" style={{ alignItems: 'start', marginBottom: 36 }}>
+          <div style={{ display: 'grid', gap: 28, marginBottom: 40 }}>
             <div>
               <div className="sk-card" style={{ padding: 0, overflow: 'hidden' }}>
                 <img src="/collage/mooring-2d.jpg" alt="Chart Room 2D map of a mooring field: every mooring ball with its number, green for open and red for overdue" style={{ width: '100%', display: 'block' }} />
@@ -705,13 +705,13 @@ export default function Home() {
             </div>
           </div>
           <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-start' }}>
-            <figure style={{ margin: 0, width: 270, maxWidth: '100%' }}>
+            <figure style={{ margin: 0, width: 310, maxWidth: '100%' }}>
               <div className="sk-card" style={{ padding: 0, overflow: 'hidden', borderRadius: 22 }}>
                 <img src="/collage/mooring-phone.jpg" alt="Boater app on a phone: open moorings M5 and M6 pulse on the Mooring Field map" style={{ width: '100%', display: 'block' }} />
               </div>
               <figcaption style={{ marginTop: 10, fontSize: 13, color: 'rgba(255,255,255,0.6)', textAlign: 'center' }}>Boater app: open moorings pulse on the Mooring Field map.</figcaption>
             </figure>
-            <figure style={{ margin: 0, width: 270, maxWidth: '100%' }}>
+            <figure style={{ margin: 0, width: 310, maxWidth: '100%' }}>
               <div className="sk-card" style={{ padding: 0, overflow: 'hidden', borderRadius: 22 }}>
                 <img src="/collage/slips-phone.jpg" alt="Boater app on a phone: open slips C7, C8 and C9 pulse on the slips map" style={{ width: '100%', display: 'block' }} />
               </div>
