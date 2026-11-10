@@ -46,12 +46,18 @@ const css = [
   '.sk-alt { background: linear-gradient(180deg, rgba(77,214,200,0.045), rgba(124,92,255,0.035)); }',
   '.sk-btn { transition: transform .2s ease, box-shadow .2s ease; padding: 16px 32px; font-size: 16px; border-radius: 10px; }',
   '.sk-btn:hover { transform: translateY(-2px); }',
+  '.sk-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 8px; }',
+  '.sk-ba figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 24px 60px rgba(0,0,0,0.5); background: #0b1626; }',
+  '.sk-ba img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }',
+  '.sk-ba figcaption { position: absolute; left: 12px; top: 12px; padding: 6px 12px; border-radius: 999px; background: rgba(7,15,26,0.78); border: 1px solid rgba(77,214,200,0.45); color: #eafffc; font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; backdrop-filter: blur(6px); }',
+  '.sk-ba figure.before figcaption { border-color: rgba(255,255,255,0.4); color: #fff; }',
   '@media (max-width: 860px) {',
   '  .sk-grid2, .sk-grid3, .sk-grid4, .sk-grid5 { grid-template-columns: 1fr; }',
   '  .sk-h2 { font-size: 30px; }',
   '  .sk-section { padding: 60px 0; }',
   '  .sk-hero-h1 { font-size: 46px !important; letter-spacing: -1.5px !important; }',
   '  .sk-ring { display: none; }',
+  '  .sk-ba { grid-template-columns: 1fr; gap: 14px; }',
   '  .sk-btn { width: 100%; text-align: center; }',
   '}',
 ].join('\n')
@@ -499,9 +505,12 @@ export default function Home() {
             <h2 className="sk-h2">Same marina. Transformed.</h2>
             <p className="sk-sub">Bronx Marina, from the aerial photo we started with to the 3D Chart Room, the live 2D map, and the Docks and Slips list.</p>
           </div>
-          <div className="***"><div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.18)', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
-            <img src="/collage/bronx-before-after.jpg" alt="Bronx Marina four ways: the satellite photo, the 3D Chart Room, the 2D live map with the Overdue filter on, and the Docks and Slips list" style={{ width: '100%', display: 'block' }} />
-          </div></div>
+          <div className="sk-ba">
+            <figure className="before"><img src="/collage/ba-sat.jpg" alt="Bronx Marina from the air, before" /><figcaption>Before: the aerial photo</figcaption></figure>
+            <figure><img src="/collage/ba-3d.jpg" alt="Bronx Marina built in 3D in the Chart Room" /><figcaption>After: 3D Chart Room</figcaption></figure>
+            <figure><img src="/collage/ba-2d.jpg" alt="Bronx Marina live 2D map with the Overdue filter on" /><figcaption>After: live 2D map</figcaption></figure>
+            <figure><img src="/collage/ba-slips.jpg" alt="Bronx Marina Docks and Slips list" /><figcaption>After: Docks and Slips</figcaption></figure>
+          </div>
         </div>
       </section>
 
