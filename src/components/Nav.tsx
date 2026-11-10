@@ -73,7 +73,7 @@ export default function Nav() {
         '.sk-navlinks { display: flex; }',
         '.sk-burger { display: none; }',
         '.sk-feat { position: relative; padding: 22px 0; }',
-        '.sk-featmenu { display: none; position: absolute; top: 56px; left: -20px; display: grid; grid-template-columns: repeat(3, 190px); gap: 24px; padding: 20px 24px; background: rgba(7,15,26,0.98); border: 1px solid rgba(77,214,200,0.3); border-radius: 12px; box-shadow: 0 30px 70px rgba(0,0,0,0.6); }',
+        '.sk-featmenu { display: none; position: absolute; top: 56px; left: -20px; grid-template-columns: repeat(3, 190px); gap: 24px; padding: 20px 24px; background: rgba(7,15,26,0.98); border: 1px solid rgba(77,214,200,0.3); border-radius: 12px; box-shadow: 0 30px 70px rgba(0,0,0,0.6); }',
         '.sk-featmenu.sk-show { display: grid; }',
         '@media (max-width: 960px) {',
         '  .sk-burger { display: block; }',
