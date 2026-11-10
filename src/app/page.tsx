@@ -440,6 +440,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* MORE OPERATOR QUOTES: DRAFTS pending approval from each person. Do NOT ship to production until approved. See /root/proof/testimonial-drafts-2026-11-10.md */}
+      <section className="sk-section" style={{ paddingTop: 0, paddingBottom: 70 }}>
+        <div className="sk-wrap">
+          <div className="sk-grid3">
+            {[
+              ['We couldn’t work out a maintenance schedule for our pedestals, or how to tie each pedestal to its dock. Skipper organized all of it, and it saved us real money.', 'Chris Bouquet', 'Marina manager'],
+              ['The Chart Room is amazing. I can filter and see everything happening with every boat, from a bird’s-eye view of the whole marina.', 'Colleen Polito', 'Operations manager, marina portfolio'],
+              ['We needed a special module built. It was up and running, bug free, in less than a day.', 'Chris Bouquet', 'Marina manager'],
+              ['Onboarding was fast and efficient, and there were no fees. Lease renewals are handled too.', 'Chris Bouquet', 'Marina manager'],
+              ['We were running on QuickBooks Lite. The accounting in Skipper is just as good as QuickBooks.', 'Colleen Polito', 'Operations manager, marina portfolio'],
+              ['Transient, slip logic, the yard, work orders, safety, parking. I like everything about it.', 'Colleen Polito', 'Operations manager, marina portfolio'],
+            ].map(([q, n, t]) => (
+              <div key={q} className="sk-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <p style={{ fontSize: 17, lineHeight: 1.55, fontWeight: 600, margin: '0 0 20px', color: 'rgba(255,255,255,0.92)' }}>&ldquo;{q}&rdquo;</p>
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: 15 }}>{n}</div>
+                  <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)' }}>{t}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* WHAT IT IS + PAIN */}
       <section className="sk-section sk-alt">
         <div className="sk-wrap">
