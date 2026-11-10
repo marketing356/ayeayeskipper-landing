@@ -521,7 +521,7 @@ export default function Home() {
       </section>
 
       {/* MORE OPERATOR QUOTES: DRAFTS pending approval from each person. Do NOT ship to production until approved. See /root/proof/testimonial-drafts-2026-11-10.md */}
-      <section className="sk-section" style={{ paddingTop: 0, paddingBottom: 70 }}>
+      {false && <section className="sk-section" style={{ paddingTop: 0, paddingBottom: 70 }}>
         <div className="sk-wrap">
           <div className="sk-grid3">
             {[
@@ -542,7 +542,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* CHART ROOM LIVE FILTERS + AI BRAIN (Mike 2026-11-10). Facts checked in code: realtime = useSkipperRealtime (Supabase Broadcast per marina); assistant = Claude models via Anthropic API (engine routes/chat.py). */}
       <section className="sk-section">
