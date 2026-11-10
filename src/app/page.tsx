@@ -378,7 +378,7 @@ export default function Home() {
             <h1 className="sk-hero-h1 sk-rise sk-rise2" style={{ fontSize: 84, fontWeight: 900, letterSpacing: '-3px', lineHeight: 1.02, margin: '0 0 20px' }}>
               We run on <span className="sk-grad">Skipper.</span>
             </h1>
-            <p className="sk-rise sk-rise3" style={{ fontSize: 28, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.95)' }}>Your marina or club, on autopilot.</p>
+            <p className="sk-rise sk-rise3" style={{ fontSize: 28, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.95)' }}>Your marina or yacht club, on autopilot.</p>
             <p className="sk-sub sk-rise sk-rise3" style={{ marginBottom: 32 }}>
               Slips, moorings, yard, contracts and billing, handled day to day. Approve every action, or set it to one tap and go. Every module included, in one published price.
             </p>
