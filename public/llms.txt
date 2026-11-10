@@ -23,6 +23,7 @@ Send your boat and owner lists, your layout and your contracts. Skipper draws ev
 Stripe, Clover and text messaging are live. Other tools are built when a marina asks.
 
 ## Pages
+- Full facts and Q&A in plain words: https://ayeayeskipper.com/how-skipper-works (also https://ayeayeskipper.com/llms-full.txt)
 - Features: https://ayeayeskipper.com/features
 - Hot Slip: https://ayeayeskipper.com/hot-slip
 - Transient booking: https://ayeayeskipper.com/transient

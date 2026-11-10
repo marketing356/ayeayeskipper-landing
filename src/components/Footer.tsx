@@ -19,6 +19,7 @@ export default function Footer() {
             <Link href="/terms" style={a}>Terms</Link>
             <Link href="/privacy" style={a}>Privacy</Link>
             <Link href="/support" style={a}>Support</Link>
+            <Link href="/how-skipper-works" style={a}>How it works</Link>
             <Link href="/sms-consent" style={a}>SMS Consent</Link>
             <a href="https://app.ayeayeskipper.com" style={a}>Boater log in</a>
           </div>
