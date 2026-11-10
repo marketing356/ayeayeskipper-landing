@@ -24,7 +24,7 @@ export default function Footer() {
           </div>
         </div>
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
-          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>Skipper (AyeAyeSkipper) is a product of Mariner and Sailor Company, 651 N. Broad St, Middletown, DE 19709</div>
+          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>Skipper (AyeAyeSkipper) was founded by Express Docks, with more than 20 years in marine services. It is a product of Mariner and Sailor Company, 651 N. Broad St, Middletown, DE 19709</div>
           <div style={{ fontSize: 12, color: TEAL, fontWeight: 700 }}>We run on Skipper.</div>
         </div>
       </div>

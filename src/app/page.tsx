@@ -992,6 +992,7 @@ export default function Home() {
       <section className="sk-section" style={{ paddingTop: 10, paddingBottom: 10 }}>
         <div className="sk-wrap">
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <span className="sk-chip"><i />Founded by Express Docks, 20+ years in marine services</span>
             <span className="sk-chip"><i />No setup fee</span>
             <span className="sk-chip"><i />Data migration included</span>
             <span className="sk-chip"><i />Billed monthly</span>
