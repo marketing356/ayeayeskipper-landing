@@ -120,13 +120,18 @@ const CLUB_TIERS: [string, string][] = [
 ]
 
 const FAQ: [string, string][] = [
-  ['Can I turn the AI off?', 'Yes. Skipper has one switch for the whole marina. Turn it off and no AI answers, replies or actions run. Slips, contracts, billing, the map and every record keep working by hand. You can turn it back on any time.'],
-  ['What is Skipper?', 'Skipper is management software for marinas and yacht clubs. It holds your spaces, boats, contracts, billing and messages in one system, and it does the day-to-day work for you.'],
-  ['Does it replace the software I use now?', 'Yes. We build your marina or club on Skipper, bring your data across, and keep working with the tools you already use, such as your accounting package and card processor.'],
-  ['Is there a setup fee?', 'No. Setup, your map, moving your data and the integrations you need are all inside your monthly subscription.'],
+  ['What is Skipper?', 'Skipper is management software for marinas and yacht clubs. It holds your spaces, boats, contracts, billing and messages in one system, with a live map of your property and an AI assistant that does the day-to-day work.'],
+  ['How much does it cost?', 'Your price depends only on the size of your marina or club, from $99 a month for up to 20 slips and moorings to $799 for over 250 or several marinas. Every module is in every plan. Yacht club prices are in the pricing section.'],
+  ['Are there setup fees or other charges?', 'No setup fee, no onboarding fee and no add-ons. Moving your data, your map and the integrations you need are inside your monthly price. There is no Skipper fee on transient bookings. Card processors such as Stripe and Clover still charge their normal card fees.'],
+  ['Do I have to use the AI?', 'No. Claude is built into Skipper, and one switch turns it off for the whole marina. With the AI off, nothing is answered, sent or done by AI, and you still run the marina on the same slips, contracts, billing, map and records, by hand. Turn it back on any time.'],
+  ['What is the AI, and does it do things without asking?', 'Skipper is powered by Claude, the AI from Anthropic. It reads your marina records, answers in plain English and does the work you approve. You can approve each action, or set it to one tap and go. You decide how much it does.'],
+  ['What do I have to do to switch from my current software?', 'Send us your boat and owner lists, your layout and your contracts. We draw every space, load your records and hand you a live map of your marina or club. You do not build it yourself.'],
+  ['Does it work with my accounting software and card processor?', 'Stripe, Clover and text messaging are live today. QuickBooks, Xero, Square, Mailchimp, Google Calendar, Zapier and your own point of sale are built when you ask, and that is included in your price.'],
   ['What if I need something Skipper does not do yet?', 'Tell us. We build custom features and integrations for the marinas and clubs we work with, and they are included.'],
-  ['Do boaters and members pay Skipper anything?', 'No. Boaters get an app with no extra work for you. Card processors such as Stripe and Clover still charge their normal card fees.'],
+  ['Do my boaters and members have to pay anything or learn anything?', 'No. Boaters get an app where their space lights up on the map and they can message you. It costs them nothing and takes no extra work from you.'],
   ['Does it work for a yacht club with only moorings?', 'Yes. Skipper shows only the kinds of space you actually have. A club with moorings and no slips sees moorings and no slips.'],
+  ['Can I run more than one marina?', 'Yes. Several marinas run together on one account with a fleet view, and they are covered by the top plan.'],
+  ['Can I see it before I decide?', 'Yes. Request a demo and we will walk you through it with a marina like yours.'],
 ]
 
 
