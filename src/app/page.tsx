@@ -504,9 +504,9 @@ export default function Home() {
             </div>
             <div style={{ display: 'grid', gap: 20 }}>
               <div className="sk-card" style={{ padding: 28 }}>
-                <div className="sk-grad" style={{ fontSize: 46, fontWeight: 900, letterSpacing: '-1px', lineHeight: 1.1 }}>Almost $1,100 a month</div>
+                <div className="sk-grad" style={{ fontSize: 46, fontWeight: 900, letterSpacing: '-1px', lineHeight: 1.1 }}>Almost $1,100 a month saved</div>
                 <p style={{ fontSize: 16, lineHeight: 1.55, color: 'rgba(255,255,255,0.8)', margin: '10px 0 0' }}>
-                  saved at his new Brooklyn marina when it switched from DockMaster to Skipper. &ldquo;The thing was so incredibly expensive.&rdquo;
+                  At his new Brooklyn marina, after it switched from DockMaster to Skipper. &ldquo;The thing was so incredibly expensive.&rdquo;
                 </p>
               </div>
               <div className="sk-card" style={{ padding: 28 }}>
