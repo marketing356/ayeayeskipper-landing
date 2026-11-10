@@ -1,4 +1,5 @@
 import DemoForm from '@/components/DemoForm'
+import FoldBtn from './FoldBtn'
 
 const NAVY = '#0d2b4b', TEAL = '#4dd6c8', DARK = '#070f1a'
 const FONT = "system-ui,-apple-system,'Segoe UI',Roboto,sans-serif"
@@ -353,10 +354,6 @@ const PHOTO_FIT: Record<string, { ratio: string; pos: string }> = {
   '/collage/photo-transient.jpg': { ratio: '16 / 9', pos: '50% 40%' },
   '/collage/photo-drystack.jpg': { ratio: '16 / 9', pos: '50% 45%' },
   '/collage/photo-fuel.jpg': { ratio: '3 / 2', pos: '50% 90%' },
-}
-
-function FoldBtn({ label }: { label: string }) {
-  return <button type="button" className="sk-foldbtn" aria-expanded="false" onClick={e => { const b = e.currentTarget; const n = b.nextElementSibling as HTMLElement | null; if (!n) return; const open = n.classList.toggle('sk-open'); b.setAttribute('aria-expanded', open ? 'true' : 'false') }}>{label}</button>
 }
 
 function ShowSection({ s: s0, alt }: { s: Show; alt: boolean }) {
