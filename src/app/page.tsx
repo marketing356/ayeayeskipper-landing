@@ -740,7 +740,7 @@ export default function Home() {
         <div className="sk-wrap">
           <div style={{ maxWidth: 800, marginBottom: 36 }}>
             <div className="sk-eyebrow">Compare</div>
-            <h2 className="sk-h2">Don&apos;t die by a thousand modules.</h2>
+            <h2 className="sk-h2">Death by a thousand modules.</h2>
             <p className="sk-sub">Most marina software prices every feature on its own line. Skipper puts all of it in one published price. Here is how we stack up, side by side, using what each company says on its own website.</p>
           </div>
           <FoldBtn label="Compare line by line" />
