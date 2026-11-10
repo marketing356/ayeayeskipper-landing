@@ -13,6 +13,8 @@ export default function Footer() {
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', maxWidth: 320, lineHeight: 1.7 }}>Management software for marinas and yacht clubs.</div>
           </div>
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <span style={{ ...a, color: 'rgba(255,255,255,0.4)' }}>Contact:</span>
+            <a href="mailto:info@ayeayeskipper.com" style={{ ...a, color: TEAL, fontWeight: 700 }}>info@ayeayeskipper.com</a>
             <a href="tel:+18006860315" style={{ ...a, color: TEAL, fontWeight: 700 }}>1-800-686-0315</a>
             <Link href="/terms" style={a}>Terms</Link>
             <Link href="/privacy" style={a}>Privacy</Link>
