@@ -67,7 +67,14 @@ const css = [
   '.sk-totop { position: fixed; right: 14px; bottom: 84px; width: 46px; height: 46px; border-radius: 50%; background: #4dd6c8; color: #04202e; border: none; font-size: 22px; font-weight: 900; box-shadow: 0 6px 20px rgba(0,0,0,0.5); cursor: pointer; z-index: 1100; display: none; }',
   '.sk-totop.sk-on { display: block; }',
   '.sk-callbar { display: none; }',
+  '.sk-foldbtn { display: none; }',
   '@media (max-width: 860px) {',
+  '  .sk-foldbtn { display: block; width: 100%; margin: 4px 0 14px; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(77,214,200,0.45); background: rgba(77,214,200,0.08); color: #4dd6c8; font-weight: 800; font-size: 15px; font-family: inherit; cursor: pointer; text-align: center; }',
+  '  .sk-foldbtn::after { content: " \\25BE"; }',
+  '  .sk-foldbtn[aria-expanded="true"]::after { content: " \\25B4"; }',
+  '  .sk-fold { display: none !important; }',
+  '  .sk-fold.sk-open { display: grid !important; }',
+  '  .sk-fold.sk-open.sk-block { display: block !important; }',
   '  .sk-cmp-cards { display: block; }',
   '  .sk-cmp-table { display: none; }',
   '  .sk-callbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 1090; gap: 10px; padding: 10px 12px; background: rgba(7,15,26,0.97); border-top: 1px solid rgba(77,214,200,0.35); }',
@@ -348,6 +355,10 @@ const PHOTO_FIT: Record<string, { ratio: string; pos: string }> = {
   '/collage/photo-fuel.jpg': { ratio: '3 / 2', pos: '50% 90%' },
 }
 
+function FoldBtn({ label }: { label: string }) {
+  return <button type="button" className="sk-foldbtn" aria-expanded="false" onClick={e => { const b = e.currentTarget; const n = b.nextElementSibling as HTMLElement | null; if (!n) return; const open = n.classList.toggle('sk-open'); b.setAttribute('aria-expanded', open ? 'true' : 'false') }}>{label}</button>
+}
+
 function ShowSection({ s: s0, alt }: { s: Show; alt: boolean }) {
   const photo = s0.shots[0] && s0.shots[0].src.indexOf('/photo-') >= 0 ? s0.shots[0] : null
   const s: Show = photo ? { ...s0, shots: s0.shots.slice(1) } : s0
@@ -377,7 +388,8 @@ function ShowSection({ s: s0, alt }: { s: Show; alt: boolean }) {
         ))}
         {s.note && <p style={{ margin: '10px 0 0', textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{s.note}</p>}
         <p className="sk-sub" style={{ maxWidth: 800, margin: '24px 0 24px' }}>{s.sub}</p>
-        <div className="sk-grid3">
+        <FoldBtn label="What is included" />
+        <div className="sk-grid3 sk-fold">
           {s.points.map(([t, d]) => (
             <div key={t} className="sk-card">
               <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 8, color: TEAL }}>{t}</div>
@@ -479,7 +491,8 @@ export default function Home() {
       {/* MORE OPERATOR QUOTES: DRAFTS pending approval from each person. Do NOT ship to production until approved. See /root/proof/testimonial-drafts-2026-11-10.md */}
       <section className="sk-section" style={{ paddingTop: 0, paddingBottom: 70 }}>
         <div className="sk-wrap">
-          <div className="sk-grid3">
+          <FoldBtn label="More from operators" />
+          <div className="sk-grid3 sk-fold">
             {[
               ['We couldn’t work out a maintenance schedule for our pedestals, or how to tie each pedestal to its dock. Skipper organized all of it, and it saved us real money.', 'Chris Bouquet', 'Marina manager'],
               ['The Chart Room is amazing. I can filter and see everything happening with every boat, from a bird’s-eye view of the whole marina.', 'Colleen Polito', 'Operations manager, marina portfolio'],
@@ -520,7 +533,8 @@ export default function Home() {
             <img src="/collage/chartroom-filters.jpg" alt="The Chart Room with the Overdue filter on: every overdue boat in the marina lit up in red on the live map" style={{ width: '100%', display: 'block' }} />
           </div></div>
           <p style={{ marginTop: 14, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>The Overdue filter on a working marina map.</p>
-          <div className="sk-grid3" style={{ marginTop: 44 }}>
+          <FoldBtn label="How it works" />
+          <div className="sk-grid3 sk-fold" style={{ marginTop: 44 }}>
             {[
               ['Live, not refreshed', 'When a boat checks in, a payment lands or a slip changes status, the map changes with it. No reload, no yesterday’s report.'],
               ['One rule everywhere', 'Overdue on the map is the same overdue as on your Helm screens and your reports. The numbers always agree.'],
@@ -600,7 +614,8 @@ export default function Home() {
             <h2 className="sk-h2">Every boat and trailer, on one map.</h2>
             <p className="sk-sub">Click a space and see what is in it, who it belongs to, what the contract says and what is owed. Hauls, moves and work orders live on the same record.</p>
           </div>
-          <div className="sk-grid4">
+          <FoldBtn label="All the features" />
+          <div className="sk-grid4 sk-fold">
             {FEATURES.map(([t, d]) => (
               <div key={t} className="sk-card">
                 <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 8, color: TEAL }}>{t}</div>
@@ -710,7 +725,8 @@ export default function Home() {
             <h2 className="sk-h2">Don&apos;t die by a thousand modules.</h2>
             <p className="sk-sub">Most marina software prices every feature on its own line. Skipper puts all of it in one published price. Here is how we stack up, side by side, using what each company says on its own website.</p>
           </div>
-          <div className="sk-cmp-cards">
+          <FoldBtn label="Compare line by line" />
+          <div className="sk-cmp-cards sk-fold sk-block">
             {COMPARE.map(([row, sk, ...others]) => (
               <div key={row} className="sk-cmp-card">
                 <div style={{ fontWeight: 800, fontSize: 15, marginBottom: 8 }}>{row}</div>
@@ -840,7 +856,8 @@ export default function Home() {
             <img src="/collage/fleet-portfolio.jpg" alt="Skipper Portfolio screen: money in today, this week and this month, what tenants owe, occupancy, vessels without a lease and boats with no known location, marina by marina" style={{ width: '100%', display: 'block' }} />
           </div>
           <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.45)', marginBottom: 36 }}>Sample portfolio, demo data.</p>
-          <div className="sk-grid4" style={{ marginBottom: 36 }}>
+          <FoldBtn label="What the owner sees" />
+          <div className="sk-grid4 sk-fold" style={{ marginBottom: 36 }}>
             {[
               ['Money in', 'Today, this week and this month for the whole portfolio, and today for each marina, from real payments.'],
               ['What is owed', 'What tenants owe you and what you owe vendors, in total and marina by marina.'],
