@@ -741,7 +741,7 @@ export default function Home() {
           <div style={{ maxWidth: 800, marginBottom: 36 }}>
             <div className="sk-eyebrow">Compare</div>
             <h2 className="sk-h2">Death by a thousand modules.</h2>
-            <p className="sk-sub">Most marina software prices every feature on its own line. Skipper puts all of it in one published price. Here is how we stack up, side by side, using what each company says on its own website.</p>
+            <p className="sk-sub">Most legacy marina software kills you by modularizing you to death. The basic plan sounds great at a low monthly price, but on its own it is not enough: to run a full marina you need the add-on modules, and every one of them is priced on its own line. With Skipper everything is included, in one published price. Here is how we stack up, side by side, using what each company says on its own website.</p>
           </div>
           <FoldBtn label="Compare line by line" />
           <div className="sk-cmp-cards sk-fold sk-block">
