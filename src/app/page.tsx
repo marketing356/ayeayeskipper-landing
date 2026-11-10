@@ -120,6 +120,7 @@ const CLUB_TIERS: [string, string][] = [
 ]
 
 const FAQ: [string, string][] = [
+  ['Can I turn the AI off?', 'Yes. Skipper has one switch for the whole marina. Turn it off and no AI answers, replies or actions run. Slips, contracts, billing, the map and every record keep working by hand. You can turn it back on any time.'],
   ['What is Skipper?', 'Skipper is management software for marinas and yacht clubs. It holds your spaces, boats, contracts, billing and messages in one system, and it does the day-to-day work for you.'],
   ['Does it replace the software I use now?', 'Yes. We build your marina or club on Skipper, bring your data across, and keep working with the tools you already use, such as your accounting package and card processor.'],
   ['Is there a setup fee?', 'No. Setup, your map, moving your data and the integrations you need are all inside your monthly subscription.'],
@@ -582,6 +583,9 @@ export default function Home() {
             <span className="sk-chip"><i />You approve what it does</span>
             <span className="sk-chip"><i />Built on Anthropic&rsquo;s Claude</span>
           </div>
+          <p style={{ margin: '26px auto 0', maxWidth: 680, fontSize: 15, lineHeight: 1.7, color: 'rgba(255,255,255,0.72)' }}>
+            <strong style={{ color: '#fff' }}>Your marina, your call.</strong> Talk to Skipper by typing or by voice, or switch the AI off completely. With Skipper off, your marina still runs on the same slips, contracts, billing and records, just by hand. Nothing is forced on you or your staff.
+          </p>
         </div>
       </section>
 
