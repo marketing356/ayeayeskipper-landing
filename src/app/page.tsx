@@ -62,7 +62,19 @@ const css = [
   '}',
   '.sk-main img[src$="skipper-hero.jpg"] { aspect-ratio: 4 / 5 !important; object-position: 50% 18%; }',
   '.sk-main img[src$="skipper-hero.jpg"] + div { position: static !important; border-radius: 0 !important; border: none !important; border-top: 1px solid rgba(77,214,200,0.35) !important; background: rgba(7,15,26,0.92) !important; padding: 12px 14px !important; }',
+  '.sk-cmp-cards { display: none; }',
+  '.sk-cmp-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 12px; padding: 14px; margin-bottom: 12px; }',
+  '.sk-totop { position: fixed; right: 14px; bottom: 84px; width: 46px; height: 46px; border-radius: 50%; background: #4dd6c8; color: #04202e; border: none; font-size: 22px; font-weight: 900; box-shadow: 0 6px 20px rgba(0,0,0,0.5); cursor: pointer; z-index: 1100; display: none; }',
+  '.sk-totop.sk-on { display: block; }',
+  '.sk-callbar { display: none; }',
   '@media (max-width: 860px) {',
+  '  .sk-cmp-cards { display: block; }',
+  '  .sk-cmp-table { display: none; }',
+  '  .sk-callbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 1090; gap: 10px; padding: 10px 12px; background: rgba(7,15,26,0.97); border-top: 1px solid rgba(77,214,200,0.35); }',
+  '  .sk-callbar a { flex: 1; text-align: center; padding: 13px 8px; border-radius: 10px; font-weight: 800; font-size: 15px; text-decoration: none; }',
+  '  body { padding-bottom: 70px; }',
+  '  .sk-hero-sub { display: none; }',
+  '  .sk-hero-chips { display: none !important; }',
   '  .sk-grid2, .sk-grid3, .sk-grid4, .sk-grid5 { grid-template-columns: 1fr; }',
   '  .sk-h2 { font-size: 30px; }',
   '  .sk-section { padding: 60px 0; }',
@@ -441,14 +453,14 @@ export default function Home() {
                 We run on <span className="sk-grad">Skipper.</span>
               </h1>
               <p className="sk-rise sk-rise3" style={{ fontSize: 26, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.95)' }}>Your marina or yacht club, on autopilot.</p>
-              <p className="sk-sub sk-rise sk-rise3" style={{ marginBottom: 28 }}>
+              <p className="sk-sub sk-rise sk-rise3 sk-hero-sub" style={{ marginBottom: 28 }}>
                 Slips, moorings, yard, contracts and billing, handled day to day. Approve every action, or set it to one tap and go. Every module included, in one published price.
               </p>
               <div className="sk-rise sk-rise4 sk-hero-actions" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <a href="#marinas" className="sk-btn sk-btn-main">I run a marina</a>
               <a href="#clubs" className="sk-btn sk-btn-ghost">I run a yacht club</a>
               </div>
-              <div className="sk-rise sk-rise4 sk-hero-actions" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 24 }}>
+              <div className="sk-hero-chips sk-rise sk-rise4 sk-hero-actions" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 24 }}>
                 <span className="sk-chip"><i />Every module included</span>
                 <span className="sk-chip"><i />Dry stack and yard, built in</span>
                 <span className="sk-chip"><i />One published price</span>
@@ -702,7 +714,18 @@ export default function Home() {
             <h2 className="sk-h2">Don&apos;t die by a thousand modules.</h2>
             <p className="sk-sub">Most marina software prices every feature on its own line. Skipper puts all of it in one published price. Here is how we stack up, side by side, using what each company says on its own website.</p>
           </div>
-          <div style={{ overflowX: 'auto', borderRadius: 14, border: '1px solid rgba(255,255,255,0.1)' }}>
+          <div className="sk-cmp-cards">
+            {COMPARE.map(([row, sk, ...others]) => (
+              <div key={row} className="sk-cmp-card">
+                <div style={{ fontWeight: 800, fontSize: 15, marginBottom: 8 }}>{row}</div>
+                <div style={{ background: 'rgba(77,214,200,0.12)', borderRadius: 8, padding: '8px 10px', color: TEAL, fontWeight: 800, fontSize: 14, marginBottom: 8 }}>Skipper: {sk}</div>
+                {['Dockwa', 'Storable (Molo)', 'DockMaster'].map((n, i) => (
+                  <div key={n} style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', marginTop: 4 }}><strong style={{ color: 'rgba(255,255,255,0.85)' }}>{n}:</strong> {others[i]}</div>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="sk-cmp-table" style={{ overflowX: 'auto', borderRadius: 14, border: '1px solid rgba(255,255,255,0.1)' }}>
             <table style={{ width: '100%', minWidth: 760, borderCollapse: 'collapse', fontSize: 14 }}>
               <thead>
                 <tr style={{ background: 'rgba(255,255,255,0.05)' }}>

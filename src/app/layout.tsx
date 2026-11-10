@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Nav from "@/components/Nav"
 import WeatherBar from "@/components/WeatherBar"
 import Footer from "@/components/Footer"
+import MobileBar from "@/components/MobileBar"
 
 export const metadata: Metadata = {
   title: { default: "Skipper — Marina and yacht club software", template: "%s | Skipper" },
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         {children}
         <Footer />
+        <MobileBar />
       </body>
     </html>
   )

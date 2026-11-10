@@ -34,7 +34,7 @@ export default function Nav() {
       borderBottom: '1px solid rgba(255,255,255,0.07)', position: 'sticky', top: 0, background: 'rgba(7,15,26,0.97)',
       backdropFilter: 'blur(12px)', zIndex: 1000, fontFamily: FONT,
     }}>
-      <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: '#fff' }}>
+      <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: '#fff' }}>
         <img src="/skipper-avatar.jpg" alt="Skipper" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(77,214,200,0.4)' }} />
         <span style={{ fontSize: 20, fontWeight: 900, letterSpacing: '-0.5px' }}>Skipper</span>
       </Link>
@@ -80,6 +80,7 @@ export default function Nav() {
         '  .sk-navlinks { display: none; width: 100%; flex-direction: column; align-items: flex-start !important; padding: 12px 0 18px; }',
         '  .sk-navlinks.sk-open { display: flex; }',
         '  .sk-feat { padding: 0; }',
+        '  .sk-open { max-height: calc(100vh - 80px); overflow-y: auto; padding-bottom: 90px !important; }',
         '  .sk-featmenu, .sk-featmenu.sk-show { display: grid; position: static; grid-template-columns: 1fr; border: none; box-shadow: none; padding: 10px 0 0 4px; background: none; }',
         '}',
       ].join('\n') }} />
