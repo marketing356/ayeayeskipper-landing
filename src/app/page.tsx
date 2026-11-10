@@ -225,6 +225,7 @@ const SHOWS: Show[] = [
       ['Rack Launch', 'A forklift schedule for launches and returns, today and this week, with who is out on a trip.'],
     ],
     shots: [
+      { src: '/collage/photo-drystack.jpg', alt: 'A forklift lifts a boat off a dry stack rack while a dock hand checks the schedule on his tablet' },
       { src: '/collage/acme-rack.jpg', alt: 'Skipper dry stack rack grid by row and level' },
       { src: '/collage/acme-racklaunch.jpg', alt: 'Skipper rack launch queue for the forklift' },
     ],
@@ -320,6 +321,7 @@ const SHOWS: Show[] = [
 const PHOTO_FIT: Record<string, { ratio: string; pos: string }> = {
   '/collage/photo-yard.jpg': { ratio: '3 / 2', pos: '50% 100%' },
   '/collage/photo-transient.jpg': { ratio: '16 / 9', pos: '50% 40%' },
+  '/collage/photo-drystack.jpg': { ratio: '16 / 9', pos: '50% 45%' },
   '/collage/photo-fuel.jpg': { ratio: '3 / 2', pos: '50% 90%' },
 }
 
