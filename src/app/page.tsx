@@ -419,6 +419,12 @@ export default function Home() {
       <div className="sk-orb" style={{ width: 420, height: 420, left: '-8%', top: 160, background: 'rgba(77,214,200,0.22)' }} />
       <div className="sk-orb" style={{ width: 380, height: 380, right: '-6%', top: 60, background: 'rgba(124,92,255,0.25)', animationDelay: '-6s' }} />
       <style dangerouslySetInnerHTML={{ __html: css }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@graph': [
+        { '@type': 'Organization', '@id': 'https://ayeayeskipper.com/#org', name: 'Skipper', alternateName: 'AyeAyeSkipper', url: 'https://ayeayeskipper.com' },
+        { '@type': 'SoftwareApplication', '@id': 'https://ayeayeskipper.com/#software', name: 'Skipper', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: 'https://ayeayeskipper.com', description: 'Management software for marinas and yacht clubs: slips, moorings, yard, contracts, billing, fuel dock and work orders on one live map, with an AI assistant that can be switched off.', publisher: { '@id': 'https://ayeayeskipper.com/#org' }, offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: 99, highPrice: 799, offerCount: 5 } },
+        { '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+      ] }).replace(/</g, '\\u003c') }} />
+      
 
       {/* HERO */}
       <section className="sk-section" style={{ paddingTop: 70, paddingBottom: 60 }}>

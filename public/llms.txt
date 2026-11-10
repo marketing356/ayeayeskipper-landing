@@ -1,0 +1,30 @@
+# Skipper (AyeAyeSkipper)
+
+> Skipper is management software for marinas and yacht clubs. It holds your spaces, boats, contracts, billing and messages in one system, with a live map of your property and an AI assistant that does the day-to-day work. One switch turns the AI off for the whole marina.
+
+Website: https://ayeayeskipper.com
+
+## What it covers
+- Slips, moorings, yard and storage on one map drawn to scale from satellite
+- Contracts and e-sign, recurring billing and payments, deposits and receipts
+- Fuel dock point of sale, work orders, parts and inventory, ship store
+- Messaging (office, dock, fuel, service channels), wait list, boater app
+- Transient bookings with the Hot Slip program (permanent tenants lend their slip while away)
+- Fleet view for several marinas on one account
+- Yacht clubs: priced by members, moorings-only clubs see only moorings
+
+## Pricing (published, per month)
+One price by size, every module in every plan, no setup or onboarding fee. $99 (up to 20 slips and moorings), $199, $299, $499, $799 (over 250 or several marinas). Yacht clubs use the same prices by member count. No Skipper fee on transient bookings; card processors charge their normal card fees.
+
+## Moving over
+Send your boat and owner lists, your layout and your contracts. Skipper draws every space, loads your records and hands you a live map.
+
+## Integrations
+Stripe, Clover and text messaging are live. Other tools are built when a marina asks.
+
+## Pages
+- Features: https://ayeayeskipper.com/features
+- Hot Slip: https://ayeayeskipper.com/hot-slip
+- Transient booking: https://ayeayeskipper.com/transient
+- Skipper vs Dockwa: https://ayeayeskipper.com/vs-dockwa
+- Request a demo: https://ayeayeskipper.com/demo

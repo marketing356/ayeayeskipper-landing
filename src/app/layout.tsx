@@ -5,12 +5,15 @@ import Footer from "@/components/Footer"
 import MobileBar from "@/components/MobileBar"
 
 export const metadata: Metadata = {
-  title: { default: "Skipper — Marina and yacht club software", template: "%s | Skipper" },
-  description: "We run on Skipper. Management software for marinas and yacht clubs: slips, moorings, yard, contracts and billing, on autopilot. No setup fees.",
+  metadataBase: new URL('https://ayeayeskipper.com'),
+  title: { default: "Skipper: Marina and yacht club management software", template: "%s | Skipper" },
+  description: "Skipper is marina and yacht club management software. Slips, moorings, yard, contracts, billing, fuel dock and work orders on one live map, with an AI assistant you can switch off. From $99 a month, every module included.",
+  alternates: { canonical: '/' },
   openGraph: {
     siteName: "Skipper",
-    title: "Skipper — We run on Skipper",
-    description: "Management software for marinas and yacht clubs. Your marina or yacht club, on autopilot.",
+    title: "Skipper: Marina and yacht club management software",
+    description: "One live system for slips, moorings, yard, contracts and billing. From $99 a month, every module included.",
+    url: 'https://ayeayeskipper.com',
     type: "website",
   }
 }
