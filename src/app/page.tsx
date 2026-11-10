@@ -453,8 +453,8 @@ export default function Home() {
               </p>
             </div>
             <div className="sk-hero-skipper sk-rise sk-rise3">
-              <img src="/collage/skipper-hero.jpg" alt="Skipper, the AI that runs the marina, standing on a dock with a tablet" />
-              <div className="sk-hero-tag">Meet Skipper, the AI that runs your marina</div>
+              <img src="/collage/skipper-hero.jpg" alt="Skipper, your marina's right hand, standing on a dock with a tablet" />
+              <div className="sk-hero-tag">Meet Skipper, your marina&rsquo;s right hand</div>
             </div>
           </div>
           <div className="sk-hero-frame"><div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.18)', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
@@ -578,7 +578,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sk-section sk-alt">
+      <section id="skipper-ai" className="sk-section sk-alt">
         <div className="sk-wrap" style={{ textAlign: 'center', maxWidth: 820 }}>
           <div className="sk-eyebrow">The brain</div>
           <h2 className="sk-h2">Skipper thinks with Claude.</h2>
@@ -913,7 +913,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section className="sk-section sk-alt">
+      <section id="faq" className="sk-section sk-alt">
         <div className="sk-wrap" style={{ maxWidth: 820 }}>
           <div className="sk-eyebrow">Questions</div>
           <h2 className="sk-h2" style={{ marginBottom: 28 }}>Straight answers.</h2>
