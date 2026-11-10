@@ -402,6 +402,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WORDS FROM OPERATORS (Dave Schmitt gave free license to quote, relayed by Mike 2026-11-10) */}
+      <section className="sk-section" style={{ paddingTop: 30, paddingBottom: 70 }}>
+        <div className="sk-wrap">
+          <div style={{ textAlign: 'center', maxWidth: 760, margin: '0 auto 40px' }}>
+            <div className="sk-eyebrow">From the people running it</div>
+            <h2 className="sk-h2">Don't take our word. Take theirs.</h2>
+          </div>
+          <div className="sk-grid2" style={{ alignItems: 'stretch' }}>
+            <div className="sk-card" style={{ padding: 34, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <div style={{ fontSize: 60, lineHeight: 0.6, color: TEAL, fontWeight: 900, marginBottom: 10 }}>&ldquo;</div>
+                <p style={{ fontSize: 22, lineHeight: 1.5, fontWeight: 600, margin: '0 0 22px', color: 'rgba(255,255,255,0.95)' }}>
+                  Before Skipper we were in the dark ages. We put it in at our first marina in the Bronx and it was light years ahead of anything anybody else is using.
+                </p>
+              </div>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: 16 }}>Dave Schmitt</div>
+                <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)' }}>Runs five marinas</div>
+              </div>
+            </div>
+            <div style={{ display: 'grid', gap: 20 }}>
+              <div className="sk-card" style={{ padding: 28 }}>
+                <div className="sk-grad" style={{ fontSize: 46, fontWeight: 900, letterSpacing: '-1px', lineHeight: 1.1 }}>Almost $1,100 a month</div>
+                <p style={{ fontSize: 16, lineHeight: 1.55, color: 'rgba(255,255,255,0.8)', margin: '10px 0 0' }}>
+                  saved at his new Brooklyn marina when it switched from DockMaster to Skipper. &ldquo;The thing was so incredibly expensive.&rdquo;
+                </p>
+              </div>
+              <div className="sk-card" style={{ padding: 28 }}>
+                <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 8 }}>Stop leaving money on the table.</div>
+                <p style={{ fontSize: 15, lineHeight: 1.55, color: 'rgba(255,255,255,0.75)', margin: 0 }}>
+                  Unaccounted-for leases, trailer boats, and boats that have sat derelict in the yard. Now they are on the record, and the liens go on.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* WHAT IT IS + PAIN */}
       <section className="sk-section sk-alt">
         <div className="sk-wrap">
