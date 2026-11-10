@@ -185,6 +185,7 @@ const SHOWS: Show[] = [
       ['No Skipper fee', 'There is no Skipper fee on transient bookings.'],
     ],
     shots: [
+      { src: '/collage/photo-transient.jpg', alt: 'A dock attendant shows arriving boaters their slip on the Skipper map' },
       { src: '/collage/acme-hotslip.jpg', alt: 'Skipper slips grid with Hot Slip spaces marked' },
       { src: '/collage/helm-hotslip.jpg', alt: 'Skipper Hot Slip Payout settings with payout calculator' },
     ],
@@ -200,6 +201,7 @@ const SHOWS: Show[] = [
       ['No contract, flagged', 'In dry stack, a boat in a slot with no contract is marked so it cannot slip by.'],
     ],
     shots: [
+      { src: '/collage/photo-yard.jpg', alt: 'A yard worker checks boats on stands against the Skipper yard map' },
       { src: '/collage/acme-yard.jpg', alt: 'Skipper yard storage with every space, boat and owner on record' },
       { src: '/collage/acme-parking.jpg', alt: 'Skipper parking lots with occupied and available spaces' },
     ],
@@ -241,6 +243,7 @@ const SHOWS: Show[] = [
       ['Today at the dock', 'Sales and transactions for the day, and a recent transactions list.'],
     ],
     shots: [
+      { src: '/collage/photo-fuel.jpg', alt: 'A fuel dock attendant waves a boat in to the fuel dock with an iPad in hand' },
       { src: '/collage/acme-fuel.jpg', alt: 'Skipper fuel dock with tank levels and recent sales' },
       { src: '/collage/fuel-tanks.jpg', alt: 'Skipper fuel tank settings: capacity, price per gallon, level bar and low-level alert for each tank' },
     ],
@@ -473,10 +476,18 @@ export default function Home() {
       {/* CHART ROOM LIVE FILTERS + AI BRAIN (Mike 2026-11-10). Facts checked in code: realtime = useSkipperRealtime (Supabase Broadcast per marina); assistant = Claude models via Anthropic API (engine routes/chat.py). */}
       <section className="sk-section">
         <div className="sk-wrap">
-          <div style={{ textAlign: 'center', maxWidth: 820, margin: '0 auto 36px' }}>
-            <div className="sk-eyebrow">The Chart Room</div>
-            <h2 className="sk-h2">Your whole marina, filtered live.</h2>
-            <p className="sk-sub">Tap a filter and the map answers. Overdue, vacant, transient, reserved, under repair, no contract. Every boat, every slip, every yard spot, in one bird&rsquo;s-eye view that stays current while you look at it.</p>
+          <div className="sk-grid2" style={{ marginBottom: 36 }}>
+            <div>
+              <div className="sk-eyebrow">The Chart Room</div>
+              <h2 className="sk-h2">Your whole marina, filtered live.</h2>
+              <p className="sk-sub">Tap a filter and the map answers. Overdue, vacant, transient, reserved, under repair, no contract. Every boat, every slip, every yard spot, in one bird&rsquo;s-eye view that stays current while you look at it.</p>
+            </div>
+            <div>
+              <div style={{ borderRadius: 14, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 20px 50px rgba(0,0,0,0.45)' }}>
+                <img src="/collage/photo-dockmaster-map.jpg" alt="A dockmaster checks the Chart Room map on his tablet at the end of the dock" style={{ width: '100%', display: 'block' }} />
+              </div>
+              <p style={{ marginTop: 10, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Illustrative photo.</p>
+            </div>
           </div>
           <div className="***"><div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.18)', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
             <img src="/collage/chartroom-filters.jpg" alt="The Chart Room with the Overdue filter on: every overdue boat in the marina lit up in red on the live map" style={{ width: '100%', display: 'block' }} />
