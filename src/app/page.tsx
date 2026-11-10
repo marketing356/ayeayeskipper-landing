@@ -464,6 +464,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CHART ROOM LIVE FILTERS + AI BRAIN (Mike 2026-11-10). Facts checked in code: realtime = useSkipperRealtime (Supabase Broadcast per marina); assistant = Claude models via Anthropic API (engine routes/chat.py). */}
+      <section className="sk-section">
+        <div className="sk-wrap">
+          <div style={{ textAlign: 'center', maxWidth: 820, margin: '0 auto 36px' }}>
+            <div className="sk-eyebrow">The Chart Room</div>
+            <h2 className="sk-h2">Your whole marina, filtered live.</h2>
+            <p className="sk-sub">Tap a filter and the map answers. Overdue, vacant, transient, reserved, under repair, no contract. Every boat, every slip, every yard spot, in one bird&rsquo;s-eye view that stays current while you look at it.</p>
+          </div>
+          <div className="***"><div style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.18)', boxShadow: '0 40px 100px rgba(0,0,0,0.6)' }}>
+            <img src="/collage/chartroom-filters.jpg" alt="The Chart Room with the Overdue filter on: every overdue boat in the marina lit up in red on the live map" style={{ width: '100%', display: 'block' }} />
+          </div></div>
+          <p style={{ marginTop: 14, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>The Overdue filter on a working marina map.</p>
+          <div className="sk-grid3" style={{ marginTop: 44 }}>
+            {[
+              ['Live, not refreshed', 'When a boat checks in, a payment lands or a slip changes status, the map changes with it. No reload, no yesterday’s report.'],
+              ['One rule everywhere', 'Overdue on the map is the same overdue as on your Helm screens and your reports. The numbers always agree.'],
+              ['Find anything in seconds', 'Search a boat or an owner, or filter by status, and the answer lights up on the map.'],
+            ].map(([t, d]) => (
+              <div key={t} className="sk-card">
+                <div style={{ fontWeight: 800, fontSize: 17, marginBottom: 8 }}>{t}</div>
+                <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6 }}>{d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sk-section sk-alt">
+        <div className="sk-wrap" style={{ textAlign: 'center', maxWidth: 820 }}>
+          <div className="sk-eyebrow">The brain</div>
+          <h2 className="sk-h2">Skipper thinks with Claude.</h2>
+          <p className="sk-sub" style={{ marginBottom: 22 }}>Skipper, the assistant your staff and your boaters talk to, is powered by Claude, the AI from Anthropic. It reads your marina&rsquo;s real records, answers in plain English, and does the work you approve.</p>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <span className="sk-chip"><i />Works from your own data</span>
+            <span className="sk-chip"><i />You approve what it does</span>
+            <span className="sk-chip"><i />Built on Anthropic&rsquo;s Claude</span>
+          </div>
+        </div>
+      </section>
+
       {/* WHAT IT IS + PAIN */}
       <section className="sk-section sk-alt">
         <div className="sk-wrap">
