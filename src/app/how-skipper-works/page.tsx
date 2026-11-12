@@ -110,7 +110,7 @@ const QA: [string, string][] = [
  ],
  [
   "What does Skipper run on?",
-  "Skipper runs in a web browser. Boaters get a free iPhone app."
+  "Skipper runs in a web browser. Boaters get a free app on iPhone (App Store) and on Android (installs from the browser)."
  ],
  [
   "How much does Skipper cost?",
@@ -258,7 +258,7 @@ const QA: [string, string][] = [
  ],
  [
   "What does the boater app do?",
-  "It is a free iPhone app. A boater with a reservation opens it and their space lights up on the map."
+  "It is a free app for iPhone and Android. A boater with a reservation opens it and their space lights up on the map."
  ],
  [
   "What is the Chart Room?",

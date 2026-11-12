@@ -449,7 +449,7 @@ export default function Home() {
                 <span className="sk-chip"><i />Dry stack and yard, built in</span>
                 <span className="sk-chip"><i />One published price</span>
                 <span className="sk-chip"><i />Live at working marinas</span>
-                <a href="#app" className="sk-chip" style={{ textDecoration: 'none', color: 'inherit' }}><i />Free iPhone app for your boaters</a>
+                <a href="#app" className="sk-chip" style={{ textDecoration: 'none', color: 'inherit' }}><i />Free iPhone and Android app for your boaters</a>
               </div>
               <p style={{ marginTop: 18, fontSize: 14, color: 'rgba(255,255,255,0.5)' }}>
                 Or <a href="#demo" style={{ color: TEAL, textDecoration: 'none', fontWeight: 700 }}>request a demo</a> and we will walk you through it.

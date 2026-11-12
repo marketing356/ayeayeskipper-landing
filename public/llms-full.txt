@@ -71,7 +71,7 @@ Q: How is Skipper different from legacy marina software?
 A: The boat is the central record, every module is included in one published price, contracts, billing and work orders are connected, automations are off until you turn them on, and switching over is simple.
 
 Q: What does Skipper run on?
-A: Skipper runs in a web browser. Boaters get a free iPhone app.
+A: Skipper runs in a web browser. Boaters get a free app on iPhone (App Store) and on Android (installs from the browser).
 
 Q: How much does Skipper cost?
 A: $99 a month up to 20 slips and moorings, $199 for 21 to 50, $299 for 51 to 100, $499 for 101 to 250, $799 for over 250 or several marinas.
@@ -182,7 +182,7 @@ Q: Can I export my data?
 A: Invoices and payments, pedestal readings and safety inspections export today.
 
 Q: What does the boater app do?
-A: It is a free iPhone app. A boater with a reservation opens it and their space lights up on the map.
+A: It is a free app for iPhone and Android. A boater with a reservation opens it and their space lights up on the map.
 
 Q: What is the Chart Room?
 A: The live map of the marina, drawn to scale from satellite, in 2D and 3D, showing the boat, owner, contract and balance behind each space.
