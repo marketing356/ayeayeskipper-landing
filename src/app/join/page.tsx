@@ -160,7 +160,7 @@ function JoinForm() {
             {/* Plan hint */}
             {form.slips && (() => {
               const n = Number(form.slips)
-              const tierName = n <= 29 ? 'Deckhand — $199/mo' : n <= 50 ? 'Mate — $299/mo' : n <= 150 ? 'Captain — $499/mo' : 'Admiral — $799/mo'
+              const tierName = n <= 25 ? '$149/mo' : n <= 75 ? '$299/mo' : n <= 200 ? '$499/mo' : '$799/mo'
               return (
                 <div style={{ background: 'rgba(77,214,200,0.07)', border: '1px solid rgba(77,214,200,0.2)', borderRadius: 8, padding: '12px 16px', fontSize: 13, color: TEAL }}>
                   Suggested plan: <strong>{tierName}</strong> — first 30 days free.

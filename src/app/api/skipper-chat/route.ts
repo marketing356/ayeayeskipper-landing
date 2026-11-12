@@ -7,7 +7,7 @@ const SKIPPER_ENGINE_URL = process.env.SKIPPER_ENGINE_URL || 'https://skipper-en
 const MARINA_SYSTEM_PROMPT = `You are Skipper — the system that runs marinas on AyeAyeSkipper. You are the hero of the AyeAyeSkipper homepage. You help marina operators understand the platform and sign up. Be conversational, confident, and nautical. You are not a chatbot — you are the system that runs their marina. Never describe yourself as "AI" or "artificial intelligence" — you are the Skipper Engine™, the system that runs marinas.
 
 Key facts:
-- Two plans: 50 slips and under = $299/mo | 50+ slips = $499/mo. First month free on both.
+- Four prices by size, every feature included: $149/mo (up to 25 slips or moorings, or up to 100 yacht club members) | $299 (26-75 slips, 101-250 members) | $499 (76-200 slips, 251-500 members) | $799 (over 200 slips, over 500 members, or several marinas).
 - Zero transaction fees. Ever. Your marina keeps 100%.
 - Hot Slip™ lets annual tenants earn revenue when away — a first in marina software
 - Skipper Gangway™ migrates from any platform same day (Dockmaster, Dockwa, spreadsheets)
@@ -112,10 +112,10 @@ export async function POST(request: NextRequest) {
         : "Hot Slip™ lets annual tenants earn revenue when they're away. First feature of its kind in marina software.",
       cost: mode === 'boater'
         ? "Skipper is always free for boaters. No booking fees, no markup — you pay exactly what the marina charges."
-        : "Plans start at $299/mo (50 slips & under) or $499/mo (50+ slips). Flat rate, zero transaction fees.",
+        : "Plans start at $149/mo (up to 25 slips or 100 yacht club members) and go to $799/mo for the largest marinas, clubs and multi-marina groups. Flat rate, every feature included.",
       price: mode === 'boater'
         ? "Skipper is always free for boaters. No booking fees, no markup — you pay exactly what the marina charges."
-        : "Plans start at $299/mo (50 slips & under) or $499/mo (50+ slips). Flat rate, zero transaction fees.",
+        : "Plans start at $149/mo (up to 25 slips or 100 yacht club members) and go to $799/mo for the largest marinas, clubs and multi-marina groups. Flat rate, every feature included.",
       migrate: "Skipper Gangway™ migrates from Dockmaster, Dockwa, or spreadsheets — usually same day. You don't start from zero.",
     }
     for (const [key, reply] of Object.entries(fallbacks)) {

@@ -8,13 +8,13 @@ import MobileBar from "@/components/MobileBar"
 export const metadata: Metadata = {
   metadataBase: new URL('https://ayeayeskipper.com'),
   title: { default: "Skipper: Marina and yacht club management software", template: "%s | Skipper" },
-  description: "Skipper is marina and yacht club management software. Slips, moorings, yard, contracts, billing, fuel dock and work orders on one live map, with an AI assistant you can switch off. From $99 a month, every module included.",
+  description: "Skipper is marina and yacht club management software. Slips, moorings, yard, contracts, billing, fuel dock and work orders on one live map, with an AI assistant you can switch off. From $149 a month, every module included.",
   alternates: { canonical: '/' },
-  twitter: { card: 'summary_large_image', title: 'Skipper: Marina and yacht club management software', description: 'One live system for slips, moorings, yard, contracts and billing. From $99 a month, every module included.' },
+  twitter: { card: 'summary_large_image', title: 'Skipper: Marina and yacht club management software', description: 'One live system for slips, moorings, yard, contracts and billing. From $149 a month, every module included.' },
   openGraph: {
     siteName: "Skipper",
     title: "Skipper: Marina and yacht club management software",
-    description: "One live system for slips, moorings, yard, contracts and billing. From $99 a month, every module included.",
+    description: "One live system for slips, moorings, yard, contracts and billing. From $149 a month, every module included.",
     url: 'https://ayeayeskipper.com',
     type: "website",
   }

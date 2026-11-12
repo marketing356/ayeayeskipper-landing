@@ -80,7 +80,7 @@ const SECTIONS: [string, string[]][] = [
  [
   "Pricing",
   [
-   "One price by size of the marina or yacht club, with every module in every plan: $99 a month up to 20 slips and moorings, $199 for 21 to 50, $299 for 51 to 100, $499 for 101 to 250, and $799 for over 250 or several marinas. Yacht clubs use the same prices by member count.",
+   "One price by size of the marina or yacht club, with every module in every plan: $149 a month up to 25 slips and moorings, $299 for 26 to 75, $499 for 76 to 200, and $799 for over 200 or several marinas. Yacht clubs pay the same prices by member count: $149 up to 100 members, $299 for 101 to 250, $499 for 251 to 500, and $799 for over 500.",
    "No setup fee, no onboarding fee and no add-ons. No Skipper fee on transient bookings. Card processors charge their normal card fees."
   ]
  ],
@@ -114,7 +114,7 @@ const QA: [string, string][] = [
  ],
  [
   "How much does Skipper cost?",
-  "$99 a month up to 20 slips and moorings, $199 for 21 to 50, $299 for 51 to 100, $499 for 101 to 250, $799 for over 250 or several marinas."
+  "$149 a month up to 25 slips and moorings, $299 for 26 to 75, $499 for 76 to 200, $799 for over 200 or several marinas. Yacht clubs: $149 up to 100 members, $299 for 101 to 250, $499 for 251 to 500, $799 for over 500."
  ],
  [
   "Are there setup fees?",

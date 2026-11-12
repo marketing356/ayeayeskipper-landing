@@ -148,7 +148,7 @@ export default function TenantPortal() {
           The Tenant Portal is included in every AyeAyeSkipper plan. No add-on. No extra charge. Book a demo and we'll show you exactly what your tenants will see.
         </p>
         <Link href="/join" style={{ display:'inline-block', padding:'18px 44px', background:TEAL, color:NAVY, borderRadius:8, fontSize:16, fontWeight:800, textDecoration:'none', fontFamily:FONT }}>Book a Demo</Link>
-        <p style={{ marginTop:16, fontSize:12, color:'rgba(255,255,255,0.25)' }}>$199–$799/mo by slip count · First month free</p>
+        <p style={{ marginTop:16, fontSize:12, color:'rgba(255,255,255,0.25)' }}>$149–$799/mo by size · First month free</p>
       </div>
     </div>
   )

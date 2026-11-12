@@ -127,7 +127,7 @@ const BUILD_STEPS: [string, string, string][] = [
 
 const COMPARE: string[][] = [
   ['Every module in one price', 'Yes. One monthly price, every module on', 'No. 8 separately priced products', 'No. Marina side priced per space; service, fuel, store and integrations are extra modules', 'Not published'],
-  ['Marina base price', '$99 to $799 a month by size', 'Per module, from $169 a month', '$42 per slip or mooring per year, about $3.50 a month (May 2026 proposal)', 'Not listed'],
+  ['Marina base price', '$149 to $799 a month by size', 'Per module, from $169 a month', '$42 per slip or mooring per year, about $3.50 a month (May 2026 proposal)', 'Not listed'],
   ['Fuel dock', 'Included', 'Extra module: $199 a month', 'Extra module, about $499 a month (told on a May 2026 sales call)', 'Listed, price not published'],
   ['Ship store and point of sale', 'Included', 'Extra module: $249 a month', 'Extra module', 'Point of sale listed'],
   ['Work orders, parts and inventory', 'Included', 'Not listed on the pricing page', 'Extra service module, charged by work-order load: about $1,000 a month for a 15-person yard, per the rep', 'Listed'],
@@ -141,24 +141,22 @@ const COMPARE: string[][] = [
 ]
 
 const MARINA_TIERS: [string, string][] = [
-  ['Up to 20 slips and moorings', '$99'],
-  ['21 to 50', '$199'],
-  ['51 to 100', '$299'],
-  ['101 to 250', '$499'],
-  ['Over 250, or several marinas', '$799'],
+  ['Up to 25 slips and moorings', '$149'],
+  ['26 to 75', '$299'],
+  ['76 to 200', '$499'],
+  ['Over 200, or several marinas', '$799'],
 ]
 
 const CLUB_TIERS: [string, string][] = [
-  ['Up to 100 members', '$99'],
-  ['101 to 250 members', '$199'],
-  ['251 to 500 members', '$299'],
-  ['501 to 1,000 members', '$499'],
-  ['Over 1,000 members', '$799'],
+  ['Up to 100 members', '$149'],
+  ['101 to 250 members', '$299'],
+  ['251 to 500 members', '$499'],
+  ['Over 500 members', '$799'],
 ]
 
 const FAQ: [string, string][] = [
   ['What is Skipper?', 'Skipper is management software for marinas and yacht clubs. It holds your spaces, boats, contracts, billing and messages in one system, with a live map of your property and an AI assistant that does the day-to-day work.'],
-  ['How much does it cost?', 'Your price depends only on the size of your marina or yacht club, from $99 a month for up to 20 slips and moorings to $799 for over 250 or several marinas. Every module is in every plan. Yacht club prices are in the pricing section.'],
+  ['How much does it cost?', 'Your price depends only on the size of your marina or yacht club, from $149 a month for up to 25 slips and moorings (or up to 100 yacht club members) to $799 for over 200 slips, over 500 members, or several marinas. Every module is in every plan. Yacht club prices are in the pricing section.'],
   ['Are there setup fees or other charges?', 'No setup fee, no onboarding fee and no add-ons. Moving your data, your map and the integrations you need are inside your monthly price. There is no Skipper fee on transient bookings. Card processors such as Stripe and Clover still charge their normal card fees.'],
   ['Do I have to use the AI?', 'No. Claude is built into Skipper, and one switch turns it off for the whole marina. With the AI off, nothing is answered, sent or done by AI, and you still run the marina on the same slips, contracts, billing, map and records, by hand. Turn it back on any time.'],
   ['What is the AI, and does it do things without asking?', 'Skipper is powered by Claude, the AI from Anthropic. It reads your marina records, answers in plain English and does the work you approve. You can approve each action, or set it to one tap and go. You decide how much it does.'],
@@ -422,7 +420,7 @@ export default function Home() {
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@graph': [
         { '@type': 'Organization', '@id': 'https://ayeayeskipper.com/#org', name: 'Skipper', alternateName: 'AyeAyeSkipper', url: 'https://ayeayeskipper.com' },
-        { '@type': 'SoftwareApplication', '@id': 'https://ayeayeskipper.com/#software', name: 'Skipper', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: 'https://ayeayeskipper.com', description: 'Management software for marinas and yacht clubs: slips, moorings, yard, contracts, billing, fuel dock and work orders on one live map, with an AI assistant that can be switched off.', publisher: { '@id': 'https://ayeayeskipper.com/#org' }, offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: 99, highPrice: 799, offerCount: 5 } },
+        { '@type': 'SoftwareApplication', '@id': 'https://ayeayeskipper.com/#software', name: 'Skipper', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: 'https://ayeayeskipper.com', description: 'Management software for marinas and yacht clubs: slips, moorings, yard, contracts, billing, fuel dock and work orders on one live map, with an AI assistant that can be switched off.', publisher: { '@id': 'https://ayeayeskipper.com/#org' }, offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: 149, highPrice: 799, offerCount: 4 } },
         { '@type': 'FAQPage', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
       ] }).replace(/</g, '\\u003c') }} />
       
@@ -438,7 +436,7 @@ export default function Home() {
               </h1>
               <p className="sk-rise sk-rise3" style={{ fontSize: 26, fontWeight: 700, margin: '0 0 16px', color: 'rgba(255,255,255,0.95)' }}>The legacy players had their day. They are so big they cannot get out of their own way.</p>
               <p className="sk-sub sk-rise sk-rise3 sk-hero-sub" style={{ marginBottom: 28 }}>
-                Most marina owners stay stuck with their legacy software because switching sounds painful. With Skipper we make it almost seamless from day one. Every module included, in one published price from $99 a month. Approve every action, or set it to one tap and go.
+                Most marina owners stay stuck with their legacy software because switching sounds painful. With Skipper we make it almost seamless from day one. Every module included, in one published price from $149 a month. Approve every action, or set it to one tap and go.
               </p>
               <div className="sk-rise sk-rise4 sk-hero-actions" style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <a href="#marinas" className="sk-btn sk-btn-main">I run a marina</a>
@@ -944,7 +942,7 @@ export default function Home() {
           </div>
 
           <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 14 }}>Marinas</div>
-          <div className="sk-grid5" style={{ marginBottom: 40 }}>
+          <div className="sk-grid4" style={{ marginBottom: 40 }}>
             {MARINA_TIERS.map(([size, price]) => (
               <div key={size} className="sk-card" style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>{size}</div>
@@ -955,7 +953,7 @@ export default function Home() {
           </div>
 
           <div style={{ fontWeight: 900, fontSize: 20, marginBottom: 14 }}>Yacht clubs</div>
-          <div className="sk-grid5" style={{ marginBottom: 40 }}>
+          <div className="sk-grid4" style={{ marginBottom: 40 }}>
             {CLUB_TIERS.map(([size, price]) => (
               <div key={size} className="sk-card" style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', marginBottom: 10 }}>{size}</div>
